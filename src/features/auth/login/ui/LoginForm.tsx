@@ -16,6 +16,12 @@ export function LoginForm() {
     setError(null);
     try {
       await loginEffect({ email: data.email, password: data.password });
+
+      if (data.rememberMe) {
+        localStorage.setItem('rememberMe', 'true');
+      } else {
+        localStorage.removeItem('rememberMe');
+      }
     } catch (err: any) {
       setError(err.response?.data?.message || 'Login failed');
     }

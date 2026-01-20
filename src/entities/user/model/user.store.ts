@@ -28,18 +28,31 @@ export const useUserStore = createGStore<UserState>(() => {
     setAuthData: (user, token) => {
       setUser(user);
       setAccessToken(token);
+      persistAccessToken(token);
       setIsInitialized(true);
     },
 
     setAccessToken: (token) => {
       setAccessToken(token);
+      persistAccessToken(token);
       setIsInitialized(true);
     },
 
     clearAuth: () => {
       setUser(null);
       setAccessToken(null);
+
+      localStorage.removeItem('accessToken');
+      localStorage.removeItem('rememberMe');
+
       setIsInitialized(true);
     }
   };
 });
+
+function persistAccessToken(token: string) {
+  const rememberMe = localStorage.getItem('rememberMe') === 'true';
+  if (rememberMe) {
+    localStorage.setItem('accessToken', token);
+  }
+}
