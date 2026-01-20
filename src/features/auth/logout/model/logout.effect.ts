@@ -1,0 +1,10 @@
+import {authApi} from "../../../../shared/api/auth.api.ts";
+import {useUserStore} from "../../../../entities/user/model/user.store.ts";
+
+export async function logoutEffect(): Promise<void> {
+  try {
+    await authApi.logout();
+  } finally {
+    useUserStore.getState().clearAuth();
+  }
+}
