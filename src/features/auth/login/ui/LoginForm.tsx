@@ -1,6 +1,7 @@
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { loginEffect } from '../model/login.effect';
 import {useState} from "react";
+import axios from 'axios';
 
 interface LoginFormData {
   email: string;
@@ -22,8 +23,13 @@ export function LoginForm() {
       } else {
         localStorage.removeItem('rememberMe');
       }
-    } catch (err: any) {
-      setError(err.response?.data?.message || 'Login failed');
+    } catch (err: unknown) {
+      if (axios.isAxiosError(err)) {
+        setError(err.response?.data?.message ?? 'Login failed');
+        return;
+      }
+
+      setError('Unexpected login error');
     }
   };
 

@@ -1,7 +1,7 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import {useUserStore} from "@/entities/user";
-import {LoginForm} from "../../features/auth/login/ui/LoginForm.tsx";
-import {RegisterForm} from "../../features/auth/register/ui/RegisterForm.tsx";
+import {LoginForm} from "@/features/auth/login";
+import {RegisterForm} from "@/features/auth/register";
 import {ProtectedRoute} from "./ProtectedRoute.tsx";
 import {Dashboard} from "@/pages/dashboard";
 import {HomePage} from "@/pages/home";

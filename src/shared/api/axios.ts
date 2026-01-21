@@ -1,6 +1,6 @@
 import axios, {AxiosError, type InternalAxiosRequestConfig} from 'axios';
-import {useUserStore} from "../../entities/user/model/user.store.ts";
-import {refreshEffect} from "../../features/auth/refresh/model/refresh.effect.ts";
+import {useUserStore} from "@/entities/user";
+import {refreshEffect} from "@/features/auth/refresh/model/refresh.effect.ts";
 
 export const api = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000',

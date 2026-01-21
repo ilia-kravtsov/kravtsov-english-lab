@@ -4,16 +4,18 @@ export function Dashboard() {
   return (
     <div>
       <header>
-        <nav>
-          <NavLink to="/">Home</NavLink>
-          <NavLink to="/vocabulary">Vocabulary</NavLink>
-          <NavLink to="/profile">Profile</NavLink>
-        </nav>
+        Header
       </header>
 
       <main>
         <Outlet />
       </main>
+
+      <nav>
+        <NavLink to="/">Home</NavLink>
+        <NavLink to="/vocabulary">Vocabulary</NavLink>
+        <NavLink to="/profile">Profile</NavLink>
+      </nav>
     </div>
   );
 }

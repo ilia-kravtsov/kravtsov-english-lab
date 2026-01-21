@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { registerEffect } from '../model/register.effect';
+import axios from 'axios';
 
 interface RegisterFormData {
   firstName: string;
@@ -25,8 +26,13 @@ export function RegisterForm() {
         password: data.password,
       });
 
-    } catch (err: any) {
-      setServerError(err.response?.data?.message || 'Registration failed');
+    } catch (err: unknown) {
+      if (axios.isAxiosError(err)) {
+        setServerError(err.response?.data?.message || 'Registration failed');
+        return;
+      }
+
+      setServerError('Unexpected registration error')
     }
   };
 

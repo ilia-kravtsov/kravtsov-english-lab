@@ -1,7 +1,7 @@
 import { api } from './axios';
-import type {User} from "../../entities/user/model/user.types.ts";
-import type {LoginDto} from "../../features/auth/login/model/login.dto.ts";
-import type {RegisterDto} from "../../features/auth/register/model/register.dto.ts";
+import type {User} from "@/entities/user";
+import type {LoginDto} from "@/features/auth/login/model/login.dto.ts";
+import type {RegisterDto} from "@/features/auth/register/model/register.dto.ts";
 
 interface AuthResponse {
   user: User;
