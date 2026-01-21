@@ -4,6 +4,9 @@ import {LoginForm} from "../../features/auth/login/ui/LoginForm.tsx";
 import {RegisterForm} from "../../features/auth/register/ui/RegisterForm.tsx";
 import {ProtectedRoute} from "./ProtectedRoute.tsx";
 import {Dashboard} from "@/pages/dashboard";
+import {HomePage} from "@/pages/home";
+import {ProfilePage} from "@/pages/profile";
+import {VocabularyPage} from "@/pages/vocabulary";
 
 export function AppRoutes() {
   const isAuthenticated = useUserStore(s => s.isAuthenticated);
