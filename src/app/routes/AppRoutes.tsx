@@ -1,8 +1,9 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
-import {useUserStore} from "../../entities/user/model/user.store.ts";
+import {useUserStore} from "@/entities/user";
 import {LoginForm} from "../../features/auth/login/ui/LoginForm.tsx";
 import {RegisterForm} from "../../features/auth/register/ui/RegisterForm.tsx";
 import {ProtectedRoute} from "./ProtectedRoute.tsx";
+import {Dashboard} from "@/pages/dashboard";
 
 export function AppRoutes() {
   const isAuthenticated = useUserStore(s => s.isAuthenticated);
@@ -28,7 +29,11 @@ export function AppRoutes() {
             <Dashboard />
           </ProtectedRoute>
         }
-      />
+      >
+        <Route index element={<HomePage />} />
+        <Route path="profile" element={<ProfilePage />} />
+        <Route path="vocabulary" element={<VocabularyPage />} />
+      </Route>
     </Routes>
   );
 }

@@ -1,5 +1,5 @@
 import { Navigate } from 'react-router-dom';
-import {useUserStore} from "../../entities/user/model/user.store.ts";
+import {useUserStore} from "@/entities/user";
 import type {JSX} from "react";
 
 export function ProtectedRoute({ children }: { children: JSX.Element }) {
