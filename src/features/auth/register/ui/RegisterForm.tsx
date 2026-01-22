@@ -17,7 +17,7 @@ export function RegisterForm() {
 
   const onSubmit: SubmitHandler<RegisterFormData> = async (data) => {
     setServerError(null);
-
+    console.log(data);
     try {
       await registerEffect({
         firstName: data.firstName,
