@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { registerEffect } from '../model/register.effect';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 interface RegisterFormData {
   firstName: string;
@@ -14,10 +15,11 @@ interface RegisterFormData {
 export function RegisterForm() {
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<RegisterFormData>();
   const [serverError, setServerError] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   const onSubmit: SubmitHandler<RegisterFormData> = async (data) => {
     setServerError(null);
-    console.log(data);
+
     try {
       await registerEffect({
         firstName: data.firstName,
@@ -25,6 +27,8 @@ export function RegisterForm() {
         email: data.email,
         password: data.password,
       });
+
+      navigate('/login', { replace: true });
 
     } catch (err: unknown) {
       if (axios.isAxiosError(err)) {

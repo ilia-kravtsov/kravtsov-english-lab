@@ -12,12 +12,12 @@ interface LoginFormData {
 
 export function LoginForm() {
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<LoginFormData>();
-  const [error, setError] = useState<string | null>(null);
+  const [serverError, setServerError] = useState<string | null>(null);
 
   const navigate = useNavigate();
 
   const onSubmit: SubmitHandler<LoginFormData> = async (data) => {
-    setError(null);
+    setServerError(null);
     try {
       await loginEffect({ email: data.email, password: data.password });
 
@@ -30,11 +30,11 @@ export function LoginForm() {
       navigate('/', { replace: true });
     } catch (err: unknown) {
       if (axios.isAxiosError(err)) {
-        setError(err.response?.data?.message ?? 'Login failed');
+        setServerError(err.response?.data?.message ?? 'Login failed');
         return;
       }
 
-      setError('Unexpected login error');
+      setServerError('Unexpected login error');
     }
   };
 
@@ -67,7 +67,7 @@ export function LoginForm() {
         <a href="/forgot-password">Forgot password?</a>
       </div>
 
-      {error && <div>{error}</div>}
+      {serverError && <div>{serverError}</div>}
 
       <button type="submit" disabled={isSubmitting}>
         {isSubmitting ? 'Logging in...' : 'Login'}

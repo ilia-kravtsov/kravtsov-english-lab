@@ -1,5 +1,5 @@
-import {authApi} from "../../../../shared/api/auth.api.ts";
-import {useUserStore} from "../../../../entities/user/model/user.store.ts";
+import {authApi} from "@/shared/api/auth.api.ts";
+import {useUserStore} from "@/entities/user";
 
 export async function logoutEffect(): Promise<void> {
   try {
