@@ -1,7 +1,8 @@
-import { useForm, type SubmitHandler } from 'react-hook-form';
-import { loginEffect } from '../model/login.effect';
+import {type SubmitHandler, useForm} from 'react-hook-form';
+import {loginEffect} from '../model/login.effect';
 import {useState} from "react";
 import axios from 'axios';
+import {useNavigate} from "react-router-dom";
 
 interface LoginFormData {
   email: string;
@@ -13,6 +14,8 @@ export function LoginForm() {
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<LoginFormData>();
   const [error, setError] = useState<string | null>(null);
 
+  const navigate = useNavigate();
+
   const onSubmit: SubmitHandler<LoginFormData> = async (data) => {
     setError(null);
     try {
@@ -23,6 +26,8 @@ export function LoginForm() {
       } else {
         localStorage.removeItem('rememberMe');
       }
+
+      navigate('/', { replace: true });
     } catch (err: unknown) {
       if (axios.isAxiosError(err)) {
         setError(err.response?.data?.message ?? 'Login failed');

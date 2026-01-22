@@ -18,16 +18,18 @@ export const useUserStore = createGStore<UserState>(() => {
   const [user, setUser] = useState<User | null>(null);
   const [accessToken, setAccessToken] = useState<string | null>(null);
   const [isInitialized, setIsInitialized] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   return {
     user,
     accessToken,
-    isAuthenticated: Boolean(user),
+    isAuthenticated,
     isInitialized,
 
     setAuthData: (user, token) => {
       setUser(user);
       setAccessToken(token);
+      setIsAuthenticated(true);
       persistAccessToken(token);
       setIsInitialized(true);
     },
