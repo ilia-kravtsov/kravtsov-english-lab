@@ -1,4 +1,4 @@
-import { api } from './axios';
+import { api } from '@/shared/api';
 import type {User} from "@/entities/user";
 import type {LoginDto} from "@/features/auth/login/model/login.dto.ts";
 import type {RegisterDto} from "@/features/auth/register/model/register.dto.ts";

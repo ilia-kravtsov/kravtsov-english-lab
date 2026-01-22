@@ -1,4 +1,4 @@
-import {useUserStore} from "../../entities/user/model/user.store.ts";
+import {useUserStore} from "@/entities/user";
 
 export function initAuth() {
   const accessToken = localStorage.getItem('accessToken');

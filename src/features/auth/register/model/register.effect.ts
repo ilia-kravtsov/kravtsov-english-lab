@@ -1,4 +1,4 @@
-import {authApi} from "@/shared/api/auth.api.ts";
+import {authApi} from "@/features/auth/api/auth.api.ts";
 import {useUserStore} from "@/entities/user";
 import type {RegisterDto} from "./register.dto.ts";
 
