@@ -1,45 +1,48 @@
-import {type ChangeEvent, type FormEvent, useState} from 'react';
-import { forgotPasswordEffect } from '../model/forgotPassword.effect';
-import { Button } from '@/shared/ui/button/Button';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useForm, type SubmitHandler } from 'react-hook-form';
+import {Button} from "@/shared/ui";
+import {forgotPasswordEffect} from "@/features/auth/forgot-password/model/forgot-password.effect.ts";
+
+interface FormData {
+  email: string;
+}
 
 export function ForgotPasswordForm() {
-  const [email, setEmail] = useState('');
-  const [success, setSuccess] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<FormData>();
+  const [serverMessage, setServerMessage] = useState<string | null>(null);
+  const navigate = useNavigate();
 
-  const onSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-    setError(null);
-
+  const onSubmit: SubmitHandler<FormData> = async (data) => {
+    setServerMessage(null);
     try {
-      await forgotPasswordEffect(email);
-      setSuccess(true);
+      const response = await forgotPasswordEffect({ email: data.email });
+      setServerMessage(response.message);
+      console.log('ForgotPasswordForm', response.token)
+      if (response.token) {
+        sessionStorage.setItem('reset-token', response.token);
+      }
+
+      setTimeout(() => navigate('/reset-password'), 3000);
     } catch {
-      setError('Failed to send reset email');
+      setServerMessage('Failed to send reset link. Try again.');
     }
   };
 
-  if (success) {
-    return <p>Check your email for password reset instructions</p>;
-  }
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value)
-  }
-
   return (
-    <form onSubmit={onSubmit}>
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={handleChange}
-        required
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <div>
+        <label>Email</label>
+        <input type="email" {...register('email', { required: 'Email is required' })} />
+        {errors.email && <span>{errors.email.message}</span>}
+      </div>
+
+      {serverMessage && <div>{serverMessage}</div>}
+
+      <Button type="submit"
+              disabled={isSubmitting}
+              title={isSubmitting ? 'Sending...' : 'Send reset link'}
       />
-
-      {error && <p>{error}</p>}
-
-      <Button type="submit" title="Send reset link" />
     </form>
   );
 }

@@ -1,49 +1,60 @@
-import {type ChangeEvent, type FormEvent, useState} from 'react';
-import { useSearchParams, useNavigate } from 'react-router-dom';
-import { resetPasswordEffect } from '../model/resetPassword.effect';
-import { Button } from '@/shared/ui/button/Button';
+import { useState } from 'react';
+import { useForm, type SubmitHandler } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import { resetPasswordEffect } from "@/features/auth/reset-password/model/reset-password.effect.ts";
+
+interface FormData {
+  password: string;
+}
 
 export function ResetPasswordForm() {
-  const [params] = useSearchParams();
+  const { register, handleSubmit, formState: { errors, isSubmitting } } =
+    useForm<FormData>();
+
+  const [serverMessage, setServerMessage] = useState<string | null>(null);
   const navigate = useNavigate();
-  const token = params.get('token');
 
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState<string | null>(null);
-
-  if (!token) {
-    return <p>Invalid reset link</p>;
-  }
-
-  const onSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-    setError(null);
+  const onSubmit: SubmitHandler<FormData> = async (data) => {
+    const token = sessionStorage.getItem('reset-token');
+    console.log('ResetPasswordForm', token)
+    if (!token) {
+      setServerMessage('Reset token is missing');
+      return;
+    }
 
     try {
-      await resetPasswordEffect(token, password);
-      navigate('/login', { replace: true });
+      const response = await resetPasswordEffect({
+        token,
+        password: data.password,
+      });
+
+      setServerMessage(response.message);
+      sessionStorage.removeItem('reset-token');
+
+      setTimeout(() => {
+        navigate('/login');
+      }, 3000);
     } catch {
-      setError('Failed to reset password');
+      setServerMessage('Failed to reset password');
     }
   };
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value)
-  }
-
   return (
-    <form onSubmit={onSubmit}>
-      <input
-        type="password"
-        placeholder="New password"
-        value={password}
-        onChange={handleChange}
-        required
-      />
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <div>
+        <label>New password</label>
+        <input
+          type="password"
+          {...register('password', { required: 'Password is required' })}
+        />
+        {errors.password && <span>{errors.password.message}</span>}
+      </div>
 
-      {error && <p>{error}</p>}
+      {serverMessage && <div>{serverMessage}</div>}
 
-      <Button type="submit" title="Reset password" />
+      <button type="submit" disabled={isSubmitting}>
+        {isSubmitting ? 'Saving...' : 'Reset password'}
+      </button>
     </form>
   );
 }
