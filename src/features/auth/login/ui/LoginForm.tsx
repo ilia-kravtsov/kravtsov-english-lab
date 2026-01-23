@@ -19,7 +19,6 @@ export function LoginForm() {
   const onSubmit: SubmitHandler<LoginFormData> = async (data) => {
     setServerError(null);
     try {
-      await loginEffect({ email: data.email, password: data.password });
 
       if (data.rememberMe) {
         localStorage.setItem('rememberMe', 'true');
@@ -27,6 +26,7 @@ export function LoginForm() {
         localStorage.removeItem('rememberMe');
       }
 
+      await loginEffect({ email: data.email, password: data.password });
       navigate('/', { replace: true });
     } catch (err: unknown) {
       if (axios.isAxiosError(err)) {

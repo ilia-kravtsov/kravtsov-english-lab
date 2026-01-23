@@ -36,6 +36,7 @@ export const useUserStore = createGStore<UserState>(() => {
 
     setAccessToken: (token) => {
       setAccessToken(token);
+      setIsAuthenticated(true);
       persistAccessToken(token);
       setIsInitialized(true);
     },
