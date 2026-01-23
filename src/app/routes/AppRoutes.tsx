@@ -6,10 +6,10 @@ import {HomePage} from "@/pages/home";
 import {ProfilePage} from "@/pages/profile";
 import {VocabularyPage} from "@/pages/vocabulary";
 import {AuthLayout} from "@/pages/auth/ui/AuthLayout.tsx";
-import {LoginForm} from "@/features/auth/login";
-import {RegisterForm} from "@/features/auth/register";
 import {ForgotPasswordPage} from "@/pages/forgot-password";
 import {ResetPasswordPage} from "@/pages/reset-password";
+import {LoginPage} from "@/pages/login";
+import {RegisterPage} from "@/pages/register";
 
 export function AppRoutes() {
   const isInitialized = useUserStore(s => s.isInitialized);
@@ -19,8 +19,8 @@ export function AppRoutes() {
   return (
     <Routes>
       <Route element={<AuthLayout />}>
-        <Route path="/login" element={<LoginForm />} />
-        <Route path="/register" element={<RegisterForm />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
         <Route path="/reset-password" element={<ResetPasswordPage />} />
       </Route>
