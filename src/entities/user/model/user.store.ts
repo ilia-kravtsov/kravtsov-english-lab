@@ -44,6 +44,7 @@ export const useUserStore = createGStore<UserState>(() => {
     clearAuth: () => {
       setUser(null);
       setAccessToken(null);
+      setIsAuthenticated(false);
 
       localStorage.removeItem('accessToken');
       localStorage.removeItem('rememberMe');

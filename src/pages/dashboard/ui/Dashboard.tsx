@@ -1,10 +1,12 @@
 import { Outlet, NavLink } from 'react-router-dom';
+import {LogoutButton} from "@/features/auth/logout";
 
 export function Dashboard() {
   return (
     <div>
       <header>
         Header
+        <LogoutButton/>
       </header>
 
       <main>
