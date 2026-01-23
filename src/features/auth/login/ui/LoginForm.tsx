@@ -2,7 +2,7 @@ import {type SubmitHandler, useForm} from 'react-hook-form';
 import {loginEffect} from '../model/login.effect';
 import {useState} from "react";
 import axios from 'axios';
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 interface LoginFormData {
   email: string;
@@ -64,7 +64,7 @@ export function LoginForm() {
           Remember me
         </label>
 
-        <a href="/forgot-password">Forgot password?</a>
+        <Link to="/forgot-password">Forgot password?</Link>
       </div>
 
       {serverError && <div>{serverError}</div>}

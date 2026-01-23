@@ -8,6 +8,8 @@ import {VocabularyPage} from "@/pages/vocabulary";
 import {AuthLayout} from "@/pages/auth/ui/AuthLayout.tsx";
 import {LoginForm} from "@/features/auth/login";
 import {RegisterForm} from "@/features/auth/register";
+import {ForgotPasswordPage} from "@/pages/forgot-password";
+import {ResetPasswordPage} from "@/pages/reset-password";
 
 export function AppRoutes() {
   const isInitialized = useUserStore(s => s.isInitialized);
@@ -19,6 +21,8 @@ export function AppRoutes() {
       <Route element={<AuthLayout />}>
         <Route path="/login" element={<LoginForm />} />
         <Route path="/register" element={<RegisterForm />} />
+        <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+        <Route path="/reset-password" element={<ResetPasswordPage />} />
       </Route>
 
       <Route
