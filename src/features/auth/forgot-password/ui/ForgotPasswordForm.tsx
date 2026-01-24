@@ -1,8 +1,6 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useForm, type SubmitHandler } from 'react-hook-form';
+import {type SubmitHandler, useForm} from 'react-hook-form';
 import {Button} from "@/shared/ui";
-import {forgotPasswordEffect} from "@/features/auth/forgot-password/model/forgot-password.effect.ts";
+import {useForgotPasswordModel} from "@/features/auth/forgot-password/model/forgot-password.model.ts";
 
 interface FormData {
   email: string;
@@ -10,23 +8,10 @@ interface FormData {
 
 export function ForgotPasswordForm() {
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<FormData>();
-  const [serverMessage, setServerMessage] = useState<string | null>(null);
-  const navigate = useNavigate();
+  const { submit, serverMessage } = useForgotPasswordModel();
 
-  const onSubmit: SubmitHandler<FormData> = async (data) => {
-    setServerMessage(null);
-    try {
-      const response = await forgotPasswordEffect({ email: data.email });
-      setServerMessage(response.message);
-
-      if (response.token) {
-        sessionStorage.setItem('reset-token', response.token);
-      }
-
-      setTimeout(() => navigate('/reset-password'), 2000);
-    } catch {
-      setServerMessage('Failed to send reset link. Try again.');
-    }
+  const onSubmit: SubmitHandler<FormData> = async ({ email }) => {
+    await submit(email);
   };
 
   return (

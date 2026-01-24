@@ -16,7 +16,7 @@ export function ResetPasswordForm() {
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     const token = sessionStorage.getItem('reset-token');
-    console.log('ResetPasswordForm', token)
+
     if (!token) {
       setServerMessage('Reset token is missing');
       return;
