@@ -1,5 +1,4 @@
-import { api } from '@/shared/api';
-import type {User} from "@/entities/user";
+import {api} from '@/shared/api';
 import type {LoginDto} from "@/features/auth/login/model/login.dto.ts";
 import type {RegisterDto} from "@/features/auth/register/model/register.dto.ts";
 import type {ForgotPasswordDto} from "@/features/auth/forgot-password/model/forgot-password.dto.ts";
@@ -7,20 +6,9 @@ import type {ResetPasswordDto} from "@/features/auth/reset-password/model/reset-
 import type {ForgotPasswordResponse} from "@/features/auth/forgot-password/model/forgot-password.types.ts";
 import type {ResetPasswordResponse} from "@/features/auth/reset-password/model/reset-password.types.ts";
 import {apiRefresh} from "@/shared/api/api-refresh.ts";
-
-interface AuthResponse {
-  user: User;
-  accessToken: string;
-}
-
-interface RefreshResponse {
-  accessToken: string;
-}
-
-interface MeResponse {
-  userId: string;
-  email: string;
-}
+import type {RefreshResponse} from "@/features/auth/refresh/model/refresh.types.ts";
+import type {AuthResponse} from "@/features/auth/login/model/login.types.ts";
+import type {MeResponse} from "@/features/auth/me/model/me.types.ts";
 
 export const authApi = {
   async login(dto: LoginDto): Promise<AuthResponse> {
