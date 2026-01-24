@@ -18,12 +18,12 @@ export function ForgotPasswordForm() {
     try {
       const response = await forgotPasswordEffect({ email: data.email });
       setServerMessage(response.message);
-      console.log('ForgotPasswordForm', response.token)
+
       if (response.token) {
         sessionStorage.setItem('reset-token', response.token);
       }
 
-      setTimeout(() => navigate('/reset-password'), 3000);
+      setTimeout(() => navigate('/reset-password'), 2000);
     } catch {
       setServerMessage('Failed to send reset link. Try again.');
     }

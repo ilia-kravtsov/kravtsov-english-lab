@@ -1,1 +1,1 @@
-export { api } from './axios';
+export { api } from './api-general.ts';

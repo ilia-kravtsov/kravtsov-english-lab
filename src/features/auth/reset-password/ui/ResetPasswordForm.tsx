@@ -31,9 +31,7 @@ export function ResetPasswordForm() {
       setServerMessage(response.message);
       sessionStorage.removeItem('reset-token');
 
-      setTimeout(() => {
-        navigate('/login');
-      }, 3000);
+      setTimeout(() => navigate('/login'), 2000);
     } catch {
       setServerMessage('Failed to reset password');
     }

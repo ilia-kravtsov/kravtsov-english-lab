@@ -6,6 +6,7 @@ import type {ForgotPasswordDto} from "@/features/auth/forgot-password/model/forg
 import type {ResetPasswordDto} from "@/features/auth/reset-password/model/reset-password.dto.ts";
 import type {ForgotPasswordResponse} from "@/features/auth/forgot-password/model/forgot-password.types.ts";
 import type {ResetPasswordResponse} from "@/features/auth/reset-password/model/reset-password.types.ts";
+import {apiRefresh} from "@/shared/api/api-refresh.ts";
 
 interface AuthResponse {
   user: User;
@@ -39,7 +40,7 @@ export const authApi = {
   },
 
   async refresh(): Promise<RefreshResponse> {
-    const { data } = await api.post<RefreshResponse>('/auth/refresh');
+    const { data } = await apiRefresh.post<RefreshResponse>('/auth/refresh');
     return data;
   },
 
