@@ -1,7 +1,5 @@
-import { useState } from 'react';
-import { useForm, type SubmitHandler } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
-import { resetPasswordEffect } from "@/features/auth/reset-password/model/reset-password.effect.ts";
+import {type SubmitHandler, useForm} from 'react-hook-form';
+import {useResetPasswordModel} from "@/features/auth/reset-password/model/reset-password.model.ts";
 
 interface FormData {
   password: string;
@@ -10,31 +8,10 @@ interface FormData {
 export function ResetPasswordForm() {
   const { register, handleSubmit, formState: { errors, isSubmitting } } =
     useForm<FormData>();
+  const { submit, serverMessage } = useResetPasswordModel();
 
-  const [serverMessage, setServerMessage] = useState<string | null>(null);
-  const navigate = useNavigate();
-
-  const onSubmit: SubmitHandler<FormData> = async (data) => {
-    const token = sessionStorage.getItem('reset-token');
-
-    if (!token) {
-      setServerMessage('Reset token is missing');
-      return;
-    }
-
-    try {
-      const response = await resetPasswordEffect({
-        token,
-        password: data.password,
-      });
-
-      setServerMessage(response.message);
-      sessionStorage.removeItem('reset-token');
-
-      setTimeout(() => navigate('/login'), 2000);
-    } catch {
-      setServerMessage('Failed to reset password');
-    }
+  const onSubmit: SubmitHandler<FormData> = async ({ password }) => {
+    await submit(password);
   };
 
   return (
