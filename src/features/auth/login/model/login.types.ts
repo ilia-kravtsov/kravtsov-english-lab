@@ -1,6 +1,5 @@
-import type {User} from "@/entities/user";
-
-export interface AuthResponse {
-  user: User;
-  accessToken: string;
+export interface LoginFormData {
+  email: string;
+  password: string;
+  rememberMe: boolean;
 }

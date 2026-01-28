@@ -1,45 +1,18 @@
 import {Controller, type SubmitHandler, useForm} from 'react-hook-form';
-import {loginEffect} from '../model/login.effect';
-import {useState} from "react";
-import axios from 'axios';
-import {Link, useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 import styles from './LoginForm.module.scss'
 import {Input} from "@/shared/ui/Input/Input.tsx";
 import {Button} from "@/shared/ui";
 import {CustomCheckbox} from "@/shared/ui/Checkbox/Checkbox.tsx";
-
-interface LoginFormData {
-  email: string;
-  password: string;
-  rememberMe: boolean;
-}
+import type {LoginFormData} from "@/features/auth/login/model/login.types.ts";
+import {useLoginForm} from "@/features/auth/login/model/useLoginForm.ts";
 
 export function LoginForm() {
   const { control, register, handleSubmit, formState: { errors, isSubmitting } } = useForm<LoginFormData>();
-  const [serverError, setServerError] = useState<string | null>(null);
-
-  const navigate = useNavigate();
+  const { submit, serverError } = useLoginForm();
 
   const onSubmit: SubmitHandler<LoginFormData> = async (data) => {
-    setServerError(null);
-    try {
-
-      if (data.rememberMe) {
-        localStorage.setItem('rememberMe', 'true');
-      } else {
-        localStorage.removeItem('rememberMe');
-      }
-
-      await loginEffect({ email: data.email, password: data.password });
-      navigate('/', { replace: true });
-    } catch (err: unknown) {
-      if (axios.isAxiosError(err)) {
-        setServerError(err.response?.data?.message ?? 'Login failed');
-        return;
-      }
-
-      setServerError('Unexpected login error');
-    }
+    await submit(data);
   };
 
   return (

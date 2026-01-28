@@ -1,44 +1,10 @@
-import { useState } from 'react';
-import { useForm, type SubmitHandler } from 'react-hook-form';
-import { registerEffect } from '../model/register.effect';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-
-interface RegisterFormData {
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-  terms: boolean;
-}
+import {useForm} from 'react-hook-form';
+import type {RegisterFormData} from "@/features/auth/register/model/register.types.ts";
+import {useRegisterForm} from "@/features/auth/register/model/useRegisterForm.ts";
 
 export function RegisterForm() {
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<RegisterFormData>();
-  const [serverError, setServerError] = useState<string | null>(null);
-  const navigate = useNavigate();
-
-  const onSubmit: SubmitHandler<RegisterFormData> = async (data) => {
-    setServerError(null);
-
-    try {
-      await registerEffect({
-        firstName: data.firstName,
-        lastName: data.lastName,
-        email: data.email,
-        password: data.password,
-      });
-
-      navigate('/login', { replace: true });
-
-    } catch (err: unknown) {
-      if (axios.isAxiosError(err)) {
-        setServerError(err.response?.data?.message || 'Registration failed');
-        return;
-      }
-
-      setServerError('Unexpected registration error')
-    }
-  };
+  const { onSubmit, serverError } = useRegisterForm();
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

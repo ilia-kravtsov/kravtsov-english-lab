@@ -1,5 +1,6 @@
-import { Outlet, useLocation, Link } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import s from './AuthLayout.module.scss'
+import {LinkAsButton} from "@/shared/ui/LinkAsButton/LinkAsButton.tsx";
 
 export function AuthLayout() {
   const location = useLocation();
@@ -16,7 +17,7 @@ export function AuthLayout() {
             <p className={s.paragraph}>
               Let’s get you all set up so you can start creating your first onboarding experience
             </p>
-            <Link className={s.link} to="/register">Register</Link>
+            <LinkAsButton to="/register">Register</LinkAsButton>
           </div>
         ) : (
           <div className={s.container}>
@@ -24,7 +25,7 @@ export function AuthLayout() {
             <p className={s.paragraph}>
               Log in to your account so you can continue building and editing your onboarding flows
             </p>
-            <Link className={s.link} to="/login">Log in</Link>
+            <LinkAsButton to="/login">Log in</LinkAsButton>
           </div>
         )}
       </div>

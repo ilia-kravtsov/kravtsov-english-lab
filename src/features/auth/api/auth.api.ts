@@ -7,8 +7,8 @@ import type {ForgotPasswordResponse} from "@/features/auth/forgot-password/model
 import type {ResetPasswordResponse} from "@/features/auth/reset-password/model/reset-password.types.ts";
 import {apiRefresh} from "@/shared/api/api-refresh.ts";
 import type {RefreshResponse} from "@/features/auth/refresh/model/refresh.types.ts";
-import type {AuthResponse} from "@/features/auth/login/model/login.types.ts";
 import type {MeResponse} from "@/features/auth/me/model/me.types.ts";
+import type {AuthResponse} from "@/features/auth/api/auth.types.ts";
 
 export const authApi = {
   async login(dto: LoginDto): Promise<AuthResponse> {
