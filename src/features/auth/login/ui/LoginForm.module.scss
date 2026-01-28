@@ -1,0 +1,31 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  .inputContainer {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+
+    .inputLabel {
+
+    }
+
+    .input {
+
+    }
+
+    .link {
+
+    }
+  }
+
+  .button {
+
+  }
+
+  .error {
+
+  }
+}

@@ -1,0 +1,30 @@
+.button {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 70px;
+  border-radius: var(--border-radius-primary);
+  padding: 10px;
+  font-family: var(--font-family-primary), sans-serif;
+  font-size: var(--font-size-primary);
+  cursor: pointer;
+  background-color: var(--background-color-secondary);
+  color: var(--font-color-secondary);
+  border: none;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+  transition:
+          transform 0.15s ease,
+          box-shadow 0.15s ease,
+          background-color 0.15s ease;
+
+  &:not(:disabled):active {
+    transform: scale(0.96);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  &:disabled {
+    background-color: var(--color-3);
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+}

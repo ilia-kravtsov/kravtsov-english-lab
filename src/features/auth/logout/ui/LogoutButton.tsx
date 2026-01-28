@@ -1,5 +1,5 @@
 import { logoutEffect } from '../model/logout.effect';
-import { Button } from '@/shared/ui/button/Button';
+import { Button } from '@/shared/ui/Button/Button';
 
 export function LogoutButton() {
   const handleLogout = async () => {

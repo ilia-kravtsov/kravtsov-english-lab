@@ -1,6 +1,6 @@
 .authContainer {
   display: flex;
-  color: var(--primary-font-color);
+  color: var(--font-color-primary);
 
   .container {
     display: flex;
@@ -10,17 +10,17 @@
 
     .header {
       font-weight: normal;
-      font-size: var(--secondary-font-size);
+      font-size: var(--font-size-secondary);
     }
 
     .paragraph {
       text-align: center;
       max-width: 500px;
-      font-size: var(--primary-font-size);
+      font-size: var(--font-size-primary);
     }
 
     .link {
-      font-size: var(--primary-font-size);
+      font-size: var(--font-size-primary);
     }
   }
 }

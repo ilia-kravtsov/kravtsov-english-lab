@@ -1,0 +1,27 @@
+:root {
+  // colors
+  --background-color-primary: #fff;
+  --background-color-secondary: #000;
+  --font-color-primary: #000;
+  --font-color-secondary: #fff;
+  --outline-color-primary: #000;
+
+  // sizes
+  --font-size-primary: 24px;
+  --font-size-secondary: 32px;
+
+  // shapes
+  --border-radius-primary: 6px;
+
+  // fonts
+  --font-family-primary: 'Baskerville';
+}
+
+[data-theme='dark'] {
+  // colors
+  --background-color-primary: #fff;
+  --background-color-secondary: #000;
+  --font-color-primary: #000;
+  --font-color-secondary: #fff;
+  --outline-color-primary: #000;
+}

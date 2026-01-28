@@ -7,7 +7,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: var(--primary-font-color);
+  background-color: var(--font-color-primary);
 }
 
 ::-webkit-scrollbar-button {
@@ -16,5 +16,5 @@
 
 * {
   scrollbar-width: thin;
-  scrollbar-color: var(--primary-font-color) var(--main-background-color);
+  scrollbar-color: var(--font-color-primary) var(--main-background-color);
 }
