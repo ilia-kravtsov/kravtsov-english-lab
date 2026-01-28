@@ -5,24 +5,13 @@
 
   .inputContainer {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     gap: 20px;
-
-    .inputLabel {
-
-    }
-
-    .input {
-
-    }
-
-    .link {
-
-    }
   }
 
-  .button {
-
+  .checkBoxLinkContainer {
+    display: flex;
+    justify-content: space-between;
   }
 
   .error {

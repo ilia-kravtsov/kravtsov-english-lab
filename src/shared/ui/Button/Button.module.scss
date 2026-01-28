@@ -2,14 +2,14 @@
   position: relative;
   overflow: hidden;
   width: 100%;
-  height: 70px;
+  height: 50px;
   border-radius: var(--border-radius-primary);
   padding: 10px;
   font-family: var(--font-family-primary), sans-serif;
   font-size: var(--font-size-primary);
-  cursor: pointer;
   background-color: var(--background-color-secondary);
   color: var(--font-color-secondary);
+  cursor: pointer;
   border: none;
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
   transition:

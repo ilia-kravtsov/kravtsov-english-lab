@@ -7,14 +7,15 @@
   --outline-color-primary: #000;
 
   // sizes
-  --font-size-primary: 24px;
-  --font-size-secondary: 32px;
+  --font-size-primary: 18px;
+  --font-size-secondary: 24px;
 
   // shapes
   --border-radius-primary: 6px;
 
   // fonts
-  --font-family-primary: 'Baskerville';
+  --font-family-primary: 'Baskervville';
+  --font-family-secondary: 'Baskervville'; // 'Roboto' 'PT Sans Narrow' 'PT Sans'
 }
 
 [data-theme='dark'] {

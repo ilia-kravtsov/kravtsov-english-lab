@@ -9,13 +9,13 @@
     gap: 20px;
 
     .header {
-      font-weight: normal;
+      font-family: var(--font-family-secondary), serif;
       font-size: var(--font-size-secondary);
     }
 
     .paragraph {
       text-align: center;
-      max-width: 500px;
+      max-width: 400px;
       font-size: var(--font-size-primary);
     }
 

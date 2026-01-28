@@ -1,5 +1,15 @@
 html,
 body {
   background-color: darkgrey;
-  font-family: var(--font-family-primary) sans-serif;
+  font-family: var(--font-family-primary), serif;
+  font-size: var(--font-size-primary);
+  font-weight: 500;
+  line-height: 1.75;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-family-secondary), serif;
+  font-weight: 500; /* или 700 */
+  font-size: var(--font-size-secondary);
+  letter-spacing: 0.02em;
 }

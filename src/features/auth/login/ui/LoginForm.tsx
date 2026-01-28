@@ -48,7 +48,6 @@ export function LoginForm() {
         <label className={styles.inputLabel} htmlFor={"email"}>Email</label>
         <Input
           id={"email"}
-          className={styles.input}
           type={"email"}
           placeholder={"Enter your email"}
           {...register('email', { required: 'Email is required' })}
@@ -60,7 +59,6 @@ export function LoginForm() {
         <label className={styles.inputLabel} htmlFor={"password"}>Password</label>
         <Input
           id={"password"}
-          className={styles.input}
           type={"password"}
           placeholder={"Enter your password"}
           {...register('password', { required: 'Password is required' })}
@@ -68,7 +66,7 @@ export function LoginForm() {
         {errors.password && <span>{errors.password.message}</span>}
       </div>
 
-      <div className={styles.inputContainer}>
+      <div className={styles.checkBoxLinkContainer}>
         <Controller
           name="rememberMe"
           control={control}
