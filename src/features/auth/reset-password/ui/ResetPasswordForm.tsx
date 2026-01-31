@@ -1,5 +1,8 @@
 import {type SubmitHandler, useForm} from 'react-hook-form';
 import {useResetPasswordModel} from "@/features/auth/reset-password/model/reset-password.model.ts";
+import styles from './ResetPasswordForm.module.scss';
+import { Input } from "@/shared/ui/Input/Input.tsx";
+import {Button} from "@/shared/ui";
 
 interface FormData {
   password: string;
@@ -15,11 +18,16 @@ export function ResetPasswordForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <div>
-        <label>New password</label>
-        <input
-          type="password"
+    <form
+      className={styles.container}
+      onSubmit={handleSubmit(onSubmit)}
+    >
+      <div className={styles.inputContainer}>
+        <label htmlFor={'password'}>Please, enter a strong password</label>
+        <Input
+          id={'password'}
+          type={'password'}
+          placeholder={'qwerty12345'}
           {...register('password', { required: 'Password is required' })}
         />
         {errors.password && <span>{errors.password.message}</span>}
@@ -27,9 +35,11 @@ export function ResetPasswordForm() {
 
       {serverMessage && <div>{serverMessage}</div>}
 
-      <button type="submit" disabled={isSubmitting}>
-        {isSubmitting ? 'Saving...' : 'Reset password'}
-      </button>
+      <Button
+        type={'submit'}
+        title={isSubmitting ? 'Saving...' : 'Reset password'}
+        disabled={isSubmitting}
+      />
     </form>
   );
 }

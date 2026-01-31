@@ -33,7 +33,7 @@ export function LoginForm() {
         <Input
           id={"password"}
           type={"password"}
-          placeholder={"Enter your password"}
+          placeholder={"qwerty12345"}
           {...register('password', { required: 'Password is required' })}
         />
         {errors.password && <span>{errors.password.message}</span>}
@@ -60,12 +60,12 @@ export function LoginForm() {
         </Link>
       </div>
 
-      {serverError && <div>{serverError}</div>}
-
       <Button type={"submit"}
               disabled={isSubmitting}
               title={isSubmitting ? 'Logging in...' : 'Login'}
       />
+
+      {serverError && <div>{serverError}</div>}
     </form>
   );
 }

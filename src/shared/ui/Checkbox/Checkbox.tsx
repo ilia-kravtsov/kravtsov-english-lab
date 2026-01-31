@@ -1,9 +1,10 @@
 import { v4 } from 'uuid';
 import styles from './Checkbox.module.scss'
+import type {ReactNode} from "react";
 
 interface Props {
   size?: number
-  label?: string
+  label?: string | ReactNode
   checked?: string | boolean;
   onChange?: (checked: boolean) => void;
 }
