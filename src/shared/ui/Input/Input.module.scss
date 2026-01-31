@@ -7,7 +7,10 @@
   background-color: transparent;
   font-size: var(--font-size-primary);
   color: var(--font-color-primary);
-
-  outline: 1px solid var(--outline-color-primary);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   border-radius: 6px;
+}
+
+.input:focus {
+  outline: 1px solid var(--outline-color-primary);
 }

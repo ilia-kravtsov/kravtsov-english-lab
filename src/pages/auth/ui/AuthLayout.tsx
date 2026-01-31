@@ -13,7 +13,7 @@ export function AuthLayout() {
       <div>
         {isLogin ? (
           <div className={s.container}>
-            <h2 className={s.header}>Don’t have an Account Yet?</h2>
+            <h2 className={s.header}>Don't you have an account yet?</h2>
             <p className={s.paragraph}>
               Let’s get you all set up so you can start creating your first onboarding experience
             </p>
