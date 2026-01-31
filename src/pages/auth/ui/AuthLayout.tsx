@@ -6,6 +6,10 @@ export function AuthLayout() {
   const location = useLocation();
   const isLogin = location.pathname.includes('login');
 
+  const linkStyles = {
+    outline: '1px solid #fff'
+  }
+
   return (
     <div className={s.authContainer} data-state={isLogin ? 'login' : 'register'}>
 
@@ -18,7 +22,7 @@ export function AuthLayout() {
               <p className={s.paragraph}>
                 Let’s get you all set up so you can start creating your first onboarding experience
               </p>
-              <LinkAsButton to="/register">Register</LinkAsButton>
+              <LinkAsButton to="/register" style={linkStyles}>Register</LinkAsButton>
             </div>
           </div>
           <div className={s.formWrapper}>
@@ -37,7 +41,7 @@ export function AuthLayout() {
               <p className={s.paragraph}>
                 Log in to your account so you can continue building and editing your onboarding flows
               </p>
-              <LinkAsButton to="/login">Log in</LinkAsButton>
+              <LinkAsButton to="/login" style={linkStyles}>Log in</LinkAsButton>
             </div>
           </div>
         </>
