@@ -7,28 +7,41 @@ export function AuthLayout() {
   const isLogin = location.pathname.includes('login');
 
   return (
-    <div className={s.authContainer}>
-      <Outlet />
+    <div className={s.authContainer} data-state={isLogin ? 'login' : 'register'}>
 
-      <div>
-        {isLogin ? (
-          <div className={s.container}>
-            <h2 className={s.header}>Don't you have an account yet?</h2>
-            <p className={s.paragraph}>
-              Let’s get you all set up so you can start creating your first onboarding experience
-            </p>
-            <LinkAsButton to="/register">Register</LinkAsButton>
+      {isLogin ? (
+        <>
+          <div className={s.panel} />
+          <div className={s.infoPanel}>
+            <div className={s.container}>
+              <h2 className={s.header}>Don't you have an account yet?</h2>
+              <p className={s.paragraph}>
+                Let’s get you all set up so you can start creating your first onboarding experience
+              </p>
+              <LinkAsButton to="/register">Register</LinkAsButton>
+            </div>
           </div>
-        ) : (
-          <div className={s.container}>
-            <h2 className={s.header}>Already Signed up?</h2>
-            <p className={s.paragraph}>
-              Log in to your account so you can continue building and editing your onboarding flows
-            </p>
-            <LinkAsButton to="/login">Log in</LinkAsButton>
+          <div className={s.formWrapper}>
+            <Outlet />
           </div>
-        )}
-      </div>
+        </>
+      ) : (
+        <>
+          <div className={s.panel} />
+          <div className={s.formWrapper}>
+            <Outlet />
+          </div>
+          <div className={s.infoPanel}>
+            <div className={s.container}>
+              <h2 className={s.header}>Already Signed up?</h2>
+              <p className={s.paragraph}>
+                Log in to your account so you can continue building and editing your onboarding flows
+              </p>
+              <LinkAsButton to="/login">Log in</LinkAsButton>
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 }
