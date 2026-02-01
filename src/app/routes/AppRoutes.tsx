@@ -1,7 +1,6 @@
 import {Route, Routes} from 'react-router-dom';
 import {useUserStore} from "@/entities/user";
 import {ProtectedRoute} from "./ProtectedRoute.tsx";
-import {Dashboard} from "@/pages/dashboard";
 import {HomePage} from "@/pages/home";
 import {ProfilePage} from "@/pages/profile";
 import {VocabularyPage} from "@/pages/vocabulary";
@@ -10,6 +9,7 @@ import {ForgotPasswordPage} from "@/pages/forgot-password";
 import {ResetPasswordPage} from "@/pages/reset-password";
 import {LoginPage} from "@/pages/login";
 import {RegisterPage} from "@/pages/register";
+import {Dashboard} from "@/widgets/dashboard";
 
 export function AppRoutes() {
   const isInitialized = useUserStore(s => s.isInitialized);

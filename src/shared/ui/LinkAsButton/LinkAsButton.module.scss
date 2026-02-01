@@ -18,9 +18,9 @@
   background-color: var(--background-color-secondary);
   color: var(--font-color-secondary);
 
-  text-decoration: none; // ключевое для <a>
+  text-decoration: none;
   cursor: pointer;
-
+  outline: 1px solid var(--font-color-secondary);
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
 
   transition:

@@ -11,10 +11,6 @@ export function AuthLayout() {
 
   const isSwitchAuth = isLogin || isRegister;
 
-  const linkStyles = {
-    outline: '1px solid #fff'
-  }
-
   if (!isSwitchAuth) {
     return (
       <div className={s.authContainer}>
@@ -37,7 +33,7 @@ export function AuthLayout() {
               <p className={s.paragraph}>
                 Let’s get you all set up so you can start creating your first onboarding experience
               </p>
-              <LinkAsButton to="/register" style={linkStyles}>Register</LinkAsButton>
+              <LinkAsButton to={"/register"}>Register</LinkAsButton>
             </div>
           </div>
           <div className={s.formWrapper}>
@@ -56,7 +52,7 @@ export function AuthLayout() {
               <p className={s.paragraph}>
                 Log in to your account so you can continue building and editing your onboarding flows
               </p>
-              <LinkAsButton to="/login" style={linkStyles}>Log in</LinkAsButton>
+              <LinkAsButton to={"/login"}>Log in</LinkAsButton>
             </div>
           </div>
         </>
