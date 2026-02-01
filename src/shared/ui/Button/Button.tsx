@@ -1,12 +1,12 @@
 import style from "./Button.module.scss";
+import type {CSSProperties} from "react";
 
 interface ButtonProps {
   title: string;
   onClick?: () => void | Promise<void>;
   disabled?: boolean;
   type?: 'button' | 'submit';
-  height?: number
-  width?: number
+  style?: CSSProperties;
 }
 
 export function Button({
@@ -14,14 +14,8 @@ export function Button({
                          onClick,
                          disabled = false,
                          type = 'button',
-                         height,
-                         width,
+                         style: externalStyle = {},
                        }: ButtonProps) {
-
-  const buttonStyles = {
-    height: height && `${height}px`,
-    width: width && `${width}px`,
-  }
 
   return (
     <button
@@ -29,7 +23,7 @@ export function Button({
       type={type}
       onClick={onClick}
       disabled={disabled}
-      style={buttonStyles}
+      style={externalStyle}
     >
       {title}
     </button>

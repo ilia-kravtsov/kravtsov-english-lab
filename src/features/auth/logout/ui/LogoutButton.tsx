@@ -3,11 +3,19 @@ import {useLogout} from "@/features/auth/logout/model/useLogout.ts";
 
 export function LogoutButton() {
   const { logout } = useLogout();
+  const buttonStyles = {
+    width: '120px',
+    height: '40px',
+    outline: '1px solid white',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  }
   return (
     <Button
       title={"Logout"}
       onClick={logout}
-      width={200}
+      style={buttonStyles}
     />
   );
 }
