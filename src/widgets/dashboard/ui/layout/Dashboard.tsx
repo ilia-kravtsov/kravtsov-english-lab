@@ -6,14 +6,16 @@ import style from './Dashboard.module.scss';
 
 export function Dashboard() {
   return (
-    <div className={style.styles}>
+    <div className={style.container}>
       <Header/>
 
-      <Nav/>
+      <div className={style.navAndMainContainer}>
+        <Nav/>
 
-      <main>
-        <Outlet />
-      </main>
+        <main>
+          <Outlet />
+        </main>
+      </div>
 
       <Footer/>
     </div>

@@ -5,12 +5,14 @@ export function LogoutButton() {
   const { logout } = useLogout();
   const buttonStyles = {
     width: '120px',
-    height: '40px',
+    height: '36px',
     outline: '1px solid white',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    fontSize: '14px',
   }
+
   return (
     <Button
       title={"Logout"}
