@@ -1,12 +1,13 @@
-import { logoutEffect } from '../model/logout.effect';
-import { Button } from '@/shared/ui/Button/Button';
+import {Button} from '@/shared/ui/Button/Button';
+import {useLogout} from "@/features/auth/logout/model/useLogout.ts";
 
 export function LogoutButton() {
-  const handleLogout = async () => {
-    await logoutEffect();
-  };
-
+  const { logout } = useLogout();
   return (
-    <Button title={"Logout"} onClick={handleLogout} />
+    <Button
+      title={"Logout"}
+      onClick={logout}
+      width={200}
+    />
   );
 }
