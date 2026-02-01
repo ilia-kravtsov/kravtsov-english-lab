@@ -22,7 +22,7 @@ export function LoginForm() {
         <Input
           id={"email"}
           type={"email"}
-          placeholder={"Enter your email"}
+          placeholder={"bondjames007@gmail.com"}
           {...register('email', { required: 'Email is required' })}
         />
         {errors.email && <span className={styles.error}>{errors.email.message}</span>}
@@ -49,7 +49,7 @@ export function LoginForm() {
               label={"Remember me"}
               checked={field.value}
               onChange={field.onChange}
-              size={16}
+              size={15}
             />
           )}
         />
