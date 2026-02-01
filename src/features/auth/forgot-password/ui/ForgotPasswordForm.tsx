@@ -1,7 +1,7 @@
 import {type SubmitHandler, useForm} from 'react-hook-form';
 import {Button} from "@/shared/ui";
 import {useForgotPasswordModel} from "@/features/auth/forgot-password/model/forgot-password.model.ts";
-import styles from './ForgotPassrowdForm.module.scss'
+import style from './ForgotPassrowdForm.module.scss'
 import {Input} from "@/shared/ui/Input/Input.tsx";
 
 interface FormData {
@@ -18,10 +18,10 @@ export function ForgotPasswordForm() {
 
   return (
     <form
-      className={styles.container}
+      className={style.container}
       onSubmit={handleSubmit(onSubmit)}
     >
-      <div className={styles.inputContainer}>
+      <div className={style.inputContainer}>
         <label htmlFor={'email'}>Enter your email</label>
         <Input
           type={"email"}

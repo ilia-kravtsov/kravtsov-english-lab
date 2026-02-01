@@ -1,7 +1,7 @@
 import {Controller, useForm} from 'react-hook-form';
 import type {RegisterFormData} from "@/features/auth/register/model/register.types.ts";
 import {useRegisterForm} from "@/features/auth/register/model/useRegisterForm.ts";
-import styles from './RegisterForm.module.scss'
+import style from './RegisterForm.module.scss'
 import {Input} from "@/shared/ui/Input/Input.tsx";
 import {CustomCheckbox} from "@/shared/ui/Checkbox/Checkbox.tsx";
 import {Button} from "@/shared/ui";
@@ -12,10 +12,10 @@ export function RegisterForm() {
   const { onSubmit, serverError } = useRegisterForm();
 
   return (
-    <form className={styles.container} onSubmit={handleSubmit(onSubmit)}>
-      <div className={styles.inputsContainer}>
-        <div className={styles.inputContainer}>
-          <label className={styles.inputLabel} htmlFor={'firstName'}>First name</label>
+    <form className={style.container} onSubmit={handleSubmit(onSubmit)}>
+      <div className={style.inputsContainer}>
+        <div className={style.inputContainer}>
+          <label className={style.inputLabel} htmlFor={'firstName'}>First name</label>
           <Input
             type={"text"}
             id={'firstName'}
@@ -25,8 +25,8 @@ export function RegisterForm() {
           {errors.firstName && <span>{errors.firstName.message}</span>}
         </div>
 
-        <div className={styles.inputContainer}>
-          <label className={styles.inputLabel} htmlFor={'lastName'}>Last name</label>
+        <div className={style.inputContainer}>
+          <label className={style.inputLabel} htmlFor={'lastName'}>Last name</label>
           <Input
             type={"text"}
             id={'lastName'}
@@ -37,8 +37,8 @@ export function RegisterForm() {
         </div>
       </div>
 
-      <div className={styles.inputContainer}>
-        <label className={styles.inputLabel} htmlFor={'email'}>Email</label>
+      <div className={style.inputContainer}>
+        <label className={style.inputLabel} htmlFor={'email'}>Email</label>
         <Input
           type={"email"}
           id={'email'}
@@ -48,8 +48,8 @@ export function RegisterForm() {
         {errors.email && <span>{errors.email.message}</span>}
       </div>
 
-      <div className={styles.inputContainer}>
-        <label className={styles.inputLabel} htmlFor={'password'}>Enter a strong password</label>
+      <div className={style.inputContainer}>
+        <label className={style.inputLabel} htmlFor={'password'}>Enter a strong password</label>
         <Input
           type={"password"}
           id={'password'}
@@ -59,7 +59,7 @@ export function RegisterForm() {
         {errors.password && <span>{errors.password.message}</span>}
       </div>
 
-      <div className={styles.checkBoxLinkContainer}>
+      <div className={style.checkBoxLinkContainer}>
         <Controller
           name="terms"
           control={control}
@@ -72,7 +72,7 @@ export function RegisterForm() {
                   <Link
                     to="/terms"
                     onClick={(e) => e.stopPropagation()}
-                    className={styles.link}
+                    className={style.link}
                   >
                     Terms & Conditions
                   </Link>

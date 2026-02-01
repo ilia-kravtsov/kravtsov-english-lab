@@ -1,5 +1,5 @@
 import { Outlet, useLocation } from 'react-router-dom';
-import s from './AuthLayout.module.scss'
+import style from './AuthLayout.module.scss'
 import {LinkAsButton} from "@/shared/ui/LinkAsButton/LinkAsButton.tsx";
 
 export function AuthLayout() {
@@ -13,8 +13,8 @@ export function AuthLayout() {
 
   if (!isSwitchAuth) {
     return (
-      <div className={s.authContainer}>
-        <div className={s.formWrapper}>
+      <div className={style.authContainer}>
+        <div className={style.formWrapper}>
           <Outlet />
         </div>
       </div>
@@ -22,34 +22,34 @@ export function AuthLayout() {
   }
 
   return (
-    <div className={s.authContainer} data-state={isLogin ? 'login' : 'register'}>
+    <div className={style.authContainer} data-state={isLogin ? 'login' : 'register'}>
 
       {isLogin ? (
         <>
-          <div className={s.panel} />
-          <div className={s.infoPanel}>
-            <div className={s.container}>
-              <h2 className={s.header}>Don't you have an account yet?</h2>
-              <p className={s.paragraph}>
+          <div className={style.panel} />
+          <div className={style.infoPanel}>
+            <div className={style.container}>
+              <h2 className={style.header}>Don't you have an account yet?</h2>
+              <p className={style.paragraph}>
                 Let’s get you all set up so you can start creating your first onboarding experience
               </p>
               <LinkAsButton to={"/register"}>Register</LinkAsButton>
             </div>
           </div>
-          <div className={s.formWrapper}>
+          <div className={style.formWrapper}>
             <Outlet />
           </div>
         </>
       ) : (
         <>
-          <div className={s.panel} />
-          <div className={s.formWrapper}>
+          <div className={style.panel} />
+          <div className={style.formWrapper}>
             <Outlet />
           </div>
-          <div className={s.infoPanel}>
-            <div className={s.container}>
-              <h2 className={s.header}>Already Signed up?</h2>
-              <p className={s.paragraph}>
+          <div className={style.infoPanel}>
+            <div className={style.container}>
+              <h2 className={style.header}>Already Signed up?</h2>
+              <p className={style.paragraph}>
                 Log in to your account so you can continue building and editing your onboarding flows
               </p>
               <LinkAsButton to={"/login"}>Log in</LinkAsButton>
