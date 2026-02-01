@@ -72,6 +72,7 @@ export function RegisterForm() {
                   <Link
                     to="/terms"
                     onClick={(e) => e.stopPropagation()}
+                    className={styles.link}
                   >
                     Terms & Conditions
                   </Link>

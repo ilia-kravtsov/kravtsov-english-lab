@@ -4,10 +4,25 @@ import {LinkAsButton} from "@/shared/ui/LinkAsButton/LinkAsButton.tsx";
 
 export function AuthLayout() {
   const location = useLocation();
-  const isLogin = location.pathname.includes('login');
+  const pathname = location.pathname;
+
+  const isLogin = pathname === '/login';
+  const isRegister = pathname === '/register';
+
+  const isSwitchAuth = isLogin || isRegister;
 
   const linkStyles = {
     outline: '1px solid #fff'
+  }
+
+  if (!isSwitchAuth) {
+    return (
+      <div className={s.authContainer}>
+        <div className={s.formWrapper}>
+          <Outlet />
+        </div>
+      </div>
+    );
   }
 
   return (
