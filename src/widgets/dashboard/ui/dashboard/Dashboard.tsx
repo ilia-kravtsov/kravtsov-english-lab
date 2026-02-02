@@ -9,7 +9,7 @@ import {BurgerButton} from "@/shared/ui/BurgerButton/BurgerButton.tsx";
 export function Dashboard() {
   const [isOpen, setIsOpen] = useState(true);
   const navRef = useRef<HTMLDivElement>(null);
-  const burgerRef = useRef<HTMLButtonElement>(null);
+  const toggleMenuRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -18,8 +18,8 @@ export function Dashboard() {
       if (
         navRef.current &&
         !navRef.current.contains(target) &&
-        burgerRef.current &&
-        !burgerRef.current.contains(target)
+        toggleMenuRef.current &&
+        !toggleMenuRef.current.contains(target)
       ) {
         setIsOpen(false);
       }
@@ -37,11 +37,7 @@ export function Dashboard() {
     <div className={style.container}>
       <Header/>
 
-      <BurgerButton
-        ref={burgerRef}
-        toggleBurger={toggle}
-        isOpen={isOpen}
-      />
+      <BurgerButton toggleBurger={toggle} isOpen={isOpen} ref={toggleMenuRef}/>
 
       <Nav
         isOpen={isOpen}
