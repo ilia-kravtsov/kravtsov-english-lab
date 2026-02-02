@@ -1,1 +1,1 @@
-export { VocabularyPage } from './ui/VocabularyPage.tsx';
+export { Vocabulary } from './ui/Vocabulary.tsx';

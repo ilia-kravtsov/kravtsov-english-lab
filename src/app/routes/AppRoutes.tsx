@@ -1,15 +1,15 @@
 import {Route, Routes} from 'react-router-dom';
 import {useUserStore} from "@/entities/user";
 import {ProtectedRoute} from "./ProtectedRoute.tsx";
-import {HomePage} from "@/pages/home";
-import {ProfilePage} from "@/pages/profile";
-import {VocabularyPage} from "@/pages/vocabulary";
-import {AuthLayout} from "@/pages/auth/ui/AuthLayout.tsx";
-import {ForgotPasswordPage} from "@/pages/forgot-password";
-import {ResetPasswordPage} from "@/pages/reset-password";
-import {LoginPage} from "@/pages/login";
-import {RegisterPage} from "@/pages/register";
+import {Home} from "@/pages/home";
+import {Profile} from "@/pages/profile";
+import {Vocabulary} from "@/pages/vocabulary";
 import {Dashboard} from "@/widgets/dashboard";
+import {AuthLayout} from "@/pages/auth/auth-layout";
+import {Login} from "@/pages/auth/login";
+import {Register} from "@/pages/auth/register";
+import {ResetPassword} from "@/pages/auth/reset-password";
+import {ForgotPassword} from "@/pages/auth/forgot-password";
 
 export function AppRoutes() {
   const isInitialized = useUserStore(s => s.isInitialized);
@@ -19,10 +19,10 @@ export function AppRoutes() {
   return (
     <Routes>
       <Route element={<AuthLayout/>}>
-        <Route path="/login" element={<LoginPage/>}/>
-        <Route path="/register" element={<RegisterPage/>}/>
-        <Route path="/forgot-password" element={<ForgotPasswordPage/>}/>
-        <Route path="/reset-password" element={<ResetPasswordPage/>}/>
+        <Route path="/login" element={<Login/>}/>
+        <Route path="/register" element={<Register/>}/>
+        <Route path="/forgot-password" element={<ForgotPassword/>}/>
+        <Route path="/reset-password" element={<ResetPassword/>}/>
       </Route>
 
       <Route
@@ -33,9 +33,9 @@ export function AppRoutes() {
           </ProtectedRoute>
         }
       >
-        <Route index element={<HomePage />} />
-        <Route path="profile" element={<ProfilePage />} />
-        <Route path="vocabulary" element={<VocabularyPage />} />
+        <Route index element={<Home />} />
+        <Route path="profile" element={<Profile />} />
+        <Route path="vocabulary" element={<Vocabulary />} />
       </Route>
     </Routes>
   );

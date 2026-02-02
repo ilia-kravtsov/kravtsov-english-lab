@@ -1,1 +1,1 @@
-export { ProfilePage } from './ui/ProfilePage.tsx';
+export { Profile } from './ui/Profile.tsx';

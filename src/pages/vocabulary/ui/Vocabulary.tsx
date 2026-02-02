@@ -1,4 +1,4 @@
-export function VocabularyPage() {
+export function Vocabulary() {
   return (
     <div>
       VocabularyPage

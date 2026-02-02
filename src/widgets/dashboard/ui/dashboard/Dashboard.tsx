@@ -7,7 +7,7 @@ import {useEffect, useRef, useState} from "react";
 import {BurgerButton} from "@/shared/ui/BurgerButton/BurgerButton.tsx";
 
 export function Dashboard() {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const navRef = useRef<HTMLDivElement>(null);
   const toggleMenuRef = useRef<HTMLButtonElement>(null);
 
@@ -29,17 +29,22 @@ export function Dashboard() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
   
-  const toggle = () => {
+  const isNavMenuOpen = () => {
     setIsOpen(!isOpen)
+  }
+
+  const handleClick = () => {
+    setIsOpen(false)
   }
 
   return (
     <div className={style.container}>
       <Header/>
 
-      <BurgerButton toggleBurger={toggle} isOpen={isOpen} ref={toggleMenuRef}/>
+      <BurgerButton toggleBurger={isNavMenuOpen} isOpen={isOpen} ref={toggleMenuRef}/>
 
       <Nav
+        onLinkClick={handleClick}
         isOpen={isOpen}
         ref={navRef}
       />

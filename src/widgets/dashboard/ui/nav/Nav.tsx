@@ -11,10 +11,11 @@ type NavLink = {
 
 interface Props {
   isOpen: boolean;
+  onLinkClick: () => void;
 }
 
 export const Nav = forwardRef<HTMLDivElement, Props>(
-  ({ isOpen }, ref: Ref<HTMLDivElement>) => {
+  ({ isOpen, onLinkClick }, ref: Ref<HTMLDivElement>) => {
 
   const navLinks: NavLink[] = [
     { id: 'daily', to: 'daily-practice', title: 'Daily Practice' },
@@ -31,11 +32,15 @@ export const Nav = forwardRef<HTMLDivElement, Props>(
 
   const linkStyles = {
     height: '40px',
-    width: '140px',
+    width: '100%',
     fontSize: '14px',
   }
 
   const containerStyles = `${style.container} ${!isOpen ? style.collapsed : ""}`;
+
+  const handleClick = () => {
+      onLinkClick()
+  }
 
   return (
     <aside className={containerStyles} ref={ref}>
@@ -45,6 +50,7 @@ export const Nav = forwardRef<HTMLDivElement, Props>(
             key={navLink.id}
             to={navLink.to}
             style={linkStyles}
+            onClick={handleClick}
           >
             {navLink.title}
           </LinkAsButton>

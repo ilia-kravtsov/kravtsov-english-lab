@@ -1,6 +1,6 @@
 import { useUserStore } from "@/entities/user";
 
-export function ProfilePage() {
+export function Profile() {
   const user = useUserStore(s => s.user);
 
   if (!user) return <div>Loading user...</div>;
