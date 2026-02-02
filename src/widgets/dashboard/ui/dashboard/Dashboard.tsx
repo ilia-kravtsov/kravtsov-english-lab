@@ -44,7 +44,7 @@ export function Dashboard() {
         ref={navRef}
       />
 
-      <main>
+      <main className={style.main}>
         <Outlet />
       </main>
 
