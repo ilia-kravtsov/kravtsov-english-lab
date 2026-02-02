@@ -1,8 +1,7 @@
-import { NavLink } from "react-router-dom";
-import { useState } from "react";
+import {NavLink} from "react-router-dom";
 import style from "./Nav.module.scss";
-import {v4} from "uuid";
 import {LinkAsButton} from "@/shared/ui/LinkAsButton/LinkAsButton.tsx";
+import {forwardRef, type Ref} from "react";
 
 type NavLink = {
   id: string;
@@ -10,20 +9,24 @@ type NavLink = {
   title: string;
 }
 
-export function Nav() {
-  const [isOpen, setIsOpen] = useState(true);
+interface Props {
+  isOpen: boolean;
+}
+
+export const Nav = forwardRef<HTMLDivElement, Props>(
+  ({ isOpen }, ref: Ref<HTMLDivElement>) => {
 
   const navLinks: NavLink[] = [
-    {id: v4(), to: 'daily-practice', title: 'Daily Practice'},
-    {id: v4(), to: 'writing', title: 'Writing'},
-    {id: v4(), to: 'speaking', title: 'Speaking'},
-    {id: v4(), to: 'listening', title: 'Listening'},
-    {id: v4(), to: 'reading', title: 'Reading'},
-    {id: v4(), to: 'vocabulary', title: 'Vocabulary'},
-    {id: v4(), to: 'theory', title: 'Theory'},
-    {id: v4(), to: 'profile', title: 'Profile'},
-    {id: v4(), to: 'rating', title: 'Rating'},
-    {id: v4(), to: 'settings', title: 'Settings'},
+    { id: 'daily', to: 'daily-practice', title: 'Daily Practice' },
+    { id: 'writing', to: 'writing', title: 'Writing' },
+    { id: 'speaking', to: 'speaking', title: 'Speaking' },
+    { id: 'listening', to: 'listening', title: 'Listening' },
+    { id: 'reading', to: 'reading', title: 'Reading' },
+    { id: 'vocabulary', to: 'vocabulary', title: 'Vocabulary' },
+    { id: 'theory', to: 'theory', title: 'Theory' },
+    { id: 'profile', to: 'profile', title: 'Profile' },
+    { id: 'rating', to: 'rating', title: 'Rating' },
+    { id: 'settings', to: 'settings', title: 'Settings' },
   ];
 
   const linkStyles = {
@@ -33,24 +36,9 @@ export function Nav() {
   }
 
   const containerStyles = `${style.container} ${!isOpen ? style.collapsed : ""}`;
-  const burgerStyles = `${style.burger} ${isOpen ? style.open : ""}`;
-
-  const toggle = () => {
-    setIsOpen(prev => !prev);
-  }
 
   return (
-    <aside className={containerStyles}>
-      <button
-        className={burgerStyles}
-        onClick={toggle}
-        aria-label={"Toggle menu"}
-      >
-        <span className={style.burgerLine} />
-        <span className={style.burgerLine} />
-        <span className={style.burgerLine} />
-      </button>
-
+    <aside className={containerStyles} ref={ref}>
       <nav className={style.menu}>
         {navLinks.map((navLink: NavLink) => (
           <LinkAsButton
@@ -64,4 +52,4 @@ export function Nav() {
       </nav>
     </aside>
   );
-}
+})

@@ -1,1 +1,1 @@
-export { Dashboard } from '@/widgets/dashboard/ui/layout/Dashboard.tsx';
+export { Dashboard } from '@/widgets/dashboard/ui/dashboard/Dashboard.tsx';

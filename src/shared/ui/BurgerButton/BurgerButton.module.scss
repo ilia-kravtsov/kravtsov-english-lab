@@ -1,0 +1,36 @@
+.burger {
+  position: absolute;
+  top: 20px;
+  left: 16px;
+  width: 32px;
+  height: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .burgerLine {
+    height: 2px;
+    width: 100%;
+    background-color: var(--background-color-primary);
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.2s ease;
+  }
+}
+
+.open {
+  span:nth-child(1) {
+    transform: translateY(10px) rotate(45deg);
+  }
+
+  span:nth-child(2) {
+    opacity: 0;
+  }
+
+  span:nth-child(3) {
+    transform: translateY(-10px) rotate(-45deg);
+  }
+}

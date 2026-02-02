@@ -1,6 +1,5 @@
 import style from './Footer.module.scss'
 import {LinkAsButton} from "@/shared/ui/LinkAsButton/LinkAsButton.tsx";
-import {v4} from "uuid";
 
 export function Footer() {
 
@@ -11,8 +10,8 @@ export function Footer() {
   }
 
   const navLinks: NavLink[] = [
-    {id: v4(), to: 'about', title: 'Author'},
-    {id: v4(), to: 'contacts', title: 'Contacts'},
+    {id: 'about', to: 'about', title: 'Author'},
+    {id: 'contacts', to: 'contacts', title: 'Contacts'},
   ];
 
   const linkStyles = {
@@ -25,6 +24,7 @@ export function Footer() {
     <div className={style.container}>
       {navLinks.map((navLink: NavLink) => (
         <LinkAsButton
+          key={navLink.id}
           to={navLink.to}
           style={linkStyles}
         >
