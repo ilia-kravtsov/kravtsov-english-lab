@@ -27,19 +27,22 @@ export function ResetPasswordForm() {
         <Input
           id={'password'}
           type={'password'}
+          data-error={!!errors.password}
           placeholder={'qwerty12345'}
           {...register('password', { required: 'Password is required' })}
         />
-        {errors.password && <span>{errors.password.message}</span>}
+        <div className={style.errorSlot}>
+          {errors.password?.message}
+        </div>
       </div>
-
-      {serverMessage && <div>{serverMessage}</div>}
 
       <Button
         type={'submit'}
         title={isSubmitting ? 'Saving...' : 'Reset password'}
         disabled={isSubmitting}
       />
+
+      {serverMessage && <div className={style.serverMessage}>{serverMessage}</div>}
     </form>
   );
 }

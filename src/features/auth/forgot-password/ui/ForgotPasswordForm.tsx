@@ -26,10 +26,13 @@ export function ForgotPasswordForm() {
         <Input
           type={"email"}
           id={"email"}
+          data-error={!!errors.email}
           placeholder={'example@test.com'}
           {...register('email', { required: 'Email is required' })}
         />
-        {errors.email && <span>{errors.email.message}</span>}
+        <div className={style.errorSlot}>
+          {errors.email?.message}
+        </div>
       </div>
 
       <Button type="submit"
@@ -37,7 +40,7 @@ export function ForgotPasswordForm() {
               title={isSubmitting ? 'Sending...' : 'Send reset link'}
       />
 
-      {serverMessage && <div>{serverMessage}</div>}
+      {serverMessage && <div className={style.serverMessage}>{serverMessage}</div>}
     </form>
   );
 }

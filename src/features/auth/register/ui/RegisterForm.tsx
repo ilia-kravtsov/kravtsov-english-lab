@@ -19,10 +19,13 @@ export function RegisterForm() {
           <Input
             type={"text"}
             id={'firstName'}
+            data-error={!!errors.firstName}
             placeholder={'James'}
             {...register('firstName', { required: 'First Name is required' })}
           />
-          {errors.firstName && <span>{errors.firstName.message}</span>}
+          <div className={style.errorSlot}>
+            {errors.firstName?.message}
+          </div>
         </div>
 
         <div className={style.inputContainer}>
@@ -30,10 +33,13 @@ export function RegisterForm() {
           <Input
             type={"text"}
             id={'lastName'}
+            data-error={!!errors.password}
             placeholder={'Brown'}
             {...register('lastName', { required: 'Last Name is required' })}
           />
-          {errors.lastName && <span>{errors.lastName.message}</span>}
+          <div className={style.errorSlot}>
+            {errors.lastName?.message}
+          </div>
         </div>
       </div>
 
@@ -42,10 +48,13 @@ export function RegisterForm() {
         <Input
           type={"email"}
           id={'email'}
+          data-error={!!errors.email}
           placeholder={'brown@test.com'}
           {...register('email', { required: 'Email is required' })}
         />
-        {errors.email && <span>{errors.email.message}</span>}
+        <div className={style.errorSlot}>
+          {errors.email?.message}
+        </div>
       </div>
 
       <div className={style.inputContainer}>
@@ -53,10 +62,13 @@ export function RegisterForm() {
         <Input
           type={"password"}
           id={'password'}
+          data-error={!!errors.password}
           placeholder={'qwerty12345'}
           {...register('password', { required: 'Password is required' })}
         />
-        {errors.password && <span>{errors.password.message}</span>}
+        <div className={style.errorSlot}>
+          {errors.password?.message}
+        </div>
       </div>
 
       <div className={style.checkBoxLinkContainer}>
@@ -84,7 +96,9 @@ export function RegisterForm() {
             />
           )}
         />
-        {errors.terms && <span>{errors.terms.message}</span>}
+        <div className={style.errorSlot}>
+          {errors.terms?.message}
+        </div>
       </div>
 
       <Button type={"submit"}
@@ -92,7 +106,7 @@ export function RegisterForm() {
               title={isSubmitting ? 'Registering...' : 'Register'}
       />
 
-      {serverError && <div>{serverError}</div>}
+      {serverError && <div className={style.serverError}>{serverError}</div>}
     </form>
   );
 }

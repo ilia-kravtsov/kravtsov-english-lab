@@ -1,12 +1,22 @@
 .container {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 20px;
 
   .inputContainer {
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: 20px;
+  }
+
+  .errorSlot {
+    position: absolute;
+    bottom: 57px;
+    left: 0;
+    font-size: var(--font-error-primary);
+    color: var(--error-color-primary);
   }
 
   .checkBoxLinkContainer {
@@ -14,7 +24,26 @@
     justify-content: space-between;
   }
 
-  .error {
+  .serverError {
+    position: absolute;
+    bottom: -40px;
+    left: 0;
+    color: var(--error-color-primary);
+    font-size: var(--font-error-primary);
+    text-align: center;
+  }
 
+  @keyframes shake {
+    0% { transform: translateX(0); }
+    20% { transform: translateX(-3px); }
+    40% { transform: translateX(3px); }
+    60% { transform: translateX(-3px); }
+    80% { transform: translateX(3px); }
+    100% { transform: translateX(0); }
+  }
+
+  input[data-error="true"] {
+    border-color: var(--error-color-primary);
+    animation: shake 0.35s;
   }
 }

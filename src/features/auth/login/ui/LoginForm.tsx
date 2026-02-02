@@ -22,10 +22,13 @@ export function LoginForm() {
         <Input
           id={"email"}
           type={"email"}
+          data-error={!!errors.email}
           placeholder={"bondjames007@gmail.com"}
           {...register('email', { required: 'Email is required' })}
         />
-        {errors.email && <span className={style.error}>{errors.email.message}</span>}
+        <div className={style.errorSlot}>
+          {errors.email?.message}
+        </div>
       </div>
 
       <div className={style.inputContainer}>
@@ -33,10 +36,13 @@ export function LoginForm() {
         <Input
           id={"password"}
           type={"password"}
+          data-error={!!errors.password}
           placeholder={"qwerty12345"}
           {...register('password', { required: 'Password is required' })}
         />
-        {errors.password && <span>{errors.password.message}</span>}
+        <div className={style.errorSlot}>
+          {errors.password?.message}
+        </div>
       </div>
 
       <div className={style.checkBoxLinkContainer}>
@@ -65,7 +71,7 @@ export function LoginForm() {
               title={isSubmitting ? 'Logging in...' : 'Login'}
       />
 
-      {serverError && <div>{serverError}</div>}
+      {serverError && <div className={style.serverError}>{serverError}</div>}
     </form>
   );
 }
