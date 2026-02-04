@@ -2,7 +2,7 @@ import {ProtectedRoute} from "@/app/routes/ProtectedRoute.tsx";
 import {Dashboard} from "@/widgets/dashboard";
 import {Home} from "@/pages/home";
 import {Profile} from "@/pages/profile";
-import {CardSets, CustomCards, ExpressionsBank, Vocabulary, WordsBank} from "@/pages/vocabulary";
+import {VocabularyLayout, WordsBank, Cards} from "@/pages/vocabulary";
 import {vocabularyHeaderLinks} from "@/features/vocabulary/config/vocabularyHeaderLinks.ts";
 import {AuthLayout} from "@/pages/auth/auth-layout";
 import {Login} from "@/pages/auth/login";
@@ -19,6 +19,7 @@ import {Theory} from "@/pages/theory";
 import {Rating} from "@/pages/rating";
 import {Settings} from "@/pages/settings";
 import {NotFound} from "@/pages/not-found";
+import {VocabularyIntro} from "@/pages/vocabulary/ui/internal-components/VocabularyIntro/VocabularyIntro.tsx";
 
 export const routes = [
   {
@@ -43,15 +44,14 @@ export const routes = [
       { path: 'settings', element: <Settings /> },
       {
         path: 'vocabulary',
-        element: <Vocabulary />,
+        element: <VocabularyLayout />,
         handle: {
           headerLinks: vocabularyHeaderLinks,
         },
         children: [
-          { path: 'card-sets', element: <CardSets /> },
-          { path: 'custom-cards', element: <CustomCards /> },
+          { index: true, element: <VocabularyIntro /> },
+          { path: 'cards', element: <Cards /> },
           { path: 'words-bank', element: <WordsBank /> },
-          { path: 'expressions-bank', element: <ExpressionsBank /> },
           { path: '*', element: <NotFound /> },
         ],
       },
