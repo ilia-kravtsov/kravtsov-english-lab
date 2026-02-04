@@ -7,7 +7,7 @@ import {useEffect, useRef, useState} from "react";
 import {BurgerButton} from "@/shared/ui/BurgerButton/BurgerButton.tsx";
 
 export function Dashboard() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
   const navRef = useRef<HTMLDivElement>(null);
   const toggleMenuRef = useRef<HTMLButtonElement>(null);
 

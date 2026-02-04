@@ -6,4 +6,47 @@
   align-items: center;
   justify-content: end;
   padding-right: 40px;
+  gap: 20px;
+
+  .navContainer {
+    display: flex;
+    gap: 20px;
+
+    .navLink {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 130px;
+      height: 36px;
+      font-size: 14px;
+      outline: 1px solid var(--background-color-primary);
+      color: var(--font-color-secondary);
+      border-radius: var(--border-radius-primary);
+
+      opacity: 0;
+      transform: translateY(-6px);
+      pointer-events: none;
+
+      animation: navLinkFadeIn 0.25s forwards;
+    }
+
+    .navLink:nth-child(1) { animation-delay: 0.2s; }
+    .navLink:nth-child(2) { animation-delay: 0.15s; }
+    .navLink:nth-child(3) { animation-delay: 0.1s; }
+    .navLink:nth-child(4) { animation-delay: 0.05s; }
+
+    .navLinkVisible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    @keyframes navLinkFadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+    }
+  }
 }
