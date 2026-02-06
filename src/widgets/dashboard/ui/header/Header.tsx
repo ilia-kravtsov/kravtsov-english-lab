@@ -1,7 +1,8 @@
 import {LogoutButton} from "@/features/auth/logout";
 import style from "./Header.module.scss"
-import {NavLink, useMatches} from "react-router-dom";
+import {useMatches} from "react-router-dom";
 import type {RouteHandle} from "@/shared/types/routeHandle.ts";
+import {LinkAsButton} from "@/shared/ui/LinkAsButton/LinkAsButton.tsx";
 
 export function Header() {
   const matches = useMatches() as Array<{ handle?: RouteHandle }>;
@@ -14,17 +15,26 @@ export function Header() {
     return match?.handle?.headerLinks ?? [];
   })();
 
+  const linkStyles = {
+    height: '40px',
+    width: '120px',
+    fontSize: '14px',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  }
+
   return (
     <header className={style.container}>
       <nav className={style.navContainer}>
         {headerLinks.map(link => (
-          <NavLink
+          <LinkAsButton
             key={link.to}
             to={link.to}
-            className={style.navLink}
+            style={linkStyles}
           >
             {link.label}
-          </NavLink>
+          </LinkAsButton>
         ))}
       </nav>
       <LogoutButton/>

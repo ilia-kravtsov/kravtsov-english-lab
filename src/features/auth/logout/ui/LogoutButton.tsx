@@ -22,7 +22,7 @@ export function LogoutButton() {
 
   const buttonStyles = {
     width: '120px',
-    height: '36px',
+    height: '40px',
     outline: '1px solid white',
     display: 'flex',
     justifyContent: 'center',

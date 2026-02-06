@@ -1,9 +1,9 @@
 :root {
   // colors
-  --background-color-primary: #fff;
-  --background-color-secondary: #000;
-  --font-color-primary: #000;
-  --font-color-secondary: #fff;
+  --background-color-primary: #F4F1EC;
+  --background-color-secondary: #1A1A1A;
+  --font-color-primary: #1A1A1A;
+  --font-color-secondary: #F4F1EC;
   --outline-color-primary: #000;
   --accent-color-primary: #3b5bff;
   --error-color-primary: #e5484d;
@@ -21,6 +21,28 @@
   // fonts
   --font-family-primary: 'Baskervville';
   --font-family-secondary: 'Baskervville'; // 'Roboto' 'PT Sans Narrow' 'PT Sans'
+
+  // additional
+  --bg-color-1: #393939;
+  --bg-color-2: #353941;
+  --accent-color-1: #1e90ff;
+  --accent-color-2: #b22222;
+  --font-color-1: #fff;
+  --font-color-2: #000;
+  --font-family-1: 'Playfair Display';
+  --font-family-2: 'Old Standard TT';
+  --font-size-1: 24px;
+  --font-weight-1: 300;
+  --font-weight-2: 500;
+  --font-weight-3: 600;
+  --letter-spacing-1: 1px;
+  --color-1: #1f75af;
+  --color-2: #fd4343;
+  --color-3: #e0e0e0;
+  --color-4: #a5543a;
+  --color-5: #817c7c;
+  --color-6: darkgreen;
+  --border-color: 1px solid silver;
 }
 
 [data-theme='dark'] {
