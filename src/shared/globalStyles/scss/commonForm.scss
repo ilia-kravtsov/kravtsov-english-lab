@@ -1,0 +1,32 @@
+@mixin errorSlot {
+  position: absolute;
+  bottom: 57px;
+  left: 0;
+  font-size: var(--font-error-primary);
+  color: var(--error-color-primary);
+}
+
+@mixin serverError {
+  position: absolute;
+  bottom: -40px;
+  left: 0;
+  color: var(--error-color-primary);
+  font-size: var(--font-error-primary);
+  text-align: center;
+}
+
+@mixin serverMessage {
+  position: absolute;
+  bottom: -40px;
+  left: 0;
+  color: var(--font-color-primary);
+  font-size: var(--font-error-primary);
+  text-align: center;
+}
+
+@mixin inputContainer($gap: 20px) {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: $gap;
+}

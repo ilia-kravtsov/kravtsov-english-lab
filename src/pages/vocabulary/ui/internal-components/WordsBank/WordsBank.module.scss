@@ -4,8 +4,9 @@
   align-items: center;
   width: 100%;
   padding: 8vh;
+  gap: 20px;
 
-  .tabsHeader{
+  .tabsHeader {
     display: flex;
     justify-content: left;
     padding-left: 4px;
@@ -21,11 +22,10 @@
     border: none;
     cursor: pointer;
     font-size: 14px;
+    border-radius: 6px;
+    width: 80px;
 
-    border-top-left-radius: 6px;
-    border-top-right-radius: 6px;
-
-    opacity: 0.4;
+    opacity: 0.5;
 
     &.active {
       opacity: 1;

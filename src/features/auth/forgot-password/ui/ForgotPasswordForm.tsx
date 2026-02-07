@@ -1,7 +1,7 @@
 import {type SubmitHandler, useForm} from 'react-hook-form';
 import {Button} from "@/shared/ui";
 import {useForgotPasswordModel} from "@/features/auth/forgot-password/model/forgot-password.model.ts";
-import style from './ForgotPassrowdForm.module.scss'
+import style from './ForgotPasswordForm.module.scss'
 import {Input} from "@/shared/ui/Input/Input.tsx";
 
 interface FormData {

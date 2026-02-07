@@ -2,10 +2,6 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-  max-width: 400px;
+  max-width: var(--max-width-primary);
   width: 100%;
-
-  .header {
-
-  }
 }

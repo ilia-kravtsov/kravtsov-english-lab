@@ -113,11 +113,11 @@ export function AddLexicalUnitForm() {
         <Input {...register('meaning')} placeholder={"meaning in English"} />
         <Input
           {...register('partsOfSpeech')}
-          list="parts-of-speech"
-          placeholder="part of speech"
+          list={"parts-of-speech"}
+          placeholder={"part of speech"}
         />
 
-        <datalist id="parts-of-speech">
+        <datalist id={"parts-of-speech"}>
           {partsOfSpeech.map(part => (
             <option key={part} value={part} />
           ))}
