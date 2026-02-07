@@ -9,7 +9,7 @@ interface Props {
   onChange?: (checked: boolean) => void;
 }
 
-export const CustomCheckbox = ({ size = 24, label, checked = false,  onChange}: Props) => {
+export const Checkbox = ({ size = 24, label, checked = false,  onChange}: Props) => {
   const checkBoxId = `checkbox_id_${v4()}`;
 
   const checkBoxSize = {

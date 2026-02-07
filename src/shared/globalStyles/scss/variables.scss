@@ -1,6 +1,7 @@
 :root {
   // colors
-  --background-color-primary: #F4F1EC;
+  //--background-color-primary: #F4F1EC;
+  --background-color-primary: #bbbaba;
   --background-color-secondary: #1A1A1A;
   --font-color-primary: #1A1A1A;
   --font-color-secondary: #F4F1EC;
@@ -13,10 +14,12 @@
   --font-size-secondary: 24px;
   --header-height: 10vh;
   --font-error-primary: 14px;
+  --max-width-primary: 600px;
 
   // shapes
   --border-radius-primary: 6px;
   --transform-scale-push-size: 0.98;
+  --shadow-primary: 0 0 3px rgba(0, 0, 0, 0.1);
 
   // fonts
   --font-family-primary: 'Baskervville';

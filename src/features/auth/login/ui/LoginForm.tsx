@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import style from './LoginForm.module.scss'
 import {Input} from "@/shared/ui/Input/Input.tsx";
 import {Button} from "@/shared/ui";
-import {CustomCheckbox} from "@/shared/ui/Checkbox/Checkbox.tsx";
+import {Checkbox} from "@/shared/ui/Checkbox/Checkbox.tsx";
 import type {LoginFormData} from "@/features/auth/login/model/login.types.ts";
 import {useLoginForm} from "@/features/auth/login/model/useLoginForm.ts";
 
@@ -51,7 +51,7 @@ export function LoginForm() {
           control={control}
           defaultValue={false}
           render={({ field }) => (
-            <CustomCheckbox
+            <Checkbox
               label={"Remember me"}
               checked={field.value}
               onChange={field.onChange}

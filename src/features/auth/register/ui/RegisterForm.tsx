@@ -3,7 +3,7 @@ import type {RegisterFormData} from "@/features/auth/register/model/register.typ
 import {useRegisterForm} from "@/features/auth/register/model/useRegisterForm.ts";
 import style from './RegisterForm.module.scss'
 import {Input} from "@/shared/ui/Input/Input.tsx";
-import {CustomCheckbox} from "@/shared/ui/Checkbox/Checkbox.tsx";
+import {Checkbox} from "@/shared/ui/Checkbox/Checkbox.tsx";
 import {Button} from "@/shared/ui";
 import {Link} from "react-router-dom";
 
@@ -77,7 +77,7 @@ export function RegisterForm() {
           control={control}
           defaultValue={false}
           render={({ field }) => (
-            <CustomCheckbox
+            <Checkbox
               label={
                 <>
                   I agree with{' '}
