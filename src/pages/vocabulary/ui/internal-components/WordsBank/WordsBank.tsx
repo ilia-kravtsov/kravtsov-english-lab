@@ -1,7 +1,7 @@
 import style from './WordsBank.module.scss';
-import {AddLexicalUnitForm} from "@/features/vocabulary/lexical-unit-add";
-import {useState} from "react";
-import {SearchLexicalUnit} from "@/features/vocabulary/lexical-unit-add/ui/SearchLexicalUnit/SearchLexicalUnit.tsx";
+import { AddLexicalUnitForm } from '@/features/vocabulary/lexical-unit-add';
+import { useState } from 'react';
+import { SearchLexicalUnit } from '@/features/vocabulary/lexical-unit-add/ui/SearchLexicalUnit/SearchLexicalUnit.tsx';
 
 type Tab = 'add' | 'search';
 
@@ -32,4 +32,4 @@ export function WordsBank() {
       </div>
     </div>
   );
-};
+}

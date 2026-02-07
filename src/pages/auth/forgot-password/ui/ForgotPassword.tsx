@@ -1,5 +1,5 @@
-import {ForgotPasswordForm} from "@/features/auth/forgot-password/ui/ForgotPasswordForm.tsx";
-import style from './ForgotPasswordPage.module.scss'
+import { ForgotPasswordForm } from '@/features/auth/forgot-password/ui/ForgotPasswordForm.tsx';
+import style from './ForgotPasswordPage.module.scss';
 
 export function ForgotPassword() {
   return (

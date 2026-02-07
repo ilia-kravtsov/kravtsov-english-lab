@@ -1,8 +1,8 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { loginEffect } from "./login.effect";
-import type { LoginDto } from "./login.dto";
-import axios from "axios";
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { loginEffect } from './login.effect';
+import type { LoginDto } from './login.dto';
+import axios from 'axios';
 
 export function useLoginForm() {
   const [serverError, setServerError] = useState<string | null>(null);
@@ -13,20 +13,20 @@ export function useLoginForm() {
 
     try {
       if (data.rememberMe) {
-        localStorage.setItem("rememberMe", "true");
+        localStorage.setItem('rememberMe', 'true');
       } else {
-        localStorage.removeItem("rememberMe");
+        localStorage.removeItem('rememberMe');
       }
 
       await loginEffect({ email: data.email, password: data.password });
-      navigate("/", { replace: true });
+      navigate('/', { replace: true });
     } catch (err: unknown) {
       if (axios.isAxiosError(err)) {
-        setServerError(err.response?.data?.message ?? "Login failed");
+        setServerError(err.response?.data?.message ?? 'Login failed');
         return;
       }
 
-      setServerError("Unexpected login error");
+      setServerError('Unexpected login error');
     }
   };
 

@@ -1,7 +1,3 @@
 export function Cards() {
-  return (
-    <div>
-      Cards
-    </div>
-  );
-};
+  return <div>Cards</div>;
+}

@@ -1,7 +1,3 @@
 export function Theory() {
-  return (
-    <div>
-      Theory
-    </div>
-  );
-};
+  return <div>Theory</div>;
+}

@@ -1,7 +1,3 @@
 export function Rating() {
-  return (
-    <div>
-      Rating
-    </div>
-  );
-};
+  return <div>Rating</div>;
+}

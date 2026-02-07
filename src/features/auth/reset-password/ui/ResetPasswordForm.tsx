@@ -1,16 +1,19 @@
-import {type SubmitHandler, useForm} from 'react-hook-form';
-import {useResetPasswordModel} from "@/features/auth/reset-password/model/reset-password.model.ts";
+import { type SubmitHandler, useForm } from 'react-hook-form';
+import { useResetPasswordModel } from '@/features/auth/reset-password/model/reset-password.model.ts';
 import style from './ResetPasswordForm.module.scss';
-import { Input } from "@/shared/ui/Input/Input.tsx";
-import {Button} from "@/shared/ui";
+import { Input } from '@/shared/ui/Input/Input.tsx';
+import { Button } from '@/shared/ui';
 
 interface FormData {
   password: string;
 }
 
 export function ResetPasswordForm() {
-  const { register, handleSubmit, formState: { errors, isSubmitting } } =
-    useForm<FormData>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<FormData>();
   const { submit, serverMessage } = useResetPasswordModel();
 
   const onSubmit: SubmitHandler<FormData> = async ({ password }) => {
@@ -18,10 +21,7 @@ export function ResetPasswordForm() {
   };
 
   return (
-    <form
-      className={style.container}
-      onSubmit={handleSubmit(onSubmit)}
-    >
+    <form className={style.container} onSubmit={handleSubmit(onSubmit)}>
       <div className={style.inputContainer}>
         <label htmlFor={'password'}>Please, enter a strong password</label>
         <Input
@@ -31,9 +31,7 @@ export function ResetPasswordForm() {
           placeholder={'qwerty12345'}
           {...register('password', { required: 'Password is required' })}
         />
-        <div className={style.errorSlot}>
-          {errors.password?.message}
-        </div>
+        <div className={style.errorSlot}>{errors.password?.message}</div>
       </div>
 
       <Button
@@ -42,7 +40,9 @@ export function ResetPasswordForm() {
         disabled={isSubmitting}
       />
 
-      {serverMessage && <div className={style.serverMessage}>{serverMessage}</div>}
+      {serverMessage && (
+        <div className={style.serverMessage}>{serverMessage}</div>
+      )}
     </form>
   );
 }

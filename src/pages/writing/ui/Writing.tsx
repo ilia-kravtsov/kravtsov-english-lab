@@ -1,7 +1,3 @@
 export function Writing() {
-  return (
-    <div>
-      Writing
-    </div>
-  );
-};
+  return <div>Writing</div>;
+}

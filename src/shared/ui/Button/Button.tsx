@@ -1,5 +1,5 @@
-import style from "./Button.module.scss";
-import type {CSSProperties} from "react";
+import style from './Button.module.scss';
+import type { CSSProperties } from 'react';
 
 interface ButtonProps {
   title: string;
@@ -10,13 +10,12 @@ interface ButtonProps {
 }
 
 export function Button({
-                         title,
-                         onClick,
-                         disabled = false,
-                         type = 'button',
-                         style: externalStyle = {},
-                       }: ButtonProps) {
-
+  title,
+  onClick,
+  disabled = false,
+  type = 'button',
+  style: externalStyle = {},
+}: ButtonProps) {
   return (
     <button
       className={style.button}

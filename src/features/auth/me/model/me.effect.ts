@@ -1,5 +1,5 @@
-import { authApi } from "@/features/auth/api/auth.api.ts";
-import {type User, useUserStore} from "@/entities/user";
+import { authApi } from '@/features/auth/api/auth.api.ts';
+import { type User, useUserStore } from '@/entities/user';
 
 export async function meEffect(): Promise<void> {
   try {
@@ -13,7 +13,9 @@ export async function meEffect(): Promise<void> {
       createdAt: new Date(data.createdAt),
     };
 
-    useUserStore.getState().setAuthData(user, useUserStore.getState().accessToken!);
+    useUserStore
+      .getState()
+      .setAuthData(user, useUserStore.getState().accessToken!);
   } catch {
     useUserStore.getState().clearAuth();
   }

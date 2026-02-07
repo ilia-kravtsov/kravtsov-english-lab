@@ -1,7 +1,3 @@
 export function Settings() {
-  return (
-    <div>
-      Settings
-    </div>
-  );
-};
+  return <div>Settings</div>;
+}

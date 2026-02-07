@@ -2,9 +2,11 @@
 
 @font-face {
   font-family: 'PT Sans';
-  src: local('PT Sans Bold Italic'), local('PTSans-BoldItalic'),
-  url('./pt_sans/PTSans-BoldItalic.woff2') format('woff2'),
-  url('./pt_sans/PTSans-BoldItalic.woff') format('woff');
+  src:
+    local('PT Sans Bold Italic'),
+    local('PTSans-BoldItalic'),
+    url('./pt_sans/PTSans-BoldItalic.woff2') format('woff2'),
+    url('./pt_sans/PTSans-BoldItalic.woff') format('woff');
   font-weight: bold;
   font-style: italic;
   font-display: swap;
@@ -12,9 +14,11 @@
 
 @font-face {
   font-family: 'PT Sans';
-  src: local('PT Sans'), local('PTSans-Regular'),
-  url('./pt_sans/PTSans-Regular.woff2') format('woff2'),
-  url('./pt_sans/PTSans-Regular.woff') format('woff');
+  src:
+    local('PT Sans'),
+    local('PTSans-Regular'),
+    url('./pt_sans/PTSans-Regular.woff2') format('woff2'),
+    url('./pt_sans/PTSans-Regular.woff') format('woff');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -22,9 +26,11 @@
 
 @font-face {
   font-family: 'PT Sans';
-  src: local('PT Sans Italic'), local('PTSans-Italic'),
-  url('./pt_sans/PTSans-Italic.woff2') format('woff2'),
-  url('./pt_sans/PTSans-Italic.woff') format('woff');
+  src:
+    local('PT Sans Italic'),
+    local('PTSans-Italic'),
+    url('./pt_sans/PTSans-Italic.woff2') format('woff2'),
+    url('./pt_sans/PTSans-Italic.woff') format('woff');
   font-weight: normal;
   font-style: italic;
   font-display: swap;
@@ -32,9 +38,11 @@
 
 @font-face {
   font-family: 'PT Sans Narrow';
-  src: local('PT Sans Narrow Bold'), local('PTSans-NarrowBold'),
-  url('./pt_sans_narrow/PTSans-NarrowBold.woff2') format('woff2'),
-  url('./pt_sans_narrow/PTSans-NarrowBold.woff') format('woff');
+  src:
+    local('PT Sans Narrow Bold'),
+    local('PTSans-NarrowBold'),
+    url('./pt_sans_narrow/PTSans-NarrowBold.woff2') format('woff2'),
+    url('./pt_sans_narrow/PTSans-NarrowBold.woff') format('woff');
   font-weight: bold;
   font-style: normal;
   font-display: swap;
@@ -42,9 +50,11 @@
 
 @font-face {
   font-family: 'PT Sans Narrow';
-  src: local('PT Sans Narrow'), local('PTSans-Narrow'),
-  url('./pt_sans_narrow/PTSans-Narrow.woff2') format('woff2'),
-  url('./pt_sans_narrow/PTSans-Narrow.woff') format('woff');
+  src:
+    local('PT Sans Narrow'),
+    local('PTSans-Narrow'),
+    url('./pt_sans_narrow/PTSans-Narrow.woff2') format('woff2'),
+    url('./pt_sans_narrow/PTSans-Narrow.woff') format('woff');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -52,9 +62,11 @@
 
 @font-face {
   font-family: 'PT Sans';
-  src: local('PT Sans Bold'), local('PTSans-Bold'),
-  url('./pt_sans/PTSans-Bold.woff2') format('woff2'),
-  url('./pt_sans/PTSans-Bold.woff') format('woff');
+  src:
+    local('PT Sans Bold'),
+    local('PTSans-Bold'),
+    url('./pt_sans/PTSans-Bold.woff2') format('woff2'),
+    url('./pt_sans/PTSans-Bold.woff') format('woff');
   font-weight: bold;
   font-style: normal;
   font-display: swap;
@@ -64,9 +76,11 @@
 
 @font-face {
   font-family: 'Roboto';
-  src: local('Roboto Bold'), local('Roboto-Bold'),
-  url('./roboto/Roboto-Bold.woff2') format('woff2'),
-  url('./roboto/Roboto-Bold.woff') format('woff');
+  src:
+    local('Roboto Bold'),
+    local('Roboto-Bold'),
+    url('./roboto/Roboto-Bold.woff2') format('woff2'),
+    url('./roboto/Roboto-Bold.woff') format('woff');
   font-weight: bold;
   font-style: normal;
   font-display: swap;
@@ -74,9 +88,11 @@
 
 @font-face {
   font-family: 'Roboto';
-  src: local('Roboto Black'), local('Roboto-Black'),
-  url('./roboto/Roboto-Black.woff2') format('woff2'),
-  url('./roboto/Roboto-Black.woff') format('woff');
+  src:
+    local('Roboto Black'),
+    local('Roboto-Black'),
+    url('./roboto/Roboto-Black.woff2') format('woff2'),
+    url('./roboto/Roboto-Black.woff') format('woff');
   font-weight: 900;
   font-style: normal;
   font-display: swap;
@@ -84,9 +100,11 @@
 
 @font-face {
   font-family: 'Roboto';
-  src: local('Roboto Black Italic'), local('Roboto-BlackItalic'),
-  url('./roboto/Roboto-BlackItalic.woff2') format('woff2'),
-  url('./roboto/Roboto-BlackItalic.woff') format('woff');
+  src:
+    local('Roboto Black Italic'),
+    local('Roboto-BlackItalic'),
+    url('./roboto/Roboto-BlackItalic.woff2') format('woff2'),
+    url('./roboto/Roboto-BlackItalic.woff') format('woff');
   font-weight: 900;
   font-style: italic;
   font-display: swap;
@@ -94,9 +112,11 @@
 
 @font-face {
   font-family: 'Roboto';
-  src: local('Roboto Bold Italic'), local('Roboto-BoldItalic'),
-  url('./roboto/Roboto-BoldItalic.woff2') format('woff2'),
-  url('./roboto/Roboto-BoldItalic.woff') format('woff');
+  src:
+    local('Roboto Bold Italic'),
+    local('Roboto-BoldItalic'),
+    url('./roboto/Roboto-BoldItalic.woff2') format('woff2'),
+    url('./roboto/Roboto-BoldItalic.woff') format('woff');
   font-weight: bold;
   font-style: italic;
   font-display: swap;
@@ -104,9 +124,11 @@
 
 @font-face {
   font-family: 'Roboto';
-  src: local('Roboto Light'), local('Roboto-Light'),
-  url('./roboto/Roboto-Light.woff2') format('woff2'),
-  url('./roboto/Roboto-Light.woff') format('woff');
+  src:
+    local('Roboto Light'),
+    local('Roboto-Light'),
+    url('./roboto/Roboto-Light.woff2') format('woff2'),
+    url('./roboto/Roboto-Light.woff') format('woff');
   font-weight: 300;
   font-style: normal;
   font-display: swap;
@@ -114,9 +136,11 @@
 
 @font-face {
   font-family: 'Roboto';
-  src: local('Roboto Italic'), local('Roboto-Italic'),
-  url('./roboto/Roboto-Italic.woff2') format('woff2'),
-  url('./roboto/Roboto-Italic.woff') format('woff');
+  src:
+    local('Roboto Italic'),
+    local('Roboto-Italic'),
+    url('./roboto/Roboto-Italic.woff2') format('woff2'),
+    url('./roboto/Roboto-Italic.woff') format('woff');
   font-weight: normal;
   font-style: italic;
   font-display: swap;
@@ -124,9 +148,11 @@
 
 @font-face {
   font-family: 'Roboto';
-  src: local('Roboto Light Italic'), local('Roboto-LightItalic'),
-  url('./roboto/Roboto-LightItalic.woff2') format('woff2'),
-  url('./roboto/Roboto-LightItalic.woff') format('woff');
+  src:
+    local('Roboto Light Italic'),
+    local('Roboto-LightItalic'),
+    url('./roboto/Roboto-LightItalic.woff2') format('woff2'),
+    url('./roboto/Roboto-LightItalic.woff') format('woff');
   font-weight: 300;
   font-style: italic;
   font-display: swap;
@@ -134,9 +160,11 @@
 
 @font-face {
   font-family: 'Roboto';
-  src: local('Roboto Medium'), local('Roboto-Medium'),
-  url('./roboto/Roboto-Medium.woff2') format('woff2'),
-  url('./roboto/Roboto-Medium.woff') format('woff');
+  src:
+    local('Roboto Medium'),
+    local('Roboto-Medium'),
+    url('./roboto/Roboto-Medium.woff2') format('woff2'),
+    url('./roboto/Roboto-Medium.woff') format('woff');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -144,9 +172,11 @@
 
 @font-face {
   font-family: 'Roboto';
-  src: local('Roboto Medium Italic'), local('Roboto-MediumItalic'),
-  url('./roboto/Roboto-MediumItalic.woff2') format('woff2'),
-  url('./roboto/Roboto-MediumItalic.woff') format('woff');
+  src:
+    local('Roboto Medium Italic'),
+    local('Roboto-MediumItalic'),
+    url('./roboto/Roboto-MediumItalic.woff2') format('woff2'),
+    url('./roboto/Roboto-MediumItalic.woff') format('woff');
   font-weight: 500;
   font-style: italic;
   font-display: swap;
@@ -154,9 +184,11 @@
 
 @font-face {
   font-family: 'Roboto';
-  src: local('Roboto Thin'), local('Roboto-Thin'),
-  url('./roboto/Roboto-Thin.woff2') format('woff2'),
-  url('./roboto/Roboto-Thin.woff') format('woff');
+  src:
+    local('Roboto Thin'),
+    local('Roboto-Thin'),
+    url('./roboto/Roboto-Thin.woff2') format('woff2'),
+    url('./roboto/Roboto-Thin.woff') format('woff');
   font-weight: 100;
   font-style: normal;
   font-display: swap;
@@ -164,9 +196,11 @@
 
 @font-face {
   font-family: 'Roboto';
-  src: local('Roboto'), local('Roboto-Regular'),
-  url('./roboto/Roboto-Regular.woff2') format('woff2'),
-  url('./roboto/Roboto-Regular.woff') format('woff');
+  src:
+    local('Roboto'),
+    local('Roboto-Regular'),
+    url('./roboto/Roboto-Regular.woff2') format('woff2'),
+    url('./roboto/Roboto-Regular.woff') format('woff');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -174,9 +208,11 @@
 
 @font-face {
   font-family: 'Roboto';
-  src: local('Roboto Thin Italic'), local('Roboto-ThinItalic'),
-  url('./roboto/Roboto-ThinItalic.woff2') format('woff2'),
-  url('./roboto/Roboto-ThinItalic.woff') format('woff');
+  src:
+    local('Roboto Thin Italic'),
+    local('Roboto-ThinItalic'),
+    url('./roboto/Roboto-ThinItalic.woff2') format('woff2'),
+    url('./roboto/Roboto-ThinItalic.woff') format('woff');
   font-weight: 100;
   font-style: italic;
   font-display: swap;
@@ -186,9 +222,11 @@
 
 @font-face {
   font-family: 'Baskervville';
-  src: local('Baskervville Bold Italic'), local('Baskervville-BoldItalic'),
-  url('./baskervville/Baskervville-BoldItalic.woff2') format('woff2'),
-  url('./baskervville/Baskervville-BoldItalic.woff') format('woff');
+  src:
+    local('Baskervville Bold Italic'),
+    local('Baskervville-BoldItalic'),
+    url('./baskervville/Baskervville-BoldItalic.woff2') format('woff2'),
+    url('./baskervville/Baskervville-BoldItalic.woff') format('woff');
   font-weight: bold;
   font-style: italic;
   font-display: swap;
@@ -196,9 +234,11 @@
 
 @font-face {
   font-family: 'Baskervville';
-  src: local('Baskervville Italic'), local('Baskervville-Italic'),
-  url('./baskervville/Baskervville-Italic.woff2') format('woff2'),
-  url('./baskervville/Baskervville-Italic.woff') format('woff');
+  src:
+    local('Baskervville Italic'),
+    local('Baskervville-Italic'),
+    url('./baskervville/Baskervville-Italic.woff2') format('woff2'),
+    url('./baskervville/Baskervville-Italic.woff') format('woff');
   font-weight: normal;
   font-style: italic;
   font-display: swap;
@@ -206,9 +246,11 @@
 
 @font-face {
   font-family: 'Baskervville';
-  src: local('Baskervville Bold'), local('Baskervville-Bold'),
-  url('./baskervville/Baskervville-Bold.woff2') format('woff2'),
-  url('./baskervville/Baskervville-Bold.woff') format('woff');
+  src:
+    local('Baskervville Bold'),
+    local('Baskervville-Bold'),
+    url('./baskervville/Baskervville-Bold.woff2') format('woff2'),
+    url('./baskervville/Baskervville-Bold.woff') format('woff');
   font-weight: bold;
   font-style: normal;
   font-display: swap;
@@ -216,9 +258,11 @@
 
 @font-face {
   font-family: 'Baskervville';
-  src: local('Baskervville Medium Italic'), local('Baskervville-MediumItalic'),
-  url('./baskervville/Baskervville-MediumItalic.woff2') format('woff2'),
-  url('./baskervville/Baskervville-MediumItalic.woff') format('woff');
+  src:
+    local('Baskervville Medium Italic'),
+    local('Baskervville-MediumItalic'),
+    url('./baskervville/Baskervville-MediumItalic.woff2') format('woff2'),
+    url('./baskervville/Baskervville-MediumItalic.woff') format('woff');
   font-weight: 500;
   font-style: italic;
   font-display: swap;
@@ -226,9 +270,11 @@
 
 @font-face {
   font-family: 'Baskervville';
-  src: local('Baskervville Regular'), local('Baskervville-Regular'),
-  url('./baskervville/Baskervville-Regular.woff2') format('woff2'),
-  url('./baskervville/Baskervville-Regular.woff') format('woff');
+  src:
+    local('Baskervville Regular'),
+    local('Baskervville-Regular'),
+    url('./baskervville/Baskervville-Regular.woff2') format('woff2'),
+    url('./baskervville/Baskervville-Regular.woff') format('woff');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -236,9 +282,11 @@
 
 @font-face {
   font-family: 'Baskervville';
-  src: local('Baskervville Medium'), local('Baskervville-Medium'),
-  url('./baskervville/Baskervville-Medium.woff2') format('woff2'),
-  url('./baskervville/Baskervville-Medium.woff') format('woff');
+  src:
+    local('Baskervville Medium'),
+    local('Baskervville-Medium'),
+    url('./baskervville/Baskervville-Medium.woff2') format('woff2'),
+    url('./baskervville/Baskervville-Medium.woff') format('woff');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -246,9 +294,11 @@
 
 @font-face {
   font-family: 'Baskervville';
-  src: local('Baskervville SemiBold Italic'), local('Baskervville-SemiBoldItalic'),
-  url('./baskervville/Baskervville-SemiBoldItalic.woff2') format('woff2'),
-  url('./baskervville/Baskervville-SemiBoldItalic.woff') format('woff');
+  src:
+    local('Baskervville SemiBold Italic'),
+    local('Baskervville-SemiBoldItalic'),
+    url('./baskervville/Baskervville-SemiBoldItalic.woff2') format('woff2'),
+    url('./baskervville/Baskervville-SemiBoldItalic.woff') format('woff');
   font-weight: 600;
   font-style: italic;
   font-display: swap;
@@ -256,9 +306,11 @@
 
 @font-face {
   font-family: 'Baskervville';
-  src: local('Baskervville SemiBold'), local('Baskervville-SemiBold'),
-  url('./baskervville/Baskervville-SemiBold.woff2') format('woff2'),
-  url('./baskervville/Baskervville-SemiBold.woff') format('woff');
+  src:
+    local('Baskervville SemiBold'),
+    local('Baskervville-SemiBold'),
+    url('./baskervville/Baskervville-SemiBold.woff2') format('woff2'),
+    url('./baskervville/Baskervville-SemiBold.woff') format('woff');
   font-weight: 600;
   font-style: normal;
   font-display: swap;

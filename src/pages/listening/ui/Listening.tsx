@@ -1,7 +1,3 @@
 export function Listening() {
-  return (
-    <div>
-      Listening
-    </div>
-  );
-};
+  return <div>Listening</div>;
+}

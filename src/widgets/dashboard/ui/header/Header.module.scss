@@ -43,10 +43,18 @@
       }
     }
 
-    .navLink:nth-child(1) { animation-delay: 0.2s; }
-    .navLink:nth-child(2) { animation-delay: 0.15s; }
-    .navLink:nth-child(3) { animation-delay: 0.1s; }
-    .navLink:nth-child(4) { animation-delay: 0.05s; }
+    .navLink:nth-child(1) {
+      animation-delay: 0.2s;
+    }
+    .navLink:nth-child(2) {
+      animation-delay: 0.15s;
+    }
+    .navLink:nth-child(3) {
+      animation-delay: 0.1s;
+    }
+    .navLink:nth-child(4) {
+      animation-delay: 0.05s;
+    }
 
     .navLinkVisible {
       opacity: 1;

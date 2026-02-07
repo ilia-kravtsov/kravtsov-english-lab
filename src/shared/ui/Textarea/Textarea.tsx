@@ -1,5 +1,5 @@
 import { forwardRef, type TextareaHTMLAttributes } from 'react';
-import style from './Textarea.module.scss'
+import style from './Textarea.module.scss';
 
 type TextAreaProps = TextareaHTMLAttributes<HTMLTextAreaElement>;
 
@@ -12,5 +12,5 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
         {...props}
       />
     );
-  }
+  },
 );

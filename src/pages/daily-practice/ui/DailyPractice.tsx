@@ -1,7 +1,3 @@
 export function DailyPractice() {
-  return (
-    <div>
-      DailyPractice
-    </div>
-  );
-};
+  return <div>DailyPractice</div>;
+}

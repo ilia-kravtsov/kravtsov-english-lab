@@ -25,10 +25,12 @@
   border-radius: var(--border-radius-primary);
   min-width: 320px;
   max-width: 400px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
   transform: translateY(-20px);
   opacity: 0;
-  transition: transform 0.25s ease, opacity 0.25s ease;
+  transition:
+    transform 0.25s ease,
+    opacity 0.25s ease;
   text-align: center;
 
   &.open {

@@ -50,7 +50,7 @@ export const useUserStore = createGStore<UserState>(() => {
       localStorage.removeItem('rememberMe');
 
       setIsInitialized(true);
-    }
+    },
   };
 });
 

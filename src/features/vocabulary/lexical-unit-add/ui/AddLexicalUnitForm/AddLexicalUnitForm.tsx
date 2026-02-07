@@ -1,11 +1,14 @@
 import { useForm } from 'react-hook-form';
 import { useAudioRecorder } from '../../model/useAudioRecorder.ts';
 import { addLexicalUnit } from '@/entities/lexical-unit/api/lexical-unit.api.ts';
-import {useEffect, useState} from 'react';
-import type {AddLexicalUnitFormValues, PartsOfSpeech} from "@/entities/lexical-unit/model/lexical-unit.types.ts";
-import style from './AddLexicalUnitForm.module.scss'
-import {Input} from "@/shared/ui/Input/Input.tsx";
-import {Button, Textarea} from "@/shared/ui";
+import { useEffect, useState } from 'react';
+import type {
+  AddLexicalUnitFormValues,
+  PartsOfSpeech,
+} from '@/entities/lexical-unit/model/lexical-unit.types.ts';
+import style from './AddLexicalUnitForm.module.scss';
+import { Input } from '@/shared/ui/Input/Input.tsx';
+import { Button, Textarea } from '@/shared/ui';
 
 const partsOfSpeech: PartsOfSpeech[] = [
   'noun',
@@ -22,8 +25,19 @@ const partsOfSpeech: PartsOfSpeech[] = [
 ];
 
 export function AddLexicalUnitForm() {
-  const { register, handleSubmit, setValue, reset } = useForm<AddLexicalUnitFormValues>();
-  const { recording, audioBlob, startRecording, stopRecording, reset: resetAudio, audioRef, pause, isPlaying, play } = useAudioRecorder();
+  const { register, handleSubmit, setValue, reset } =
+    useForm<AddLexicalUnitFormValues>();
+  const {
+    recording,
+    audioBlob,
+    startRecording,
+    stopRecording,
+    reset: resetAudio,
+    audioRef,
+    pause,
+    isPlaying,
+    play,
+  } = useAudioRecorder();
   const [submitting, setSubmitting] = useState(false);
   const [audioURL, setAudioURL] = useState<string | null>(null);
 
@@ -65,16 +79,19 @@ export function AddLexicalUnitForm() {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={style.container}>
       <div className={style.twoFieldsBox}>
-        <Input {...register('value', { required: true })} placeholder={"word or expression"} />
-        <Input {...register('translation')} placeholder={"translation"} />
+        <Input
+          {...register('value', { required: true })}
+          placeholder={'word or expression'}
+        />
+        <Input {...register('translation')} placeholder={'translation'} />
       </div>
       <div className={style.twoFieldsBox}>
         <div className={style.audioContainer}>
           <button
-            type={"button"}
+            type={'button'}
             className={style.button}
             onClick={recording ? handleStopRecording : startRecording}
-            style={{width: '120px'}}
+            style={{ width: '120px' }}
           >
             {recording ? 'Stop Recording' : 'Record a sound'}
           </button>
@@ -87,53 +104,57 @@ export function AddLexicalUnitForm() {
               />
 
               <button
-                type={"button"}
+                type={'button'}
                 className={style.button}
                 onClick={isPlaying ? pause : play}
-                style={{width: '60px'}}
+                style={{ width: '60px' }}
               >
                 {isPlaying ? 'Pause' : 'Play'}
               </button>
 
               <button
-                type={"button"}
+                type={'button'}
                 className={style.button}
                 onClick={handleResetAudio}
                 disabled={!audioBlob}
-                style={{width: '60px'}}
+                style={{ width: '60px' }}
               >
                 Reset
               </button>
             </>
           )}
         </div>
-        <Input {...register('transcription')} placeholder={"transcription"} style={{maxWidth:'50%'}}/>
+        <Input
+          {...register('transcription')}
+          placeholder={'transcription'}
+          style={{ maxWidth: '50%' }}
+        />
       </div>
       <div className={style.twoFieldsBox}>
-        <Input {...register('meaning')} placeholder={"meaning in English"} />
+        <Input {...register('meaning')} placeholder={'meaning in English'} />
         <Input
           {...register('partsOfSpeech')}
-          list={"parts-of-speech"}
-          placeholder={"part of speech"}
+          list={'parts-of-speech'}
+          placeholder={'part of speech'}
         />
 
-        <datalist id={"parts-of-speech"}>
-          {partsOfSpeech.map(part => (
+        <datalist id={'parts-of-speech'}>
+          {partsOfSpeech.map((part) => (
             <option key={part} value={part} />
           ))}
         </datalist>
       </div>
       <div className={style.twoFieldsBox}>
-        <Input {...register('synonyms')} placeholder={"synonyms"} />
-        <Input {...register('antonyms')} placeholder={"antonyms"} />
+        <Input {...register('synonyms')} placeholder={'synonyms'} />
+        <Input {...register('antonyms')} placeholder={'antonyms'} />
       </div>
-      <Textarea {...register('examples')} placeholder={"examples"} />
-      <Textarea {...register('comment')} placeholder={"comment"} />
+      <Textarea {...register('examples')} placeholder={'examples'} />
+      <Textarea {...register('comment')} placeholder={'comment'} />
       <Button
-        type={"submit"}
+        type={'submit'}
         disabled={submitting}
         title={submitting ? 'Saving...' : 'Save'}
-        style={{width: '200px'}}
+        style={{ width: '200px' }}
       />
     </form>
   );

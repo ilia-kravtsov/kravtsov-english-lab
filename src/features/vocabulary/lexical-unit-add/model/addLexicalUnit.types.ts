@@ -1,4 +1,7 @@
-import type {LexicalUnitType, PartsOfSpeech} from "@/entities/lexical-unit/model/lexical-unit.types.ts";
+import type {
+  LexicalUnitType,
+  PartsOfSpeech,
+} from '@/entities/lexical-unit/model/lexical-unit.types.ts';
 
 export interface AddLexicalUnitFormValues {
   type: LexicalUnitType;

@@ -1,10 +1,10 @@
-import {Outlet} from 'react-router-dom';
-import {Header} from "@/widgets/dashboard/ui/header/Header.tsx";
-import {Nav} from "@/widgets/dashboard/ui/nav/Nav.tsx";
-import {Footer} from "@/widgets/dashboard/ui/footer/Footer.tsx";
+import { Outlet } from 'react-router-dom';
+import { Header } from '@/widgets/dashboard/ui/header/Header.tsx';
+import { Nav } from '@/widgets/dashboard/ui/nav/Nav.tsx';
+import { Footer } from '@/widgets/dashboard/ui/footer/Footer.tsx';
 import style from './Dashboard.module.scss';
-import {useEffect, useRef, useState} from "react";
-import {BurgerButton} from "@/shared/ui/BurgerButton/BurgerButton.tsx";
+import { useEffect, useRef, useState } from 'react';
+import { BurgerButton } from '@/shared/ui/BurgerButton/BurgerButton.tsx';
 
 export function Dashboard() {
   const [isOpen, setIsOpen] = useState(true);
@@ -25,35 +25,35 @@ export function Dashboard() {
       }
     }
 
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
-  
+
   const isNavMenuOpen = () => {
-    setIsOpen(!isOpen)
-  }
+    setIsOpen(!isOpen);
+  };
 
   const handleClick = () => {
-    setIsOpen(false)
-  }
+    setIsOpen(false);
+  };
 
   return (
     <div className={style.container}>
-      <Header/>
+      <Header />
 
-      <BurgerButton toggleBurger={isNavMenuOpen} isOpen={isOpen} ref={toggleMenuRef}/>
-
-      <Nav
-        onLinkClick={handleClick}
+      <BurgerButton
+        toggleBurger={isNavMenuOpen}
         isOpen={isOpen}
-        ref={navRef}
+        ref={toggleMenuRef}
       />
+
+      <Nav onLinkClick={handleClick} isOpen={isOpen} ref={navRef} />
 
       <main className={style.main}>
         <Outlet />
       </main>
 
-      <Footer/>
+      <Footer />
     </div>
   );
 }

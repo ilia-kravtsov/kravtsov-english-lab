@@ -1,7 +1,3 @@
 export function SearchLexicalUnit() {
-  return (
-    <div>
-      SearchLexicalUnit
-    </div>
-  );
-};
+  return <div>SearchLexicalUnit</div>;
+}

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { registerEffect } from '../model/register.effect';
 import axios from 'axios';
-import type {RegisterFormData} from "@/features/auth/register/model/register.types.ts";
+import type { RegisterFormData } from '@/features/auth/register/model/register.types.ts';
 
 export function useRegisterForm() {
   const [serverError, setServerError] = useState<string | null>(null);
@@ -20,7 +20,6 @@ export function useRegisterForm() {
       });
 
       navigate('/login', { replace: true });
-
     } catch (err: unknown) {
       if (axios.isAxiosError(err)) {
         setServerError(err.response?.data?.message || 'Registration failed');
