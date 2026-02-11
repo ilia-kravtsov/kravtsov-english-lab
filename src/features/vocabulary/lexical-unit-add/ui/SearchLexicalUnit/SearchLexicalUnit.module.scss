@@ -38,13 +38,14 @@
 
 .fieldRow {
   display: flex;
+  align-items: center;
   gap: 10px;
 }
 
 .fieldBlock {
   display: flex;
-  flex-direction: column;
-  gap: 6px;
+  align-items: center;
+  gap: 20px;
 }
 
 .label {

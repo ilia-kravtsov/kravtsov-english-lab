@@ -5,6 +5,7 @@ import { Button } from '@/shared/ui';
 import { deleteLexicalUnit, searchLexicalUnitByValue } from '@/entities/lexical-unit/api/lexical-unit.api.ts';
 import type { LexicalUnit } from '@/entities/lexical-unit/model/lexical-unit.types.ts';
 import { useLexicalUnitEditorStore } from '@/features/vocabulary/lexical-unit-add/model/lexicalUnitEditor.store.ts';
+const apiBaseUrl = import.meta.env.VITE_API_URL ?? 'http://localhost:3000';
 
 type ResultState =
   | { status: 'idle' }
@@ -66,6 +67,20 @@ export function SearchLexicalUnit() {
     }
   };
 
+  const audioSrc = useMemo(() => {
+    if (result.status !== 'found') return null;
+
+    const url = result.unit.audioUrl;
+
+    if (!url) return null;
+
+    if (url.startsWith('http://') || url.startsWith('https://')) {
+      return url;
+    }
+
+    return `${apiBaseUrl}${url}`;
+  }, [result]);
+
   return (
     <div className={style.container}>
       <div className={style.searchRow}>
@@ -103,21 +118,22 @@ export function SearchLexicalUnit() {
         <div className={style.resultBox}>
           <div className={style.fields}>
             <div className={style.fieldRow}>
-              <span className={style.label}>Value:</span>
               <span className={style.value}>{result.unit.value}</span>
+              {result.unit.transcription && (
+                <div className={style.fieldRow}>
+                  <span className={style.value}>{result.unit.transcription}</span>
+                </div>
+              )}
+              {audioSrc && (
+                <div className={style.fieldBlock}>
+                  <audio controls preload={"metadata"} src={audioSrc} />
+                </div>
+              )}
             </div>
 
             {result.unit.translation && (
               <div className={style.fieldRow}>
-                <span className={style.label}>Translation:</span>
                 <span className={style.value}>{result.unit.translation}</span>
-              </div>
-            )}
-
-            {result.unit.transcription && (
-              <div className={style.fieldRow}>
-                <span className={style.label}>Transcription:</span>
-                <span className={style.value}>{result.unit.transcription}</span>
               </div>
             )}
 
