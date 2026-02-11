@@ -7,6 +7,8 @@ function toFormData(data: AddLexicalUnitFormValues) {
   Object.entries(data).forEach(([key, value]) => {
     if (value == null) return;
 
+    if (typeof value === 'string' && value.trim() === '') return;
+
     if (key === 'audio') {
       formData.append('audio', value as Blob, 'record.webm');
       return;

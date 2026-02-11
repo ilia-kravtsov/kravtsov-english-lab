@@ -25,7 +25,19 @@ export interface LexicalUnit {
   partsOfSpeech?: PartsOfSpeech;
   examples?: string;
   comment?: string;
-  audio?: BlobType;
+  audioUrl?: string | null;
 }
 
-export type AddLexicalUnitFormValues = Omit<LexicalUnit, 'id'>;
+export interface AddLexicalUnitFormValues {
+  type: LexicalUnitType;
+  value: string;
+  translation?: string;
+  transcription?: string;
+  meaning?: string;
+  antonyms?: string;
+  synonyms?: string;
+  partsOfSpeech?: PartsOfSpeech | '';
+  examples?: string;
+  comment?: string;
+  audio?: Blob | null;
+}

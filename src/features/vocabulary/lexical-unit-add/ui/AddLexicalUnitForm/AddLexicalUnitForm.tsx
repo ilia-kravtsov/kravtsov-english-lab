@@ -54,7 +54,9 @@ export function AddLexicalUnitForm() {
   const onSubmit = async (data: AddLexicalUnitFormValues) => {
     setSubmitting(true);
     try {
-      await addLexicalUnit({ ...data, audio: audioBlob ?? undefined });
+      const v = (data.value ?? '').trim().replace(/\s+/g, ' ');
+      const type = v.includes(' ') ? 'expression' : 'word';
+      await addLexicalUnit({ ...data, type, audio: audioBlob ?? undefined });
       reset();
       resetAudio();
       alert('Saved!');
