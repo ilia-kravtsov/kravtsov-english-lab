@@ -46,6 +46,11 @@ export function useAudioRecorder() {
     setAudioBlob(null);
   };
 
+  const setExternalBlob = (blob: Blob | null) => {
+    pause();
+    setAudioBlob(blob);
+  };
+
   return {
     recording,
     audioBlob,
@@ -56,5 +61,6 @@ export function useAudioRecorder() {
     play,
     pause,
     reset,
+    setExternalBlob,
   };
 }

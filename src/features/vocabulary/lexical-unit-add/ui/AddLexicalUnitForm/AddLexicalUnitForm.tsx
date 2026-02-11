@@ -91,7 +91,7 @@ export function AddLexicalUnitForm() {
             type={'button'}
             className={style.button}
             onClick={recording ? handleStopRecording : startRecording}
-            style={{ width: '120px' }}
+            style={{ width: '112px' }}
           >
             {recording ? 'Stop Recording' : 'Record a sound'}
           </button>
@@ -107,7 +107,7 @@ export function AddLexicalUnitForm() {
                 type={'button'}
                 className={style.button}
                 onClick={isPlaying ? pause : play}
-                style={{ width: '60px' }}
+                style={{ width: '56px' }}
               >
                 {isPlaying ? 'Pause' : 'Play'}
               </button>
@@ -117,7 +117,7 @@ export function AddLexicalUnitForm() {
                 className={style.button}
                 onClick={handleResetAudio}
                 disabled={!audioBlob}
-                style={{ width: '60px' }}
+                style={{ width: '56px' }}
               >
                 Reset
               </button>
@@ -154,7 +154,7 @@ export function AddLexicalUnitForm() {
         type={'submit'}
         disabled={submitting}
         title={submitting ? 'Saving...' : 'Save'}
-        style={{ width: '200px' }}
+        style={{ width: '160px', fontSize: '16px' }}
       />
     </form>
   );

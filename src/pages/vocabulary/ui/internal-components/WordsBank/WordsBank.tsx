@@ -1,26 +1,27 @@
 import style from './WordsBank.module.scss';
 import { AddLexicalUnitForm } from '@/features/vocabulary/lexical-unit-add';
-import { useState } from 'react';
 import { SearchLexicalUnit } from '@/features/vocabulary/lexical-unit-add/ui/SearchLexicalUnit/SearchLexicalUnit.tsx';
-
-type Tab = 'add' | 'search';
+import { useLexicalUnitEditorStore } from '@/features/vocabulary/lexical-unit-add/model/lexicalUnitEditor.store.ts';
 
 export function WordsBank() {
-  const [activeTab, setActiveTab] = useState<Tab>('add');
+  const activeTab = useLexicalUnitEditorStore(s => s.activeTab);
+  const mode = useLexicalUnitEditorStore(s => s.mode);
+  const openAdd = useLexicalUnitEditorStore(s => s.openAdd);
+  const openSearch = useLexicalUnitEditorStore(s => s.openSearch);
 
   return (
     <div className={style.container}>
       <div className={style.tabsHeader}>
         <button
           className={`${style.tab} ${activeTab === 'add' ? style.active : ''}`}
-          onClick={() => setActiveTab('add')}
+          onClick={openAdd}
         >
-          Add
+          {mode === 'update' ? 'Update' : 'Add'}
         </button>
 
         <button
           className={`${style.tab} ${activeTab === 'search' ? style.active : ''}`}
-          onClick={() => setActiveTab('search')}
+          onClick={openSearch}
         >
           Search
         </button>
