@@ -96,11 +96,11 @@ export function SearchLexicalUnit() {
             </div>
 
             <div className={style.fieldRow}>
-              {result.unit.partsOfSpeech && (
+              {result.unit.partsOfSpeech?.length ? (
                 <div className={style.fieldRow}>
-                  <span className={style.value}>{result.unit.partsOfSpeech}</span>
+                  <span className={style.value}>{result.unit.partsOfSpeech.join(', ')}</span>
                 </div>
-              )}
+              ) : null}
 
               {result.unit.translation && (
                 <div className={style.fieldRow}>

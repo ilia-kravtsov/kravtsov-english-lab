@@ -22,7 +22,7 @@ export interface LexicalUnit {
   meaning?: string;
   antonyms?: string;
   synonyms?: string;
-  partsOfSpeech?: PartsOfSpeech;
+  partsOfSpeech?: PartsOfSpeech[] | null;
   examples?: string;
   comment?: string;
   audioUrl?: string | null;
@@ -36,8 +36,8 @@ export interface AddLexicalUnitFormValues {
   meaning?: string;
   antonyms?: string;
   synonyms?: string;
-  partsOfSpeech?: PartsOfSpeech | '';
+  partsOfSpeech?: PartsOfSpeech[];
   examples?: string;
   comment?: string;
-  audio?: Blob | null;
+  audio?: BlobType;
 }

@@ -2,6 +2,8 @@ import style from './AddLexicalUnitForm.module.scss';
 import { Input } from '@/shared/ui/Input/Input.tsx';
 import { Button, Textarea } from '@/shared/ui';
 import { useAddLexicalUnitForm } from '@/features/vocabulary/lexical-unit-add/model/useAddLexicalUnitForm.ts';
+import { Controller } from 'react-hook-form';
+import { MultiSelect } from '@/shared/ui/MultiSelect/MultiSelect.tsx';
 
 export function AddLexicalUnitForm() {
   const {
@@ -10,7 +12,7 @@ export function AddLexicalUnitForm() {
     mode,
     submitting,
 
-    partsOfSpeech,
+    partsOptions,
 
     recording,
     audioBlob,
@@ -26,6 +28,7 @@ export function AddLexicalUnitForm() {
     play,
     pause,
     handleResetAudio,
+    control,
   } = useAddLexicalUnitForm();
 
   return (
@@ -89,19 +92,20 @@ export function AddLexicalUnitForm() {
 
       </div>
 
-      <div className={style.twoFieldsBox}>
-        <Input{...register('transcription')} placeholder={'transcription'} />
-        <Input
-          {...register('partsOfSpeech')}
-          list={'parts-of-speech'}
-          placeholder={'part of speech'}
-        />
-        <datalist id={'parts-of-speech'}>
-          {partsOfSpeech.map((part) => (
-            <option key={part} value={part} />
-          ))}
-        </datalist>
-      </div>
+      <Input{...register('transcription')} placeholder={'transcription'} />
+
+      <Controller
+        control={control}
+        name={"partsOfSpeech"}
+        render={({ field }) => (
+          <MultiSelect
+            value={field.value ?? []}
+            onChange={field.onChange}
+            options={partsOptions}
+            placeholder={"noun"}
+          />
+        )}
+      />
 
       <Input {...register('synonyms')} placeholder={'synonyms'} />
       <Input {...register('antonyms')} placeholder={'antonyms'} />

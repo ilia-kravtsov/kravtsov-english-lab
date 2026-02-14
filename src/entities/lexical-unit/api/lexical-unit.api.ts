@@ -14,6 +14,18 @@ function toFormData(data: AddLexicalUnitFormValues) {
       return;
     }
 
+    if (Array.isArray(value)) {
+      value.forEach(v => {
+        if (v != null && String(v).trim() !== '') {
+          formData.append(key, String(v));
+        }
+      });
+
+      return;
+    }
+
+    if (typeof value === 'string' && value.trim() === '') return;
+
     formData.append(key, String(value));
   });
 

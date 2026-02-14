@@ -52,7 +52,7 @@ export function useAddLexicalUnitForm() {
     },
   });
 
-  const { register, handleSubmit, setValue, reset } = form;
+  const { register, handleSubmit, setValue, reset, control } = form;
 
   const {
     recording,
@@ -100,7 +100,7 @@ export function useAddLexicalUnitForm() {
       translation: editingUnit.translation ?? '',
       transcription: editingUnit.transcription ?? '',
       meaning: editingUnit.meaning ?? '',
-      partsOfSpeech: editingUnit.partsOfSpeech ?? undefined,
+      partsOfSpeech: editingUnit.partsOfSpeech ?? [],
       synonyms: editingUnit.synonyms ?? '',
       antonyms: editingUnit.antonyms ?? '',
       examples: editingUnit.examples ?? '',
@@ -122,7 +122,7 @@ export function useAddLexicalUnitForm() {
     try {
       const normalized = normalizeValue(data.value ?? '');
       const type = computeTypeByValue(normalized);
-
+      console.log(data);
       const payload: AddLexicalUnitFormValues = {
         ...data,
         value: normalized,
@@ -165,6 +165,9 @@ export function useAddLexicalUnitForm() {
     setValue('audio', null);
   };
 
+  const partsOptions: { value: PartsOfSpeech; label: string }[] =
+    PARTS_OF_SPEECH.map(p => ({ value: p, label: p }));
+
   return {
     // form bindings
     register,
@@ -174,6 +177,7 @@ export function useAddLexicalUnitForm() {
     // state
     mode,
     submitting,
+    control,
 
     // audio ui state
     recording,
@@ -193,6 +197,6 @@ export function useAddLexicalUnitForm() {
     handleResetAudio,
 
     // constants
-    partsOfSpeech: PARTS_OF_SPEECH,
+    partsOptions,
   };
 }

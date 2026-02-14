@@ -5,3 +5,4 @@ export { Checkbox } from '@/shared/ui/Checkbox/Checkbox.tsx';
 export { LinkAsButton } from '@/shared/ui/LinkAsButton/LinkAsButton.tsx';
 export { ConfirmModal } from '@/shared/ui/Modal/ConfirmModal.tsx';
 export { Textarea } from './Textarea/Textarea.tsx';
+export { MultiSelect } from './MultiSelect/MultiSelect.tsx';
