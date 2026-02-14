@@ -80,76 +80,67 @@ export function AddLexicalUnitForm() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={style.container}>
-      <div className={style.twoFieldsBox}>
-        <Input
-          {...register('value', { required: true })}
-          placeholder={'word or expression'}
-        />
-        <Input {...register('translation')} placeholder={'translation'} />
-      </div>
-      <div className={style.twoFieldsBox}>
-        <div className={style.audioContainer}>
-          <button
-            type={'button'}
-            className={style.button}
-            onClick={recording ? handleStopRecording : startRecording}
-            style={{ width: '112px' }}
-          >
-            {recording ? 'Stop Recording' : 'Record a sound'}
-          </button>
-          {audioBlob && (
-            <>
-              <audio
-                ref={audioRef}
-                src={audioURL ?? undefined}
-                onEnded={() => pause()}
-              />
+      <Input
+        {...register('value', { required: true })}
+        placeholder={'word or expression'}
+      />
+      <Input {...register('translation')} placeholder={'translation'} />
+      <div className={style.audioContainer}>
+        <button
+          type={'button'}
+          className={style.button}
+          onClick={recording ? handleStopRecording : startRecording}
+          style={{ width: '112px' }}
+        >
+          {recording ? 'Stop Recording' : 'Record a sound'}
+        </button>
+        {audioBlob && (
+          <>
+            <audio
+              ref={audioRef}
+              src={audioURL ?? undefined}
+              onEnded={() => pause()}
+            />
 
-              <button
-                type={'button'}
-                className={style.button}
-                onClick={isPlaying ? pause : play}
-                style={{ width: '56px' }}
-              >
-                {isPlaying ? 'Pause' : 'Play'}
-              </button>
+            <button
+              type={'button'}
+              className={style.button}
+              onClick={isPlaying ? pause : play}
+              style={{ width: '56px' }}
+            >
+              {isPlaying ? 'Pause' : 'Play'}
+            </button>
 
-              <button
-                type={'button'}
-                className={style.button}
-                onClick={handleResetAudio}
-                disabled={!audioBlob}
-                style={{ width: '56px' }}
-              >
-                Reset
-              </button>
-            </>
-          )}
-        </div>
-        <Input
-          {...register('transcription')}
-          placeholder={'transcription'}
-          style={{ maxWidth: '50%' }}
-        />
+            <button
+              type={'button'}
+              className={style.button}
+              onClick={handleResetAudio}
+              disabled={!audioBlob}
+              style={{ width: '56px' }}
+            >
+              Reset
+            </button>
+          </>
+        )}
       </div>
-      <div className={style.twoFieldsBox}>
-        <Input {...register('meaning')} placeholder={'meaning in English'} />
-        <Input
-          {...register('partsOfSpeech')}
-          list={'parts-of-speech'}
-          placeholder={'part of speech'}
-        />
+      <Input
+        {...register('transcription')}
+        placeholder={'transcription'}
+      />
+      <Input {...register('meaning')} placeholder={'meaning in English'} />
+      <Input
+        {...register('partsOfSpeech')}
+        list={'parts-of-speech'}
+        placeholder={'part of speech'}
+      />
 
-        <datalist id={'parts-of-speech'}>
-          {partsOfSpeech.map((part) => (
-            <option key={part} value={part} />
-          ))}
-        </datalist>
-      </div>
-      <div className={style.twoFieldsBox}>
-        <Input {...register('synonyms')} placeholder={'synonyms'} />
-        <Input {...register('antonyms')} placeholder={'antonyms'} />
-      </div>
+      <datalist id={'parts-of-speech'}>
+        {partsOfSpeech.map((part) => (
+          <option key={part} value={part} />
+        ))}
+      </datalist>
+      <Input {...register('synonyms')} placeholder={'synonyms'} />
+      <Input {...register('antonyms')} placeholder={'antonyms'} />
       <Textarea {...register('examples')} placeholder={'examples'} />
       <Textarea {...register('comment')} placeholder={'comment'} />
       <Button
