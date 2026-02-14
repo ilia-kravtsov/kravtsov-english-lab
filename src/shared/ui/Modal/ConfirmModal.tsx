@@ -1,5 +1,6 @@
 import style from './ConfirmModal.module.scss';
 import { Button } from '@/shared/ui/Button/Button';
+import { useEffect } from 'react';
 
 interface Props {
   isOpen: boolean;
@@ -16,6 +17,18 @@ export function ConfirmModal({
   onConfirm,
   onCancel,
 }: Props) {
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onCancel();
+    };
+
+    window.addEventListener('keydown', handler);
+    return () => window.removeEventListener('keydown', handler);
+  }, [isOpen, onCancel]);
+
   if (!isOpen) return null;
 
   const overlayStyles = `${style.overlay} ${isOpen ? style.open : ''}`;

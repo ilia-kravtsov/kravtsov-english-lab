@@ -1,92 +1,34 @@
-import { type ChangeEvent, type KeyboardEvent, useMemo, useState } from 'react';
+import { type ChangeEvent, type KeyboardEvent } from 'react';
 import style from './SearchLexicalUnit.module.scss';
 import { Input } from '@/shared/ui/Input/Input.tsx';
-import { Button } from '@/shared/ui';
-import { deleteLexicalUnit, searchLexicalUnitByValue } from '@/entities/lexical-unit/api/lexical-unit.api.ts';
-import type { LexicalUnit } from '@/entities/lexical-unit/model/lexical-unit.types.ts';
-import { useLexicalUnitEditorStore } from '@/features/vocabulary/lexical-unit-add/model/lexicalUnitEditor.store.ts';
-const apiBaseUrl = import.meta.env.VITE_API_URL ?? 'http://localhost:3000';
-import { useRef } from 'react';
-
-type ResultState =
-  | { status: 'idle' }
-  | { status: 'loading' }
-  | { status: 'not-found' }
-  | { status: 'found'; unit: LexicalUnit };
+import { Button, ConfirmModal } from '@/shared/ui';
+import { useSearchLexicalUnit } from '@/features/vocabulary/lexical-unit-add/model/useSearchLexicalUnit.ts';
 
 export function SearchLexicalUnit() {
-  const openAddWithValue = useLexicalUnitEditorStore(s => s.openAddWithValue);
-  const openUpdate = useLexicalUnitEditorStore(s => s.openUpdate);
+  const {
+    query,
+    setQuery,
+    normalizedQuery,
+    result,
 
-  const [query, setQuery] = useState('');
-  const [result, setResult] = useState<ResultState>({ status: 'idle' });
+    runSearch,
+    handleAdd,
+    handleUpdate,
 
-  const audioRef = useRef<HTMLAudioElement | null>(null);
+    confirmOpen,
+    deleting,
+    handleDeleteClick,
+    cancelDelete,
+    confirmDelete,
 
-  const normalizedQuery = useMemo(() => query.trim(), [query]);
-
-  const runSearch = async () => {
-    const value = normalizedQuery;
-    if (!value) {
-      setResult({ status: 'idle' });
-      return;
-    }
-
-    setResult({ status: 'loading' });
-    try {
-      const data = await searchLexicalUnitByValue(value);
-      if (!data) {
-        setResult({ status: 'not-found' });
-        return;
-      }
-      setResult({ status: 'found', unit: data });
-    } catch (e) {
-      console.error(e);
-      setResult({ status: 'not-found' });
-    }
-  };
-
-  const handleAdd = () => {
-    const value = normalizedQuery;
-    if (!value) return;
-    openAddWithValue(value);
-  };
-
-  const handleUpdate = () => {
-    if (result.status !== 'found') return;
-    openUpdate(result.unit);
-  };
-
-  const handleDelete = async () => {
-    if (result.status !== 'found') return;
-    const { unit } = result;
-
-    try {
-      await deleteLexicalUnit(unit.id);
-      setResult({ status: 'not-found' });
-    } catch (e) {
-      console.error(e);
-      alert('Failed to delete');
-    }
-  };
-
-  const audioSrc = useMemo(() => {
-    if (result.status !== 'found') return null;
-
-    const url = result.unit.audioUrl;
-
-    if (!url) return null;
-
-    if (url.startsWith('http://') || url.startsWith('https://')) {
-      return url;
-    }
-
-    return `${apiBaseUrl}${url}`;
-  }, [result]);
+    audioRef,
+    audioSrc,
+    playAudio,
+  } = useSearchLexicalUnit();
 
   const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    setQuery(e.target.value)
-  }
+    setQuery(e.target.value);
+  };
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
@@ -94,14 +36,6 @@ export function SearchLexicalUnit() {
       void runSearch();
     }
   };
-
-  const handlePlayAudio = () => {
-    if (!audioRef.current) return;
-
-    audioRef.current.currentTime = 0;
-    void audioRef.current.play();
-  };
-
 
   return (
     <div className={style.container}>
@@ -141,6 +75,7 @@ export function SearchLexicalUnit() {
                   <span className={style.value}>{result.unit.transcription}</span>
                 </div>
               )}
+
               {audioSrc && (
                 <div className={style.fieldBlock}>
                   <audio
@@ -153,7 +88,7 @@ export function SearchLexicalUnit() {
                   <Button
                     type={'button'}
                     title={'Play'}
-                    onClick={handlePlayAudio}
+                    onClick={playAudio}
                     style={{ width: '80px' }}
                   />
                 </div>
@@ -218,12 +153,21 @@ export function SearchLexicalUnit() {
             <Button
               type={'button'}
               title={'Delete'}
-              onClick={() => void handleDelete()}
+              disabled={deleting}
+              onClick={handleDeleteClick}
               style={{ width: '120px' }}
             />
           </div>
         </div>
       )}
+
+      <ConfirmModal
+        isOpen={confirmOpen}
+        title={'Delete lexical unit?'}
+        message={'This action cannot be undone.'}
+        onCancel={cancelDelete}
+        onConfirm={() => void confirmDelete()}
+      />
     </div>
   );
 }
