@@ -123,24 +123,25 @@ export function AddLexicalUnitForm() {
           </>
         )}
       </div>
-      <Input
-        {...register('transcription')}
-        placeholder={'transcription'}
-      />
-      <Input {...register('meaning')} placeholder={'meaning in English'} />
-      <Input
-        {...register('partsOfSpeech')}
-        list={'parts-of-speech'}
-        placeholder={'part of speech'}
-      />
-
-      <datalist id={'parts-of-speech'}>
-        {partsOfSpeech.map((part) => (
-          <option key={part} value={part} />
-        ))}
-      </datalist>
+      <div className={style.twoFieldsBox}>
+        <Input
+          {...register('transcription')}
+          placeholder={'transcription'}
+        />
+        <Input
+          {...register('partsOfSpeech')}
+          list={'parts-of-speech'}
+          placeholder={'part of speech'}
+        />
+        <datalist id={'parts-of-speech'}>
+          {partsOfSpeech.map((part) => (
+            <option key={part} value={part} />
+          ))}
+        </datalist>
+      </div>
       <Input {...register('synonyms')} placeholder={'synonyms'} />
       <Input {...register('antonyms')} placeholder={'antonyms'} />
+      <Textarea {...register('meaning')} placeholder={'meaning in English'} />
       <Textarea {...register('examples')} placeholder={'examples'} />
       <Textarea {...register('comment')} placeholder={'comment'} />
       <Button

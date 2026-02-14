@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { type ChangeEvent, type KeyboardEvent, useMemo, useState } from 'react';
 import style from './SearchLexicalUnit.module.scss';
 import { Input } from '@/shared/ui/Input/Input.tsx';
 import { Button } from '@/shared/ui';
@@ -81,19 +81,25 @@ export function SearchLexicalUnit() {
     return `${apiBaseUrl}${url}`;
   }, [result]);
 
+  const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    setQuery(e.target.value)
+  }
+
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      void runSearch();
+    }
+  };
+
   return (
     <div className={style.container}>
       <div className={style.searchRow}>
         <Input
           value={query}
-          onChange={e => setQuery(e.target.value)}
+          onChange={changeHandler}
           placeholder={'Find lexical unit in the bank'}
-          onKeyDown={e => {
-            if (e.key === 'Enter') {
-              e.preventDefault();
-              void runSearch();
-            }
-          }}
+          onKeyDown={handleKeyDown}
         />
 
         <Button
@@ -131,23 +137,23 @@ export function SearchLexicalUnit() {
               )}
             </div>
 
-            {result.unit.translation && (
-              <div className={style.fieldRow}>
-                <span className={style.value}>{result.unit.translation}</span>
-              </div>
-            )}
+            <div className={style.fieldRow}>
+              {result.unit.partsOfSpeech && (
+                <div className={style.fieldRow}>
+                  <span className={style.value}>{result.unit.partsOfSpeech}</span>
+                </div>
+              )}
+
+              {result.unit.translation && (
+                <div className={style.fieldRow}>
+                  <span className={style.value}>{result.unit.translation}</span>
+                </div>
+              )}
+            </div>
 
             {result.unit.meaning && (
               <div className={style.fieldRow}>
-                <span className={style.label}>Meaning:</span>
                 <span className={style.value}>{result.unit.meaning}</span>
-              </div>
-            )}
-
-            {result.unit.partsOfSpeech && (
-              <div className={style.fieldRow}>
-                <span className={style.label}>Part of speech:</span>
-                <span className={style.value}>{result.unit.partsOfSpeech}</span>
               </div>
             )}
 
