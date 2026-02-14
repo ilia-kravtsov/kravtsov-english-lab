@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 import type { AddLexicalUnitFormValues, PartsOfSpeech } from '@/entities/lexical-unit/model/lexical-unit.types';
 import { addLexicalUnit, updateLexicalUnit } from '@/entities/lexical-unit/api/lexical-unit.api';
@@ -139,17 +140,21 @@ export function useAddLexicalUnitForm() {
 
       reset();
       resetAudio();
-      alert(mode === 'update' ? 'Updated!' : 'Saved!');
+      toast.success(mode === 'update' ? 'Updated!' : 'Saved!');
     } catch (err: unknown) {
       if (axios.isAxiosError(err)) {
         const status = err.response?.status;
         if (status === 409) {
-          alert('Already exists in your bank');
+          toast.warning('Already exists in your bank');
           return;
         }
       }
       console.error(err);
-      alert(mode === 'update' ? 'Failed to update' : 'Failed to save');
+      toast.error(
+        mode === 'update'
+          ? 'Failed to update'
+          : 'Failed to save'
+      );
     } finally {
       setSubmitting(false);
     }
