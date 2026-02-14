@@ -6,6 +6,7 @@ import { deleteLexicalUnit, searchLexicalUnitByValue } from '@/entities/lexical-
 import type { LexicalUnit } from '@/entities/lexical-unit/model/lexical-unit.types.ts';
 import { useLexicalUnitEditorStore } from '@/features/vocabulary/lexical-unit-add/model/lexicalUnitEditor.store.ts';
 const apiBaseUrl = import.meta.env.VITE_API_URL ?? 'http://localhost:3000';
+import { useRef } from 'react';
 
 type ResultState =
   | { status: 'idle' }
@@ -19,6 +20,8 @@ export function SearchLexicalUnit() {
 
   const [query, setQuery] = useState('');
   const [result, setResult] = useState<ResultState>({ status: 'idle' });
+
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const normalizedQuery = useMemo(() => query.trim(), [query]);
 
@@ -92,6 +95,14 @@ export function SearchLexicalUnit() {
     }
   };
 
+  const handlePlayAudio = () => {
+    if (!audioRef.current) return;
+
+    audioRef.current.currentTime = 0;
+    void audioRef.current.play();
+  };
+
+
   return (
     <div className={style.container}>
       <div className={style.searchRow}>
@@ -132,7 +143,19 @@ export function SearchLexicalUnit() {
               )}
               {audioSrc && (
                 <div className={style.fieldBlock}>
-                  <audio controls preload={"metadata"} src={audioSrc} />
+                  <audio
+                    ref={audioRef}
+                    src={audioSrc}
+                    preload={"metadata"}
+                    style={{ display: 'none' }}
+                  />
+
+                  <Button
+                    type={'button'}
+                    title={'Play'}
+                    onClick={handlePlayAudio}
+                    style={{ width: '80px' }}
+                  />
                 </div>
               )}
             </div>
@@ -180,15 +203,24 @@ export function SearchLexicalUnit() {
 
             {result.unit.comment && (
               <div className={style.fieldBlock}>
-                <div className={style.label}>Comment:</div>
                 <div className={style.value}>{result.unit.comment}</div>
               </div>
             )}
           </div>
 
           <div className={style.actions}>
-            <Button type={'button'} title={'Update'} onClick={handleUpdate} style={{ width: '120px' }} />
-            <Button type={'button'} title={'Delete'} onClick={() => void handleDelete()} style={{ width: '120px' }} />
+            <Button
+              type={'button'}
+              title={'Update'}
+              onClick={handleUpdate}
+              style={{ width: '120px' }}
+            />
+            <Button
+              type={'button'}
+              title={'Delete'}
+              onClick={() => void handleDelete()}
+              style={{ width: '120px' }}
+            />
           </div>
         </div>
       )}

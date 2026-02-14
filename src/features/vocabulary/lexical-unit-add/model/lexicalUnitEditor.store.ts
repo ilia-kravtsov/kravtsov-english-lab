@@ -31,6 +31,9 @@ export const useLexicalUnitEditorStore = createGStore<LexicalUnitEditorState>(()
     editingUnit,
 
     openSearch: () => {
+      setMode('add');
+      setEditingUnit(null);
+      setPrefillValue('');
       setActiveTab('search');
     },
 
