@@ -103,7 +103,7 @@ export function AddLexicalUnitForm() {
           </div>
         )}
 
-        <Input {...register('imageUrl')} placeholder={'image link (https://...)'} />
+        <Input {...register('imageUrl')} placeholder={'image link https://...'} />
       </div>
 
       <Controller

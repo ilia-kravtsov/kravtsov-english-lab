@@ -1,4 +1,3 @@
-import { LogoutButton } from '@/features/auth/logout';
 import style from './Header.module.scss';
 import { useMatches } from 'react-router-dom';
 import type { RouteHandle } from '@/shared/types/routeHandle.ts';
@@ -31,7 +30,6 @@ export function Header() {
           </LinkAsButton>
         ))}
       </nav>
-      <LogoutButton />
     </header>
   );
 }
