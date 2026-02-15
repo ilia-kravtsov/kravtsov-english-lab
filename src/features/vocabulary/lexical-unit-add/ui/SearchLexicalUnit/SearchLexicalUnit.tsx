@@ -24,6 +24,8 @@ export function SearchLexicalUnit() {
     audioRef,
     audioSrc,
     playAudio,
+
+    imageSrc,
   } = useSearchLexicalUnit();
 
   const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -142,6 +144,13 @@ export function SearchLexicalUnit() {
               </div>
             )}
           </div>
+
+
+          {imageSrc && (
+            <div className={style.imageBox}>
+              <img src={imageSrc} alt={result.unit.value} />
+            </div>
+          )}
 
           <div className={style.actions}>
             <Button

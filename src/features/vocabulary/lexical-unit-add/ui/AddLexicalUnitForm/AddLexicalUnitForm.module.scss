@@ -21,7 +21,6 @@
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
     padding: 8px 10px;
     border-radius: 6px;
-
     background-color: var(--background-color-primary);
 
     .button {
@@ -59,5 +58,34 @@
       max-width: 420px;
       height: 32px;
     }
+  }
+
+  .imageContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 10px;
+    flex-wrap: wrap;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    padding: var(--padding-primary);
+    border-radius: var(--border-radius-primary);
+    background-color: var(--background-color-primary);
+  }
+
+  .imagePreview {
+    max-width: 220px;
+    max-height: 220px;
+    flex: 0 0 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .imagePreview img {
+    max-width: 320px;
+    max-height: 220px;
+    border-radius: var(--border-radius-primary);
+    object-fit: cover;
   }
 }

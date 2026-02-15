@@ -29,6 +29,8 @@ export function AddLexicalUnitForm() {
     pause,
     handleResetAudio,
     control,
+
+    imagePreviewSrc,
   } = useAddLexicalUnitForm();
 
   return (
@@ -94,6 +96,16 @@ export function AddLexicalUnitForm() {
 
       <Input{...register('transcription')} placeholder={'transcription'} />
 
+      <div className={style.imageContainer}>
+        {imagePreviewSrc && (
+          <div className={style.imagePreview}>
+            <img src={imagePreviewSrc} alt={'lexical unit image'} />
+          </div>
+        )}
+
+        <Input {...register('imageUrl')} placeholder={'image link (https://...)'} />
+      </div>
+
       <Controller
         control={control}
         name={"partsOfSpeech"}
@@ -102,7 +114,7 @@ export function AddLexicalUnitForm() {
             value={field.value ?? []}
             onChange={field.onChange}
             options={partsOptions}
-            placeholder={"noun"}
+            placeholder={"parts of speech"}
           />
         )}
       />

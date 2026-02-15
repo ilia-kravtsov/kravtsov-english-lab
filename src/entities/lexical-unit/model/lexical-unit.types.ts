@@ -1,5 +1,6 @@
 export type BlobType = Blob | null;
 export type LexicalUnitType = 'word' | 'expression';
+export type Url = string | null
 export type PartsOfSpeech =
   | 'noun'
   | 'pronoun'
@@ -25,7 +26,8 @@ export interface LexicalUnit {
   partsOfSpeech?: PartsOfSpeech[] | null;
   examples?: string;
   comment?: string;
-  audioUrl?: string | null;
+  audioUrl?: Url;
+  imageUrl?: Url;
 }
 
 export interface AddLexicalUnitFormValues {
@@ -40,4 +42,5 @@ export interface AddLexicalUnitFormValues {
   examples?: string;
   comment?: string;
   audio?: BlobType;
+  imageUrl?: string;
 }

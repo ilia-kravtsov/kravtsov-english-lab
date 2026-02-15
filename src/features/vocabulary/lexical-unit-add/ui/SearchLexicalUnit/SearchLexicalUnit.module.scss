@@ -30,6 +30,19 @@
   width: 100%;
 }
 
+.imageBox {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.imageBox img {
+  max-width: 220px;
+  max-height: 220px;
+  border-radius: var(--border-radius-primary);
+  object-fit: cover;
+}
+
 .fields {
   display: flex;
   flex-direction: column;

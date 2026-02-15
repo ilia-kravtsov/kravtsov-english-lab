@@ -40,6 +40,20 @@ export function useSearchLexicalUnit() {
     return `${apiBaseUrl}${url}`;
   }, [result]);
 
+  const imageSrc = useMemo(() => {
+    if (result.status !== 'found') {
+      return null;
+    }
+
+    const url = result.unit.imageUrl;
+
+    if (!url) {
+      return null;
+    }
+
+    return url;
+  }, [result]);
+
   const runSearch = async () => {
     const value = normalizedQuery;
     if (!value) {
@@ -127,5 +141,8 @@ export function useSearchLexicalUnit() {
     audioRef,
     audioSrc,
     playAudio,
+
+    // image
+    imageSrc
   };
 }

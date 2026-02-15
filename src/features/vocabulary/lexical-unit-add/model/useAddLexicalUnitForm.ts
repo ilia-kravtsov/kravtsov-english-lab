@@ -49,8 +49,20 @@ export function useAddLexicalUnitForm() {
       examples: '',
       comment: '',
       audio: null,
+      imageUrl: '',
     },
   });
+
+  const imageUrlValue = form.watch('imageUrl');
+
+  const imagePreviewSrc = useMemo(() => {
+    const raw = (imageUrlValue ?? '').trim();
+    if (!raw) return null;
+
+    if (raw.startsWith('http://') || raw.startsWith('https://')) return raw;
+
+    return `${apiBaseUrl}${raw}`;
+  }, [imageUrlValue]);
 
   const { register, handleSubmit, setValue, reset, control } = form;
 
@@ -82,6 +94,14 @@ export function useAddLexicalUnitForm() {
     return `${apiBaseUrl}${url}`;
   }, [mode, editingUnit?.audioUrl, audioBlob, apiBaseUrl]);
 
+  const remoteImageSrc = useMemo(() => {
+    if (mode !== 'update') return null;
+    if (!editingUnit?.imageUrl) return null;
+    const url = editingUnit.imageUrl;
+    if (url.startsWith('http://') || url.startsWith('https://')) return url;
+    return `${apiBaseUrl}${url}`;
+  }, [mode, editingUnit?.imageUrl, apiBaseUrl]);
+
   useEffect(() => {
     if (audioBlob) {
       const url = URL.createObjectURL(audioBlob);
@@ -105,6 +125,7 @@ export function useAddLexicalUnitForm() {
       antonyms: editingUnit.antonyms ?? '',
       examples: editingUnit.examples ?? '',
       comment: editingUnit.comment ?? '',
+      imageUrl: editingUnit.imageUrl ?? '',
       audio: null,
     });
 
@@ -195,6 +216,10 @@ export function useAddLexicalUnitForm() {
     play,
     pause,
     handleResetAudio,
+
+    // image
+    imagePreviewSrc,
+    remoteImageSrc,
 
     // constants
     partsOptions,
