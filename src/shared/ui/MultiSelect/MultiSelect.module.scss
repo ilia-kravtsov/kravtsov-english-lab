@@ -2,6 +2,8 @@
   width: 100%;
   position: relative;
   outline: none;
+  border: none;
+  border-radius: var(--border-radius-primary);
 }
 
 .disabled {
@@ -14,11 +16,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-
-  border-radius: 6px;
-  padding: 8px 10px;
-  border: 1px solid rgba(0, 0, 0, 0.12);
-
+  border-radius: var(--border-radius-primary);
+  padding: var(--padding-primary);
+  border: none;
+  box-shadow: var(--shadow-primary);
+  font-size: var(--font-size-primary);
   background: var(--background-color-primary);
   cursor: pointer;
 }
@@ -32,7 +34,7 @@
 
 .placeholder {
   opacity: 0.6;
-  font-size: 14px;
+  font-size: var(--font-size-primary);
 }
 
 .tags {
@@ -46,24 +48,18 @@
   align-items: center;
   gap: 6px;
   padding: 4px 8px;
-  border-radius: 999px;
+  border-radius: var(--border-radius-primary);
   background: rgba(0, 0, 0, 0.06);
-  font-size: 13px;
+  font-size: var(--font-size-primary);
 }
 
 .tagRemove {
   border: none;
   background: transparent;
   cursor: pointer;
-  font-size: 14px;
   line-height: 1;
   padding: 0;
-}
-
-.chevron {
-  margin-left: 10px;
-  font-size: 12px;
-  opacity: 0.7;
+  font-size: var(--font-size-primary);
 }
 
 .dropdown {
@@ -73,11 +69,12 @@
   top: calc(100% + 6px);
   z-index: 50;
 
-  border-radius: 8px;
-  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: var(--border-radius-primary);
+  border: none;
+  box-shadow: var(--shadow-primary);
   background: var(--background-color-primary);
 
-  max-height: 220px;
+  max-height: 260px;
   overflow: auto;
   padding: 6px;
 }

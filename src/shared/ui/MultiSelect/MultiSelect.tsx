@@ -50,7 +50,7 @@ export function MultiSelect({ value, onChange, options, placeholder, disabled }:
       }}
     >
       <button
-        type="button"
+        type={"button"}
         className={style.control}
         onClick={() => !disabled && setOpen(v => !v)}
       >
@@ -63,7 +63,7 @@ export function MultiSelect({ value, onChange, options, placeholder, disabled }:
                 <span key={t.value} className={style.tag}>
                   {t.label}
                   <button
-                    type="button"
+                    type={"button"}
                     className={style.tagRemove}
                     onClick={(e) => {
                       e.stopPropagation();
@@ -78,8 +78,6 @@ export function MultiSelect({ value, onChange, options, placeholder, disabled }:
             </div>
           )}
         </div>
-
-        <span className={style.chevron}>{open ? '▲' : '▼'}</span>
       </button>
 
       {open && (

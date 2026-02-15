@@ -1,13 +1,13 @@
 .input {
   width: 100%;
   box-sizing: border-box;
-  padding: 12px;
+  padding: var(--padding-primary);
   border: none;
   font-family: inherit;
   background-color: transparent;
   font-size: var(--font-size-primary);
   color: var(--font-color-primary);
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-primary);
   border-radius: 6px;
 }
 
