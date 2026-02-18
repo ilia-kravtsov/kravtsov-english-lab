@@ -1,0 +1,56 @@
+import { createGStore } from 'create-gstore';
+import { useState } from 'react';
+import type { CardSet } from '@/entities/card-set/model/card-set.types';
+
+export interface CardSetsState {
+  sets: CardSet[];
+  selectedId: string | null;
+  isLoading: boolean;
+
+  setSets: (sets: CardSet[]) => void;
+  setLoading: (v: boolean) => void;
+
+  select: (id: string | null) => void;
+  removeFromState: (id: string) => void;
+  upsertInState: (set: CardSet) => void;
+}
+
+export const useCardSetsStore = createGStore<CardSetsState>(() => {
+  const [sets, setSetsState] = useState<CardSet[]>([]);
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+
+  return {
+    sets,
+    selectedId,
+    isLoading,
+
+    setSets: next => {
+      setSetsState(next);
+      setSelectedId(prev => {
+        if (prev && next.some(s => s.id === prev)) return prev;
+        return next[0]?.id ?? null;
+      });
+    },
+
+    setLoading: setIsLoading,
+
+    select: setSelectedId,
+
+    removeFromState: id => {
+      setSetsState(prev => prev.filter(s => s.id !== id));
+      setSelectedId(prev => (prev === id ? null : prev));
+    },
+
+    upsertInState: set => {
+      setSetsState(prev => {
+        const idx = prev.findIndex(x => x.id === set.id);
+        if (idx === -1) return [set, ...prev];
+        const copy = prev.slice();
+        copy[idx] = set;
+        return copy;
+      });
+      setSelectedId(set.id);
+    },
+  };
+});
