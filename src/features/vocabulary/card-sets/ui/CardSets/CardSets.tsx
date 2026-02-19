@@ -32,74 +32,41 @@ export function CardSets() {
 
   return (
     <div className={style.container}>
-      <div className={style.section}>
-        <div className={style.headerRow}>
+      <div className={style.sectionContainer}>
+        <div className={style.sectionCreateCardSet}>
           <h2 className={style.title}>Create Card Set</h2>
-          <Button title={isLoading ? 'Loading...' : 'Refresh'} onClick={reload} disabled={isLoading} />
+          <form onSubmit={handleSubmitCreate(submitCreate)}>
+            <div className={style.formRow}>
+              <div className={style.formField}>
+                <span className={style.label}>Title</span>
+                <Input placeholder={"Travel France"} {...registerCreate('title', { required: true })} />
+                {createErrors.title && <span className={style.error}>Title is required</span>}
+              </div>
+
+              <div className={style.formField}>
+                <span className={style.label}>Description</span>
+                <Input placeholder={"Short note"} {...registerCreate('description')} />
+              </div>
+
+              <div className={style.buttonContainer}>
+                <Button
+                  title={isLoading ? 'Loading...' : 'Refresh'}
+                  onClick={reload}
+                  type={"button"}
+                  disabled={isLoading}
+                  style={{width: '200px'}}
+                />
+                <Button
+                  title={isCreating ? 'Creating...' : 'Create'}
+                  type={"submit"}
+                  disabled={isCreating}
+                  style={{width: '200px'}}
+                />
+              </div>
+            </div>
+          </form>
         </div>
-
-        <form onSubmit={handleSubmitCreate(submitCreate)}>
-          <div className={style.formRow}>
-            <div className={style.formField}>
-              <span className={style.label}>Title (unique)</span>
-              <Input placeholder={"Travel France"} {...registerCreate('title', { required: true })} />
-              {createErrors.title && <span className={style.error}>Title is required</span>}
-            </div>
-
-            <div className={style.formField}>
-              <span className={style.label}>Description (optional)</span>
-              <Input placeholder={"Short note"} {...registerCreate('description')} />
-            </div>
-
-            <Button title={isCreating ? 'Creating...' : 'Create'} type={"submit"} disabled={isCreating} />
-          </div>
-        </form>
-      </div>
-
-      <div className={style.split}>
-        <div className={style.section}>
-          <div className={style.headerRow}>
-            <h2 className={style.title}>Your Card Sets</h2>
-          </div>
-
-          {isLoading && <div className={style.muted}>Loading...</div>}
-
-          {!isLoading && sets.length === 0 && <div className={style.muted}>No card sets yet</div>}
-
-          {!isLoading && sets.length > 0 && (
-            <div className={style.list}>
-              {sets.map(s => {
-                const active = s.id === selectedId;
-
-                return (
-                  <div
-                    key={s.id}
-                    className={`${style.item} ${active ? style.itemActive : ''}`}
-                    onClick={() => select(s.id)}
-                    role="button"
-                    tabIndex={0}
-                  >
-                    <div className={style.itemMeta}>
-                      <div className={style.itemTitle}>
-                        {s.title}{s.isPreset ? ' (preset)' : ''}
-                      </div>
-                      <div className={style.itemDesc}>
-                        key: {s.key}{s.description ? ` · ${s.description}` : ''}
-                      </div>
-                    </div>
-
-                    <div className={style.itemActions} onClick={e => e.stopPropagation()}>
-                      <Button title="Edit" onClick={() => select(s.id)} />
-                      <Button title="Delete" onClick={() => requestDelete(s)} />
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          )}
-        </div>
-
-        <div className={style.section}>
+        <div className={style.sectionEdit}>
           <div className={style.headerRow}>
             <h2 className={style.title}>Edit Selected</h2>
           </div>
@@ -120,13 +87,58 @@ export function CardSets() {
                   <Input {...registerEdit('description')} />
                 </div>
 
-                <Button title={isEditing ? 'Saving...' : 'Save'} type="submit" disabled={isEditing} />
+                <Button title={isEditing ? 'Saving...' : 'Save'} type={"submit"} disabled={isEditing} />
               </div>
-
-              <div className={style.muted}>URL: /vocabulary/cards/{selected.key}</div>
             </form>
           )}
         </div>
+      </div>
+
+      <div className={style.sectionYourCardSets}>
+        <div className={style.headerRow}>
+          <h2 className={style.title}>Your Card Sets</h2>
+        </div>
+
+        {isLoading && <div className={style.muted}>Loading...</div>}
+
+        {!isLoading && sets.length === 0 && <div className={style.muted}>No card sets yet</div>}
+
+        {!isLoading && sets.length > 0 && (
+          <div className={style.list}>
+            {sets.map(s => {
+              const active = s.id === selectedId;
+
+              return (
+                <div
+                  key={s.id}
+                  className={`${style.item} ${active ? style.itemActive : ''}`}
+                  onClick={() => select(s.id)}
+                  role={"button"}
+                  tabIndex={0}
+                >
+                  <div className={style.itemDesc}>
+                    {s.description ? s.description : ''}
+                  </div>
+                  <div className={style.itemTitle}>
+                    {s.title}
+                  </div>
+                  <div className={style.itemActions} onClick={e => e.stopPropagation()}>
+                    <Button
+                      title={"Edit"}
+                      onClick={() => select(s.id)}
+                      style={{width: '100px', backgroundColor: 'transparent', color: 'black'}}
+                    />
+                    <Button
+                      title={"Delete"}
+                      onClick={() => requestDelete(s)}
+                      style={{width: '100px', backgroundColor: 'transparent', color: 'black'}}
+                    />
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
       </div>
 
       <ConfirmModal
