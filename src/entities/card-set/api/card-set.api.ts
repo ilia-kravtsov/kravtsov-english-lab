@@ -24,3 +24,8 @@ export async function updateCardSet(id: string, payload: UpdateCardSetPayload) {
 export async function deleteCardSet(id: string) {
   await api.delete(`/card-sets/${id}`);
 }
+
+export async function getCardSetById(id: string) {
+  const res = await api.get<CardSet>(`/card-sets/${id}`);
+  return res.data;
+}

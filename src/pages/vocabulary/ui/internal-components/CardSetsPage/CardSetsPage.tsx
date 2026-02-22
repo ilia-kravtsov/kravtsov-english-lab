@@ -10,8 +10,10 @@ export function CardSetsPage() {
   const navigate = useNavigate();
 
   const {
-    lexicalSearch,
+    cardSet,
+    cardSetLoading,
 
+    lexicalSearch,
     cards,
     cardsLoading,
 
@@ -34,7 +36,11 @@ export function CardSetsPage() {
           onClick={() => navigate('/vocabulary/cards')}
           style={{ width: '200px' }}
         />
-        <h2 className={style.title}>Card Set</h2>
+        <h2 className={style.title}>
+          {cardSetLoading
+            ? 'Loading...'
+            : cardSet?.title ?? 'Card Set'}
+        </h2>
       </div>
 
       <div className={style.contentContainer}>
