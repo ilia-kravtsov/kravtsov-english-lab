@@ -1,0 +1,171 @@
+import { type ChangeEvent, type KeyboardEvent, type ReactNode } from 'react';
+
+import style from './LexicalUnitSearchPanel.module.scss';
+import { Input } from '@/shared/ui/Input/Input';
+import { Button } from '@/shared/ui';
+import type { LexicalUnit } from '@/entities/lexical-unit';
+import type { LexicalUnitSearchResultState } from '@/features/vocabulary/lexical-unit-add/model/useLexicalUnitSearch';
+
+type Props = {
+  query: string;
+  setQuery: (v: string) => void;
+  normalizedQuery: string;
+  result: LexicalUnitSearchResultState;
+
+  runSearch: () => Promise<void> | void;
+
+  audioRef?: React.RefObject<HTMLAudioElement | null>;
+  audioSrc?: string | null;
+  playAudio?: () => void;
+
+  imageSrc?: string | null;
+
+  variant?: 'full' | 'compact';
+
+  renderNotFound?: () => ReactNode;
+  renderFoundActions?: (unit: LexicalUnit) => ReactNode;
+};
+
+export function LexicalUnitSearchPanel({
+                                         query,
+                                         setQuery,
+                                         normalizedQuery,
+                                         result,
+                                         runSearch,
+
+                                         audioRef,
+                                         audioSrc,
+                                         playAudio,
+
+                                         imageSrc,
+
+                                         variant = 'full',
+
+                                         renderNotFound,
+                                         renderFoundActions,
+                                       }: Props) {
+  const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    setQuery(e.target.value);
+  };
+
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      void runSearch();
+    }
+  };
+
+  return (
+    <div className={style.container}>
+      <div className={style.searchRow}>
+        <Input
+          value={query}
+          onChange={changeHandler}
+          placeholder={'Find lexical unit in the bank'}
+          onKeyDown={handleKeyDown}
+        />
+
+        <Button
+          type={'button'}
+          title={result.status === 'loading' ? 'Searching...' : 'Search'}
+          disabled={result.status === 'loading' || !normalizedQuery}
+          onClick={() => void runSearch()}
+          style={{ width: '120px' }}
+        />
+      </div>
+
+      {result.status === 'loading' && <div className={style.hint}>Searching…</div>}
+
+      {result.status === 'error' && <div className={style.error}>Search failed.</div>}
+
+      {result.status === 'not-found' && (
+        <div className={style.notFoundBox}>
+          {renderNotFound ? renderNotFound() : <div className={style.hint}>Not found in your bank.</div>}
+        </div>
+      )}
+
+      {result.status === 'found' && (
+        <div className={style.resultBox}>
+          <div className={style.fields}>
+            <div className={style.fieldRow}>
+              <span className={style.value}>{result.unit.value}</span>
+
+              {result.unit.translation && (
+                <div className={style.fieldRow}>
+                  <span className={style.value}>{result.unit.translation}</span>
+                </div>
+              )}
+            </div>
+
+            <div className={style.fieldRow}>
+
+              {result.unit.transcription && (
+                <div className={style.fieldRow}>
+                  <span className={style.value}>{result.unit.transcription}</span>
+                </div>
+              )}
+
+              {audioSrc && audioRef && playAudio && (
+                <div className={style.fieldBlock}>
+                  <audio ref={audioRef} src={audioSrc} preload={'metadata'} style={{ display: 'none' }} />
+                  <Button type={'button'} title={'Play'} onClick={playAudio} style={{ width: '80px' }} />
+                </div>
+              )}
+
+              {result.unit.partsOfSpeech?.length ? (
+                <div className={style.fieldRow}>
+                  <span className={style.value}>{result.unit.partsOfSpeech.join(', ')}</span>
+                </div>
+              ) : null}
+            </div>
+
+            {variant === 'full' && (
+              <>
+                {result.unit.meaning && (
+                  <div className={style.fieldRow}>
+                    <span className={style.value}>{result.unit.meaning}</span>
+                  </div>
+                )}
+
+                {result.unit.synonyms && (
+                  <div className={style.fieldRow}>
+                    <span className={style.label}>Synonyms:</span>
+                    <span className={style.value}>{result.unit.synonyms}</span>
+                  </div>
+                )}
+
+                {result.unit.antonyms && (
+                  <div className={style.fieldRow}>
+                    <span className={style.label}>Antonyms:</span>
+                    <span className={style.value}>{result.unit.antonyms}</span>
+                  </div>
+                )}
+
+                {result.unit.examples && (
+                  <div className={style.fieldBlock}>
+                    <div className={style.label}>Examples:</div>
+                    <div className={style.value}>{result.unit.examples}</div>
+                  </div>
+                )}
+
+                {result.unit.comment && (
+                  <div className={style.fieldBlock}>
+                    <div className={style.value}>{result.unit.comment}</div>
+                  </div>
+                )}
+              </>
+            )}
+          </div>
+
+          {variant === 'full' && imageSrc && (
+            <div className={style.imageBox}>
+              <img src={imageSrc} alt={result.unit.value} />
+            </div>
+          )}
+
+          {renderFoundActions && <div className={style.actions}>{renderFoundActions(result.unit)}</div>}
+        </div>
+      )}
+    </div>
+  );
+}

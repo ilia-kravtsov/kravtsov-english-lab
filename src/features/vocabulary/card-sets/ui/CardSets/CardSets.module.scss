@@ -10,7 +10,7 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-  width: 40%;
+  width: 30%;
 }
 
 .sectionCreateCardSet {
@@ -46,14 +46,15 @@
   background: var(--background-color-primary);
   box-shadow: var(--shadow-primary);
   border-radius: var(--border-radius-primary);
-  width: 50%;
+  width: 60%;
   height: fit-content;
 }
 
 .headerRow {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  text-align: center;
   gap: 12px;
   width: 100%;
 }
@@ -81,7 +82,6 @@
 .buttonContainer {
   display: flex;
   width: 100%;
-  justify-content: space-between;
   gap: 20px;
 }
 
@@ -111,10 +111,10 @@
   box-shadow: var(--shadow-primary);
   border-radius: var(--border-radius-primary);
   cursor: pointer;
-  transition: transform 0.3s ease-in-out;
+  transition: transform 0.2s ease-in-out;
 
   &:hover {
-    transform: scale(1.03);
+    transform: scale(1.025);
   }
 }
 
@@ -138,6 +138,10 @@
   display: flex;
   gap: 8px;
 }
+
+//.itemActive {
+//  box-shadow: var(--shadow-secondary);
+//}
 
 .muted {
   opacity: 0.75;

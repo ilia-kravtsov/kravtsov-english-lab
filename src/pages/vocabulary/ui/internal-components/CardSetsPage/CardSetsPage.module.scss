@@ -1,0 +1,42 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  gap: 20px;
+
+  .headerRow {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .contentContainer {
+    display: flex;
+    gap: 20px;
+
+    .left {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      width: 35%;
+
+      .searchRow {
+        display: flex;
+        gap: 20px;
+      }
+    }
+
+    .right {
+      box-shadow: var(--shadow-primary);
+      width: 65%;
+      padding: 20px;
+      border-radius: var(--border-radius-primary);
+    }
+  }
+
+  .muted {
+    opacity: 0.7;
+  }
+}
+
+

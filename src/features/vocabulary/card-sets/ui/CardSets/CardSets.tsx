@@ -1,8 +1,10 @@
 import style from './CardSets.module.scss';
 import { Button, ConfirmModal, Input } from '@/shared/ui';
 import { useCardSets } from '../../model/useCardSets.ts';
+import { useNavigate } from 'react-router-dom';
 
 export function CardSets() {
+  const navigate = useNavigate();
   const {
     sets,
     selectedId,
@@ -22,8 +24,6 @@ export function CardSets() {
     editErrors,
     isEditing,
 
-    reload,
-
     deleteTarget,
     requestDelete,
     cancelDelete,
@@ -39,59 +39,58 @@ export function CardSets() {
             <div className={style.formRow}>
               <div className={style.formField}>
                 <span className={style.label}>Title</span>
-                <Input placeholder={"Travel France"} {...registerCreate('title', { required: true })} />
+                <Input placeholder={'Travel France'} {...registerCreate('title', { required: true })} />
                 {createErrors.title && <span className={style.error}>Title is required</span>}
               </div>
 
               <div className={style.formField}>
                 <span className={style.label}>Description</span>
-                <Input placeholder={"Short note"} {...registerCreate('description')} />
+                <Input placeholder={'Short note'} {...registerCreate('description')} />
               </div>
 
               <div className={style.buttonContainer}>
                 <Button
-                  title={isLoading ? 'Loading...' : 'Refresh'}
-                  onClick={reload}
-                  type={"button"}
-                  disabled={isLoading}
-                  style={{width: '200px'}}
-                />
-                <Button
                   title={isCreating ? 'Creating...' : 'Create'}
-                  type={"submit"}
+                  type={'submit'}
                   disabled={isCreating}
-                  style={{width: '200px'}}
+                  style={{ width: '100%' }}
                 />
               </div>
             </div>
           </form>
         </div>
-        <div className={style.sectionEdit}>
-          <div className={style.headerRow}>
-            <h2 className={style.title}>Edit Selected</h2>
-          </div>
+        {selectedId &&
+          <div className={style.sectionEdit}>
+            <div className={style.headerRow}>
+              <h2 className={style.title}>Edit Card Set</h2>
+              <p>Click the Edit button on the Card Set to change the title and description</p>
+            </div>
 
-          {!selected && <div className={style.muted}>Select a card set</div>}
+            {!selected && <div className={style.muted}>Select a card set</div>}
 
-          {selected && (
-            <form onSubmit={handleSubmitEdit(submitEdit)}>
-              <div className={style.formRow}>
-                <div className={style.formField}>
-                  <span className={style.label}>Title</span>
-                  <Input {...registerEdit('title', { required: true })} />
-                  {editErrors.title && <span className={style.error}>Title is required</span>}
+            {selected && (
+              <form onSubmit={handleSubmitEdit(submitEdit)}>
+                <div className={style.formRow}>
+                  <div className={style.formField}>
+                    <span className={style.label}>Title</span>
+                    <Input {...registerEdit('title', { required: true })} />
+                    {editErrors.title && <span className={style.error}>Title is required</span>}
+                  </div>
+
+                  <div className={style.formField}>
+                    <span className={style.label}>Description</span>
+                    <Input {...registerEdit('description')} />
+                  </div>
+
+                  <Button
+                    title={isEditing ? 'Saving...' : 'Save'}
+                    type={'submit'}
+                    disabled={isEditing}
+                  />
                 </div>
-
-                <div className={style.formField}>
-                  <span className={style.label}>Description</span>
-                  <Input {...registerEdit('description')} />
-                </div>
-
-                <Button title={isEditing ? 'Saving...' : 'Save'} type={"submit"} disabled={isEditing} />
-              </div>
-            </form>
-          )}
-        </div>
+              </form>
+            )}
+          </div>}
       </div>
 
       <div className={style.sectionYourCardSets}>
@@ -112,26 +111,26 @@ export function CardSets() {
                 <div
                   key={s.id}
                   className={`${style.item} ${active ? style.itemActive : ''}`}
-                  onClick={() => select(s.id)}
-                  role={"button"}
+                  onClick={() => navigate(`/vocabulary/cards/${s.id}`)}
+                  role={'button'}
                   tabIndex={0}
                 >
-                  <div className={style.itemDesc}>
-                    {s.description ? s.description : ''}
-                  </div>
+                  {s.description && (
+                    <div className={style.itemDesc}>{s.description}</div>
+                  )}
                   <div className={style.itemTitle}>
                     {s.title}
                   </div>
                   <div className={style.itemActions} onClick={e => e.stopPropagation()}>
                     <Button
-                      title={"Edit"}
+                      title={'Edit'}
                       onClick={() => select(s.id)}
-                      style={{width: '100px', backgroundColor: 'transparent', color: 'black'}}
+                      style={{ width: '100px', backgroundColor: 'transparent', color: 'black' }}
                     />
                     <Button
-                      title={"Delete"}
+                      title={'Delete'}
                       onClick={() => requestDelete(s)}
-                      style={{width: '100px', backgroundColor: 'transparent', color: 'black'}}
+                      style={{ width: '100px', backgroundColor: 'transparent', color: 'black' }}
                     />
                   </div>
                 </div>
@@ -143,7 +142,7 @@ export function CardSets() {
 
       <ConfirmModal
         isOpen={deleteTarget != null}
-        title={"Delete card set?"}
+        title={'Delete card set?'}
         message={deleteTarget ? `Delete "${deleteTarget.title}"? All cards inside will be deleted.` : undefined}
         onConfirm={confirmDelete}
         onCancel={cancelDelete}

@@ -2,7 +2,7 @@ import { ProtectedRoute } from '@/app/routes/ProtectedRoute.tsx';
 import { Dashboard } from '@/widgets/dashboard';
 import { Home } from '@/pages/home';
 import { Profile } from '@/pages/profile';
-import { VocabularyLayout, WordsBank, Cards } from '@/pages/vocabulary';
+import { Cards, CardSetsPage, VocabularyLayout, WordsBank } from '@/pages/vocabulary';
 import { vocabularyHeaderLinks } from '@/features/vocabulary/config/vocabularyHeaderLinks.ts';
 import { AuthLayout } from '@/pages/auth/auth-layout';
 import { Login } from '@/pages/auth/login';
@@ -51,6 +51,7 @@ export const routes = [
         children: [
           { index: true, element: <VocabularyIntro /> },
           { path: 'cards', element: <Cards /> },
+          { path: 'cards/:cardSetId', element: <CardSetsPage /> },
           { path: 'words-bank', element: <WordsBank /> },
           { path: '*', element: <NotFound /> },
         ],
