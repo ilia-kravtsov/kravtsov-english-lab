@@ -1,8 +1,15 @@
 import { api } from '@/shared/api';
-import type { Card, CreateCardPayload, UpdateCardPayload } from '../model/card.types.ts';
+import type { Card, CardWithLexicalUnit, CreateCardPayload, UpdateCardPayload } from '../model/card.types.ts';
 
 export async function listCards(cardSetId: string) {
   const res = await api.get<Card[]>(`/card-sets/${cardSetId}/cards`);
+  return res.data;
+}
+
+export async function listCardsWithLexicalUnit(cardSetId: string) {
+  const res = await api.get<CardWithLexicalUnit[]>(`/card-sets/${cardSetId}/cards`, {
+    params: { include: 'lexicalUnit' },
+  });
   return res.data;
 }
 

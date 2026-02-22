@@ -1,3 +1,5 @@
+import type { LexicalUnit } from '@/entities/lexical-unit';
+
 export interface Card {
   id: string;
   cardSetId: string;
@@ -8,9 +10,13 @@ export interface Card {
   updatedAt: string;
 }
 
+export interface CardWithLexicalUnit extends Card {
+  lexicalUnit: LexicalUnit | null;
+}
+
 export interface CreateCardPayload {
   lexicalUnitId: string;
-  note?: string;
+  note?: string | null;
   sortOrder?: number;
 }
 

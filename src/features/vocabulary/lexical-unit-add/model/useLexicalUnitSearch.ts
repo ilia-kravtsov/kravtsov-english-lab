@@ -2,6 +2,7 @@ import { useMemo, useRef, useState } from 'react';
 
 import { searchLexicalUnitByValue } from '@/entities/lexical-unit/api/lexical-unit.api';
 import type { LexicalUnit } from '@/entities/lexical-unit/model/lexical-unit.types';
+import { toast } from 'react-toastify';
 
 const apiBaseUrl = import.meta.env.VITE_API_URL ?? 'http://localhost:3000';
 
@@ -48,12 +49,16 @@ export function useLexicalUnitSearch() {
       const data = await searchLexicalUnitByValue(value);
       if (!data) {
         setResult({ status: 'not-found' });
+        setQuery('');
         return;
       }
       setResult({ status: 'found', unit: data });
+      setQuery('');
     } catch (e) {
       console.error(e);
       setResult({ status: 'error' });
+      toast.error('Search failed');
+      setQuery('');
     }
   };
 

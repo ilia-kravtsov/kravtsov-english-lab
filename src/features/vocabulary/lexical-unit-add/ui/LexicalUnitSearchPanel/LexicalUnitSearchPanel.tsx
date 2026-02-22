@@ -1,4 +1,4 @@
-import { type ChangeEvent, type KeyboardEvent, type ReactNode } from 'react';
+import { type ChangeEvent, type KeyboardEvent, type ReactNode, type RefObject } from 'react';
 
 import style from './LexicalUnitSearchPanel.module.scss';
 import { Input } from '@/shared/ui/Input/Input';
@@ -14,7 +14,7 @@ type Props = {
 
   runSearch: () => Promise<void> | void;
 
-  audioRef?: React.RefObject<HTMLAudioElement | null>;
+  audioRef?: RefObject<HTMLAudioElement | null>;
   audioSrc?: string | null;
   playAudio?: () => void;
 
@@ -55,6 +55,10 @@ export function LexicalUnitSearchPanel({
     }
   };
 
+  const handleSearch = async () => {
+    await runSearch();
+  };
+
   return (
     <div className={style.container}>
       <div className={style.searchRow}>
@@ -69,7 +73,7 @@ export function LexicalUnitSearchPanel({
           type={'button'}
           title={result.status === 'loading' ? 'Searching...' : 'Search'}
           disabled={result.status === 'loading' || !normalizedQuery}
-          onClick={() => void runSearch()}
+          onClick={handleSearch}
           style={{ width: '120px' }}
         />
       </div>
@@ -111,12 +115,6 @@ export function LexicalUnitSearchPanel({
                   <Button type={'button'} title={'Play'} onClick={playAudio} style={{ width: '80px' }} />
                 </div>
               )}
-
-              {result.unit.partsOfSpeech?.length ? (
-                <div className={style.fieldRow}>
-                  <span className={style.value}>{result.unit.partsOfSpeech.join(', ')}</span>
-                </div>
-              ) : null}
             </div>
 
             {variant === 'full' && (
@@ -126,6 +124,12 @@ export function LexicalUnitSearchPanel({
                     <span className={style.value}>{result.unit.meaning}</span>
                   </div>
                 )}
+
+                {result.unit.partsOfSpeech?.length ? (
+                  <div className={style.fieldRow}>
+                    <span className={style.value}>{result.unit.partsOfSpeech.join(', ')}</span>
+                  </div>
+                ) : null}
 
                 {result.unit.synonyms && (
                   <div className={style.fieldRow}>

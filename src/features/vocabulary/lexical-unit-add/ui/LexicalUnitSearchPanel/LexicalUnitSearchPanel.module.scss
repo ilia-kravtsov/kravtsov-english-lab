@@ -1,6 +1,7 @@
 .container {
   display: flex;
   flex-direction: column;
+  align-items: start;
   gap: 12px;
 }
 
@@ -25,25 +26,26 @@
 }
 
 .resultBox {
+  width: 100%;
   border: none;
   box-shadow: var(--shadow-primary);
   border-radius: 10px;
   padding: 12px;
   display: grid;
   grid-template-columns: 1fr auto;
-  gap: 12px;
+  gap: 20px;
   align-items: start;
 }
 
 .fields {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 20px;
 }
 
 .fieldRow {
   display: flex;
-  gap: 12px;
+  gap: 20px;
 }
 
 .fieldBlock {
