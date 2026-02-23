@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from 'react-router-dom';
 
 import style from './CardSetsPage.module.scss';
-import { Button, ConfirmModal } from '@/shared/ui';
+import { Button, ConfirmModal, LinkAsButton } from '@/shared/ui';
 import { useCardSetsPage } from '@/features/vocabulary/card-sets/model/useCardSetsPage';
 import { LexicalUnitSearchPanel } from '@/features/vocabulary/lexical-unit-add/ui/LexicalUnitSearchPanel/LexicalUnitSearchPanel';
 
@@ -18,6 +18,7 @@ export function CardSetsPage() {
     cardsLoading,
 
     inSet,
+    foundCardInSet,
     adding,
     addToSet,
 
@@ -31,16 +32,26 @@ export function CardSetsPage() {
   return (
     <div className={style.container}>
       <div className={style.headerRow}>
-        <Button
-          title={'Back'}
-          onClick={() => navigate('/vocabulary/cards')}
-          style={{ width: '100px' }}
-        />
-        <h2 className={style.title}>
-          {cardSetLoading
-            ? 'Loading...'
-            : cardSet?.title ?? 'Card Set'}
-        </h2>
+        <div className={style.headerLeft}>
+          <Button
+            title={'Back'}
+            onClick={() => navigate('/vocabulary/cards')}
+            style={{ width: '100px' }}
+          />
+          <h2 className={style.title}>
+            {cardSetLoading
+              ? 'Loading...'
+              : cardSet?.title ?? 'Card Set'}
+          </h2>
+        </div>
+        {cardSetId && (
+          <LinkAsButton
+            to={`/vocabulary/cards/${cardSetId}/practice`}
+            style={{ width: '120px', textAlign: 'center' }}
+          >
+            Practice
+          </LinkAsButton>
+        )}
       </div>
 
       <div className={style.contentContainer}>
@@ -60,13 +71,26 @@ export function CardSetsPage() {
               <div className={style.hint}>Not found in your words bank.</div>
             )}
             renderFoundActions={() => (
-              <Button
-                type={'button'}
-                title={inSet ? 'Already added' : adding ? 'Adding...' : 'Add'}
-                disabled={adding || inSet}
-                onClick={() => void addToSet()}
-                style={{ width: '140px' }}
-              />
+              <div style={{ display: 'flex', gap: '12px' }}>
+                <Button
+                  type={'button'}
+                  title={inSet ? 'Already added' : adding ? 'Adding...' : 'Add'}
+                  disabled={adding || inSet}
+                  onClick={() => void addToSet()}
+                  style={{ width: '140px' }}
+                />
+
+                <Button
+                  type={'button'}
+                  title={removing ? 'Removing...' : 'Remove'}
+                  disabled={removing || !foundCardInSet}
+                  onClick={() => {
+                    if (!foundCardInSet) return;
+                    requestRemove(foundCardInSet);
+                  }}
+                  style={{ width: '140px' }}
+                />
+              </div>
             )}
           />
         </div>

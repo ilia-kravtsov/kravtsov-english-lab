@@ -1,9 +1,9 @@
 import style from './Button.module.scss';
-import type { CSSProperties } from 'react';
+import type { CSSProperties, MouseEvent } from 'react';
 
 interface ButtonProps {
   title: string;
-  onClick?: () => void | Promise<void>;
+  onClick?: (e: MouseEvent<HTMLButtonElement>) => void | Promise<void>;
   disabled?: boolean;
   type?: 'button' | 'submit';
   style?: CSSProperties;

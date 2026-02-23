@@ -9,7 +9,6 @@
   .tabsHeader {
     display: flex;
     justify-content: left;
-    padding-left: 4px;
     gap: 20px;
     width: 100%;
     max-width: var(--max-width-primary);
@@ -21,9 +20,9 @@
     box-shadow: var(--shadow-primary);
     border: none;
     cursor: pointer;
-    font-size: 14px;
-    border-radius: 6px;
-    width: 80px;
+    font-size: var(--font-size-primary);
+    border-radius: var(--border-radius-primary);
+    width: 100px;
 
     opacity: 0.5;
 

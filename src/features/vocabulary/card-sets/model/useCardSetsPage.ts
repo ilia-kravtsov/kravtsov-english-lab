@@ -68,6 +68,11 @@ export function useCardSetsPage(cardSetId: string | undefined) {
     return cards.some(c => c.lexicalUnitId === foundUnitId);
   }, [cards, foundUnitId]);
 
+  const foundCardInSet = useMemo(() => {
+    if (!foundUnitId) return null;
+    return cards.find(c => c.lexicalUnitId === foundUnitId) ?? null;
+  }, [cards, foundUnitId]);
+
   const addToSet = async () => {
     if (!cardSetId) return;
     if (!foundUnitId) return;
@@ -124,6 +129,7 @@ export function useCardSetsPage(cardSetId: string | undefined) {
     reloadCards: loadCards,
 
     inSet,
+    foundCardInSet,
     adding,
     addToSet,
 
