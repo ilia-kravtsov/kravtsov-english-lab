@@ -34,7 +34,7 @@ export function CardSetsPage() {
         <Button
           title={'Back'}
           onClick={() => navigate('/vocabulary/cards')}
-          style={{ width: '200px' }}
+          style={{ width: '100px' }}
         />
         <h2 className={style.title}>
           {cardSetLoading

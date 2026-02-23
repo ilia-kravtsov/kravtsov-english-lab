@@ -125,12 +125,12 @@ export function CardSets() {
                     <Button
                       title={'Edit'}
                       onClick={() => select(s.id)}
-                      style={{ width: '100px', backgroundColor: 'transparent', color: 'black' }}
+                      style={{ width: '100px'}}
                     />
                     <Button
                       title={'Delete'}
                       onClick={() => requestDelete(s)}
-                      style={{ width: '100px', backgroundColor: 'transparent', color: 'black' }}
+                      style={{ width: '100px'}}
                     />
                   </div>
                 </div>

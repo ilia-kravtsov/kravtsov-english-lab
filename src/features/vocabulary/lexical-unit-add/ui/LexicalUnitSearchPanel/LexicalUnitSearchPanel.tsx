@@ -1,10 +1,19 @@
-import { type ChangeEvent, type KeyboardEvent, type ReactNode, type RefObject } from 'react';
+import {
+  type ChangeEvent,
+  type KeyboardEvent,
+  type ReactNode,
+  type RefObject,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 
 import style from './LexicalUnitSearchPanel.module.scss';
 import { Input } from '@/shared/ui/Input/Input';
 import { Button } from '@/shared/ui';
 import type { LexicalUnit } from '@/entities/lexical-unit';
 import type { LexicalUnitSearchResultState } from '@/features/vocabulary/lexical-unit-add/model/useLexicalUnitSearch';
+import { useLexicalUnitSuggestions } from '@/features/vocabulary/lexical-unit-add/model/useLexicalUnitSuggestions.ts';
 
 type Props = {
   query: string;
@@ -12,7 +21,7 @@ type Props = {
   normalizedQuery: string;
   result: LexicalUnitSearchResultState;
 
-  runSearch: () => Promise<void> | void;
+  runSearch: (valueArg?: string) => Promise<void> | void;
 
   audioRef?: RefObject<HTMLAudioElement | null>;
   audioSrc?: string | null;
@@ -44,30 +53,86 @@ export function LexicalUnitSearchPanel({
                                          renderNotFound,
                                          renderFoundActions,
                                        }: Props) {
+  const [isSuggestOpen, setIsSuggestOpen] = useState(false);
+  const suggestWrapRef = useRef<HTMLDivElement | null>(null);
+  const suggestions = useLexicalUnitSuggestions(query, 3);
+
+  useEffect(() => {
+    if (!isSuggestOpen) return;
+
+    const onMouseDown = (e: MouseEvent) => {
+      const wrap = suggestWrapRef.current;
+      if (!wrap) return;
+      if (wrap.contains(e.target as Node)) return;
+      setIsSuggestOpen(false);
+    };
+
+    document.addEventListener('mousedown', onMouseDown);
+    return () => document.removeEventListener('mousedown', onMouseDown);
+  }, [isSuggestOpen]);
+
   const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
+    setIsSuggestOpen(true);
   };
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       e.preventDefault();
       void runSearch();
+      setIsSuggestOpen(false);
+    }
+
+    if (e.key === 'Escape') {
+      setIsSuggestOpen(false);
     }
   };
 
   const handleSearch = async () => {
     await runSearch();
+    setIsSuggestOpen(false);
+  };
+
+  const showSuggest =
+    isSuggestOpen &&
+    normalizedQuery &&
+    suggestions.status !== 'error' &&
+    suggestions.items.length > 0 &&
+    result.status !== 'loading';
+
+  const handlePickSuggestion = async (value: string) => {
+    setIsSuggestOpen(false);
+    await runSearch(value);
   };
 
   return (
     <div className={style.container}>
       <div className={style.searchRow}>
-        <Input
-          value={query}
-          onChange={changeHandler}
-          placeholder={'Find lexical unit in the bank'}
-          onKeyDown={handleKeyDown}
-        />
+        <div className={style.inputWrap} ref={suggestWrapRef}>
+          <Input
+            value={query}
+            onChange={changeHandler}
+            placeholder={'Find lexical unit in the bank'}
+            onKeyDown={handleKeyDown}
+            onFocus={() => setIsSuggestOpen(true)}
+          />
+
+          {showSuggest && (
+            <div className={style.suggestBox} role={'listbox'}>
+              {suggestions.items.slice(0, 3).map(item => (
+                <button
+                  key={item.id}
+                  type={'button'}
+                  className={style.suggestItem}
+                  onMouseDown={e => e.preventDefault()}
+                  onClick={() => void handlePickSuggestion(item.value)}
+                >
+                  <span className={style.suggestValue}>{item.value}</span>
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
 
         <Button
           type={'button'}

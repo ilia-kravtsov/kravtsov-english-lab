@@ -11,6 +11,48 @@
   align-items: center;
 }
 
+.inputWrap {
+  position: relative;
+  flex: 1;
+}
+
+.suggestBox {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  z-index: 20;
+  background: var(--color-bg, #fff);
+  border-radius: 10px;
+  box-shadow: var(--shadow-primary);
+  overflow: hidden;
+}
+
+.suggestItem {
+  width: 100%;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 10px 12px;
+  border: none;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+}
+
+.suggestItem:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.suggestValue {
+  font-weight: 600;
+}
+
+.suggestMeta {
+  opacity: 0.75;
+  font-size: 0.9em;
+}
+
 .hint {
   opacity: 0.7;
 }

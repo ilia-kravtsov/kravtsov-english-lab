@@ -30,6 +30,14 @@ export interface LexicalUnit {
   imageUrl?: Url;
 }
 
+export interface LexicalUnitSuggestion {
+  id: string;
+  type: LexicalUnitType;
+  value: string;
+  translation: string | null;
+  transcription: string | null;
+}
+
 export interface AddLexicalUnitFormValues {
   type: LexicalUnitType;
   value: string;

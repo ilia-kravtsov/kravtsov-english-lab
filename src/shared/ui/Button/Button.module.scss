@@ -23,8 +23,7 @@
   }
 
   &:disabled {
-    background-color: var(--color-3);
     cursor: not-allowed;
-    opacity: 0.6;
+    opacity: 0.4;
   }
 }

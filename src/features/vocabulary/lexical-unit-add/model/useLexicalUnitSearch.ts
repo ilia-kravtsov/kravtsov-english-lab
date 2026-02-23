@@ -37,8 +37,8 @@ export function useLexicalUnitSearch() {
     return result.unit.imageUrl ?? null;
   }, [result]);
 
-  const runSearch = async () => {
-    const value = normalizedQuery;
+  const runSearch = async (valueArg?: string) => {
+    const value = (valueArg ?? normalizedQuery).trim();
     if (!value) {
       setResult({ status: 'idle' });
       return;

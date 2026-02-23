@@ -1,5 +1,5 @@
 import { api } from '@/shared/api';
-import type { AddLexicalUnitFormValues, LexicalUnit } from '../model/lexical-unit.types';
+import type { AddLexicalUnitFormValues, LexicalUnit, LexicalUnitSuggestion } from '../model/lexical-unit.types';
 
 function toFormData(data: AddLexicalUnitFormValues) {
   const formData = new FormData();
@@ -55,6 +55,14 @@ export async function deleteLexicalUnit(id: string) {
 export async function searchLexicalUnitByValue(value: string) {
   const response = await api.get<LexicalUnit | null>('/lexical-units/search', {
     params: { value },
+  });
+
+  return response.data;
+}
+
+export async function suggestLexicalUnits(query: string, limit = 3) {
+  const response = await api.get<LexicalUnitSuggestion[]>('/lexical-units/suggest', {
+    params: { query, limit },
   });
 
   return response.data;

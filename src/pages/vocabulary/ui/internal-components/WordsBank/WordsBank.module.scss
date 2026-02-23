@@ -36,8 +36,8 @@
 
   .tabsContent {
     padding: 20px;
+    border-radius: var(--border-radius-primary);
     width: 50%;
-    border-radius: 0 6px 6px 6px;
     z-index: 3;
     box-shadow: var(--shadow-primary);
     border: none;

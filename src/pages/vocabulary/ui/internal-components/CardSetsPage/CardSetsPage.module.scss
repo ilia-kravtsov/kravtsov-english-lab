@@ -8,7 +8,7 @@
 .headerRow {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 30px;
 }
 
 .contentContainer {
@@ -21,14 +21,17 @@
 .right {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 20px;
+  box-shadow: var(--shadow-primary);
+  border-radius: var(--border-radius-primary);
+  padding: 20px;
 }
 
 .cardsHeader {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  gap: 12px;
+  gap: 20px;
 }
 
 .cardsTitle {
