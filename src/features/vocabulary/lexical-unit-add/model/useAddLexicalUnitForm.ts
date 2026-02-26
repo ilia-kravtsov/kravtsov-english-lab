@@ -8,6 +8,8 @@ import { addLexicalUnit, updateLexicalUnit } from '@/entities/lexical-unit/api/l
 import { useLexicalUnitEditorStore } from './lexicalUnitEditor.store';
 import { useAudioRecorder } from './useAudioRecorder';
 
+type FormValues = Omit<AddLexicalUnitFormValues, 'type' | 'examples'> & { examples: string[] };
+
 function normalizeValue(value: string) {
   return value.trim().replace(/\s+/g, ' ');
 }
@@ -15,6 +17,16 @@ function normalizeValue(value: string) {
 function computeTypeByValue(value: string): AddLexicalUnitFormValues['type'] {
   const v = normalizeValue(value);
   return v.includes(' ') ? 'expression' : 'word';
+}
+
+function ensureAtLeastOne(v?: string[] | null) {
+  if (!v || v.length === 0) return [''];
+  return v;
+}
+
+function trimNonEmpty(v?: string[] | null) {
+  const list = (v ?? []).map(s => s.trim()).filter(Boolean);
+  return list.length ? list : undefined;
 }
 
 export const PARTS_OF_SPEECH: PartsOfSpeech[] = [
@@ -37,7 +49,9 @@ export function useAddLexicalUnitForm() {
   const prefillValue = useLexicalUnitEditorStore(s => s.prefillValue);
   const openSearch = useLexicalUnitEditorStore(s => s.openSearch);
 
-  const form = useForm<AddLexicalUnitFormValues>({
+  const apiBaseUrl = import.meta.env.VITE_API_URL ?? 'http://localhost:3000';
+
+  const form = useForm<FormValues>({
     defaultValues: {
       value: '',
       translation: '',
@@ -46,12 +60,14 @@ export function useAddLexicalUnitForm() {
       partsOfSpeech: undefined,
       synonyms: '',
       antonyms: '',
-      examples: '',
+      examples: [''],
       comment: '',
       audio: null,
       imageUrl: '',
     },
   });
+
+  const { register, handleSubmit, setValue, reset, control } = form;
 
   const imageUrlValue = form.watch('imageUrl');
 
@@ -64,7 +80,22 @@ export function useAddLexicalUnitForm() {
     return `${apiBaseUrl}${raw}`;
   }, [imageUrlValue]);
 
-  const { register, handleSubmit, setValue, reset, control } = form;
+  const examples = form.watch('examples');
+  const examplesCount = (examples?.length ?? 0);
+
+  const addExample = () => {
+    const current = examples ?? [''];
+    if (current.length >= 5) return;
+    setValue('examples', [...current, ''], { shouldDirty: true });
+  };
+
+  const removeExample = (index: number) => {
+    const current = examples ?? [''];
+    if (current.length <= 1) return;
+    const next = current.slice();
+    next.splice(index, 1);
+    setValue('examples', next.length ? next : [''], { shouldDirty: true });
+  };
 
   const {
     recording,
@@ -82,8 +113,6 @@ export function useAddLexicalUnitForm() {
 
   const [submitting, setSubmitting] = useState(false);
   const [audioURL, setAudioURL] = useState<string | null>(null);
-
-  const apiBaseUrl = import.meta.env.VITE_API_URL ?? 'http://localhost:3000';
 
   const remoteAudioSrc = useMemo(() => {
     if (mode !== 'update') return null;
@@ -123,7 +152,7 @@ export function useAddLexicalUnitForm() {
       partsOfSpeech: editingUnit.partsOfSpeech ?? [],
       synonyms: editingUnit.synonyms ?? '',
       antonyms: editingUnit.antonyms ?? '',
-      examples: editingUnit.examples ?? '',
+      examples: ensureAtLeastOne(editingUnit.examples ?? null),
       comment: editingUnit.comment ?? '',
       imageUrl: editingUnit.imageUrl ?? '',
       audio: null,
@@ -143,12 +172,14 @@ export function useAddLexicalUnitForm() {
     try {
       const normalized = normalizeValue(data.value ?? '');
       const type = computeTypeByValue(normalized);
+      const examples = trimNonEmpty(data.examples ?? []);
       console.log(data);
       const payload: AddLexicalUnitFormValues = {
         ...data,
         value: normalized,
         type,
         audio: audioBlob ?? undefined,
+        examples,
       };
 
       if (mode === 'update') {
@@ -159,7 +190,19 @@ export function useAddLexicalUnitForm() {
         await addLexicalUnit(payload);
       }
 
-      reset();
+      reset({
+        value: '',
+        translation: '',
+        transcription: '',
+        meaning: '',
+        partsOfSpeech: undefined,
+        synonyms: '',
+        antonyms: '',
+        examples: [''],
+        comment: '',
+        audio: null,
+        imageUrl: '',
+      });
       resetAudio();
       toast.success(mode === 'update' ? 'Updated!' : 'Saved!');
     } catch (err: unknown) {
@@ -199,6 +242,12 @@ export function useAddLexicalUnitForm() {
     mode,
     submitting,
     control,
+
+    // examples
+    examples: examples ?? [''],
+    examplesCount,
+    addExample,
+    removeExample,
 
     // audio ui state
     recording,

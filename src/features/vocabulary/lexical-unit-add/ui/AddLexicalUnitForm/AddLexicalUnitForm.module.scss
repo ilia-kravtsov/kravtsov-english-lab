@@ -87,4 +87,39 @@
     border-radius: var(--border-radius-primary);
     object-fit: cover;
   }
+
+  .examplesHeader {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .examplesTitle {
+    font-weight: 600;
+    opacity: 0.9;
+  }
+
+  .examplesCounter {
+    opacity: 0.7;
+    font-size: 14px;
+  }
+
+  .examplesList {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .examplesRow {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 10px;
+    align-items: start;
+  }
+
+  .examplesActions {
+    display: flex;
+    gap: 8px;
+  }
 }

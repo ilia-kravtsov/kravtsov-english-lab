@@ -7,6 +7,15 @@ import type { CardSet } from '@/entities/card-set/model/card-set.types.ts';
 import type { CardWithLexicalUnit } from '@/entities/card/model/card.types.ts';
 import { getCardSetById } from '@/entities/card-set/api/card-set.api.ts';
 import { listCardsWithLexicalUnit } from '@/entities/card/api/card.api.ts';
+import { useRecognitionStore } from '@/features/vocabulary/card-practice/recognition/model/recognition.store.ts';
+import { RecognitionPractice } from '@/features/vocabulary/card-practice/recognition/ui/RecognitionPractice.tsx';
+import { useTypingStore } from '@/features/vocabulary/card-practice/typing/model/typing.store.ts';
+import { TypingPractice } from '@/features/vocabulary/card-practice/typing/ui/TypingPractice.tsx';
+import { useContextStore } from '@/features/vocabulary/card-practice/context/model/context.store.ts';
+import { pickContextExample } from '@/features/vocabulary/card-practice/context/model/context.utils.ts';
+import { ContextPractice } from '@/features/vocabulary/card-practice/context/ui/ContextPractice.tsx';
+import { useListeningStore } from '@/features/vocabulary/card-practice/listening/model/listening.store.ts';
+import { ListeningPractice } from '@/features/vocabulary/card-practice/listening/ui/ListeningPractice.tsx';
 
 const apiBaseUrl = import.meta.env.VITE_API_URL ?? 'http://localhost:3000';
 
@@ -24,7 +33,7 @@ function toAbsoluteMediaUrl(url: string) {
   return `${apiBaseUrl}${url}`;
 }
 
-type Mode = 'standard' | 'typing' | 'listening';
+type Mode = 'standard' | 'recognition' | 'typing' | 'listening' | 'context';
 
 export function CardSetPracticePage() {
   const { cardSetId } = useParams<{ cardSetId: string }>();
@@ -37,6 +46,15 @@ export function CardSetPracticePage() {
   const [isFlipped, setIsFlipped] = useState(false);
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  const startRecognition = useRecognitionStore(s => s.start);
+  const stopRecognition = useRecognitionStore(s => s.stop);
+  const startTyping = useTypingStore(s => s.start);
+  const stopTyping = useTypingStore(s => s.stop);
+  const startContext = useContextStore(s => s.start);
+  const stopContext = useContextStore(s => s.stop);
+  const startListening = useListeningStore(s => s.start);
+  const stopListening = useListeningStore(s => s.stop);
 
   useEffect(() => {
     if (!cardSetId) return;
@@ -53,6 +71,11 @@ export function CardSetPracticePage() {
         setItems(shuffle(cardsData));
         setIndex(0);
         setIsFlipped(false);
+
+        stopRecognition()
+        stopTyping()
+        stopListening()
+        setMode('standard');
       } finally {
         setLoading(false);
       }
@@ -61,6 +84,7 @@ export function CardSetPracticePage() {
 
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
+      if (mode !== 'standard') return;
       if (e.code !== 'Space') return;
       e.preventDefault();
       setIsFlipped(v => !v);
@@ -68,7 +92,67 @@ export function CardSetPracticePage() {
 
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
-  }, []);
+  }, [mode]);
+
+  const recognitionAvailable = useMemo(() => {
+    const count = items.filter(
+      c => c.lexicalUnit && (c.lexicalUnit.translation ?? '').trim().length > 0
+    ).length;
+    return count >= 2;
+  }, [items]);
+
+  const typingAvailable = useMemo(() => {
+    const count = items.filter(
+      c => c.lexicalUnit && (c.lexicalUnit.translation ?? '').trim().length > 0
+    ).length;
+    return count >= 1;
+  }, [items]);
+
+  const contextAvailable = useMemo(() => {
+    const count = items.filter(c => {
+      const lu = c.lexicalUnit;
+      if (!lu) return false;
+      const ex = lu.examples ?? [];
+      if (!ex.length) return false;
+      return Boolean(pickContextExample(lu.value ?? '', ex));
+    }).length;
+    return count >= 1;
+  }, [items]);
+
+  const listeningAvailable = useMemo(() => {
+    const count = items.filter(c => c.lexicalUnit && Boolean(c.lexicalUnit.audioUrl)).length;
+    return count >= 1;
+  }, [items]);
+
+  const startRecognitionHandler = () => {
+    if (!cardSetId) return;
+    if (!recognitionAvailable) return;
+    startRecognition(cardSetId, items);
+    setMode('recognition');
+  };
+
+  const startTypingHandler = () => {
+    if (!cardSetId) return;
+    if (!typingAvailable) return;
+    startTyping(cardSetId, items);
+    setMode('typing');
+  };
+
+  const startContextHandler = () => {
+    if (!cardSetId) return;
+    if (!contextAvailable) return;
+    stopRecognition();
+    stopTyping();
+    startContext(cardSetId, items);
+    setMode('context');
+  };
+
+  const startListeningHandler = () => {
+    if (!cardSetId) return;
+    if (!listeningAvailable) return;
+    startListening(cardSetId, items);
+    setMode('listening');
+  };
 
   const current = items[index] ?? null;
   const unit = current?.lexicalUnit ?? null;
@@ -127,19 +211,60 @@ export function CardSetPracticePage() {
             <button
               type={'button'}
               className={mode === 'standard' ? style.modeBtnActive : style.modeBtn}
-              onClick={() => setMode('standard')}
+              onClick={() => {
+                stopRecognition();
+                stopTyping();
+                stopContext();
+                setMode('standard');
+              }}
             >
               Standard
             </button>
 
-            <button type={'button'} className={style.modeBtnDisabled} disabled>
+            <button
+              type={'button'}
+              className={mode === 'recognition' ? style.modeBtnActive : style.modeBtn}
+              onClick={startRecognitionHandler}
+              disabled={!recognitionAvailable || loading || items.length === 0}
+            >
+              Recognition
+            </button>
+
+            <button
+              type={'button'}
+              className={mode === 'typing' ? style.modeBtnActive : style.modeBtn}
+              onClick={startTypingHandler}
+              disabled={!typingAvailable || loading || items.length === 0}
+            >
               Typing
             </button>
 
-            <button type={'button'} className={style.modeBtnDisabled} disabled>
+            <button
+              type={'button'}
+              className={mode === 'listening' ? style.modeBtnActive : style.modeBtn}
+              onClick={startListeningHandler}
+              disabled={!listeningAvailable || loading || items.length === 0}
+            >
               Listening
             </button>
+
+            <button
+              type={'button'}
+              className={mode === 'context' ? style.modeBtnActive : style.modeBtn}
+              onClick={startContextHandler}
+              disabled={!contextAvailable || loading || items.length === 0}
+            >
+              Context
+            </button>
           </div>
+
+          {!loading && items.length > 0 && !recognitionAvailable && (
+            <div className={style.modeHint}>Recognition needs at least 2 cards with translation.</div>
+          )}
+
+          {!loading && items.length > 0 && !contextAvailable && (
+            <div className={style.modeHint}>Context needs at least 1 card with example containing lexical unit.</div>
+          )}
         </div>
 
         <div className={style.content}>
@@ -202,9 +327,13 @@ export function CardSetPracticePage() {
                         </div>
                       )}
 
-                      {unit?.examples && (
+                      {Array.isArray(unit?.examples) && unit.examples.length > 0 && (
                         <div className={style.backRow}>
-                          <div className={style.backValue}>{unit.examples}</div>
+                          <div className={style.backValue}>
+                            {unit.examples.map((ex, i) => (
+                              <div key={i}>{ex}</div>
+                            ))}
+                          </div>
                         </div>
                       )}
 
@@ -233,6 +362,31 @@ export function CardSetPracticePage() {
                   style={{ width: '120px' }}
                 />
               </div>
+            </>
+          )}
+
+          {!loading && items.length > 0 && mode === 'recognition' && (
+            <>
+              {!recognitionAvailable && (
+                <div className={style.muted}>Recognition needs at least 2 cards with translation.</div>
+              )}
+              {recognitionAvailable && <RecognitionPractice />}
+            </>
+          )}
+
+          {!loading && items.length > 0 && mode === 'typing' && (
+            <>
+              {!typingAvailable && <div className={style.muted}>Typing needs at least 1 card with translation.</div>}
+              {typingAvailable && <TypingPractice />}
+            </>
+          )}
+
+          {!loading && items.length > 0 && mode === 'context' && <ContextPractice />}
+
+          {!loading && items.length > 0 && mode === 'listening' && (
+            <>
+              {!listeningAvailable && <div className={style.muted}>Listening needs at least 1 card with audio.</div>}
+              {listeningAvailable && <ListeningPractice />}
             </>
           )}
         </div>

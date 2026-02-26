@@ -38,20 +38,18 @@ export function CardSetsPage() {
             onClick={() => navigate('/vocabulary/cards')}
             style={{ width: '100px' }}
           />
+          {cardSetId && (
+            <LinkAsButton
+              to={`/vocabulary/cards/${cardSetId}/practice`}
+              style={{ width: '120px', textAlign: 'center' }}
+            >
+              Practice
+            </LinkAsButton>
+          )}
           <h2 className={style.title}>
-            {cardSetLoading
-              ? 'Loading...'
-              : cardSet?.title ?? 'Card Set'}
+            {cardSetLoading ? '' : cardSet?.title ?? ''}
           </h2>
         </div>
-        {cardSetId && (
-          <LinkAsButton
-            to={`/vocabulary/cards/${cardSetId}/practice`}
-            style={{ width: '120px', textAlign: 'center' }}
-          >
-            Practice
-          </LinkAsButton>
-        )}
       </div>
 
       <div className={style.contentContainer}>

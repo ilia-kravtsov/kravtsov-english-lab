@@ -24,7 +24,7 @@ export interface LexicalUnit {
   antonyms?: string;
   synonyms?: string;
   partsOfSpeech?: PartsOfSpeech[] | null;
-  examples?: string;
+  examples?: string[] | null;
   comment?: string;
   audioUrl?: Url;
   imageUrl?: Url;
@@ -47,7 +47,7 @@ export interface AddLexicalUnitFormValues {
   antonyms?: string;
   synonyms?: string;
   partsOfSpeech?: PartsOfSpeech[];
-  examples?: string;
+  examples?: string[];
   comment?: string;
   audio?: BlobType;
   imageUrl?: string;

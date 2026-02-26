@@ -1,0 +1,92 @@
+import { Button, Input } from '@/shared/ui';
+import style from './ContextPractice.module.scss';
+import { useContextStore } from '../model/context.store';
+
+export function ContextPractice() {
+  const cards = useContextStore(s => s.cards);
+  const index = useContextStore(s => s.index);
+  const feedback = useContextStore(s => s.feedback);
+  const locked = useContextStore(s => s.locked);
+
+  const input = useContextStore(s => s.input);
+  const setInput = useContextStore(s => s.setInput);
+
+  const attempts = useContextStore(s => s.attempts);
+
+  const isFinished = useContextStore(s => s.isFinished);
+  const cardSetId = useContextStore(s => s.cardSetId);
+  const getStoredContext = useContextStore(s => s.getStoredContext);
+
+  const submit = useContextStore(s => s.submit);
+  const next = useContextStore(s => s.next);
+  const restart = useContextStore(s => s.restart);
+
+  const current = cards[index] ?? null;
+
+  if (!cardSetId) return null;
+
+  if (isFinished) {
+    const c = getStoredContext(cardSetId);
+    return (
+      <div className={style.result}>
+        <h3 className={style.sectionTitle}>Results</h3>
+
+        <div className={style.resultBlock}>
+          <div className={style.resultRow}>
+            <div className={style.resultLabel}>Context</div>
+            <div className={style.resultValue}>
+              {c ? `${c.correctCards}/${c.totalCards} (${c.accuracy}%) · avg ${c.avgTimeMs}ms` : 'Not started'}
+            </div>
+          </div>
+        </div>
+
+        <div className={style.controlsRow}>
+          <Button title={'Restart Context'} onClick={restart} style={{ width: '180px' }} />
+        </div>
+      </div>
+    );
+  }
+
+  if (!current) return null;
+
+  return (
+    <div className={style.wrap}>
+      <div
+        className={[
+          style.card,
+          feedback === 'correct' ? style.cardCorrect : '',
+          feedback === 'wrong' ? style.cardWrong : '',
+        ].join(' ')}
+      >
+        <div className={style.promptLabel}>Fill the gap:</div>
+        <div className={style.promptValue}>{current.contextMasked}</div>
+
+        <div className={style.counter}>
+          {index + 1} / {cards.length}
+        </div>
+      </div>
+
+      <div className={style.formRow}>
+        <Input
+          value={input}
+          onChange={e => setInput(e.target.value)}
+          placeholder={'Type lexical unit'}
+          disabled={locked}
+          onKeyDown={e => {
+            if (e.key === 'Enter') {
+              e.preventDefault();
+              submit();
+            }
+          }}
+        />
+
+        <Button title={'Check'} onClick={submit} disabled={locked} style={{ width: '120px' }} />
+      </div>
+
+      <div className={style.controlsRow}>
+        <Button title={'Next'} onClick={next} disabled={!locked} style={{ width: '120px' }} />
+        <div className={style.meta}>Attempts: {attempts}</div>
+      </div>
+    </div>
+  );
+}

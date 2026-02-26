@@ -31,6 +31,11 @@ export function AddLexicalUnitForm() {
     control,
 
     imagePreviewSrc,
+
+    examples,
+    examplesCount,
+    addExample,
+    removeExample,
   } = useAddLexicalUnitForm();
 
   return (
@@ -122,7 +127,47 @@ export function AddLexicalUnitForm() {
       <Input {...register('synonyms')} placeholder={'synonyms'} />
       <Input {...register('antonyms')} placeholder={'antonyms'} />
       <Textarea {...register('meaning')} placeholder={'meaning in English'} />
-      <Textarea {...register('examples')} placeholder={'examples'} />
+
+      <div className={style.examplesHeader}>
+        <div className={style.examplesTitle}>Examples</div>
+        <div className={style.examplesCounter}>{examplesCount}/5</div>
+      </div>
+
+      <div className={style.examplesHeader}>
+        <div className={style.examplesTitle}>Examples</div>
+        <div className={style.examplesCounter}>{examplesCount}/5</div>
+      </div>
+
+      <div className={style.examplesList}>
+        {examples.map((_, i) => (
+          <div key={i} className={style.examplesRow}>
+            <Textarea
+              {...register(`examples.${i}` as const)}
+              placeholder={i === 0 ? 'example' : `example ${i + 1}`}
+              rows={2}
+            />
+            <div className={style.examplesActions}>
+              {examplesCount < 5 && i === examplesCount - 1 && (
+                <Button
+                  type={'button'}
+                  title={'+'}
+                  onClick={addExample}
+                  style={{ width: '44px' }}
+                />
+              )}
+              {examplesCount > 1 && (
+                <Button
+                  type={'button'}
+                  title={'🗑'}
+                  onClick={() => removeExample(i)}
+                  style={{ width: '44px' }}
+                />
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+
       <Textarea {...register('comment')} placeholder={'comment'} />
       <Button
         type={'submit'}
