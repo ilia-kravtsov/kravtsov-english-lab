@@ -163,7 +163,7 @@ export function CardSetPracticePage() {
     return toAbsoluteMediaUrl(url);
   }, [unit]);
 
-  const hasBackContent = Boolean(unit?.translation || unit?.synonyms || unit?.meaning);
+  const hasBackContent = Boolean(unit?.translation || unit?.synonyms?.length || unit?.meaning);
 
   const playAudio = () => {
     if (!audioRef.current) return;
@@ -315,9 +315,9 @@ export function CardSetPracticePage() {
                         </div>
                       )}
 
-                      {unit?.synonyms && (
+                      {unit?.synonyms?.length && (
                         <div className={style.backRow}>
-                          <div className={style.backValue}>{unit.synonyms}</div>
+                          <div className={style.backValue}>{unit.synonyms.join(', ')}</div>
                         </div>
                       )}
 

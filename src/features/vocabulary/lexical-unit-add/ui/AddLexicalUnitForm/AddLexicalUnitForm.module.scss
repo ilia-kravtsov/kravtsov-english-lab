@@ -88,24 +88,8 @@
     object-fit: cover;
   }
 
-  .examplesHeader {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 12px;
-  }
-
-  .examplesTitle {
-    font-weight: 600;
-    opacity: 0.9;
-  }
-
-  .examplesCounter {
-    opacity: 0.7;
-    font-size: 14px;
-  }
-
   .examplesList {
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 10px;

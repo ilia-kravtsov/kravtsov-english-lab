@@ -196,19 +196,8 @@ export function LexicalUnitSearchPanel({
                   </div>
                 ) : null}
 
-                {result.unit.synonyms && (
-                  <div className={style.fieldRow}>
-                    <span className={style.label}>Synonyms:</span>
-                    <span className={style.value}>{result.unit.synonyms}</span>
-                  </div>
-                )}
-
-                {result.unit.antonyms && (
-                  <div className={style.fieldRow}>
-                    <span className={style.label}>Antonyms:</span>
-                    <span className={style.value}>{result.unit.antonyms}</span>
-                  </div>
-                )}
+                {result.unit.synonyms?.length && <span>{result.unit.synonyms.join(', ')}</span>}
+                {result.unit.antonyms?.length && <span>{result.unit.antonyms.join(', ')}</span>}
 
                 {result.unit.examples && (
                   <div className={style.fieldBlock}>

@@ -8,8 +8,6 @@ import { addLexicalUnit, updateLexicalUnit } from '@/entities/lexical-unit/api/l
 import { useLexicalUnitEditorStore } from './lexicalUnitEditor.store';
 import { useAudioRecorder } from './useAudioRecorder';
 
-type FormValues = Omit<AddLexicalUnitFormValues, 'type' | 'examples'> & { examples: string[] };
-
 function normalizeValue(value: string) {
   return value.trim().replace(/\s+/g, ' ');
 }
@@ -51,15 +49,15 @@ export function useAddLexicalUnitForm() {
 
   const apiBaseUrl = import.meta.env.VITE_API_URL ?? 'http://localhost:3000';
 
-  const form = useForm<FormValues>({
+  const form = useForm<AddLexicalUnitFormValues>({
     defaultValues: {
       value: '',
       translation: '',
       transcription: '',
       meaning: '',
       partsOfSpeech: undefined,
-      synonyms: '',
-      antonyms: '',
+      synonyms: [''],
+      antonyms: [''],
       examples: [''],
       comment: '',
       audio: null,
@@ -67,7 +65,7 @@ export function useAddLexicalUnitForm() {
     },
   });
 
-  const { register, handleSubmit, setValue, reset, control } = form;
+  const { register, handleSubmit, setValue, reset, control, getValues } = form;
 
   const imageUrlValue = form.watch('imageUrl');
 
@@ -83,6 +81,12 @@ export function useAddLexicalUnitForm() {
   const examples = form.watch('examples');
   const examplesCount = (examples?.length ?? 0);
 
+  const synonyms = form.watch('synonyms');
+  const synonymsCount = (synonyms?.length ?? 0);
+
+  const antonyms = form.watch('antonyms');
+  const antonymsCount = (antonyms?.length ?? 0);
+
   const addExample = () => {
     const current = examples ?? [''];
     if (current.length >= 5) return;
@@ -95,6 +99,52 @@ export function useAddLexicalUnitForm() {
     const next = current.slice();
     next.splice(index, 1);
     setValue('examples', next.length ? next : [''], { shouldDirty: true });
+  };
+
+  const MAX_ITEMS = 5;
+
+  const addSynonym = () => {
+    const current = getValues('synonyms') ?? [];
+    if (current.length >= MAX_ITEMS) return;
+
+    setValue('synonyms', [...current, ''], {
+      shouldDirty: true,
+      shouldTouch: true,
+      shouldValidate: true,
+    });
+  };
+
+  const removeSynonym = (index: number) => {
+    const current = getValues('synonyms') ?? [];
+    const next = current.filter((_, i) => i !== index);
+
+    setValue('synonyms', next.length ? next : [''], {
+      shouldDirty: true,
+      shouldTouch: true,
+      shouldValidate: true,
+    });
+  };
+
+  const addAntonym = () => {
+    const current = getValues('antonyms') ?? [];
+    if (current.length >= MAX_ITEMS) return;
+
+    setValue('antonyms', [...current, ''], {
+      shouldDirty: true,
+      shouldTouch: true,
+      shouldValidate: true,
+    });
+  };
+
+  const removeAntonym = (index: number) => {
+    const current = getValues('antonyms') ?? [];
+    const next = current.filter((_, i) => i !== index);
+
+    setValue('antonyms', next.length ? next : [''], {
+      shouldDirty: true,
+      shouldTouch: true,
+      shouldValidate: true,
+    });
   };
 
   const {
@@ -150,8 +200,8 @@ export function useAddLexicalUnitForm() {
       transcription: editingUnit.transcription ?? '',
       meaning: editingUnit.meaning ?? '',
       partsOfSpeech: editingUnit.partsOfSpeech ?? [],
-      synonyms: editingUnit.synonyms ?? '',
-      antonyms: editingUnit.antonyms ?? '',
+      synonyms: ensureAtLeastOne(editingUnit.synonyms ?? null),
+      antonyms: ensureAtLeastOne(editingUnit.antonyms ?? null),
       examples: ensureAtLeastOne(editingUnit.examples ?? null),
       comment: editingUnit.comment ?? '',
       imageUrl: editingUnit.imageUrl ?? '',
@@ -172,14 +222,19 @@ export function useAddLexicalUnitForm() {
     try {
       const normalized = normalizeValue(data.value ?? '');
       const type = computeTypeByValue(normalized);
-      const examples = trimNonEmpty(data.examples ?? []);
+      const normalizedExamples = trimNonEmpty(data.examples ?? []);
+      const normalizedSynonyms = trimNonEmpty(data.synonyms ?? []);
+      const normalizedAntonyms = trimNonEmpty(data.antonyms ?? []);
+
       console.log(data);
       const payload: AddLexicalUnitFormValues = {
         ...data,
         value: normalized,
         type,
         audio: audioBlob ?? undefined,
-        examples,
+        examples: normalizedExamples?.length ? normalizedExamples : null,
+        synonyms: normalizedSynonyms?.length ? normalizedSynonyms : null,
+        antonyms: normalizedAntonyms?.length ? normalizedAntonyms : null,
       };
 
       if (mode === 'update') {
@@ -196,8 +251,8 @@ export function useAddLexicalUnitForm() {
         transcription: '',
         meaning: '',
         partsOfSpeech: undefined,
-        synonyms: '',
-        antonyms: '',
+        synonyms: [''],
+        antonyms: [''],
         examples: [''],
         comment: '',
         audio: null,
@@ -248,6 +303,18 @@ export function useAddLexicalUnitForm() {
     examplesCount,
     addExample,
     removeExample,
+
+    // synonyms
+    synonyms: synonyms ?? [''],
+    synonymsCount,
+    addSynonym,
+    removeSynonym,
+
+    // antonyms
+    antonyms: antonyms ?? [''],
+    antonymsCount,
+    addAntonym,
+    removeAntonym,
 
     // audio ui state
     recording,

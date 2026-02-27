@@ -21,8 +21,8 @@ export interface LexicalUnit {
   translation?: string;
   transcription?: string;
   meaning?: string;
-  antonyms?: string;
-  synonyms?: string;
+  antonyms?: string[] | null;
+  synonyms?: string[] | null;
   partsOfSpeech?: PartsOfSpeech[] | null;
   examples?: string[] | null;
   comment?: string;
@@ -44,10 +44,10 @@ export interface AddLexicalUnitFormValues {
   translation?: string;
   transcription?: string;
   meaning?: string;
-  antonyms?: string;
-  synonyms?: string;
+  antonyms?: string[] | null;
+  synonyms?: string[] | null;
   partsOfSpeech?: PartsOfSpeech[];
-  examples?: string[];
+  examples?: string[] | null;
   comment?: string;
   audio?: BlobType;
   imageUrl?: string;

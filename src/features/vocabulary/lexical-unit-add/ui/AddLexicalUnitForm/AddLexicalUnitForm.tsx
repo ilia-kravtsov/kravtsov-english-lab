@@ -36,6 +36,16 @@ export function AddLexicalUnitForm() {
     examplesCount,
     addExample,
     removeExample,
+
+    synonyms,
+    synonymsCount,
+    addSynonym,
+    removeSynonym,
+
+    antonyms,
+    antonymsCount,
+    addAntonym,
+    removeAntonym,
   } = useAddLexicalUnitForm();
 
   return (
@@ -124,19 +134,39 @@ export function AddLexicalUnitForm() {
         )}
       />
 
-      <Input {...register('synonyms')} placeholder={'synonyms'} />
-      <Input {...register('antonyms')} placeholder={'antonyms'} />
+      <div className={style.examplesList}>
+        {synonyms.map((_, i) => (
+          <div key={`syn-${i}`} className={style.examplesRow}>
+            <Input {...register(`synonyms.${i}` as const)} placeholder={i === 0 ? 'synonym' : `synonym ${i + 1}`} />
+            <div className={style.examplesActions}>
+              {synonymsCount < 5 && i === synonymsCount - 1 && (
+                <Button type={'button'} title={'+'} onClick={addSynonym} style={{ width: '44px' }} />
+              )}
+              {synonymsCount > 1 && (
+                <Button type={'button'} title={'🗑'} onClick={() => removeSynonym(i)} style={{ width: '44px' }} />
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className={style.examplesList}>
+        {antonyms.map((_, i) => (
+          <div key={`ant-${i}`} className={style.examplesRow}>
+            <Input {...register(`antonyms.${i}` as const)} placeholder={i === 0 ? 'antonym' : `antonym ${i + 1}`} />
+            <div className={style.examplesActions}>
+              {antonymsCount < 5 && i === antonymsCount - 1 && (
+                <Button type={'button'} title={'+'} onClick={addAntonym} style={{ width: '44px' }} />
+              )}
+              {antonymsCount > 1 && (
+                <Button type={'button'} title={'🗑'} onClick={() => removeAntonym(i)} style={{ width: '44px' }} />
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+
       <Textarea {...register('meaning')} placeholder={'meaning in English'} />
-
-      <div className={style.examplesHeader}>
-        <div className={style.examplesTitle}>Examples</div>
-        <div className={style.examplesCounter}>{examplesCount}/5</div>
-      </div>
-
-      <div className={style.examplesHeader}>
-        <div className={style.examplesTitle}>Examples</div>
-        <div className={style.examplesCounter}>{examplesCount}/5</div>
-      </div>
 
       <div className={style.examplesList}>
         {examples.map((_, i) => (
