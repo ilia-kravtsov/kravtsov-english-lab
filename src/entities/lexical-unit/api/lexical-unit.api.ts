@@ -1,16 +1,23 @@
 import { api } from '@/shared/api';
 import type { AddLexicalUnitFormValues, LexicalUnit, LexicalUnitSuggestion } from '../model/lexical-unit.types';
 
+const blobFileNames: Partial<Record<keyof AddLexicalUnitFormValues, string>> = {
+  audio: 'record.webm',
+  soundMeaning: 'meaning.webm',
+  soundExample: 'example.webm',
+};
+
 function toFormData(data: AddLexicalUnitFormValues) {
   const formData = new FormData();
 
   Object.entries(data).forEach(([key, value]) => {
     if (value == null) return;
-
     if (typeof value === 'string' && value.trim() === '') return;
 
-    if (key === 'audio') {
-      formData.append('audio', value as Blob, 'record.webm');
+    const fileName = blobFileNames[key as keyof AddLexicalUnitFormValues];
+
+    if (fileName) {
+      formData.append(key, value as Blob, fileName);
       return;
     }
 

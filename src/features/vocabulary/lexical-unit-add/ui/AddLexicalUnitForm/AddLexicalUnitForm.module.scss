@@ -26,11 +26,10 @@
       padding: 6px 10px;
       border-radius: 6px;
       border: none;
-
       background-color: var(--background-color-secondary);
       color: var(--background-color-primary);
 
-      font-size: 12px;
+      font-size: var(--font-size-small);
       cursor: pointer;
       transition: opacity 0.2s ease;
     }

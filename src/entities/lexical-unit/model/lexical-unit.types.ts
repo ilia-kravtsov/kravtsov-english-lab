@@ -28,6 +28,8 @@ export interface LexicalUnit {
   comment?: string;
   audioUrl?: Url;
   imageUrl?: Url;
+  soundMeaningUrl?: Url;
+  soundExampleUrl?: Url;
 }
 
 export interface LexicalUnitSuggestion {
@@ -50,5 +52,7 @@ export interface AddLexicalUnitFormValues {
   examples?: string[] | null;
   comment?: string;
   audio?: BlobType;
+  soundMeaning?: BlobType;
+  soundExample?: BlobType;
   imageUrl?: string;
 }

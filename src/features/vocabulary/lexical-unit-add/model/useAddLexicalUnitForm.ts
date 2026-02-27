@@ -61,6 +61,8 @@ export function useAddLexicalUnitForm() {
       examples: [''],
       comment: '',
       audio: null,
+      soundMeaning: null,
+      soundExample: null,
       imageUrl: '',
     },
   });
@@ -161,8 +163,13 @@ export function useAddLexicalUnitForm() {
     maxSec,
   } = useAudioRecorder();
 
+  const meaningRecorder = useAudioRecorder();
+  const exampleRecorder = useAudioRecorder();
+
   const [submitting, setSubmitting] = useState(false);
   const [audioURL, setAudioURL] = useState<string | null>(null);
+  const [meaningAudioURL, setMeaningAudioURL] = useState<string | null>(null);
+  const [exampleAudioURL, setExampleAudioURL] = useState<string | null>(null);
 
   const remoteAudioSrc = useMemo(() => {
     if (mode !== 'update') return null;
@@ -172,6 +179,24 @@ export function useAddLexicalUnitForm() {
     if (url.startsWith('http://') || url.startsWith('https://')) return url;
     return `${apiBaseUrl}${url}`;
   }, [mode, editingUnit?.audioUrl, audioBlob, apiBaseUrl]);
+
+  const remoteMeaningAudioSrc = useMemo(() => {
+    if (mode !== 'update') return null;
+    if (!editingUnit?.soundMeaningUrl) return null;
+    if (meaningRecorder.audioBlob) return null;
+    const url = editingUnit.soundMeaningUrl;
+    if (url.startsWith('http://') || url.startsWith('https://')) return url;
+    return `${apiBaseUrl}${url}`;
+  }, [mode, editingUnit?.soundMeaningUrl, meaningRecorder.audioBlob, apiBaseUrl]);
+
+  const remoteExampleAudioSrc = useMemo(() => {
+    if (mode !== 'update') return null;
+    if (!editingUnit?.soundExampleUrl) return null;
+    if (exampleRecorder.audioBlob) return null;
+    const url = editingUnit.soundExampleUrl;
+    if (url.startsWith('http://') || url.startsWith('https://')) return url;
+    return `${apiBaseUrl}${url}`;
+  }, [mode, editingUnit?.soundExampleUrl, exampleRecorder.audioBlob, apiBaseUrl]);
 
   const remoteImageSrc = useMemo(() => {
     if (mode !== 'update') return null;
@@ -189,6 +214,26 @@ export function useAddLexicalUnitForm() {
     }
     setAudioURL(null);
   }, [audioBlob]);
+
+  useEffect(() => {
+    const b = meaningRecorder.audioBlob;
+    if (b) {
+      const url = URL.createObjectURL(b);
+      setMeaningAudioURL(url);
+      return () => URL.revokeObjectURL(url);
+    }
+    setMeaningAudioURL(null);
+  }, [meaningRecorder.audioBlob]);
+
+  useEffect(() => {
+    const b = exampleRecorder.audioBlob;
+    if (b) {
+      const url = URL.createObjectURL(b);
+      setExampleAudioURL(url);
+      return () => URL.revokeObjectURL(url);
+    }
+    setExampleAudioURL(null);
+  }, [exampleRecorder.audioBlob]);
 
   useEffect(() => {
     if (mode !== 'update') return;
@@ -209,6 +254,8 @@ export function useAddLexicalUnitForm() {
     });
 
     resetAudio();
+    meaningRecorder.reset();
+    exampleRecorder.reset();
   }, [mode, editingUnit?.id]);
 
   useEffect(() => {
@@ -232,6 +279,8 @@ export function useAddLexicalUnitForm() {
         value: normalized,
         type,
         audio: audioBlob ?? undefined,
+        soundMeaning: meaningRecorder.audioBlob ?? undefined,
+        soundExample: exampleRecorder.audioBlob ?? undefined,
         examples: normalizedExamples?.length ? normalizedExamples : null,
         synonyms: normalizedSynonyms?.length ? normalizedSynonyms : null,
         antonyms: normalizedAntonyms?.length ? normalizedAntonyms : null,
@@ -256,6 +305,8 @@ export function useAddLexicalUnitForm() {
         examples: [''],
         comment: '',
         audio: null,
+        soundMeaning: null,
+        soundExample: null,
         imageUrl: '',
       });
       resetAudio();
@@ -282,6 +333,16 @@ export function useAddLexicalUnitForm() {
   const handleResetAudio = () => {
     resetAudio();
     setValue('audio', null);
+  };
+
+  const handleResetMeaningAudio = () => {
+    meaningRecorder.reset();
+    setValue('soundMeaning', null);
+  };
+
+  const handleResetExampleAudio = () => {
+    exampleRecorder.reset();
+    setValue('soundExample', null);
   };
 
   const partsOptions: { value: PartsOfSpeech; label: string }[] =
@@ -332,6 +393,36 @@ export function useAddLexicalUnitForm() {
     play,
     pause,
     handleResetAudio,
+
+    // meaning audio
+    meaningRecording: meaningRecorder.recording,
+    meaningAudioBlob: meaningRecorder.audioBlob,
+    meaningAudioURL,
+    remoteMeaningAudioSrc,
+    meaningAudioRef: meaningRecorder.audioRef,
+    meaningIsPlaying: meaningRecorder.isPlaying,
+    meaningElapsedSec: meaningRecorder.elapsedSec,
+    meaningMaxSec: meaningRecorder.maxSec,
+    startMeaningRecording: meaningRecorder.startRecording,
+    stopMeaningRecording: meaningRecorder.stopRecording,
+    playMeaning: meaningRecorder.play,
+    pauseMeaning: meaningRecorder.pause,
+    handleResetMeaningAudio,
+
+    // example audio
+    exampleRecording: exampleRecorder.recording,
+    exampleAudioBlob: exampleRecorder.audioBlob,
+    exampleAudioURL,
+    remoteExampleAudioSrc,
+    exampleAudioRef: exampleRecorder.audioRef,
+    exampleIsPlaying: exampleRecorder.isPlaying,
+    exampleElapsedSec: exampleRecorder.elapsedSec,
+    exampleMaxSec: exampleRecorder.maxSec,
+    startExampleRecording: exampleRecorder.startRecording,
+    stopExampleRecording: exampleRecorder.stopRecording,
+    playExample: exampleRecorder.play,
+    pauseExample: exampleRecorder.pause,
+    handleResetExampleAudio,
 
     // image
     imagePreviewSrc,

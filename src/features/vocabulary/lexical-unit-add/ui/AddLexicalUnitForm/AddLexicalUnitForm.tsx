@@ -30,6 +30,34 @@ export function AddLexicalUnitForm() {
     handleResetAudio,
     control,
 
+    meaningRecording,
+    meaningAudioBlob,
+    meaningAudioURL,
+    remoteMeaningAudioSrc,
+    meaningAudioRef,
+    meaningIsPlaying,
+    meaningElapsedSec,
+    meaningMaxSec,
+    startMeaningRecording,
+    stopMeaningRecording,
+    playMeaning,
+    pauseMeaning,
+    handleResetMeaningAudio,
+
+    exampleRecording,
+    exampleAudioBlob,
+    exampleAudioURL,
+    remoteExampleAudioSrc,
+    exampleAudioRef,
+    exampleIsPlaying,
+    exampleElapsedSec,
+    exampleMaxSec,
+    startExampleRecording,
+    stopExampleRecording,
+    playExample,
+    pauseExample,
+    handleResetExampleAudio,
+
     imagePreviewSrc,
 
     examples,
@@ -65,9 +93,9 @@ export function AddLexicalUnitForm() {
           type={'button'}
           className={style.button}
           onClick={recording ? stopRecording : startRecording}
-          style={{ width: '112px' }}
+          style={{ minWidth: '144px' }}
         >
-          {recording ? 'Stop Recording' : 'Record a sound'}
+          {recording ? 'Stop Recording' : 'Record a Sound'}
         </button>
 
         {recording && (
@@ -107,6 +135,114 @@ export function AddLexicalUnitForm() {
           </>
         )}
 
+      </div>
+
+      <div className={style.audioContainer}>
+        {!meaningAudioBlob && remoteMeaningAudioSrc && (
+          <div className={style.remoteAudio}>
+            <audio controls preload={"metadata"} src={remoteMeaningAudioSrc} />
+          </div>
+        )}
+
+        <button
+          type={'button'}
+          className={style.button}
+          onClick={meaningRecording ? stopMeaningRecording : startMeaningRecording}
+          style={{ width: '144px' }}
+        >
+          {meaningRecording ? 'Stop Meaning' : 'Record Meaning'}
+        </button>
+
+        {meaningRecording && (
+          <span className={style.recordHint}>
+      Recording… {meaningElapsedSec}/{meaningMaxSec}s
+    </span>
+        )}
+
+        {meaningAudioBlob && (
+          <>
+            <audio
+              ref={meaningAudioRef}
+              src={meaningAudioURL ?? undefined}
+              onEnded={() => pauseMeaning()}
+              className={style.audio}
+            />
+
+            <button
+              type={'button'}
+              className={style.button}
+              onClick={meaningIsPlaying ? pauseMeaning : playMeaning}
+              disabled={!meaningAudioBlob}
+              style={{ width: '56px' }}
+            >
+              {meaningIsPlaying ? 'Pause' : 'Play'}
+            </button>
+
+            <button
+              type={'button'}
+              className={style.button}
+              onClick={handleResetMeaningAudio}
+              disabled={!meaningAudioBlob}
+              style={{ width: '56px' }}
+            >
+              Reset
+            </button>
+          </>
+        )}
+      </div>
+
+      <div className={style.audioContainer}>
+        {!exampleAudioBlob && remoteExampleAudioSrc && (
+          <div className={style.remoteAudio}>
+            <audio controls preload={"metadata"} src={remoteExampleAudioSrc} />
+          </div>
+        )}
+
+        <button
+          type={'button'}
+          className={style.button}
+          onClick={exampleRecording ? stopExampleRecording : startExampleRecording}
+          style={{ width: '144px' }}
+        >
+          {exampleRecording ? 'Stop Example' : 'Record Example'}
+        </button>
+
+        {exampleRecording && (
+          <span className={style.recordHint}>
+      Recording… {exampleElapsedSec}/{exampleMaxSec}s
+    </span>
+        )}
+
+        {exampleAudioBlob && (
+          <>
+            <audio
+              ref={exampleAudioRef}
+              src={exampleAudioURL ?? undefined}
+              onEnded={() => pauseExample()}
+              className={style.audio}
+            />
+
+            <button
+              type={'button'}
+              className={style.button}
+              onClick={exampleIsPlaying ? pauseExample : playExample}
+              disabled={!exampleAudioBlob}
+              style={{ width: '56px' }}
+            >
+              {exampleIsPlaying ? 'Pause' : 'Play'}
+            </button>
+
+            <button
+              type={'button'}
+              className={style.button}
+              onClick={handleResetExampleAudio}
+              disabled={!exampleAudioBlob}
+              style={{ width: '56px' }}
+            >
+              Reset
+            </button>
+          </>
+        )}
       </div>
 
       <Input{...register('transcription')} placeholder={'transcription'} />

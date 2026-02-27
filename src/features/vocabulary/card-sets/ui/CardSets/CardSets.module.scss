@@ -104,7 +104,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 30px;
+  justify-content: space-between;
+  min-height: 250px;
+  gap: 10px;
   padding: 10px 12px;
   box-shadow: var(--shadow-primary);
   border-radius: var(--border-radius-primary);
