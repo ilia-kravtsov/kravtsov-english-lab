@@ -16,6 +16,7 @@ import { pickContextExample } from '@/features/vocabulary/card-practice/context/
 import { ContextPractice } from '@/features/vocabulary/card-practice/context/ui/ContextPractice.tsx';
 import { useListeningStore } from '@/features/vocabulary/card-practice/listening/model/listening.store.ts';
 import { ListeningPractice } from '@/features/vocabulary/card-practice/listening/ui/ListeningPractice.tsx';
+import { useSwitchAnimation } from '@/features/vocabulary/card-practice/shared/useSwitchAnimation.ts';
 
 const apiBaseUrl = import.meta.env.VITE_API_URL ?? 'http://localhost:3000';
 
@@ -46,10 +47,7 @@ export function CardSetPracticePage() {
   const [items, setItems] = useState<CardWithLexicalUnit[]>([]);
   const [index, setIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
-  const [switchDir, setSwitchDir] = useState<CardSwitcher | null>(null);
-  const switchTimeoutRef = useRef<number | null>(null);
-  const switchEndTimeoutRef = useRef<number | null>(null);
-
+  const { dir: switchDir, trigger: triggerSwitch } = useSwitchAnimation(260);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const startRecognition = useRecognitionStore(s => s.start);
@@ -122,13 +120,6 @@ export function CardSetPracticePage() {
     window.addEventListener('keydown', handleKeyDown, true);
     return () => window.removeEventListener('keydown', handleKeyDown, true);
   }, [mode, index, items.length, switchDir]);
-
-  useEffect(() => {
-    return () => {
-      if (switchTimeoutRef.current) window.clearTimeout(switchTimeoutRef.current);
-      if (switchEndTimeoutRef.current) window.clearTimeout(switchEndTimeoutRef.current);
-    };
-  }, []);
 
   const recognitionAvailable = useMemo(() => {
     const count = items.filter(
@@ -207,36 +198,31 @@ export function CardSetPracticePage() {
     void audioRef.current.play();
   };
 
-  function animateSwitch(dir: CardSwitcher, getNextIndex: (i: number) => number) {
+  function animateSwitch(dir: CardSwitcher, commit: () => void) {
     if (items.length === 0) return;
     if (switchDir) return;
 
     setIsFlipped(false);
-    setSwitchDir(dir);
+    triggerSwitch(dir);
 
-    if (switchTimeoutRef.current) window.clearTimeout(switchTimeoutRef.current);
-    if (switchEndTimeoutRef.current) window.clearTimeout(switchEndTimeoutRef.current);
-
-    switchTimeoutRef.current = window.setTimeout(() => {
-      setIndex(i => getNextIndex(i));
+    window.setTimeout(() => {
+      commit();
     }, 130);
-
-    switchEndTimeoutRef.current = window.setTimeout(() => {
-      setSwitchDir(null);
-    }, 260);
   }
 
   function next() {
-    animateSwitch('next', (i) => {
-      const n = i + 1;
-      return n >= items.length ? i : n;
+    if (index >= items.length - 1) return;
+
+    animateSwitch('next', () => {
+      setIndex(i => Math.min(i + 1, items.length - 1));
     });
   }
 
   function prev() {
-    animateSwitch('prev', (i) => {
-      const n = i - 1;
-      return n < 0 ? 0 : n;
+    if (index <= 0) return;
+
+    animateSwitch('prev', () => {
+      setIndex(i => Math.max(i - 1, 0));
     });
   }
 
@@ -427,23 +413,47 @@ export function CardSetPracticePage() {
               {!recognitionAvailable && (
                 <div className={style.muted}>Recognition needs at least 2 cards with translation.</div>
               )}
-              {recognitionAvailable && <RecognitionPractice />}
+              {recognitionAvailable && (
+                <RecognitionPractice
+                  switchDir={switchDir}
+                  onAutoNext={() => triggerSwitch('next')}
+                  autoNextCommitDelayMs={130}
+                />
+              )}
             </>
           )}
 
           {!loading && items.length > 0 && mode === 'typing' && (
             <>
               {!typingAvailable && <div className={style.muted}>Typing needs at least 1 card with translation.</div>}
-              {typingAvailable && <TypingPractice />}
+              {typingAvailable && (
+                <TypingPractice
+                  switchDir={switchDir}
+                  onAutoNext={() => triggerSwitch('next')}
+                  autoNextCommitDelayMs={130}
+                />
+              )}
             </>
           )}
 
-          {!loading && items.length > 0 && mode === 'context' && <ContextPractice />}
+          {!loading && items.length > 0 && mode === 'context' && (
+            <ContextPractice
+              switchDir={switchDir}
+              onAutoNext={() => triggerSwitch('next')}
+              autoNextCommitDelayMs={130}
+            />
+          )}
 
           {!loading && items.length > 0 && mode === 'listening' && (
             <>
               {!listeningAvailable && <div className={style.muted}>Listening needs at least 1 card with audio.</div>}
-              {listeningAvailable && <ListeningPractice />}
+              {listeningAvailable && (
+                <ListeningPractice
+                  switchDir={switchDir}
+                  onAutoNext={() => triggerSwitch('next')}
+                  autoNextCommitDelayMs={130}
+                />
+              )}
             </>
           )}
         </div>

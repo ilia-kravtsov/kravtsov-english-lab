@@ -4,8 +4,16 @@ import style from './ListeningPractice.module.scss';
 import { useListeningStore } from '../model/listening.store';
 import { toAbsoluteMediaUrl } from '../model/listening.utils.ts';
 import { useAutoNextOnCorrect } from '@/features/vocabulary/card-practice/shared/useAutoNextOnCorrect.ts';
+import type { Flip } from '@/features/vocabulary/card-practice/shared/Flip.type.ts';
+import switchAnim from '@/features/vocabulary/card-practice/shared/SwitchAnimation.module.scss';
 
-export function ListeningPractice() {
+type Props = {
+  switchDir?: Flip;
+  onAutoNext?: () => void;
+  autoNextCommitDelayMs?: number;
+};
+
+export function ListeningPractice({switchDir, onAutoNext, autoNextCommitDelayMs}: Props) {
   const cards = useListeningStore(s => s.cards);
   const index = useListeningStore(s => s.index);
   const feedback = useListeningStore(s => s.feedback);
@@ -24,7 +32,15 @@ export function ListeningPractice() {
   const next = useListeningStore(s => s.next);
   const restart = useListeningStore(s => s.restart);
 
-  useAutoNextOnCorrect({ isFinished, locked, feedback, next, delayMs: 450 });
+  useAutoNextOnCorrect({
+    isFinished,
+    locked,
+    feedback,
+    next,
+    delayMs: 450,
+    beforeNext: onAutoNext,
+    commitDelayMs: autoNextCommitDelayMs ?? 130,
+  });
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -89,6 +105,8 @@ export function ListeningPractice() {
       <div
         className={[
           style.card,
+          switchDir === 'next' ? switchAnim.switchNext : '',
+          switchDir === 'prev' ? switchAnim.switchPrev : '',
           feedback === 'correct' ? style.cardCorrect : '',
           feedback === 'wrong' ? style.cardWrong : '',
         ].join(' ')}

@@ -2,8 +2,16 @@ import { Button, Input } from '@/shared/ui';
 import style from './TypingPractice.module.scss';
 import { useTypingStore } from '../model/typing.store';
 import { useAutoNextOnCorrect } from '@/features/vocabulary/card-practice/shared/useAutoNextOnCorrect.ts';
+import switchAnim from '@/features/vocabulary/card-practice/shared/SwitchAnimation.module.scss';
+import type { Flip } from '@/features/vocabulary/card-practice/shared/Flip.type.ts';
 
-export function TypingPractice() {
+type Props = {
+  switchDir?: Flip;
+  onAutoNext?: () => void;
+  autoNextCommitDelayMs?: number;
+}
+
+export function TypingPractice({switchDir, onAutoNext, autoNextCommitDelayMs}: Props) {
   const cards = useTypingStore(s => s.cards);
   const index = useTypingStore(s => s.index);
   const feedback = useTypingStore(s => s.feedback);
@@ -22,7 +30,15 @@ export function TypingPractice() {
   const next = useTypingStore(s => s.next);
   const restart = useTypingStore(s => s.restart);
 
-  useAutoNextOnCorrect({ isFinished, locked, feedback, next, delayMs: 450 });
+  useAutoNextOnCorrect({
+    isFinished,
+    locked,
+    feedback,
+    next,
+    delayMs: 450,
+    beforeNext: onAutoNext,
+    commitDelayMs: autoNextCommitDelayMs ?? 130,
+  });
 
   const current = cards[index] ?? null;
   const unit = current?.lexicalUnit ?? null;
@@ -73,6 +89,8 @@ export function TypingPractice() {
       <div
         className={[
           style.card,
+          switchDir === 'next' ? switchAnim.switchNext : '',
+          switchDir === 'prev' ? switchAnim.switchPrev : '',
           feedback === 'correct' ? style.cardCorrect : '',
           feedback === 'wrong' ? style.cardWrong : '',
         ].join(' ')}

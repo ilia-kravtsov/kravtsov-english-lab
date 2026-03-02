@@ -9,7 +9,7 @@
 .card {
   width: min(720px, 100%);
   min-height: 260px;
-  border-radius: 16px;
+  border-radius: var(--border-radius-primary);
   box-shadow: var(--shadow-primary);
   padding: 24px;
   display: flex;
@@ -64,7 +64,7 @@
 
 .result {
   width: min(720px, 100%);
-  border-radius: 16px;
+  border-radius: var(--border-radius-primary);
   box-shadow: var(--shadow-primary);
   padding: 24px;
   display: flex;
@@ -89,7 +89,7 @@
   justify-content: space-between;
   gap: 12px;
   padding: 10px 12px;
-  border-radius: 12px;
+  border-radius: var(--border-radius-primary);
   box-shadow: var(--shadow-primary);
 }
 

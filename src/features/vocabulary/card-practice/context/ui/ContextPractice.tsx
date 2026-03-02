@@ -2,8 +2,16 @@ import { Button, Input } from '@/shared/ui';
 import style from './ContextPractice.module.scss';
 import { useContextStore } from '../model/context.store';
 import { useAutoNextOnCorrect } from '@/features/vocabulary/card-practice/shared/useAutoNextOnCorrect.ts';
+import type { Flip } from '@/features/vocabulary/card-practice/shared/Flip.type.ts';
+import switchAnim from '@/features/vocabulary/card-practice/shared/SwitchAnimation.module.scss';
 
-export function ContextPractice() {
+type Props = {
+  switchDir?: Flip;
+  onAutoNext?: () => void;
+  autoNextCommitDelayMs?: number;
+};
+
+export function ContextPractice({switchDir, onAutoNext, autoNextCommitDelayMs}: Props) {
   const cards = useContextStore(s => s.cards);
   const index = useContextStore(s => s.index);
   const feedback = useContextStore(s => s.feedback);
@@ -22,7 +30,15 @@ export function ContextPractice() {
   const next = useContextStore(s => s.next);
   const restart = useContextStore(s => s.restart);
 
-  useAutoNextOnCorrect({ isFinished, locked, feedback, next, delayMs: 450 });
+  useAutoNextOnCorrect({
+    isFinished,
+    locked,
+    feedback,
+    next,
+    delayMs: 450,
+    beforeNext: onAutoNext,
+    commitDelayMs: autoNextCommitDelayMs ?? 130,
+  });
 
   const current = cards[index] ?? null;
 
@@ -57,6 +73,8 @@ export function ContextPractice() {
       <div
         className={[
           style.card,
+          switchDir === 'next' ? switchAnim.switchNext : '',
+          switchDir === 'prev' ? switchAnim.switchPrev : '',
           feedback === 'correct' ? style.cardCorrect : '',
           feedback === 'wrong' ? style.cardWrong : '',
         ].join(' ')}

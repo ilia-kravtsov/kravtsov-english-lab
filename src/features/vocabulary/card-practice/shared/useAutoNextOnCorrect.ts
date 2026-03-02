@@ -7,6 +7,9 @@ type Params = {
   feedback: string | null;
   next: () => void;
   delayMs?: number;
+
+  beforeNext?: () => void;
+  commitDelayMs?: number;
 };
 
 export function useAutoNextOnCorrect({
@@ -15,7 +18,9 @@ export function useAutoNextOnCorrect({
                                        locked,
                                        feedback,
                                        next,
-                                       delayMs = 450,
+                                       delayMs = 500,
+                                       beforeNext,
+                                       commitDelayMs = 0,
                                      }: Params) {
   useEffect(() => {
     if (!enabled) return;
@@ -24,9 +29,15 @@ export function useAutoNextOnCorrect({
     if (feedback !== 'correct') return;
 
     const t = window.setTimeout(() => {
-      next();
+      if (beforeNext) beforeNext();
+
+      if (commitDelayMs > 0) {
+        window.setTimeout(() => next(), commitDelayMs);
+      } else {
+        next();
+      }
     }, delayMs);
 
     return () => window.clearTimeout(t);
-  }, [enabled, isFinished, locked, feedback, next, delayMs]);
+  }, [enabled, isFinished, locked, feedback, next, delayMs, beforeNext, commitDelayMs]);
 }
