@@ -7,6 +7,7 @@ export interface CardSet {
   sortOrder: number;
   createdAt: string;
   updatedAt: string;
+  cardsCount: number;
 }
 
 export interface CreateCardSetPayload {

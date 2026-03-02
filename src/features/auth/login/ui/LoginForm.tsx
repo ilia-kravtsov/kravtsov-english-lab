@@ -60,7 +60,7 @@ export function LoginForm() {
               label={'Remember me'}
               checked={field.value}
               onChange={field.onChange}
-              size={16}
+              size={19}
             />
           )}
         />

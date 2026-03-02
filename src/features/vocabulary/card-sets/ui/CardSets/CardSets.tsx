@@ -119,6 +119,7 @@ export function CardSets() {
                   <div className={style.itemTitle}>
                     {s.title}
                   </div>
+                  {s.cardsCount && <div className={style.itemCount}>{s.cardsCount} cards</div>}
                   <div className={style.itemActions} onClick={e => e.stopPropagation()}>
                     <Button
                       title={'Edit'}

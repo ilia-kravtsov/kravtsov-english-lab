@@ -2,7 +2,7 @@ import { api } from '@/shared/api';
 import type { CardSet, CreateCardSetPayload, UpdateCardSetPayload } from '../model/card-set.types.ts';
 
 export async function getCardSets() {
-  const res = await api.get<CardSet[]>('/card-sets');
+  const res = await api.get<CardSet[]>('/card-sets/with-counts');
   return res.data;
 }
 
