@@ -115,9 +115,7 @@ export function CardSets() {
                   role={'button'}
                   tabIndex={0}
                 >
-                  {s.description && (
-                    <div className={style.itemDesc}>{s.description}</div>
-                  )}
+                  <div className={style.itemDesc}>{s.description}</div>
                   <div className={style.itemTitle}>
                     {s.title}
                   </div>

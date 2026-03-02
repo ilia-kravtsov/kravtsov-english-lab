@@ -13,7 +13,10 @@ export const LinkAsButton = ({
   ...props
 }: Props) => {
   return (
-    <Link className={style.linkAsButton} style={externalStyle} {...props}>
+    <Link className={style.linkAsButton}
+          style={externalStyle}
+          {...props}
+    >
       {children}
     </Link>
   );

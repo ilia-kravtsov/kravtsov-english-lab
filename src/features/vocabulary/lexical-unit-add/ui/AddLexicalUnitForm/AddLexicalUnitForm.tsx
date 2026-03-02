@@ -247,6 +247,8 @@ export function AddLexicalUnitForm() {
 
       <Input{...register('transcription')} placeholder={'transcription'} />
 
+      <Textarea {...register('meaning')} placeholder={'meaning in English'} />
+
       <div className={style.imageContainer}>
         {imagePreviewSrc && (
           <div className={style.imagePreview}>
@@ -301,8 +303,6 @@ export function AddLexicalUnitForm() {
           </div>
         ))}
       </div>
-
-      <Textarea {...register('meaning')} placeholder={'meaning in English'} />
 
       <div className={style.examplesList}>
         {examples.map((_, i) => (
