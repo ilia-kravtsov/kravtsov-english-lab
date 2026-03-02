@@ -2,6 +2,7 @@ import { Button } from '@/shared/ui';
 import style from './RecognitionPractice.module.scss';
 import { useRecognitionStore } from '../model/recognition.store';
 import { norm } from '../model/recognition.utils';
+import { useAutoNextOnCorrect } from '@/features/vocabulary/card-practice/shared/useAutoNextOnCorrect.ts';
 
 export function RecognitionPractice() {
   const cards = useRecognitionStore(s => s.cards);
@@ -21,6 +22,8 @@ export function RecognitionPractice() {
   const answer = useRecognitionStore(s => s.answer);
   const next = useRecognitionStore(s => s.next);
   const restart = useRecognitionStore(s => s.restart);
+
+  useAutoNextOnCorrect({ isFinished, locked, feedback, next, delayMs: 450 });
 
   const current = cards[index] ?? null;
   const unit = current?.lexicalUnit ?? null;
@@ -107,7 +110,6 @@ export function RecognitionPractice() {
       </div>
 
       <div className={style.controlsRow}>
-        <Button title={'Next'} onClick={next} disabled={!locked} style={{ width: '120px' }} />
         <div className={style.meta}>Attempts: {attempts}</div>
       </div>
     </div>

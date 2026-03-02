@@ -3,6 +3,7 @@ import { Button, Input } from '@/shared/ui';
 import style from './ListeningPractice.module.scss';
 import { useListeningStore } from '../model/listening.store';
 import { toAbsoluteMediaUrl } from '../model/listening.utils.ts';
+import { useAutoNextOnCorrect } from '@/features/vocabulary/card-practice/shared/useAutoNextOnCorrect.ts';
 
 export function ListeningPractice() {
   const cards = useListeningStore(s => s.cards);
@@ -22,6 +23,8 @@ export function ListeningPractice() {
   const submit = useListeningStore(s => s.submit);
   const next = useListeningStore(s => s.next);
   const restart = useListeningStore(s => s.restart);
+
+  useAutoNextOnCorrect({ isFinished, locked, feedback, next, delayMs: 450 });
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -125,7 +128,6 @@ export function ListeningPractice() {
       </div>
 
       <div className={style.controlsRow}>
-        <Button title={'Next'} onClick={next} disabled={!locked} style={{ width: '120px' }} />
         <div className={style.meta}>Attempts: {attempts}</div>
       </div>
     </div>

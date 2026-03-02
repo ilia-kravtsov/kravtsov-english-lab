@@ -1,6 +1,7 @@
 import { Button, Input } from '@/shared/ui';
 import style from './TypingPractice.module.scss';
 import { useTypingStore } from '../model/typing.store';
+import { useAutoNextOnCorrect } from '@/features/vocabulary/card-practice/shared/useAutoNextOnCorrect.ts';
 
 export function TypingPractice() {
   const cards = useTypingStore(s => s.cards);
@@ -20,6 +21,8 @@ export function TypingPractice() {
   const submit = useTypingStore(s => s.submit);
   const next = useTypingStore(s => s.next);
   const restart = useTypingStore(s => s.restart);
+
+  useAutoNextOnCorrect({ isFinished, locked, feedback, next, delayMs: 450 });
 
   const current = cards[index] ?? null;
   const unit = current?.lexicalUnit ?? null;
@@ -100,7 +103,6 @@ export function TypingPractice() {
       </div>
 
       <div className={style.controlsRow}>
-        <Button title={'Next'} onClick={next} disabled={!locked} style={{ width: '120px' }} />
         <div className={style.meta}>Attempts: {attempts}</div>
       </div>
     </div>

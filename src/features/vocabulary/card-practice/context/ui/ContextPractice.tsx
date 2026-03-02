@@ -1,6 +1,7 @@
 import { Button, Input } from '@/shared/ui';
 import style from './ContextPractice.module.scss';
 import { useContextStore } from '../model/context.store';
+import { useAutoNextOnCorrect } from '@/features/vocabulary/card-practice/shared/useAutoNextOnCorrect.ts';
 
 export function ContextPractice() {
   const cards = useContextStore(s => s.cards);
@@ -20,6 +21,8 @@ export function ContextPractice() {
   const submit = useContextStore(s => s.submit);
   const next = useContextStore(s => s.next);
   const restart = useContextStore(s => s.restart);
+
+  useAutoNextOnCorrect({ isFinished, locked, feedback, next, delayMs: 450 });
 
   const current = cards[index] ?? null;
 
@@ -84,7 +87,6 @@ export function ContextPractice() {
       </div>
 
       <div className={style.controlsRow}>
-        <Button title={'Next'} onClick={next} disabled={!locked} style={{ width: '120px' }} />
         <div className={style.meta}>Attempts: {attempts}</div>
       </div>
     </div>
