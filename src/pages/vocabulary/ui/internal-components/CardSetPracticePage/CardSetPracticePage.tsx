@@ -35,6 +35,8 @@ function toAbsoluteMediaUrl(url: string) {
 
 type Mode = 'standard' | 'recognition' | 'typing' | 'listening' | 'context';
 
+type CardSwitcher = 'next' | 'prev';
+
 export function CardSetPracticePage() {
   const { cardSetId } = useParams<{ cardSetId: string }>();
   const navigate = useNavigate();
@@ -44,6 +46,9 @@ export function CardSetPracticePage() {
   const [items, setItems] = useState<CardWithLexicalUnit[]>([]);
   const [index, setIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
+  const [switchDir, setSwitchDir] = useState<CardSwitcher | null>(null);
+  const switchTimeoutRef = useRef<number | null>(null);
+  const switchEndTimeoutRef = useRef<number | null>(null);
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -83,16 +88,47 @@ export function CardSetPracticePage() {
   }, [cardSetId]);
 
   useEffect(() => {
-    const onKeyDown = (e: KeyboardEvent) => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      const t = e.target as HTMLElement | null;
+      const tag = t?.tagName?.toLowerCase();
+      if (tag === 'input' || tag === 'textarea') return;
+
       if (mode !== 'standard') return;
-      if (e.code !== 'Space') return;
-      e.preventDefault();
-      setIsFlipped(v => !v);
+
+      if (e.code === 'Space') {
+        e.preventDefault();
+        setIsFlipped(v => !v);
+        return;
+      }
+
+      if (e.key === 'ArrowRight') {
+        if (switchDir) return;
+        if (index < items.length - 1) {
+          e.preventDefault();
+          next();
+        }
+        return;
+      }
+
+      if (e.key === 'ArrowLeft') {
+        if (switchDir) return;
+        if (index > 0) {
+          e.preventDefault();
+          prev();
+        }
+      }
     };
 
-    window.addEventListener('keydown', onKeyDown);
-    return () => window.removeEventListener('keydown', onKeyDown);
-  }, [mode]);
+    window.addEventListener('keydown', handleKeyDown, true);
+    return () => window.removeEventListener('keydown', handleKeyDown, true);
+  }, [mode, index, items.length, switchDir]);
+
+  useEffect(() => {
+    return () => {
+      if (switchTimeoutRef.current) window.clearTimeout(switchTimeoutRef.current);
+      if (switchEndTimeoutRef.current) window.clearTimeout(switchEndTimeoutRef.current);
+    };
+  }, []);
 
   const recognitionAvailable = useMemo(() => {
     const count = items.filter(
@@ -171,21 +207,38 @@ export function CardSetPracticePage() {
     void audioRef.current.play();
   };
 
-  const next = () => {
-    setIndex(i => {
+  function animateSwitch(dir: CardSwitcher, getNextIndex: (i: number) => number) {
+    if (items.length === 0) return;
+    if (switchDir) return;
+
+    setIsFlipped(false);
+    setSwitchDir(dir);
+
+    if (switchTimeoutRef.current) window.clearTimeout(switchTimeoutRef.current);
+    if (switchEndTimeoutRef.current) window.clearTimeout(switchEndTimeoutRef.current);
+
+    switchTimeoutRef.current = window.setTimeout(() => {
+      setIndex(i => getNextIndex(i));
+    }, 130);
+
+    switchEndTimeoutRef.current = window.setTimeout(() => {
+      setSwitchDir(null);
+    }, 260);
+  }
+
+  function next() {
+    animateSwitch('next', (i) => {
       const n = i + 1;
       return n >= items.length ? i : n;
     });
-    setIsFlipped(false);
-  };
+  }
 
-  const prev = () => {
-    setIndex(i => {
+  function prev() {
+    animateSwitch('prev', (i) => {
       const n = i - 1;
       return n < 0 ? 0 : n;
     });
-    setIsFlipped(false);
-  };
+  }
 
   const playHandler = (e: MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
@@ -285,7 +338,11 @@ export function CardSetPracticePage() {
                   if (e.key === 'Enter') setIsFlipped(v => !v);
                 }}
               >
-                <div className={style.flipInner}>
+                <div className={[
+                  style.flipInner,
+                  switchDir === 'next' ? style.flipInnerSwitchNext : '',
+                  switchDir === 'prev' ? style.flipInnerSwitchPrev : '',
+                ].join(' ')}>
                   <div className={style.cardFaceFront}>
                     <div className={style.frontTop}>
                       <div className={style.value}>{unit?.value ?? current?.lexicalUnitId}</div>
