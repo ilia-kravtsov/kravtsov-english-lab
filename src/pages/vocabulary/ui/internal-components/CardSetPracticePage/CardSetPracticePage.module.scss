@@ -47,10 +47,11 @@
           cursor: pointer;
           box-shadow: var(--shadow-primary);
           background: transparent;
+          transition: box-shadow 100ms ease-in-out;
         }
 
         .modeBtnActive {
-
+          box-shadow: var(--shadow-third);
         }
 
         .modeBtnDisabled {
