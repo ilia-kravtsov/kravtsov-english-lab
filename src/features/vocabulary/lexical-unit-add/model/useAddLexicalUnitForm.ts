@@ -304,12 +304,14 @@ export function useAddLexicalUnitForm() {
         antonyms: [''],
         examples: [''],
         comment: '',
+        imageUrl: '',
         audio: null,
         soundMeaning: null,
         soundExample: null,
-        imageUrl: '',
       });
       resetAudio();
+      meaningRecorder.reset();
+      exampleRecorder.reset();
       toast.success(mode === 'update' ? 'Updated!' : 'Saved!');
     } catch (err: unknown) {
       if (axios.isAxiosError(err)) {

@@ -78,8 +78,8 @@ export function AddLexicalUnitForm() {
 
   return (
     <form onSubmit={submit} className={style.container}>
-      <Input{...register('value', { required: true })} placeholder={'word or expression'} />
-      <Input {...register('translation')} placeholder={'translation'} />
+      <Input{...register('value', { required: true })} placeholder={'word or expression *'} />
+      <Input {...register('translation')} placeholder={'translation *'} />
 
       <div className={style.audioContainer}>
 
