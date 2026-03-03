@@ -1,5 +1,5 @@
 import { createGStore } from 'create-gstore';
-import { useMemo, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import type { CardWithLexicalUnit } from '@/entities/card/model/card.types';
 import type {
   RecognitionCardStat,
@@ -66,11 +66,7 @@ export const useRecognitionStore = createGStore<RecognitionState>(() => {
 
   const shownAtRef = useRef(0);
 
-  const translationsPool = useMemo(() => {
-    return uniqNonEmpty(cards.map(c => c.lexicalUnit.translation ?? ''));
-  }, [cards]);
-
-  const resetCardState = (card: RecognitionSessionCard | null) => {
+  const resetCardState = (card: RecognitionSessionCard | null, poolOverride?: string[]) => {
     setFeedback('idle');
     setLocked(false);
     setDisabled({});
@@ -84,7 +80,10 @@ export const useRecognitionStore = createGStore<RecognitionState>(() => {
     }
 
     const correct = norm(card.lexicalUnit.translation ?? '');
-    const pool = translationsPool.filter(t => t !== correct);
+
+    const poolBase = poolOverride ?? uniqNonEmpty(cards.map(c => c.lexicalUnit.translation ?? ''));
+    const pool = poolBase.filter(t => t !== correct);
+
     const want = Math.min(3, pool.length);
     const distractors = shuffle(pool).slice(0, want);
     setOptions(shuffle([correct, ...distractors]));
@@ -130,7 +129,8 @@ export const useRecognitionStore = createGStore<RecognitionState>(() => {
     setIsAvailable(ok);
     setIsActive(true);
 
-    resetCardState(filtered[0] ?? null);
+    const pool = uniqNonEmpty(filtered.map(c => c.lexicalUnit.translation ?? ''));
+    resetCardState(filtered[0] ?? null, pool);
   };
 
   const stop = () => {
@@ -213,7 +213,8 @@ export const useRecognitionStore = createGStore<RecognitionState>(() => {
     setStatsByCard({});
     setIsFinished(false);
     setIsActive(true);
-    resetCardState(cards[0] ?? null);
+    const pool = uniqNonEmpty(cards.map(c => c.lexicalUnit.translation ?? ''));
+    resetCardState(cards[0] ?? null, pool);
   };
 
   const getStoredRecognition = (id: string) => {
