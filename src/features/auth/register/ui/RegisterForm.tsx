@@ -97,7 +97,7 @@ export function RegisterForm() {
               }
               checked={field.value}
               onChange={field.onChange}
-              size={19}
+              size={18}
             />
           )}
         />
