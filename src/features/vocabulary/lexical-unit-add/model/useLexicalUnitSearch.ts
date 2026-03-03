@@ -6,6 +6,12 @@ import { toast } from 'react-toastify';
 
 const apiBaseUrl = import.meta.env.VITE_API_URL ?? 'http://localhost:3000';
 
+const toAbsUrl = (url?: string | null) => {
+  if (!url) return null;
+  if (url.startsWith('http://') || url.startsWith('https://')) return url;
+  return `${apiBaseUrl}${url}`;
+};
+
 export type LexicalUnitSearchResultState =
   | { status: 'idle' }
   | { status: 'loading' }
@@ -20,6 +26,8 @@ export function useLexicalUnitSearch() {
   const normalizedQuery = useMemo(() => query.trim(), [query]);
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const meaningAudioRef = useRef<HTMLAudioElement | null>(null);
+  const exampleAudioRef = useRef<HTMLAudioElement | null>(null);
 
   const audioSrc = useMemo(() => {
     if (result.status !== 'found') return null;
@@ -30,6 +38,14 @@ export function useLexicalUnitSearch() {
     if (url.startsWith('http://') || url.startsWith('https://')) return url;
 
     return `${apiBaseUrl}${url}`;
+  }, [result]);
+  const meaningAudioSrc = useMemo(() => {
+    if (result.status !== 'found') return null;
+    return toAbsUrl(result.unit.soundMeaningUrl);
+  }, [result]);
+  const exampleAudioSrc = useMemo(() => {
+    if (result.status !== 'found') return null;
+    return toAbsUrl(result.unit.soundExampleUrl);
   }, [result]);
 
   const imageSrc = useMemo(() => {
@@ -67,6 +83,16 @@ export function useLexicalUnitSearch() {
     audioRef.current.currentTime = 0;
     void audioRef.current.play();
   };
+  const playMeaningAudio = () => {
+    if (!meaningAudioRef.current) return;
+    meaningAudioRef.current.currentTime = 0;
+    void meaningAudioRef.current.play();
+  };
+  const playExampleAudio = () => {
+    if (!exampleAudioRef.current) return;
+    exampleAudioRef.current.currentTime = 0;
+    void exampleAudioRef.current.play();
+  };
 
   return {
     query,
@@ -79,6 +105,14 @@ export function useLexicalUnitSearch() {
     audioRef,
     audioSrc,
     playAudio,
+
+    meaningAudioRef,
+    meaningAudioSrc,
+    playMeaningAudio,
+
+    exampleAudioRef,
+    exampleAudioSrc,
+    playExampleAudio,
 
     imageSrc,
   };

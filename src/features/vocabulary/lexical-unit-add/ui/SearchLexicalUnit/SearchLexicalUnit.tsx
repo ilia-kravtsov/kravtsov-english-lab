@@ -24,6 +24,14 @@ export function SearchLexicalUnit() {
     audioSrc,
     playAudio,
 
+    meaningAudioRef,
+    meaningAudioSrc,
+    playMeaningAudio,
+
+    exampleAudioRef,
+    exampleAudioSrc,
+    playExampleAudio,
+
     imageSrc,
   } = useSearchLexicalUnit();
 
@@ -38,6 +46,12 @@ export function SearchLexicalUnit() {
         audioRef={audioRef}
         audioSrc={audioSrc}
         playAudio={playAudio}
+        meaningAudioRef={meaningAudioRef}
+        meaningAudioSrc={meaningAudioSrc}
+        playMeaningAudio={playMeaningAudio}
+        exampleAudioRef={exampleAudioRef}
+        exampleAudioSrc={exampleAudioSrc}
+        playExampleAudio={playExampleAudio}
         imageSrc={imageSrc}
         variant={'full'}
         renderNotFound={() => (

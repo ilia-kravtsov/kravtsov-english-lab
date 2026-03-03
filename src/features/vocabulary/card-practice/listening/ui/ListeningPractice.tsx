@@ -123,10 +123,6 @@ export function ListeningPractice({switchDir, onAutoNext, autoNextCommitDelayMs}
             style={{ width: '140px' }}
           />
         </div>
-
-        <div className={style.counter}>
-          {index + 1} / {cards.length}
-        </div>
       </div>
 
       <div className={style.formRow}>
@@ -146,6 +142,9 @@ export function ListeningPractice({switchDir, onAutoNext, autoNextCommitDelayMs}
       </div>
 
       <div className={style.controlsRow}>
+        <div className={style.counter}>
+          {index + 1} / {cards.length}
+        </div>
         <div className={style.meta}>Attempts: {attempts}</div>
       </div>
     </div>

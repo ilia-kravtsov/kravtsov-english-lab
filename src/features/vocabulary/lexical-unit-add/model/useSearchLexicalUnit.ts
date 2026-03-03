@@ -15,9 +15,19 @@ export function useSearchLexicalUnit() {
     normalizedQuery,
     result,
     runSearch,
+
     audioRef,
     audioSrc,
     playAudio,
+
+    meaningAudioRef,
+    meaningAudioSrc,
+    playMeaningAudio,
+
+    exampleAudioRef,
+    exampleAudioSrc,
+    playExampleAudio,
+
     imageSrc,
   } = useLexicalUnitSearch();
 
@@ -79,6 +89,14 @@ export function useSearchLexicalUnit() {
     audioRef,
     audioSrc,
     playAudio,
+
+    meaningAudioRef,
+    meaningAudioSrc,
+    playMeaningAudio,
+
+    exampleAudioRef,
+    exampleAudioSrc,
+    playExampleAudio,
 
     imageSrc,
   };

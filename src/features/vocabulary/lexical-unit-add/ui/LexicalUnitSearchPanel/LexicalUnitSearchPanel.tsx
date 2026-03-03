@@ -27,6 +27,14 @@ type Props = {
   audioSrc?: string | null;
   playAudio?: () => void;
 
+  meaningAudioRef?: RefObject<HTMLAudioElement | null>;
+  meaningAudioSrc?: string | null;
+  playMeaningAudio?: () => void;
+
+  exampleAudioRef?: RefObject<HTMLAudioElement | null>;
+  exampleAudioSrc?: string | null;
+  playExampleAudio?: () => void;
+
   imageSrc?: string | null;
 
   variant?: 'full' | 'compact';
@@ -45,6 +53,14 @@ export function LexicalUnitSearchPanel({
                                          audioRef,
                                          audioSrc,
                                          playAudio,
+
+                                         meaningAudioRef,
+                                         meaningAudioSrc,
+                                         playMeaningAudio,
+
+                                         exampleAudioRef,
+                                         exampleAudioSrc,
+                                         playExampleAudio,
 
                                          imageSrc,
 
@@ -190,6 +206,13 @@ export function LexicalUnitSearchPanel({
                   </div>
                 )}
 
+                {meaningAudioSrc && meaningAudioRef && playMeaningAudio && (
+                  <div className={style.fieldBlock}>
+                    <audio ref={meaningAudioRef} src={meaningAudioSrc} preload="metadata" hidden />
+                    <Button type="button" title="Play meaning" onClick={playMeaningAudio} style={{ width: '80px' }} />
+                  </div>
+                )}
+
                 {result.unit.partsOfSpeech?.length ? (
                   <div className={style.fieldRow}>
                     <span className={style.value}>{result.unit.partsOfSpeech.join(', ')}</span>
@@ -203,6 +226,13 @@ export function LexicalUnitSearchPanel({
                   <div className={style.fieldBlock}>
                     <div className={style.label}>Examples:</div>
                     <div className={style.value}>{result.unit.examples}</div>
+                  </div>
+                )}
+
+                {exampleAudioSrc && (
+                  <div className={style.fieldBlock}>
+                    <audio ref={exampleAudioRef} src={exampleAudioSrc} preload={'metadata'} />
+                    <Button type={'button'} title={'Play example'} onClick={playExampleAudio} style={{ width: '80px' }} />
                   </div>
                 )}
 
