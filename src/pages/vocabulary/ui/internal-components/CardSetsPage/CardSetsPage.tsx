@@ -1,9 +1,10 @@
 import { useNavigate, useParams } from 'react-router-dom';
-
 import style from './CardSetsPage.module.scss';
 import { Button, ConfirmModal, LinkAsButton } from '@/shared/ui';
 import { useCardSetsPage } from '@/features/vocabulary/card-sets/model/useCardSetsPage';
-import { LexicalUnitSearchPanel } from '@/features/vocabulary/lexical-unit-add/ui/LexicalUnitSearchPanel/LexicalUnitSearchPanel';
+import {
+  LexicalUnitSearchPanel,
+} from '@/features/vocabulary/lexical-unit-add/ui/LexicalUnitSearchPanel/LexicalUnitSearchPanel';
 
 export function CardSetsPage() {
   const { cardSetId } = useParams<{ cardSetId: string }>();
@@ -28,6 +29,8 @@ export function CardSetsPage() {
     cancelRemove,
     confirmRemove,
   } = useCardSetsPage(cardSetId);
+
+  const cardsShorterAmount = cards.slice(0, 30);
 
   return (
     <div className={style.container}>
@@ -95,7 +98,7 @@ export function CardSetsPage() {
 
         <div className={style.right}>
           <div className={style.cardsHeader}>
-            <h3 className={style.cardsTitle}>Cards in set</h3>
+            <h3 className={style.cardsTitle}>First 30 cards in set</h3>
             {cardsLoading && <div className={style.muted}>Loading…</div>}
           </div>
 
@@ -105,7 +108,7 @@ export function CardSetsPage() {
 
           {!cardsLoading && cards.length > 0 && (
             <div className={style.cardsList}>
-              {cards.map(c => {
+              {cardsShorterAmount.map(c => {
                 const value = c.lexicalUnit?.value ?? c.lexicalUnitId;
 
                 return (
