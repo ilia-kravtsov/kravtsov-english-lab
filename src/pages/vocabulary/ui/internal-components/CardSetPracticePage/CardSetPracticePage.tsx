@@ -314,7 +314,7 @@ export function CardSetPracticePage() {
           )}
 
           {!loading && items.length > 0 && mode === 'standard' && (
-            <>
+            <div className={style.standardContainer}>
               <div
                 className={isFlipped ? style.flipCardFlipped : style.flipCard}
                 role={'button'}
@@ -405,7 +405,7 @@ export function CardSetPracticePage() {
                   style={{ width: '120px' }}
                 />
               </div>
-            </>
+            </div>
           )}
 
           {!loading && items.length > 0 && mode === 'recognition' && (

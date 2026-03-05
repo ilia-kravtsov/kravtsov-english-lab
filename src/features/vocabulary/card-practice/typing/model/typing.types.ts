@@ -8,6 +8,8 @@ export type TypingCardStat = {
   attempts: number;
   wrongCount: number;
   timeMs: number;
+  isCorrect?: boolean;
+  skipped?: boolean;
 };
 
 export type TypingStats = {

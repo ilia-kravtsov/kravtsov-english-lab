@@ -8,6 +8,8 @@ export type ListeningCardStat = {
   attempts: number;
   wrongCount: number;
   timeMs: number;
+  isCorrect?: boolean;
+  skipped?: boolean;
 };
 
 export type ListeningStats = {

@@ -83,7 +83,7 @@ export function ContextPractice({switchDir, onAutoNext, autoNextCommitDelayMs}: 
         <div className={style.promptLabel}>Fill the gap:</div>
         <div className={style.promptValue}>{current.contextMasked}</div>
         <div className={style.hint}>
-          <div className={style.hintLabel}>Hint —</div>
+          <div className={style.hintLabel}>Hint</div>
           <div className={style.hintValue}>{current.lexicalUnit.translation ?? '—'}</div>
         </div>
       </div>

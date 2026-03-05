@@ -29,6 +29,7 @@ export function ListeningPractice({switchDir, onAutoNext, autoNextCommitDelayMs}
   const getStoredListening = useListeningStore(s => s.getStoredListening);
 
   const submit = useListeningStore(s => s.submit);
+  const skip = useListeningStore(s => s.skip);
   const next = useListeningStore(s => s.next);
   const restart = useListeningStore(s => s.restart);
 
@@ -112,7 +113,6 @@ export function ListeningPractice({switchDir, onAutoNext, autoNextCommitDelayMs}
         ].join(' ')}
       >
         <div className={style.promptLabel}>Listen and type:</div>
-
         <div className={style.audioRow}>
           {audioSrc && <audio ref={audioRef} src={audioSrc} preload={'metadata'} style={{ display: 'none' }} />}
           <Button
@@ -122,6 +122,10 @@ export function ListeningPractice({switchDir, onAutoNext, autoNextCommitDelayMs}
             disabled={!audioSrc}
             style={{ width: '140px' }}
           />
+        </div>
+        <div className={style.hint}>
+          <div className={style.hintLabel}>Hint</div>
+          <div className={style.hintValue}>{unit?.translation ?? '—'}</div>
         </div>
       </div>
 
@@ -138,7 +142,10 @@ export function ListeningPractice({switchDir, onAutoNext, autoNextCommitDelayMs}
             }
           }}
         />
-        <Button title={'Check'} onClick={submit} disabled={locked} style={{ width: '120px' }} />
+        <div className={style.buttonsContainer}>
+          <Button title={'Check'} onClick={submit} disabled={locked} style={{ width: '120px' }} />
+          <Button title={'Skip'} onClick={skip} style={{ width: '120px' }} />
+        </div>
       </div>
 
       <div className={style.controlsRow}>

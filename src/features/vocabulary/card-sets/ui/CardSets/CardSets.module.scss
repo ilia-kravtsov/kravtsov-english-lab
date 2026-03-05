@@ -3,7 +3,7 @@
   justify-content: center;
   width: 100%;
   gap: 20px;
-  padding: 20px;
+  padding: 20px 20px 40px 20px;
 }
 
 .sectionContainer {
@@ -138,10 +138,6 @@
   display: flex;
   gap: 8px;
 }
-
-//.itemActive {
-//  box-shadow: var(--shadow-secondary);
-//}
 
 .muted {
   opacity: 0.75;

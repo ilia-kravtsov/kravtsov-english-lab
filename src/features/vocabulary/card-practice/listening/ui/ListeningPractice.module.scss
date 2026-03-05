@@ -8,15 +8,15 @@
 
 .card {
   width: min(720px, 100%);
-  min-height: 260px;
+  min-height: 300px;
   border-radius: var(--border-radius-primary);
   box-shadow: var(--shadow-primary);
-  padding: 24px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 14px;
+  gap: 20px;
 }
 
 .cardCorrect {
@@ -42,12 +42,26 @@
   font-size: 14px;
 }
 
+.hint {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--border-radius-primary);
+}
+
+.hintLabel {
+  text-align: center;
+  font-size: var(--font-size-primary);
+  opacity: 0.7;
+}
+
+.hintValue {
+  font-size: var(--font-size-primary);
+  opacity: 0.9;
+}
+
 .formRow {
+  display: flex;
   width: min(720px, 100%);
-  display: grid;
-  grid-template-columns: 1fr 120px;
-  gap: 12px;
-  align-items: center;
+  gap: 20px;
 }
 
 .controlsRow {
@@ -101,6 +115,11 @@
 .resultValue {
   opacity: 0.8;
   text-align: right;
+}
+
+.buttonsContainer {
+  display: flex;
+  gap: 20px;
 }
 
 @keyframes flashCorrect {

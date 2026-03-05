@@ -6,11 +6,8 @@
   width: 100%;
   padding: 40px 20px;
 
-  .title {
-  }
-
   .subtitle {
-    font-size: 20px;
+    font-size: var(--font-size-primary);
   }
 
   .paragraph {

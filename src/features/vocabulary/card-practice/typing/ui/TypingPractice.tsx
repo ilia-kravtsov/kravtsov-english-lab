@@ -27,6 +27,7 @@ export function TypingPractice({switchDir, onAutoNext, autoNextCommitDelayMs}: P
   const getStoredTyping = useTypingStore(s => s.getStoredTyping);
 
   const submit = useTypingStore(s => s.submit);
+  const skip = useTypingStore(s => s.skip);
   const next = useTypingStore(s => s.next);
   const restart = useTypingStore(s => s.restart);
 
@@ -97,9 +98,9 @@ export function TypingPractice({switchDir, onAutoNext, autoNextCommitDelayMs}: P
       >
         <div className={style.promptLabel}>Translate:</div>
         <div className={style.promptValue}>{unit.translation}</div>
-
-        <div className={style.counter}>
-          {index + 1} / {cards.length}
+        <div className={style.hint}>
+          <div className={style.hintLabel}>Meaning in English</div>
+          <div className={style.hintValue}>{unit.meaning ?? '—'}</div>
         </div>
       </div>
 
@@ -117,10 +118,16 @@ export function TypingPractice({switchDir, onAutoNext, autoNextCommitDelayMs}: P
           }}
         />
 
-        <Button title={'Check'} onClick={submit} disabled={locked} style={{ width: '120px' }} />
+        <div className={style.buttonsContainer}>
+          <Button title={'Check'} onClick={submit} disabled={locked} style={{ width: '120px' }} />
+          <Button title={'Skip'} onClick={skip} style={{ width: '120px' }} />
+        </div>
       </div>
 
       <div className={style.controlsRow}>
+        <div className={style.counter}>
+          {index + 1} / {cards.length}
+        </div>
         <div className={style.meta}>Attempts: {attempts}</div>
       </div>
     </div>
