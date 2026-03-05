@@ -1,4 +1,4 @@
-import { useMemo, useRef } from 'react';
+import { useMemo, useRef, useEffect } from 'react';
 import { Button, Input } from '@/shared/ui';
 import style from './ListeningPractice.module.scss';
 import { useListeningStore } from '../model/listening.store';
@@ -32,6 +32,14 @@ export function ListeningPractice({switchDir, onAutoNext, autoNextCommitDelayMs}
   const skip = useListeningStore(s => s.skip);
   const next = useListeningStore(s => s.next);
   const restart = useListeningStore(s => s.restart);
+
+  const inputRef = useRef<HTMLInputElement | null>(null);
+
+  useEffect(() => {
+    if (!locked) {
+      inputRef.current?.focus();
+    }
+  }, [index, locked]);
 
   useAutoNextOnCorrect({
     isFinished,
@@ -131,6 +139,7 @@ export function ListeningPractice({switchDir, onAutoNext, autoNextCommitDelayMs}
 
       <div className={style.formRow}>
         <Input
+          ref={inputRef}
           value={input}
           onChange={e => setInput(e.target.value)}
           placeholder={'Type lexical unit'}

@@ -1,5 +1,6 @@
 import { Button, Input } from '@/shared/ui';
 import style from './TypingPractice.module.scss';
+import { useRef, useEffect } from 'react';
 import { useTypingStore } from '../model/typing.store';
 import { useAutoNextOnCorrect } from '@/features/vocabulary/card-practice/shared/useAutoNextOnCorrect.ts';
 import switchAnim from '@/features/vocabulary/card-practice/shared/SwitchAnimation.module.scss';
@@ -30,6 +31,14 @@ export function TypingPractice({switchDir, onAutoNext, autoNextCommitDelayMs}: P
   const skip = useTypingStore(s => s.skip);
   const next = useTypingStore(s => s.next);
   const restart = useTypingStore(s => s.restart);
+
+  const inputRef = useRef<HTMLInputElement | null>(null);
+
+  useEffect(() => {
+    if (!locked) {
+      inputRef.current?.focus();
+    }
+  }, [index, locked]);
 
   useAutoNextOnCorrect({
     isFinished,
@@ -106,6 +115,7 @@ export function TypingPractice({switchDir, onAutoNext, autoNextCommitDelayMs}: P
 
       <div className={style.formRow}>
         <Input
+          ref={inputRef}
           value={input}
           onChange={e => setInput(e.target.value)}
           placeholder={'Type lexical unit'}

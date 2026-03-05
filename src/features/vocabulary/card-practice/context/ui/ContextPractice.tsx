@@ -1,5 +1,6 @@
 import { Button, Input } from '@/shared/ui';
 import style from './ContextPractice.module.scss';
+import { useRef, useEffect } from 'react';
 import { useContextStore } from '../model/context.store';
 import { useAutoNextOnCorrect } from '@/features/vocabulary/card-practice/shared/useAutoNextOnCorrect.ts';
 import type { Flip } from '@/features/vocabulary/card-practice/shared/Flip.type.ts';
@@ -30,6 +31,14 @@ export function ContextPractice({switchDir, onAutoNext, autoNextCommitDelayMs}: 
   const skip = useContextStore(s => s.skip);
   const next = useContextStore(s => s.next);
   const restart = useContextStore(s => s.restart);
+
+  const inputRef = useRef<HTMLInputElement | null>(null);
+
+  useEffect(() => {
+    if (!locked) {
+      inputRef.current?.focus();
+    }
+  }, [index, locked]);
 
   useAutoNextOnCorrect({
     isFinished,
@@ -90,6 +99,7 @@ export function ContextPractice({switchDir, onAutoNext, autoNextCommitDelayMs}: 
 
       <div className={style.formRow}>
         <Input
+          ref={inputRef}
           value={input}
           onChange={e => setInput(e.target.value)}
           placeholder={'Type lexical unit'}
