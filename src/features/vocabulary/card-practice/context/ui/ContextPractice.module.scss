@@ -1,13 +1,20 @@
 .wrap {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  box-shadow: var(--shadow-primary);
+  border-radius: var(--border-radius-primary);
+  padding: 20px;
+  gap: 20px;
 }
 
 .card {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: var(--border-radius-primary);
-  padding: 16px;
+  box-shadow: var(--shadow-primary);
+  padding: 40px;
 }
 
 .cardCorrect {
@@ -19,19 +26,17 @@
 }
 
 .promptLabel {
-  font-size: 12px;
+  font-size: var(--font-size-primary);
   opacity: 0.7;
 }
 
 .promptValue {
-  font-size: 18px;
-  margin-top: 6px;
+  font-size: var(--font-size-primary);
   white-space: pre-wrap;
 }
 
 .counter {
-  margin-top: 10px;
-  font-size: 12px;
+  font-size: var(--font-size-primary);
   opacity: 0.7;
 }
 
@@ -42,8 +47,8 @@
 
 .controlsRow {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 12px;
 }
 
 .meta {
@@ -80,4 +85,20 @@
 
 .resultValue {
   text-align: right;
+}
+
+.hint {
+  display: flex;
+  gap: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--border-radius-primary);
+}
+
+.hintLabel {
+  font-size: var(--font-size-primary);
+  opacity: 0.7;
+}
+
+.hintValue {
+  font-size: var(--font-size-primary);
 }

@@ -30,6 +30,7 @@ export interface ContextState {
 
   setInput: (value: string) => void;
   submit: () => void;
+  skip: () => void;
   next: () => void;
   restart: () => void;
 
@@ -70,7 +71,7 @@ export const useContextStore = createGStore<ContextState>(() => {
   const finish = (id: string, nextStatsByCard: Record<string, ContextCardStat>) => {
     const totalCards = cards.length;
     const completedCards = Object.keys(nextStatsByCard).length;
-    const correctCards = completedCards;
+    const correctCards = Object.values(nextStatsByCard).filter(s => (s.isCorrect ?? true)).length;
 
     const timeSum = Object.values(nextStatsByCard).reduce((acc, s) => acc + (s.timeMs || 0), 0);
     const avgTimeMs = completedCards > 0 ? round(timeSum / completedCards) : 0;
@@ -165,6 +166,7 @@ export const useContextStore = createGStore<ContextState>(() => {
         attempts: nextAttempts,
         wrongCount,
         timeMs,
+        isCorrect: true,
       };
 
       setStatsByCard(prev => ({ ...prev, [card.id]: stat }));
@@ -174,6 +176,39 @@ export const useContextStore = createGStore<ContextState>(() => {
     setFeedback('wrong');
     setWrongCount(v => v + 1);
     window.setTimeout(() => setFeedback('idle'), 260);
+  };
+
+  const skip = () => {
+    if (!isActive || isFinished) return;
+    const card = cards[index] ?? null;
+    if (!card) return;
+
+    const timeMs = round(performance.now() - shownAtRef.current);
+
+    const stat: ContextCardStat = {
+      cardId: card.id,
+      lexicalUnitId: card.lexicalUnitId,
+      attempts,
+      wrongCount,
+      timeMs,
+      isCorrect: false,
+      skipped: true,
+    };
+
+    const nextStatsByCard = { ...statsByCard, [card.id]: stat };
+    setStatsByCard(nextStatsByCard);
+
+    const id = cardSetId;
+    if (!id) return;
+
+    const isLast = index >= cards.length - 1;
+    if (isLast) {
+      finish(id, nextStatsByCard);
+      return;
+    }
+
+    setIndex(index + 1);
+    resetCardState();
   };
 
   const next = () => {
@@ -238,6 +273,7 @@ export const useContextStore = createGStore<ContextState>(() => {
 
     setInput,
     submit,
+    skip,
     next,
     restart,
 

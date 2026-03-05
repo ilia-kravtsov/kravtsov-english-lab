@@ -27,6 +27,7 @@ export function ContextPractice({switchDir, onAutoNext, autoNextCommitDelayMs}: 
   const getStoredContext = useContextStore(s => s.getStoredContext);
 
   const submit = useContextStore(s => s.submit);
+  const skip = useContextStore(s => s.skip);
   const next = useContextStore(s => s.next);
   const restart = useContextStore(s => s.restart);
 
@@ -81,9 +82,9 @@ export function ContextPractice({switchDir, onAutoNext, autoNextCommitDelayMs}: 
       >
         <div className={style.promptLabel}>Fill the gap:</div>
         <div className={style.promptValue}>{current.contextMasked}</div>
-
-        <div className={style.counter}>
-          {index + 1} / {cards.length}
+        <div className={style.hint}>
+          <div className={style.hintLabel}>Hint —</div>
+          <div className={style.hintValue}>{current.lexicalUnit.translation ?? '—'}</div>
         </div>
       </div>
 
@@ -100,11 +101,14 @@ export function ContextPractice({switchDir, onAutoNext, autoNextCommitDelayMs}: 
             }
           }}
         />
-
         <Button title={'Check'} onClick={submit} disabled={locked} style={{ width: '120px' }} />
+        <Button title={'Skip'} onClick={skip} style={{ width: '120px' }} />
       </div>
 
       <div className={style.controlsRow}>
+        <div className={style.counter}>
+          {index + 1} / {cards.length}
+        </div>
         <div className={style.meta}>Attempts: {attempts}</div>
       </div>
     </div>
