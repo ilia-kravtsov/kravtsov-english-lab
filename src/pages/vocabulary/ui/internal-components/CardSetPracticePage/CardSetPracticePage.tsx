@@ -1,12 +1,18 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import style from './CardSetPracticePage.module.scss';
-import { Button } from '@/shared/ui';
 import { useSwitchAnimation } from '@/features/vocabulary/card-practice/shared/useSwitchAnimation.ts';
 import { useCardSetPracticePage } from '@/features/vocabulary/card-practice/model/useCardSetPracticePage.ts';
 import { usePracticeModeAvailability } from '@/features/vocabulary/card-practice/model/usePracticeModeAvailability.ts';
 import { usePracticeModeActions } from '@/features/vocabulary/card-practice/model/usePracticeModeActions.ts';
-import { PracticeModeSidebar } from '@/pages/vocabulary/ui/internal-components/CardSetPracticePage/PracticeModeSidebar/PracticeModeSidebar.tsx';
-import { PracticeContent } from '@/pages/vocabulary/ui/internal-components/CardSetPracticePage/PracticeContent/PracticeContent.tsx';
+import {
+  PracticeModeSidebar,
+} from '@/pages/vocabulary/ui/internal-components/CardSetPracticePage/PracticeModeSidebar/PracticeModeSidebar.tsx';
+import {
+  PracticeContent,
+} from '@/pages/vocabulary/ui/internal-components/CardSetPracticePage/PracticeContent/PracticeContent.tsx';
+import {
+  CardSetsPageHeader,
+} from '@/pages/vocabulary/ui/internal-components/CardSetsPage/CardSetsPageHeader/CardSetsPageHeader.tsx';
 
 type CardSetId = {
   cardSetId: string;
@@ -56,7 +62,7 @@ export function CardSetPracticePage() {
     listeningAvailable,
   });
 
-  const backHandlerClick = () => {
+  const onBackClick = () => {
     navigate(`/vocabulary/cards/${cardSetId}`)
   }
 
@@ -66,14 +72,11 @@ export function CardSetPracticePage() {
 
   return (
     <div className={style.container}>
-      <div className={style.headerRow}>
-        <Button
-          title={'Back'}
-          onClick={backHandlerClick}
-          style={buttonStyles}
-        />
-        <h2 className={style.title}>{cardSet?.title ?? 'Practice'}</h2>
-      </div>
+      <CardSetsPageHeader
+        title={cardSet?.title ?? 'Practice'}
+        onBackClick={onBackClick}
+        backButtonStyle={buttonStyles}
+      />
 
       <div className={style.body}>
         <PracticeModeSidebar

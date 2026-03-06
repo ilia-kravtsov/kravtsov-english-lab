@@ -5,6 +5,9 @@ import { useCardSetsPage } from '@/features/vocabulary/card-sets/model/useCardSe
 import {
   LexicalUnitSearchPanel,
 } from '@/features/vocabulary/lexical-unit-add/ui/LexicalUnitSearchPanel/LexicalUnitSearchPanel';
+import {
+  CardSetsPageHeader,
+} from '@/pages/vocabulary/ui/internal-components/CardSetsPage/CardSetsPageHeader/CardSetsPageHeader.tsx';
 
 export function CardSetsPage() {
   const { cardSetId } = useParams<{ cardSetId: string }>();
@@ -32,28 +35,27 @@ export function CardSetsPage() {
 
   const cardsShorterAmount = cards.slice(0, 30);
 
+  const onBackClick = () => {
+    navigate('/vocabulary/cards')
+  }
+
+
   return (
     <div className={style.container}>
-      <div className={style.headerRow}>
-        <div className={style.headerLeft}>
-          <Button
-            title={'Back'}
-            onClick={() => navigate('/vocabulary/cards')}
-            style={{ width: '100px' }}
-          />
-          {cardSetId && (
-            <LinkAsButton
-              to={`/vocabulary/cards/${cardSetId}/practice`}
-              style={{ width: '120px', textAlign: 'center' }}
-            >
-              Practice
-            </LinkAsButton>
-          )}
-          <h2 className={style.title}>
-            {cardSetLoading ? '' : cardSet?.title ?? ''}
-          </h2>
-        </div>
-      </div>
+      <CardSetsPageHeader
+        title={cardSetLoading ? '' : cardSet?.title ?? ''}
+        onBackClick={onBackClick}
+        backButtonStyle={{ width: '100px' }}
+      >
+        {cardSetId && (
+          <LinkAsButton
+            to={`/vocabulary/cards/${cardSetId}/practice`}
+            style={{ width: '120px', textAlign: 'center' }}
+          >
+            Practice
+          </LinkAsButton>
+        )}
+      </CardSetsPageHeader>
 
       <div className={style.contentContainer}>
         <div className={style.left}>
