@@ -1,5 +1,5 @@
-import { setupAuthRequestInterceptor } from '@/features/auth/interceptors/auth-request.interceptor.ts';
-import { setupAuthResponseInterceptor } from '@/features/auth/interceptors/auth-response.interceptor.ts';
+import { setupAuthRequestInterceptor } from '@/features/auth/interceptors/auth-request.interceptor';
+import { setupAuthResponseInterceptor } from '@/features/auth/interceptors/auth-response.interceptor';
 
 export function setupAuth() {
   setupAuthRequestInterceptor();

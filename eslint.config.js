@@ -9,7 +9,7 @@ import eslintConfigPrettier from 'eslint-config-prettier';
 import { defineConfig, globalIgnores } from 'eslint/config';
 
 export default defineConfig([
-  globalIgnores(['dist', 'node_modules', 'coverage', 'src/features/auth/api/auth.api.ts',]),
+  globalIgnores(['dist', 'node_modules', 'coverage']),
   {
     files: ['**/*.{ts,tsx}'],
     extends: [

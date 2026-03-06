@@ -1,1 +1,1 @@
-export { setupAuth } from './auth-provider.ts';
+export { setupAuth } from './auth-provider';
