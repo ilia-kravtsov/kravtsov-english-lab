@@ -1,5 +1,7 @@
 import type { CSSProperties, ReactNode } from 'react';
+
 import { Button } from '@/shared/ui';
+
 import style from './CardSetsPageHeader.module.scss';
 
 type Props = {
@@ -11,20 +13,16 @@ type Props = {
 };
 
 export function CardSetsPageHeader({
-                                       title,
-                                       onBackClick,
-                                       backTitle = 'Back',
-                                       backButtonStyle,
-                                       children,
-                                     }: Props) {
+  title,
+  onBackClick,
+  backTitle = 'Back',
+  backButtonStyle,
+  children,
+}: Props) {
   return (
     <div className={style.headerRow}>
       <div className={style.headerLeft}>
-        <Button
-          title={backTitle}
-          onClick={onBackClick}
-          style={backButtonStyle}
-        />
+        <Button title={backTitle} onClick={onBackClick} style={backButtonStyle} />
         {children}
         <h2 className={style.title}>{title}</h2>
       </div>

@@ -1,11 +1,13 @@
-import { Button, Input } from '@/shared/ui';
-import style from './ContextPractice.module.scss';
 import { useEffect, useRef } from 'react';
-import { useContextStore } from '../model/context.store';
-import { useAutoNextOnCorrect } from '@/features/vocabulary/card-practice/shared/model/useAutoNextOnCorrect.ts';
-import switchAnim from '@/features/vocabulary/card-practice/shared/ui/SwitchAnimation.module.scss';
+
 import type { PracticeSwitchState } from '@/features/vocabulary/card-practice/model/practice-mode.types.ts';
+import { useAutoNextOnCorrect } from '@/features/vocabulary/card-practice/shared/model/useAutoNextOnCorrect.ts';
 import { PracticeResults } from '@/features/vocabulary/card-practice/shared/ui/PracticeResults/PracticeResults.tsx';
+import switchAnim from '@/features/vocabulary/card-practice/shared/ui/SwitchAnimation.module.scss';
+import { Button, Input } from '@/shared/ui';
+
+import { useContextStore } from '../model/context.store';
+import style from './ContextPractice.module.scss';
 
 type Props = {
   switchDir?: PracticeSwitchState;
@@ -13,24 +15,24 @@ type Props = {
   autoNextCommitDelayMs?: number;
 };
 
-export function ContextPractice({switchDir, onAutoNext, autoNextCommitDelayMs}: Props) {
-  const cards = useContextStore(s => s.cards);
-  const index = useContextStore(s => s.index);
-  const feedback = useContextStore(s => s.feedback);
-  const locked = useContextStore(s => s.locked);
+export function ContextPractice({ switchDir, onAutoNext, autoNextCommitDelayMs }: Props) {
+  const cards = useContextStore((s) => s.cards);
+  const index = useContextStore((s) => s.index);
+  const feedback = useContextStore((s) => s.feedback);
+  const locked = useContextStore((s) => s.locked);
 
-  const input = useContextStore(s => s.input);
-  const setInput = useContextStore(s => s.setInput);
+  const input = useContextStore((s) => s.input);
+  const setInput = useContextStore((s) => s.setInput);
 
-  const attempts = useContextStore(s => s.attempts);
+  const attempts = useContextStore((s) => s.attempts);
 
-  const isFinished = useContextStore(s => s.isFinished);
-  const cardSetId = useContextStore(s => s.cardSetId);
+  const isFinished = useContextStore((s) => s.isFinished);
+  const cardSetId = useContextStore((s) => s.cardSetId);
 
-  const submit = useContextStore(s => s.submit);
-  const skip = useContextStore(s => s.skip);
-  const next = useContextStore(s => s.next);
-  const restart = useContextStore(s => s.restart);
+  const submit = useContextStore((s) => s.submit);
+  const skip = useContextStore((s) => s.skip);
+  const next = useContextStore((s) => s.next);
+  const restart = useContextStore((s) => s.restart);
 
   const inputRef = useRef<HTMLInputElement | null>(null);
 
@@ -56,11 +58,7 @@ export function ContextPractice({switchDir, onAutoNext, autoNextCommitDelayMs}: 
 
   if (isFinished) {
     return (
-      <PracticeResults
-        cardSetId={cardSetId}
-        restart={restart}
-        restartTitle="Restart Context"
-      />
+      <PracticeResults cardSetId={cardSetId} restart={restart} restartTitle="Restart Context" />
     );
   }
 
@@ -89,10 +87,10 @@ export function ContextPractice({switchDir, onAutoNext, autoNextCommitDelayMs}: 
         <Input
           ref={inputRef}
           value={input}
-          onChange={e => setInput(e.target.value)}
+          onChange={(e) => setInput(e.target.value)}
           placeholder={'Type lexical unit'}
           disabled={locked}
-          onKeyDown={e => {
+          onKeyDown={(e) => {
             if (e.key === 'Enter') {
               e.preventDefault();
               submit();

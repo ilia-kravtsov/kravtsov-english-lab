@@ -1,8 +1,8 @@
 import { useMemo, useRef, useState } from 'react';
+import { toast } from 'react-toastify';
 
 import { searchLexicalUnitByValue } from '@/entities/lexical-unit/api/lexical-unit.api';
 import type { LexicalUnit } from '@/entities/lexical-unit/model/lexical-unit.types';
-import { toast } from 'react-toastify';
 
 const apiBaseUrl = import.meta.env.VITE_API_URL ?? 'http://localhost:3000';
 

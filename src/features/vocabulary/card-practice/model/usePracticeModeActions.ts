@@ -1,9 +1,9 @@
-import { useRecognitionStore } from '@/features/vocabulary/card-practice/recognition/model/recognition.store.ts';
-import { useTypingStore } from '@/features/vocabulary/card-practice/typing/model/typing.store.ts';
+import type { CardWithLexicalUnit } from '@/entities/card/model/card.types.ts';
 import { useContextStore } from '@/features/vocabulary/card-practice/context/model/context.store.ts';
 import { useListeningStore } from '@/features/vocabulary/card-practice/listening/model/listening.store.ts';
-import type { CardWithLexicalUnit } from '@/entities/card/model/card.types.ts';
 import type { PracticeMode } from '@/features/vocabulary/card-practice/model/practice-mode.types.ts';
+import { useRecognitionStore } from '@/features/vocabulary/card-practice/recognition/model/recognition.store.ts';
+import { useTypingStore } from '@/features/vocabulary/card-practice/typing/model/typing.store.ts';
 
 type Params = {
   cardSetId?: string;
@@ -16,25 +16,25 @@ type Params = {
 };
 
 export function usePracticeModeActions({
-                                         cardSetId,
-                                         items,
-                                         setMode,
-                                         recognitionAvailable,
-                                         typingAvailable,
-                                         contextAvailable,
-                                         listeningAvailable,
-                                       }: Params) {
-  const startRecognition = useRecognitionStore(s => s.start);
-  const stopRecognition = useRecognitionStore(s => s.stop);
+  cardSetId,
+  items,
+  setMode,
+  recognitionAvailable,
+  typingAvailable,
+  contextAvailable,
+  listeningAvailable,
+}: Params) {
+  const startRecognition = useRecognitionStore((s) => s.start);
+  const stopRecognition = useRecognitionStore((s) => s.stop);
 
-  const startTyping = useTypingStore(s => s.start);
-  const stopTyping = useTypingStore(s => s.stop);
+  const startTyping = useTypingStore((s) => s.start);
+  const stopTyping = useTypingStore((s) => s.stop);
 
-  const startContext = useContextStore(s => s.start);
-  const stopContext = useContextStore(s => s.stop);
+  const startContext = useContextStore((s) => s.start);
+  const stopContext = useContextStore((s) => s.stop);
 
-  const startListening = useListeningStore(s => s.start);
-  const stopListening = useListeningStore(s => s.stop);
+  const startListening = useListeningStore((s) => s.start);
+  const stopListening = useListeningStore((s) => s.stop);
 
   const stopAll = () => {
     stopRecognition();

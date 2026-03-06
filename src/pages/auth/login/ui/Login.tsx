@@ -1,4 +1,5 @@
 import { LoginForm } from '@/features/auth/login';
+
 import style from './LoginPage.module.scss';
 
 export function Login() {

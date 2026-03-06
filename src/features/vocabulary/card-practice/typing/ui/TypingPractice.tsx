@@ -1,36 +1,38 @@
-import { Button, Input } from '@/shared/ui';
-import style from './TypingPractice.module.scss';
 import { useEffect, useRef } from 'react';
-import { useTypingStore } from '../model/typing.store';
-import { useAutoNextOnCorrect } from '@/features/vocabulary/card-practice/shared/model/useAutoNextOnCorrect.ts';
-import switchAnim from '@/features/vocabulary/card-practice/shared/ui/SwitchAnimation.module.scss';
+
 import type { PracticeSwitchState } from '@/features/vocabulary/card-practice/model/practice-mode.types.ts';
+import { useAutoNextOnCorrect } from '@/features/vocabulary/card-practice/shared/model/useAutoNextOnCorrect.ts';
 import { PracticeResults } from '@/features/vocabulary/card-practice/shared/ui/PracticeResults/PracticeResults.tsx';
+import switchAnim from '@/features/vocabulary/card-practice/shared/ui/SwitchAnimation.module.scss';
+import { Button, Input } from '@/shared/ui';
+
+import { useTypingStore } from '../model/typing.store';
+import style from './TypingPractice.module.scss';
 
 type Props = {
   switchDir?: PracticeSwitchState;
   onAutoNext?: () => void;
   autoNextCommitDelayMs?: number;
-}
+};
 
-export function TypingPractice({switchDir, onAutoNext, autoNextCommitDelayMs}: Props) {
-  const cards = useTypingStore(s => s.cards);
-  const index = useTypingStore(s => s.index);
-  const feedback = useTypingStore(s => s.feedback);
-  const locked = useTypingStore(s => s.locked);
+export function TypingPractice({ switchDir, onAutoNext, autoNextCommitDelayMs }: Props) {
+  const cards = useTypingStore((s) => s.cards);
+  const index = useTypingStore((s) => s.index);
+  const feedback = useTypingStore((s) => s.feedback);
+  const locked = useTypingStore((s) => s.locked);
 
-  const input = useTypingStore(s => s.input);
-  const setInput = useTypingStore(s => s.setInput);
+  const input = useTypingStore((s) => s.input);
+  const setInput = useTypingStore((s) => s.setInput);
 
-  const attempts = useTypingStore(s => s.attempts);
+  const attempts = useTypingStore((s) => s.attempts);
 
-  const isFinished = useTypingStore(s => s.isFinished);
-  const cardSetId = useTypingStore(s => s.cardSetId);
+  const isFinished = useTypingStore((s) => s.isFinished);
+  const cardSetId = useTypingStore((s) => s.cardSetId);
 
-  const submit = useTypingStore(s => s.submit);
-  const skip = useTypingStore(s => s.skip);
-  const next = useTypingStore(s => s.next);
-  const restart = useTypingStore(s => s.restart);
+  const submit = useTypingStore((s) => s.submit);
+  const skip = useTypingStore((s) => s.skip);
+  const next = useTypingStore((s) => s.next);
+  const restart = useTypingStore((s) => s.restart);
 
   const inputRef = useRef<HTMLInputElement | null>(null);
 
@@ -59,9 +61,9 @@ export function TypingPractice({switchDir, onAutoNext, autoNextCommitDelayMs}: P
     return (
       <PracticeResults
         cardSetId={cardSetId}
-        mode={"typing"}
+        mode={'typing'}
         restart={restart}
-        restartTitle={"Restart Typing"}
+        restartTitle={'Restart Typing'}
       />
     );
   }
@@ -91,10 +93,10 @@ export function TypingPractice({switchDir, onAutoNext, autoNextCommitDelayMs}: P
         <Input
           ref={inputRef}
           value={input}
-          onChange={e => setInput(e.target.value)}
+          onChange={(e) => setInput(e.target.value)}
           placeholder={'Type lexical unit'}
           disabled={locked}
-          onKeyDown={e => {
+          onKeyDown={(e) => {
             if (e.key === 'Enter') {
               e.preventDefault();
               submit();
@@ -103,7 +105,12 @@ export function TypingPractice({switchDir, onAutoNext, autoNextCommitDelayMs}: P
         />
 
         <div className={style.buttonsContainer}>
-          <Button title={'Check'} onClick={submit} disabled={locked} style={{ width: '100px', fontSize: '16px'}} />
+          <Button
+            title={'Check'}
+            onClick={submit}
+            disabled={locked}
+            style={{ width: '100px', fontSize: '16px' }}
+          />
           <Button title={'Skip'} onClick={skip} style={{ width: '100px', fontSize: '16px' }} />
         </div>
       </div>

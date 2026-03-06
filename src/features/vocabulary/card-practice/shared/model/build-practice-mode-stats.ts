@@ -17,11 +17,13 @@ export function buildPracticeModeStats<T extends CardStatLike>(
   const entries = Object.values(statsByCard);
 
   const completedCards = entries.length;
-  const firstTryCorrectCards = entries.filter(s => s.isCorrect && !s.skipped && s.attempts === 1 && s.wrongCount === 0).length;
+  const firstTryCorrectCards = entries.filter(
+    (s) => s.isCorrect && !s.skipped && s.attempts === 1 && s.wrongCount === 0,
+  ).length;
   const wrongAnswers = entries.reduce((acc, s) => acc + s.wrongCount, 0);
-  const skippedCards = entries.filter(s => s.skipped).length;
+  const skippedCards = entries.filter((s) => s.skipped).length;
   const totalAnswers = entries.reduce((acc, s) => acc + s.attempts, 0);
-  const correctAnswers = entries.filter(s => s.isCorrect).length;
+  const correctAnswers = entries.filter((s) => s.isCorrect).length;
   const timeSum = entries.reduce((acc, s) => acc + (s.timeMs || 0), 0);
   const avgTimeMs = completedCards > 0 ? round(timeSum / completedCards) : 0;
 

@@ -1,12 +1,14 @@
 import { createGStore } from 'create-gstore';
 import { useRef, useState } from 'react';
+
 import type { CardWithLexicalUnit } from '@/entities/card/model/card.types';
-import type { TypingCardStat, TypingFeedback, TypingSessionCard } from './typing.types';
-import { writeTypingStats } from './typing.storage';
-import { norm, round } from './typing.utils';
-import type { PracticeModeStats } from '@/features/vocabulary/card-practice/shared/model/practice.types.ts';
-import { readPracticeStats } from '@/features/vocabulary/card-practice/shared/model/practice.storage.ts';
 import { buildPracticeModeStats } from '@/features/vocabulary/card-practice/shared/model/build-practice-mode-stats.ts';
+import { readPracticeStats } from '@/features/vocabulary/card-practice/shared/model/practice.storage.ts';
+import type { PracticeModeStats } from '@/features/vocabulary/card-practice/shared/model/practice.types.ts';
+
+import { writeTypingStats } from './typing.storage';
+import type { TypingCardStat, TypingFeedback, TypingSessionCard } from './typing.types';
+import { norm, round } from './typing.utils';
 
 export interface TypingState {
   cardSetId: string | null;
@@ -80,8 +82,8 @@ export const useTypingStore = createGStore<TypingState>(() => {
 
   const start = (id: string, allCards: CardWithLexicalUnit[]) => {
     const filtered = allCards
-      .filter(c => c.lexicalUnit && (c.lexicalUnit.translation ?? '').trim().length > 0)
-      .map(c => c as TypingSessionCard);
+      .filter((c) => c.lexicalUnit && (c.lexicalUnit.translation ?? '').trim().length > 0)
+      .map((c) => c as TypingSessionCard);
 
     setCardSetId(id);
     setCards(filtered);
@@ -141,12 +143,12 @@ export const useTypingStore = createGStore<TypingState>(() => {
         isCorrect: true,
       };
 
-      setStatsByCard(prev => ({ ...prev, [card.id]: stat }));
+      setStatsByCard((prev) => ({ ...prev, [card.id]: stat }));
       return;
     }
 
     setFeedback('wrong');
-    setWrongCount(v => v + 1);
+    setWrongCount((v) => v + 1);
     window.setTimeout(() => setFeedback('idle'), 260);
   };
 

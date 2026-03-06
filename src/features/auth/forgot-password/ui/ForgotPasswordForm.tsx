@@ -1,8 +1,10 @@
 import { type SubmitHandler, useForm } from 'react-hook-form';
-import { Button } from '@/shared/ui';
+
 import { useForgotPasswordModel } from '@/features/auth/forgot-password/model/forgot-password.model.ts';
-import style from './ForgotPasswordForm.module.scss';
+import { Button } from '@/shared/ui';
 import { Input } from '@/shared/ui/Input/Input.tsx';
+
+import style from './ForgotPasswordForm.module.scss';
 
 interface FormData {
   email: string;
@@ -35,14 +37,12 @@ export function ForgotPasswordForm() {
       </div>
 
       <Button
-        type='submit'
+        type="submit"
         disabled={isSubmitting}
         title={isSubmitting ? 'Sending...' : 'Send reset link'}
       />
 
-      {serverMessage && (
-        <div className={style.serverMessage}>{serverMessage}</div>
-      )}
+      {serverMessage && <div className={style.serverMessage}>{serverMessage}</div>}
     </form>
   );
 }

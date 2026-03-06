@@ -1,12 +1,14 @@
 import { createGStore } from 'create-gstore';
 import { useRef, useState } from 'react';
+
 import type { CardWithLexicalUnit } from '@/entities/card/model/card.types';
-import type { ContextCardStat, ContextFeedback, ContextSessionCard } from './context.types';
-import { writeContextStats } from './context.storage';
-import { norm, pickContextExample, round } from './context.utils';
-import type { PracticeModeStats } from '@/features/vocabulary/card-practice/shared/model/practice.types.ts';
-import { readPracticeStats } from '@/features/vocabulary/card-practice/shared/model/practice.storage.ts';
 import { buildPracticeModeStats } from '@/features/vocabulary/card-practice/shared/model/build-practice-mode-stats.ts';
+import { readPracticeStats } from '@/features/vocabulary/card-practice/shared/model/practice.storage.ts';
+import type { PracticeModeStats } from '@/features/vocabulary/card-practice/shared/model/practice.types.ts';
+
+import { writeContextStats } from './context.storage';
+import type { ContextCardStat, ContextFeedback, ContextSessionCard } from './context.types';
+import { norm, pickContextExample, round } from './context.utils';
 
 export interface ContextState {
   cardSetId: string | null;
@@ -80,8 +82,13 @@ export const useContextStore = createGStore<ContextState>(() => {
 
   const start = (id: string, allCards: CardWithLexicalUnit[]) => {
     const filtered = allCards
-      .filter(c => c.lexicalUnit)
-      .map(c => c as CardWithLexicalUnit & { lexicalUnit: NonNullable<CardWithLexicalUnit['lexicalUnit']> })
+      .filter((c) => c.lexicalUnit)
+      .map(
+        (c) =>
+          c as CardWithLexicalUnit & {
+            lexicalUnit: NonNullable<CardWithLexicalUnit['lexicalUnit']>;
+          },
+      )
       .map((c) => {
         const lu = c.lexicalUnit;
         const examples = lu.examples ?? [];
@@ -156,12 +163,12 @@ export const useContextStore = createGStore<ContextState>(() => {
         isCorrect: true,
       };
 
-      setStatsByCard(prev => ({ ...prev, [card.id]: stat }));
+      setStatsByCard((prev) => ({ ...prev, [card.id]: stat }));
       return;
     }
 
     setFeedback('wrong');
-    setWrongCount(v => v + 1);
+    setWrongCount((v) => v + 1);
     window.setTimeout(() => setFeedback('idle'), 260);
   };
 

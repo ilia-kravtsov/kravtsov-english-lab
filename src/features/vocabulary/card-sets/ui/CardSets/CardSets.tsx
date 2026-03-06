@@ -1,7 +1,9 @@
-import style from './CardSets.module.scss';
-import { Button, ConfirmModal, Input } from '@/shared/ui';
-import { useCardSets } from '../../model/useCardSets.ts';
 import { useNavigate } from 'react-router-dom';
+
+import { Button, ConfirmModal, Input } from '@/shared/ui';
+
+import { useCardSets } from '../../model/useCardSets.ts';
+import style from './CardSets.module.scss';
 
 export function CardSets() {
   const navigate = useNavigate();
@@ -39,7 +41,10 @@ export function CardSets() {
             <div className={style.formRow}>
               <div className={style.formField}>
                 <span className={style.label}>Title</span>
-                <Input placeholder={'Travel France'} {...registerCreate('title', { required: true })} />
+                <Input
+                  placeholder={'Travel France'}
+                  {...registerCreate('title', { required: true })}
+                />
                 {createErrors.title && <span className={style.error}>Title is required</span>}
               </div>
 
@@ -59,7 +64,7 @@ export function CardSets() {
             </div>
           </form>
         </div>
-        {selectedId &&
+        {selectedId && (
           <div className={style.sectionEdit}>
             <div className={style.headerRow}>
               <h2 className={style.title}>Edit Card Set</h2>
@@ -90,7 +95,8 @@ export function CardSets() {
                 </div>
               </form>
             )}
-          </div>}
+          </div>
+        )}
       </div>
 
       <div className={style.sectionYourCardSets}>
@@ -104,7 +110,7 @@ export function CardSets() {
 
         {!isLoading && sets.length > 0 && (
           <div className={style.list}>
-            {sets.map(s => {
+            {sets.map((s) => {
               const active = s.id === selectedId;
 
               return (
@@ -116,20 +122,18 @@ export function CardSets() {
                   tabIndex={0}
                 >
                   <div className={style.itemDesc}>{s.description}</div>
-                  <div className={style.itemTitle}>
-                    {s.title}
-                  </div>
+                  <div className={style.itemTitle}>{s.title}</div>
                   <div className={style.itemCount}>{s.cardsCount} cards</div>
-                  <div className={style.itemActions} onClick={e => e.stopPropagation()}>
+                  <div className={style.itemActions} onClick={(e) => e.stopPropagation()}>
                     <Button
                       title={'Edit'}
                       onClick={() => select(s.id)}
-                      style={{ width: '100px'}}
+                      style={{ width: '100px' }}
                     />
                     <Button
                       title={'Delete'}
                       onClick={() => requestDelete(s)}
-                      style={{ width: '100px'}}
+                      style={{ width: '100px' }}
                     />
                   </div>
                 </div>
@@ -142,7 +146,11 @@ export function CardSets() {
       <ConfirmModal
         isOpen={deleteTarget != null}
         title={'Delete card set?'}
-        message={deleteTarget ? `Delete "${deleteTarget.title}"? All cards inside will be deleted.` : undefined}
+        message={
+          deleteTarget
+            ? `Delete "${deleteTarget.title}"? All cards inside will be deleted.`
+            : undefined
+        }
         onConfirm={confirmDelete}
         onCancel={cancelDelete}
       />

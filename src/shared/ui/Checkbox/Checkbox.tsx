@@ -1,6 +1,7 @@
-import { v4 } from 'uuid';
-import style from './Checkbox.module.scss';
 import type { ReactNode } from 'react';
+import { v4 } from 'uuid';
+
+import style from './Checkbox.module.scss';
 
 interface Props {
   size?: number;
@@ -9,12 +10,7 @@ interface Props {
   onChange?: (checked: boolean) => void;
 }
 
-export const Checkbox = ({
-  size = 24,
-  label,
-  checked = false,
-  onChange,
-}: Props) => {
+export const Checkbox = ({ size = 24, label, checked = false, onChange }: Props) => {
   const checkBoxId = `checkbox_id_${v4()}`;
 
   const checkBoxSize = {
@@ -30,19 +26,10 @@ export const Checkbox = ({
 
   return (
     <div className={style.container}>
-      <div
-        className={style.checkbox}
-        id={checkBoxId}
-        onClick={changeStatus}
-        style={checkBoxSize}
-      >
+      <div className={style.checkbox} id={checkBoxId} onClick={changeStatus} style={checkBoxSize}>
         <div className={checkBoxClassNames} />
       </div>
-      <label
-        className={style.label}
-        htmlFor={checkBoxId}
-        onClick={changeStatus}
-      >
+      <label className={style.label} htmlFor={checkBoxId} onClick={changeStatus}>
         {label}
       </label>
     </div>

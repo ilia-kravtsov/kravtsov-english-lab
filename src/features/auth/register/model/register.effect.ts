@@ -1,5 +1,6 @@
-import { authApi } from '@/features/auth/api/auth.api.ts';
 import { useUserStore } from '@/entities/user';
+import { authApi } from '@/features/auth/api/auth.api.ts';
+
 import type { RegisterDto } from './register.dto.ts';
 
 export async function registerEffect(dto: RegisterDto): Promise<void> {

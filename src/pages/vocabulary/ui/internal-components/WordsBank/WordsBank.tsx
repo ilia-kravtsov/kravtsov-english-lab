@@ -1,13 +1,14 @@
-import style from './WordsBank.module.scss';
 import { AddLexicalUnitForm } from '@/features/vocabulary/lexical-unit-add';
-import { SearchLexicalUnit } from '@/features/vocabulary/lexical-unit-add/ui/SearchLexicalUnit/SearchLexicalUnit.tsx';
 import { useLexicalUnitEditorStore } from '@/features/vocabulary/lexical-unit-add/model/lexicalUnitEditor.store.ts';
+import { SearchLexicalUnit } from '@/features/vocabulary/lexical-unit-add/ui/SearchLexicalUnit/SearchLexicalUnit.tsx';
+
+import style from './WordsBank.module.scss';
 
 export function WordsBank() {
-  const activeTab = useLexicalUnitEditorStore(s => s.activeTab);
-  const mode = useLexicalUnitEditorStore(s => s.mode);
-  const openAdd = useLexicalUnitEditorStore(s => s.openAdd);
-  const openSearch = useLexicalUnitEditorStore(s => s.openSearch);
+  const activeTab = useLexicalUnitEditorStore((s) => s.activeTab);
+  const mode = useLexicalUnitEditorStore((s) => s.mode);
+  const openAdd = useLexicalUnitEditorStore((s) => s.openAdd);
+  const openSearch = useLexicalUnitEditorStore((s) => s.openSearch);
 
   return (
     <div className={style.container}>

@@ -1,11 +1,13 @@
 import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
-import style from './LoginForm.module.scss';
-import { Input } from '@/shared/ui/Input/Input.tsx';
-import { Button } from '@/shared/ui';
-import { Checkbox } from '@/shared/ui/Checkbox/Checkbox.tsx';
+
 import type { LoginFormData } from '@/features/auth/login/model/login.types.ts';
 import { useLoginForm } from '@/features/auth/login/model/useLoginForm.ts';
+import { Button } from '@/shared/ui';
+import { Checkbox } from '@/shared/ui/Checkbox/Checkbox.tsx';
+import { Input } from '@/shared/ui/Input/Input.tsx';
+
+import style from './LoginForm.module.scss';
 
 export function LoginForm() {
   const {
@@ -52,7 +54,7 @@ export function LoginForm() {
 
       <div className={style.checkBoxLinkContainer}>
         <Controller
-          name='rememberMe'
+          name="rememberMe"
           control={control}
           defaultValue={false}
           render={({ field }) => (

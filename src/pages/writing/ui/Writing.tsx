@@ -3,9 +3,7 @@ import style from './Writing.module.scss';
 export function Writing() {
   return (
     <section className={style.container}>
-      <h1 className={style.header}>
-        Writing
-      </h1>
+      <h1 className={style.header}>Writing</h1>
       <p className={style.paragraph}>
         This section will help you develop your English writing skills
       </p>
@@ -14,8 +12,8 @@ export function Writing() {
         and longer texts
       </p>
       <p className={style.paragraph}>
-        Exercises will focus on grammar accuracy, vocabulary usage,
-        and clear expression so you can write confidently in everyday situations
+        Exercises will focus on grammar accuracy, vocabulary usage, and clear expression so you can
+        write confidently in everyday situations
       </p>
     </section>
   );

@@ -1,8 +1,9 @@
-import { Button } from '@/shared/ui';
-import style from './PracticeResults.module.scss';
 import type { PracticeMode } from '@/features/vocabulary/card-practice/model/practice-mode.types.ts';
-import { ConfettiBurstPetard } from '@/shared/ui/ConfettiBurstPetard/ConfettiBurstPetard.tsx';
 import { readPracticeStats } from '@/features/vocabulary/card-practice/shared/model/practice.storage.ts';
+import { Button } from '@/shared/ui';
+import { ConfettiBurstPetard } from '@/shared/ui/ConfettiBurstPetard/ConfettiBurstPetard.tsx';
+
+import style from './PracticeResults.module.scss';
 
 export type PracticeStats = {
   recognition?: PracticeModeStats;
@@ -76,11 +77,7 @@ function Row({ label, value }: { label: string; value: string }) {
   );
 }
 
-export function PracticeResults({
-                                  cardSetId,
-                                  restart,
-                                  restartTitle,
-                                }: Props) {
+export function PracticeResults({ cardSetId, restart, restartTitle }: Props) {
   const stats = readPracticeStats(cardSetId) as PracticeStats;
 
   return (
@@ -90,33 +87,17 @@ export function PracticeResults({
       <h3 className={style.sectionTitle}>Results</h3>
 
       <div className={style.resultBlock}>
-        <Row
-          label={MODE_LABEL.recognition}
-          value={format(stats.recognition)}
-        />
+        <Row label={MODE_LABEL.recognition} value={format(stats.recognition)} />
 
-        <Row
-          label={MODE_LABEL.typing}
-          value={format(stats.typing)}
-        />
+        <Row label={MODE_LABEL.typing} value={format(stats.typing)} />
 
-        <Row
-          label={MODE_LABEL.listening}
-          value={format(stats.listening)}
-        />
+        <Row label={MODE_LABEL.listening} value={format(stats.listening)} />
 
-        <Row
-          label={MODE_LABEL.context}
-          value={format(stats.context)}
-        />
+        <Row label={MODE_LABEL.context} value={format(stats.context)} />
       </div>
 
       <div className={style.controlsRow}>
-        <Button
-          title={restartTitle}
-          onClick={restart}
-          style={{ width: '200px' }}
-        />
+        <Button title={restartTitle} onClick={restart} style={{ width: '200px' }} />
       </div>
     </div>
   );

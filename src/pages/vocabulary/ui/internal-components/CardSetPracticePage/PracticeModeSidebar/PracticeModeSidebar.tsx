@@ -1,5 +1,6 @@
-import style from './PracticeModeSidebar.module.scss';
 import type { PracticeMode } from '@/features/vocabulary/card-practice/model/practice-mode.types.ts';
+
+import style from './PracticeModeSidebar.module.scss';
 
 type Props = {
   mode: PracticeMode;
@@ -17,19 +18,19 @@ type Props = {
 };
 
 export function PracticeModeSidebar({
-                                      mode,
-                                      loading,
-                                      hasItems,
-                                      recognitionAvailable,
-                                      typingAvailable,
-                                      listeningAvailable,
-                                      contextAvailable,
-                                      onStandardClick,
-                                      onRecognitionClick,
-                                      onTypingClick,
-                                      onListeningClick,
-                                      onContextClick,
-                                    }: Props) {
+  mode,
+  loading,
+  hasItems,
+  recognitionAvailable,
+  typingAvailable,
+  listeningAvailable,
+  contextAvailable,
+  onStandardClick,
+  onRecognitionClick,
+  onTypingClick,
+  onListeningClick,
+  onContextClick,
+}: Props) {
   return (
     <div className={style.left}>
       <h3 className={style.sectionTitle}>Mode</h3>
@@ -81,9 +82,7 @@ export function PracticeModeSidebar({
       </div>
 
       {!loading && hasItems && !recognitionAvailable && (
-        <div className={style.modeHint}>
-          Recognition needs at least 2 cards with translation.
-        </div>
+        <div className={style.modeHint}>Recognition needs at least 2 cards with translation.</div>
       )}
 
       {!loading && hasItems && !contextAvailable && (

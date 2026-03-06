@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
+
 import type {
   PracticeSwitchDir,
   PracticeSwitchState,
@@ -14,11 +15,14 @@ export function useSwitchAnimation(totalMs = 260) {
     };
   }, []);
 
-  const trigger = useCallback((d: PracticeSwitchDir) => {
-    setDir(d);
-    if (endRef.current) window.clearTimeout(endRef.current);
-    endRef.current = window.setTimeout(() => setDir(null), totalMs);
-  }, [totalMs]);
+  const trigger = useCallback(
+    (d: PracticeSwitchDir) => {
+      setDir(d);
+      if (endRef.current) window.clearTimeout(endRef.current);
+      endRef.current = window.setTimeout(() => setDir(null), totalMs);
+    },
+    [totalMs],
+  );
 
   return { dir, trigger, totalMs };
 }

@@ -1,4 +1,5 @@
 import { RegisterForm } from '@/features/auth/register';
+
 import style from './RegisterPage.module.scss';
 
 export function Register() {

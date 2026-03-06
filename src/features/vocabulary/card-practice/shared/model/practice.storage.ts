@@ -14,11 +14,7 @@ export function readPracticeStats(cardSetId: string) {
   }
 }
 
-export function writePracticeModeStats(
-  cardSetId: string,
-  mode: PracticeMode,
-  stats: unknown
-) {
+export function writePracticeModeStats(cardSetId: string, mode: PracticeMode, stats: unknown) {
   const current = readPracticeStats(cardSetId);
 
   const next = {

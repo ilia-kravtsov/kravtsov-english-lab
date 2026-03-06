@@ -1,6 +1,8 @@
 import { useMemo, useRef, useState } from 'react';
-import style from './MultiSelect.module.scss';
+
 import type { PartsOfSpeech } from '@/entities/lexical-unit';
+
+import style from './MultiSelect.module.scss';
 
 type Option = { value: PartsOfSpeech; label: string };
 
@@ -21,21 +23,19 @@ export function MultiSelect({ value, onChange, options, placeholder, disabled }:
   const toggle = (v: PartsOfSpeech) => {
     if (disabled) return;
 
-    const next = selectedSet.has(v)
-      ? value.filter(x => x !== v)
-      : [...value, v];
+    const next = selectedSet.has(v) ? value.filter((x) => x !== v) : [...value, v];
 
     onChange(next);
   };
 
   const remove = (v: PartsOfSpeech) => {
     if (disabled) return;
-    onChange(value.filter(x => x !== v));
+    onChange(value.filter((x) => x !== v));
   };
 
   const selectedLabels = useMemo(() => {
-    const map = new Map<PartsOfSpeech, string>(options.map(o => [o.value, o.label]));
-    return value.map(v => ({ value: v, label: map.get(v) ?? v }));
+    const map = new Map<PartsOfSpeech, string>(options.map((o) => [o.value, o.label]));
+    return value.map((v) => ({ value: v, label: map.get(v) ?? v }));
   }, [value, options]);
 
   return (
@@ -50,20 +50,20 @@ export function MultiSelect({ value, onChange, options, placeholder, disabled }:
       }}
     >
       <button
-        type={"button"}
+        type={'button'}
         className={style.control}
-        onClick={() => !disabled && setOpen(v => !v)}
+        onClick={() => !disabled && setOpen((v) => !v)}
       >
         <div className={style.valueArea}>
           {selectedLabels.length === 0 ? (
             <span className={style.placeholder}>{placeholder ?? 'Select...'}</span>
           ) : (
             <div className={style.tags}>
-              {selectedLabels.map(t => (
+              {selectedLabels.map((t) => (
                 <span key={t.value} className={style.tag}>
                   {t.label}
                   <button
-                    type={"button"}
+                    type={'button'}
                     className={style.tagRemove}
                     onClick={(e) => {
                       e.stopPropagation();
@@ -82,7 +82,7 @@ export function MultiSelect({ value, onChange, options, placeholder, disabled }:
 
       {open && (
         <div className={style.dropdown}>
-          {options.map(opt => {
+          {options.map((opt) => {
             const active = selectedSet.has(opt.value);
             return (
               <button

@@ -1,6 +1,7 @@
-import style from './Footer.module.scss';
-import { LinkAsButton } from '@/shared/ui/LinkAsButton/LinkAsButton.tsx';
 import { LogoutButton } from '@/features/auth/logout';
+import { LinkAsButton } from '@/shared/ui/LinkAsButton/LinkAsButton.tsx';
+
+import style from './Footer.module.scss';
 
 export function Footer() {
   type NavLink = {

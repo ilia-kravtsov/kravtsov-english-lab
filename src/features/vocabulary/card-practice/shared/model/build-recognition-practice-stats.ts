@@ -15,7 +15,7 @@ export function buildRecognitionPracticeStats<T extends RecognitionCardStatLike>
   const entries = Object.values(statsByCard);
 
   const completedCards = entries.length;
-  const firstTryCorrectCards = entries.filter(s => s.attempts === 1 && s.wrongCount === 0,).length;
+  const firstTryCorrectCards = entries.filter((s) => s.attempts === 1 && s.wrongCount === 0).length;
   const wrongAnswers = entries.reduce((acc, s) => acc + s.wrongCount, 0);
   const skippedCards = 0;
   const totalAnswers = entries.reduce((acc, s) => acc + s.attempts, 0);

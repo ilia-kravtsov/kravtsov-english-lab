@@ -1,5 +1,6 @@
-import style from './Button.module.scss';
 import type { CSSProperties, MouseEvent } from 'react';
+
+import style from './Button.module.scss';
 
 interface ButtonProps {
   title: string;

@@ -8,12 +8,13 @@ import {
   useState,
 } from 'react';
 
-import style from './LexicalUnitSearchPanel.module.scss';
-import { Input } from '@/shared/ui/Input/Input';
-import { Button } from '@/shared/ui';
 import type { LexicalUnit } from '@/entities/lexical-unit';
 import type { LexicalUnitSearchResultState } from '@/features/vocabulary/lexical-unit-add/model/useLexicalUnitSearch';
 import { useLexicalUnitSuggestions } from '@/features/vocabulary/lexical-unit-add/model/useLexicalUnitSuggestions.ts';
+import { Button } from '@/shared/ui';
+import { Input } from '@/shared/ui/Input/Input';
+
+import style from './LexicalUnitSearchPanel.module.scss';
 
 type Props = {
   query: string;
@@ -44,31 +45,31 @@ type Props = {
 };
 
 export function LexicalUnitSearchPanel({
-                                         query,
-                                         setQuery,
-                                         normalizedQuery,
-                                         result,
-                                         runSearch,
+  query,
+  setQuery,
+  normalizedQuery,
+  result,
+  runSearch,
 
-                                         audioRef,
-                                         audioSrc,
-                                         playAudio,
+  audioRef,
+  audioSrc,
+  playAudio,
 
-                                         meaningAudioRef,
-                                         meaningAudioSrc,
-                                         playMeaningAudio,
+  meaningAudioRef,
+  meaningAudioSrc,
+  playMeaningAudio,
 
-                                         exampleAudioRef,
-                                         exampleAudioSrc,
-                                         playExampleAudio,
+  exampleAudioRef,
+  exampleAudioSrc,
+  playExampleAudio,
 
-                                         imageSrc,
+  imageSrc,
 
-                                         variant = 'full',
+  variant = 'full',
 
-                                         renderNotFound,
-                                         renderFoundActions,
-                                       }: Props) {
+  renderNotFound,
+  renderFoundActions,
+}: Props) {
   const [isSuggestOpen, setIsSuggestOpen] = useState(false);
   const suggestWrapRef = useRef<HTMLDivElement | null>(null);
   const suggestions = useLexicalUnitSuggestions(query, 3);
@@ -135,12 +136,12 @@ export function LexicalUnitSearchPanel({
 
           {showSuggest && (
             <div className={style.suggestBox} role={'listbox'}>
-              {suggestions.items.slice(0, 3).map(item => (
+              {suggestions.items.slice(0, 3).map((item) => (
                 <button
                   key={item.id}
                   type={'button'}
                   className={style.suggestItem}
-                  onMouseDown={e => e.preventDefault()}
+                  onMouseDown={(e) => e.preventDefault()}
                   onClick={() => void handlePickSuggestion(item.value)}
                 >
                   <span className={style.suggestValue}>{item.value}</span>
@@ -165,7 +166,11 @@ export function LexicalUnitSearchPanel({
 
       {result.status === 'not-found' && (
         <div className={style.notFoundBox}>
-          {renderNotFound ? renderNotFound() : <div className={style.hint}>Not found in your bank.</div>}
+          {renderNotFound ? (
+            renderNotFound()
+          ) : (
+            <div className={style.hint}>Not found in your bank.</div>
+          )}
         </div>
       )}
 
@@ -183,7 +188,6 @@ export function LexicalUnitSearchPanel({
             </div>
 
             <div className={style.fieldRow}>
-
               {result.unit.transcription && (
                 <div className={style.fieldRow}>
                   <span className={style.value}>{result.unit.transcription}</span>
@@ -192,8 +196,18 @@ export function LexicalUnitSearchPanel({
 
               {audioSrc && audioRef && playAudio && (
                 <div className={style.fieldBlock}>
-                  <audio ref={audioRef} src={audioSrc} preload={'metadata'} style={{ display: 'none' }} />
-                  <Button type={'button'} title={'Play'} onClick={playAudio} style={{ width: '80px' }} />
+                  <audio
+                    ref={audioRef}
+                    src={audioSrc}
+                    preload={'metadata'}
+                    style={{ display: 'none' }}
+                  />
+                  <Button
+                    type={'button'}
+                    title={'Play'}
+                    onClick={playAudio}
+                    style={{ width: '80px' }}
+                  />
                 </div>
               )}
             </div>
@@ -209,7 +223,12 @@ export function LexicalUnitSearchPanel({
                 {meaningAudioSrc && meaningAudioRef && playMeaningAudio && (
                   <div className={style.fieldBlock}>
                     <audio ref={meaningAudioRef} src={meaningAudioSrc} preload="metadata" hidden />
-                    <Button type="button" title="Play meaning" onClick={playMeaningAudio} style={{ width: '80px' }} />
+                    <Button
+                      type="button"
+                      title="Play meaning"
+                      onClick={playMeaningAudio}
+                      style={{ width: '80px' }}
+                    />
                   </div>
                 )}
 
@@ -232,7 +251,12 @@ export function LexicalUnitSearchPanel({
                 {exampleAudioSrc && (
                   <div className={style.fieldBlock}>
                     <audio ref={exampleAudioRef} src={exampleAudioSrc} preload={'metadata'} />
-                    <Button type={'button'} title={'Play example'} onClick={playExampleAudio} style={{ width: '80px' }} />
+                    <Button
+                      type={'button'}
+                      title={'Play example'}
+                      onClick={playExampleAudio}
+                      style={{ width: '80px' }}
+                    />
                   </div>
                 )}
 
@@ -251,7 +275,9 @@ export function LexicalUnitSearchPanel({
             </div>
           )}
 
-          {renderFoundActions && <div className={style.actions}>{renderFoundActions(result.unit)}</div>}
+          {renderFoundActions && (
+            <div className={style.actions}>{renderFoundActions(result.unit)}</div>
+          )}
         </div>
       )}
     </div>

@@ -1,12 +1,14 @@
 import { useEffect, useMemo, useRef } from 'react';
+
+import type { PracticeSwitchState } from '@/features/vocabulary/card-practice/model/practice-mode.types.ts';
+import { useAutoNextOnCorrect } from '@/features/vocabulary/card-practice/shared/model/useAutoNextOnCorrect.ts';
+import { PracticeResults } from '@/features/vocabulary/card-practice/shared/ui/PracticeResults/PracticeResults.tsx';
+import switchAnim from '@/features/vocabulary/card-practice/shared/ui/SwitchAnimation.module.scss';
 import { Button, Input } from '@/shared/ui';
-import style from './ListeningPractice.module.scss';
+
 import { useListeningStore } from '../model/listening.store';
 import { toAbsoluteMediaUrl } from '../model/listening.utils.ts';
-import { useAutoNextOnCorrect } from '@/features/vocabulary/card-practice/shared/model/useAutoNextOnCorrect.ts';
-import switchAnim from '@/features/vocabulary/card-practice/shared/ui/SwitchAnimation.module.scss';
-import type { PracticeSwitchState } from '@/features/vocabulary/card-practice/model/practice-mode.types.ts';
-import { PracticeResults } from '@/features/vocabulary/card-practice/shared/ui/PracticeResults/PracticeResults.tsx';
+import style from './ListeningPractice.module.scss';
 
 type Props = {
   switchDir?: PracticeSwitchState;
@@ -14,24 +16,24 @@ type Props = {
   autoNextCommitDelayMs?: number;
 };
 
-export function ListeningPractice({switchDir, onAutoNext, autoNextCommitDelayMs}: Props) {
-  const cards = useListeningStore(s => s.cards);
-  const index = useListeningStore(s => s.index);
-  const feedback = useListeningStore(s => s.feedback);
-  const locked = useListeningStore(s => s.locked);
+export function ListeningPractice({ switchDir, onAutoNext, autoNextCommitDelayMs }: Props) {
+  const cards = useListeningStore((s) => s.cards);
+  const index = useListeningStore((s) => s.index);
+  const feedback = useListeningStore((s) => s.feedback);
+  const locked = useListeningStore((s) => s.locked);
 
-  const input = useListeningStore(s => s.input);
-  const setInput = useListeningStore(s => s.setInput);
+  const input = useListeningStore((s) => s.input);
+  const setInput = useListeningStore((s) => s.setInput);
 
-  const attempts = useListeningStore(s => s.attempts);
+  const attempts = useListeningStore((s) => s.attempts);
 
-  const isFinished = useListeningStore(s => s.isFinished);
-  const cardSetId = useListeningStore(s => s.cardSetId);
+  const isFinished = useListeningStore((s) => s.isFinished);
+  const cardSetId = useListeningStore((s) => s.cardSetId);
 
-  const submit = useListeningStore(s => s.submit);
-  const skip = useListeningStore(s => s.skip);
-  const next = useListeningStore(s => s.next);
-  const restart = useListeningStore(s => s.restart);
+  const submit = useListeningStore((s) => s.submit);
+  const skip = useListeningStore((s) => s.skip);
+  const next = useListeningStore((s) => s.next);
+  const restart = useListeningStore((s) => s.restart);
 
   const inputRef = useRef<HTMLInputElement | null>(null);
 
@@ -72,11 +74,7 @@ export function ListeningPractice({switchDir, onAutoNext, autoNextCommitDelayMs}
 
   if (isFinished) {
     return (
-      <PracticeResults
-        cardSetId={cardSetId}
-        restart={restart}
-        restartTitle={"Restart Listening"}
-      />
+      <PracticeResults cardSetId={cardSetId} restart={restart} restartTitle={'Restart Listening'} />
     );
   }
 
@@ -95,7 +93,9 @@ export function ListeningPractice({switchDir, onAutoNext, autoNextCommitDelayMs}
       >
         <div className={style.promptLabel}>Listen and type:</div>
         <div className={style.audioRow}>
-          {audioSrc && <audio ref={audioRef} src={audioSrc} preload={'metadata'} style={{ display: 'none' }} />}
+          {audioSrc && (
+            <audio ref={audioRef} src={audioSrc} preload={'metadata'} style={{ display: 'none' }} />
+          )}
           <Button
             type={'button'}
             title={'Play'}
@@ -114,10 +114,10 @@ export function ListeningPractice({switchDir, onAutoNext, autoNextCommitDelayMs}
         <Input
           ref={inputRef}
           value={input}
-          onChange={e => setInput(e.target.value)}
+          onChange={(e) => setInput(e.target.value)}
           placeholder={'Type lexical unit'}
           disabled={locked}
-          onKeyDown={e => {
+          onKeyDown={(e) => {
             if (e.key === 'Enter') {
               e.preventDefault();
               submit();

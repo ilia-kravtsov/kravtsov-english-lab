@@ -1,5 +1,6 @@
 import { createGStore } from 'create-gstore';
 import { useState } from 'react';
+
 import type { CardSet } from '@/entities/card-set/model/card-set.types';
 
 export interface CardSetsState {
@@ -25,10 +26,10 @@ export const useCardSetsStore = createGStore<CardSetsState>(() => {
     selectedId,
     isLoading,
 
-    setSets: next => {
+    setSets: (next) => {
       setSetsState(next);
-      setSelectedId(prev => {
-        if (prev && next.some(s => s.id === prev)) return prev;
+      setSelectedId((prev) => {
+        if (prev && next.some((s) => s.id === prev)) return prev;
         return next[0]?.id ?? null;
       });
     },
@@ -37,14 +38,14 @@ export const useCardSetsStore = createGStore<CardSetsState>(() => {
 
     select: setSelectedId,
 
-    removeFromState: id => {
-      setSetsState(prev => prev.filter(s => s.id !== id));
-      setSelectedId(prev => (prev === id ? null : prev));
+    removeFromState: (id) => {
+      setSetsState((prev) => prev.filter((s) => s.id !== id));
+      setSelectedId((prev) => (prev === id ? null : prev));
     },
 
-    upsertInState: set => {
-      setSetsState(prev => {
-        const idx = prev.findIndex(x => x.id === set.id);
+    upsertInState: (set) => {
+      setSetsState((prev) => {
+        const idx = prev.findIndex((x) => x.id === set.id);
         if (idx === -1) return [set, ...prev];
         const copy = prev.slice();
         copy[idx] = set;

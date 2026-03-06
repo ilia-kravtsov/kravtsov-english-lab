@@ -1,12 +1,14 @@
 import { createGStore } from 'create-gstore';
 import { useRef, useState } from 'react';
+
 import type { CardWithLexicalUnit } from '@/entities/card/model/card.types';
-import type { ListeningCardStat, ListeningFeedback, ListeningSessionCard } from './listening.types';
-import { writeListeningStats } from './listening.storage';
-import { norm, round } from './listening.utils.ts';
-import type { PracticeModeStats } from '@/features/vocabulary/card-practice/shared/model/practice.types.ts';
-import { readPracticeStats } from '@/features/vocabulary/card-practice/shared/model/practice.storage.ts';
 import { buildPracticeModeStats } from '@/features/vocabulary/card-practice/shared/model/build-practice-mode-stats.ts';
+import { readPracticeStats } from '@/features/vocabulary/card-practice/shared/model/practice.storage.ts';
+import type { PracticeModeStats } from '@/features/vocabulary/card-practice/shared/model/practice.types.ts';
+
+import { writeListeningStats } from './listening.storage';
+import type { ListeningCardStat, ListeningFeedback, ListeningSessionCard } from './listening.types';
+import { norm, round } from './listening.utils.ts';
 
 export interface ListeningState {
   cardSetId: string | null;
@@ -80,8 +82,8 @@ export const useListeningStore = createGStore<ListeningState>(() => {
 
   const start = (id: string, allCards: CardWithLexicalUnit[]) => {
     const filtered = allCards
-      .filter(c => c.lexicalUnit && Boolean(c.lexicalUnit.audioUrl))
-      .map(c => c as ListeningSessionCard);
+      .filter((c) => c.lexicalUnit && Boolean(c.lexicalUnit.audioUrl))
+      .map((c) => c as ListeningSessionCard);
 
     setCardSetId(id);
     setCards(filtered);
@@ -141,12 +143,12 @@ export const useListeningStore = createGStore<ListeningState>(() => {
         isCorrect: true,
       };
 
-      setStatsByCard(prev => ({ ...prev, [card.id]: stat }));
+      setStatsByCard((prev) => ({ ...prev, [card.id]: stat }));
       return;
     }
 
     setFeedback('wrong');
-    setWrongCount(v => v + 1);
+    setWrongCount((v) => v + 1);
     window.setTimeout(() => setFeedback('idle'), 260);
   };
 

@@ -1,8 +1,10 @@
+import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { registerEffect } from '../model/register.effect';
-import axios from 'axios';
+
 import type { RegisterFormData } from '@/features/auth/register/model/register.types.ts';
+
+import { registerEffect } from '../model/register.effect';
 
 export function useRegisterForm() {
   const [serverError, setServerError] = useState<string | null>(null);

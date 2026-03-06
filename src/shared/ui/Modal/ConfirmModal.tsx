@@ -1,6 +1,8 @@
-import style from './ConfirmModal.module.scss';
-import { Button } from '@/shared/ui/Button/Button';
 import { useEffect } from 'react';
+
+import { Button } from '@/shared/ui/Button/Button';
+
+import style from './ConfirmModal.module.scss';
 
 interface Props {
   isOpen: boolean;
@@ -10,14 +12,7 @@ interface Props {
   onCancel: () => void;
 }
 
-export function ConfirmModal({
-  isOpen,
-  title,
-  message,
-  onConfirm,
-  onCancel,
-}: Props) {
-
+export function ConfirmModal({ isOpen, title, message, onConfirm, onCancel }: Props) {
   useEffect(() => {
     if (!isOpen) return;
 
@@ -40,8 +35,8 @@ export function ConfirmModal({
         <h3 className={style.title}>{title}</h3>
         {message && <p className={style.paragraph}>{message}</p>}
         <div className={style.actions}>
-          <Button title='Cancel' onClick={onCancel} />
-          <Button title='Confirm' onClick={onConfirm} />
+          <Button title="Cancel" onClick={onCancel} />
+          <Button title="Confirm" onClick={onConfirm} />
         </div>
       </div>
     </div>

@@ -1,7 +1,9 @@
-import { NavLink } from 'react-router-dom';
-import style from './Nav.module.scss';
-import { LinkAsButton } from '@/shared/ui/LinkAsButton/LinkAsButton.tsx';
 import { forwardRef, type Ref } from 'react';
+import type { NavLink } from 'react-router-dom';
+
+import { LinkAsButton } from '@/shared/ui/LinkAsButton/LinkAsButton.tsx';
+
+import style from './Nav.module.scss';
 
 type NavLink = {
   id: string;
@@ -45,12 +47,7 @@ export const Nav = forwardRef<HTMLDivElement, Props>(
       <aside className={containerStyles} ref={ref}>
         <nav className={style.menu}>
           {navLinks.map((navLink: NavLink) => (
-            <LinkAsButton
-              key={navLink.id}
-              to={navLink.to}
-              style={linkStyles}
-              onClick={handleClick}
-            >
+            <LinkAsButton key={navLink.id} to={navLink.to} style={linkStyles} onClick={handleClick}>
               {navLink.title}
             </LinkAsButton>
           ))}

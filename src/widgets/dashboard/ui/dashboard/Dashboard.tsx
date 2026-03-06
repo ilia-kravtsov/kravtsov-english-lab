@@ -1,10 +1,12 @@
+import { useEffect, useRef, useState } from 'react';
 import { Outlet } from 'react-router-dom';
+
+import { BurgerButton } from '@/shared/ui/BurgerButton/BurgerButton.tsx';
+import { Footer } from '@/widgets/dashboard/ui/footer/Footer.tsx';
 import { Header } from '@/widgets/dashboard/ui/header/Header.tsx';
 import { Nav } from '@/widgets/dashboard/ui/nav/Nav.tsx';
-import { Footer } from '@/widgets/dashboard/ui/footer/Footer.tsx';
+
 import style from './Dashboard.module.scss';
-import { useEffect, useRef, useState } from 'react';
-import { BurgerButton } from '@/shared/ui/BurgerButton/BurgerButton.tsx';
 
 export function Dashboard() {
   const [isOpen, setIsOpen] = useState(true);
@@ -41,11 +43,7 @@ export function Dashboard() {
     <div className={style.container}>
       <Header />
 
-      <BurgerButton
-        toggleBurger={isNavMenuOpen}
-        isOpen={isOpen}
-        ref={toggleMenuRef}
-      />
+      <BurgerButton toggleBurger={isNavMenuOpen} isOpen={isOpen} ref={toggleMenuRef} />
 
       <Nav onLinkClick={handleClick} isOpen={isOpen} ref={navRef} />
 

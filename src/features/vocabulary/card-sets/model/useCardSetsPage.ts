@@ -1,11 +1,11 @@
 import { useEffect, useMemo, useState } from 'react';
 import { toast } from 'react-toastify';
 
-import type { CardWithLexicalUnit } from '@/entities/card/model/card.types';
 import { createCard, deleteCard, listCardsWithLexicalUnit } from '@/entities/card/api/card.api';
-import { useLexicalUnitSearch } from '@/features/vocabulary/lexical-unit-add/model/useLexicalUnitSearch';
-import type { CardSet } from '@/entities/card-set/model/card-set.types.ts';
+import type { CardWithLexicalUnit } from '@/entities/card/model/card.types';
 import { getCardSetById } from '@/entities/card-set/api/card-set.api.ts';
+import type { CardSet } from '@/entities/card-set/model/card-set.types.ts';
+import { useLexicalUnitSearch } from '@/features/vocabulary/lexical-unit-add/model/useLexicalUnitSearch';
 
 export function useCardSetsPage(cardSetId: string | undefined) {
   const lexicalSearch = useLexicalUnitSearch();
@@ -58,19 +58,17 @@ export function useCardSetsPage(cardSetId: string | undefined) {
   }, [cardSetId]);
 
   const foundUnitId = useMemo(() => {
-    return lexicalSearch.result.status === 'found'
-      ? lexicalSearch.result.unit.id
-      : null;
+    return lexicalSearch.result.status === 'found' ? lexicalSearch.result.unit.id : null;
   }, [lexicalSearch.result]);
 
   const inSet = useMemo(() => {
     if (!foundUnitId) return false;
-    return cards.some(c => c.lexicalUnitId === foundUnitId);
+    return cards.some((c) => c.lexicalUnitId === foundUnitId);
   }, [cards, foundUnitId]);
 
   const foundCardInSet = useMemo(() => {
     if (!foundUnitId) return null;
-    return cards.find(c => c.lexicalUnitId === foundUnitId) ?? null;
+    return cards.find((c) => c.lexicalUnitId === foundUnitId) ?? null;
   }, [cards, foundUnitId]);
 
   const addToSet = async () => {

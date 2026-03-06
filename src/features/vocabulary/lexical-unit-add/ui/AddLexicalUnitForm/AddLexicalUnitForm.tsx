@@ -1,9 +1,11 @@
-import style from './AddLexicalUnitForm.module.scss';
-import { Input } from '@/shared/ui/Input/Input.tsx';
-import { Button, Textarea } from '@/shared/ui';
-import { useAddLexicalUnitForm } from '@/features/vocabulary/lexical-unit-add/model/useAddLexicalUnitForm.ts';
 import { Controller } from 'react-hook-form';
+
+import { useAddLexicalUnitForm } from '@/features/vocabulary/lexical-unit-add/model/useAddLexicalUnitForm.ts';
+import { Button, Textarea } from '@/shared/ui';
+import { Input } from '@/shared/ui/Input/Input.tsx';
 import { MultiSelect } from '@/shared/ui/MultiSelect/MultiSelect.tsx';
+
+import style from './AddLexicalUnitForm.module.scss';
 
 export function AddLexicalUnitForm() {
   const {
@@ -78,14 +80,13 @@ export function AddLexicalUnitForm() {
 
   return (
     <form onSubmit={submit} className={style.container}>
-      <Input{...register('value', { required: true })} placeholder={'word or expression *'} />
+      <Input {...register('value', { required: true })} placeholder={'word or expression *'} />
       <Input {...register('translation')} placeholder={'translation *'} />
 
       <div className={style.audioContainer}>
-
         {!audioBlob && remoteAudioSrc && (
           <div className={style.remoteAudio}>
-            <audio controls preload={"metadata"} src={remoteAudioSrc} />
+            <audio controls preload={'metadata'} src={remoteAudioSrc} />
           </div>
         )}
 
@@ -134,13 +135,12 @@ export function AddLexicalUnitForm() {
             </button>
           </>
         )}
-
       </div>
 
       <div className={style.audioContainer}>
         {!meaningAudioBlob && remoteMeaningAudioSrc && (
           <div className={style.remoteAudio}>
-            <audio controls preload={"metadata"} src={remoteMeaningAudioSrc} />
+            <audio controls preload={'metadata'} src={remoteMeaningAudioSrc} />
           </div>
         )}
 
@@ -155,8 +155,8 @@ export function AddLexicalUnitForm() {
 
         {meaningRecording && (
           <span className={style.recordHint}>
-      Recording… {meaningElapsedSec}/{meaningMaxSec}s
-    </span>
+            Recording… {meaningElapsedSec}/{meaningMaxSec}s
+          </span>
         )}
 
         {meaningAudioBlob && (
@@ -194,7 +194,7 @@ export function AddLexicalUnitForm() {
       <div className={style.audioContainer}>
         {!exampleAudioBlob && remoteExampleAudioSrc && (
           <div className={style.remoteAudio}>
-            <audio controls preload={"metadata"} src={remoteExampleAudioSrc} />
+            <audio controls preload={'metadata'} src={remoteExampleAudioSrc} />
           </div>
         )}
 
@@ -209,8 +209,8 @@ export function AddLexicalUnitForm() {
 
         {exampleRecording && (
           <span className={style.recordHint}>
-      Recording… {exampleElapsedSec}/{exampleMaxSec}s
-    </span>
+            Recording… {exampleElapsedSec}/{exampleMaxSec}s
+          </span>
         )}
 
         {exampleAudioBlob && (
@@ -245,7 +245,7 @@ export function AddLexicalUnitForm() {
         )}
       </div>
 
-      <Input{...register('transcription')} placeholder={'transcription'} />
+      <Input {...register('transcription')} placeholder={'transcription'} />
 
       <Textarea {...register('meaning')} placeholder={'meaning in English'} />
 
@@ -261,13 +261,13 @@ export function AddLexicalUnitForm() {
 
       <Controller
         control={control}
-        name={"partsOfSpeech"}
+        name={'partsOfSpeech'}
         render={({ field }) => (
           <MultiSelect
             value={field.value ?? []}
             onChange={field.onChange}
             options={partsOptions}
-            placeholder={"parts of speech"}
+            placeholder={'parts of speech'}
           />
         )}
       />
@@ -275,13 +275,26 @@ export function AddLexicalUnitForm() {
       <div className={style.examplesList}>
         {synonyms.map((_, i) => (
           <div key={`syn-${i}`} className={style.examplesRow}>
-            <Input {...register(`synonyms.${i}` as const)} placeholder={i === 0 ? 'synonym' : `synonym ${i + 1}`} />
+            <Input
+              {...register(`synonyms.${i}` as const)}
+              placeholder={i === 0 ? 'synonym' : `synonym ${i + 1}`}
+            />
             <div className={style.examplesActions}>
               {synonymsCount < 5 && i === synonymsCount - 1 && (
-                <Button type={'button'} title={'+'} onClick={addSynonym} style={{ width: '44px' }} />
+                <Button
+                  type={'button'}
+                  title={'+'}
+                  onClick={addSynonym}
+                  style={{ width: '44px' }}
+                />
               )}
               {synonymsCount > 1 && (
-                <Button type={'button'} title={'🗑'} onClick={() => removeSynonym(i)} style={{ width: '44px' }} />
+                <Button
+                  type={'button'}
+                  title={'🗑'}
+                  onClick={() => removeSynonym(i)}
+                  style={{ width: '44px' }}
+                />
               )}
             </div>
           </div>
@@ -291,13 +304,26 @@ export function AddLexicalUnitForm() {
       <div className={style.examplesList}>
         {antonyms.map((_, i) => (
           <div key={`ant-${i}`} className={style.examplesRow}>
-            <Input {...register(`antonyms.${i}` as const)} placeholder={i === 0 ? 'antonym' : `antonym ${i + 1}`} />
+            <Input
+              {...register(`antonyms.${i}` as const)}
+              placeholder={i === 0 ? 'antonym' : `antonym ${i + 1}`}
+            />
             <div className={style.examplesActions}>
               {antonymsCount < 5 && i === antonymsCount - 1 && (
-                <Button type={'button'} title={'+'} onClick={addAntonym} style={{ width: '44px' }} />
+                <Button
+                  type={'button'}
+                  title={'+'}
+                  onClick={addAntonym}
+                  style={{ width: '44px' }}
+                />
               )}
               {antonymsCount > 1 && (
-                <Button type={'button'} title={'🗑'} onClick={() => removeAntonym(i)} style={{ width: '44px' }} />
+                <Button
+                  type={'button'}
+                  title={'🗑'}
+                  onClick={() => removeAntonym(i)}
+                  style={{ width: '44px' }}
+                />
               )}
             </div>
           </div>

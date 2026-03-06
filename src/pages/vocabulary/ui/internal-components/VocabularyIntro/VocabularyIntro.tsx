@@ -1,5 +1,6 @@
-import style from './VocabularyIntro.module.scss';
 import { NavLink } from 'react-router-dom';
+
+import style from './VocabularyIntro.module.scss';
 
 export function VocabularyIntro() {
   return (
@@ -14,11 +15,12 @@ export function VocabularyIntro() {
           To get started, choose one of the options from the menu above
         </p>
         <p className={style.paragraph}>
-          <NavLink to='cards'>Cards — </NavLink>
-          ready-made sets of cards organized by difficulty level create your own cards for personalized practice
+          <NavLink to="cards">Cards — </NavLink>
+          ready-made sets of cards organized by difficulty level create your own cards for
+          personalized practice
         </p>
         <p className={style.paragraph}>
-          <NavLink to='words-bank'>Words bank — </NavLink>
+          <NavLink to="words-bank">Words bank — </NavLink>
           save unfamiliar words and new expressions for later review and future practice
         </p>
       </div>

@@ -2,12 +2,13 @@ import { useMemo, useState } from 'react';
 import { toast } from 'react-toastify';
 
 import { deleteLexicalUnit } from '@/entities/lexical-unit/api/lexical-unit.api';
+
 import { useLexicalUnitEditorStore } from './lexicalUnitEditor.store';
 import { useLexicalUnitSearch } from './useLexicalUnitSearch';
 
 export function useSearchLexicalUnit() {
-  const openAddWithValue = useLexicalUnitEditorStore(s => s.openAddWithValue);
-  const openUpdate = useLexicalUnitEditorStore(s => s.openUpdate);
+  const openAddWithValue = useLexicalUnitEditorStore((s) => s.openAddWithValue);
+  const openUpdate = useLexicalUnitEditorStore((s) => s.openUpdate);
 
   const {
     query,
@@ -34,7 +35,10 @@ export function useSearchLexicalUnit() {
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [deleting, setDeleting] = useState(false);
 
-  const canAdd = useMemo(() => result.status === 'not-found' && !!normalizedQuery, [result, normalizedQuery]);
+  const canAdd = useMemo(
+    () => result.status === 'not-found' && !!normalizedQuery,
+    [result, normalizedQuery],
+  );
 
   const handleAdd = () => {
     if (!canAdd) return;

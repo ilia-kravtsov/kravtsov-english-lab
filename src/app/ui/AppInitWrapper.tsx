@@ -1,5 +1,6 @@
-import { useUserStore } from '@/entities/user';
 import type { JSX } from 'react';
+
+import { useUserStore } from '@/entities/user';
 
 export function AppInitWrapper({ children }: { children: JSX.Element }) {
   const isInitialized = useUserStore((s) => s.isInitialized);

@@ -1,5 +1,6 @@
-import style from './BurgerButton.module.scss';
 import { forwardRef } from 'react';
+
+import style from './BurgerButton.module.scss';
 
 interface Props {
   toggleBurger: (toggleStatus: boolean) => void;
@@ -15,12 +16,7 @@ export const BurgerButton = forwardRef<HTMLButtonElement, Props>(
     };
 
     return (
-      <button
-        className={burgerStyles}
-        onClick={toggle}
-        aria-label={'Toggle menu'}
-        ref={ref}
-      >
+      <button className={burgerStyles} onClick={toggle} aria-label={'Toggle menu'} ref={ref}>
         <span className={style.burgerLine} />
         <span className={style.burgerLine} />
         <span className={style.burgerLine} />

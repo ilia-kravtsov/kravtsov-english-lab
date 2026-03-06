@@ -1,7 +1,8 @@
-import style from './SearchLexicalUnit.module.scss';
-import { Button, ConfirmModal } from '@/shared/ui';
 import { useSearchLexicalUnit } from '@/features/vocabulary/lexical-unit-add/model/useSearchLexicalUnit.ts';
 import { LexicalUnitSearchPanel } from '@/features/vocabulary/lexical-unit-add/ui/LexicalUnitSearchPanel/LexicalUnitSearchPanel';
+import { Button, ConfirmModal } from '@/shared/ui';
+
+import style from './SearchLexicalUnit.module.scss';
 
 export function SearchLexicalUnit() {
   const {
@@ -62,7 +63,12 @@ export function SearchLexicalUnit() {
         )}
         renderFoundActions={() => (
           <>
-            <Button type={'button'} title={'Update'} onClick={handleUpdate} style={{ width: '120px' }} />
+            <Button
+              type={'button'}
+              title={'Update'}
+              onClick={handleUpdate}
+              style={{ width: '120px' }}
+            />
             <Button
               type={'button'}
               title={'Delete'}

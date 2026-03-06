@@ -1,7 +1,8 @@
 import type { AxiosError, InternalAxiosRequestConfig } from 'axios';
-import { api } from '@/shared/api';
+
 import { useUserStore } from '@/entities/user';
 import { refreshEffect } from '@/features/auth/refresh/model/refresh.effect.ts';
+import { api } from '@/shared/api';
 
 export function setupAuthResponseInterceptor() {
   api.interceptors.response.use(

@@ -12,7 +12,7 @@ export function escapeRegExp(s: string) {
 
 export function pickContextExample(
   value: string,
-  examples: string[]
+  examples: string[],
 ): { example: string; masked: string } | null {
   const v = value.trim();
   if (!v) return null;

@@ -44,7 +44,7 @@ export function useLexicalUnitSuggestions(query: string, limit = 3) {
     }
 
     const reqId = ++lastReqId.current;
-    setState(prev => ({ status: 'loading', items: prev.items }));
+    setState((prev) => ({ status: 'loading', items: prev.items }));
 
     const t = window.setTimeout(() => {
       void (async () => {

@@ -1,5 +1,11 @@
 import { api } from '@/shared/api';
-import type { Card, CardWithLexicalUnit, CreateCardPayload, UpdateCardPayload } from '../model/card.types.ts';
+
+import type {
+  Card,
+  CardWithLexicalUnit,
+  CreateCardPayload,
+  UpdateCardPayload,
+} from '../model/card.types.ts';
 
 export async function listCards(cardSetId: string) {
   const res = await api.get<Card[]>(`/card-sets/${cardSetId}/cards`);

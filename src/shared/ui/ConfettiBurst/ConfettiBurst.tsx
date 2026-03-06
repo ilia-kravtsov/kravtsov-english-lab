@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+
 import style from './ConfettiBurst.module.scss';
 
 type Props = {
@@ -35,6 +36,7 @@ export function ConfettiBurst({ pieces = 46, maxDurationMs = 2800 }: Props) {
       };
     });
 
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setItems(generated);
   }, [pieces]);
 

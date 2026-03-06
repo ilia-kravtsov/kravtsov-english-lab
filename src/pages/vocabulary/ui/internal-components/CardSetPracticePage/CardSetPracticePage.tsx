@@ -1,50 +1,30 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import style from './CardSetPracticePage.module.scss';
-import { useSwitchAnimation } from '@/features/vocabulary/card-practice/shared/model/useSwitchAnimation.ts';
+
 import { useCardSetPracticePage } from '@/features/vocabulary/card-practice/model/useCardSetPracticePage.ts';
-import { usePracticeModeAvailability } from '@/features/vocabulary/card-practice/model/usePracticeModeAvailability.ts';
 import { usePracticeModeActions } from '@/features/vocabulary/card-practice/model/usePracticeModeActions.ts';
-import {
-  PracticeModeSidebar,
-} from '@/pages/vocabulary/ui/internal-components/CardSetPracticePage/PracticeModeSidebar/PracticeModeSidebar.tsx';
-import {
-  PracticeContent,
-} from '@/pages/vocabulary/ui/internal-components/CardSetPracticePage/PracticeContent/PracticeContent.tsx';
-import {
-  CardSetsPageHeader,
-} from '@/pages/vocabulary/ui/internal-components/CardSetsPage/CardSetsPageHeader/CardSetsPageHeader.tsx';
+import { usePracticeModeAvailability } from '@/features/vocabulary/card-practice/model/usePracticeModeAvailability.ts';
+import { useSwitchAnimation } from '@/features/vocabulary/card-practice/shared/model/useSwitchAnimation.ts';
+import { PracticeContent } from '@/pages/vocabulary/ui/internal-components/CardSetPracticePage/PracticeContent/PracticeContent.tsx';
+import { PracticeModeSidebar } from '@/pages/vocabulary/ui/internal-components/CardSetPracticePage/PracticeModeSidebar/PracticeModeSidebar.tsx';
+import { CardSetsPageHeader } from '@/pages/vocabulary/ui/internal-components/CardSetsPage/CardSetsPageHeader/CardSetsPageHeader.tsx';
+
+import style from './CardSetPracticePage.module.scss';
 
 type CardSetId = {
   cardSetId: string;
-}
+};
 
 export function CardSetPracticePage() {
   const { cardSetId } = useParams<CardSetId>();
   const navigate = useNavigate();
 
-  const {
-    dir: switchDir,
-    trigger: triggerSwitch
-  } = useSwitchAnimation(260);
+  const { dir: switchDir, trigger: triggerSwitch } = useSwitchAnimation(260);
 
-  const {
-    mode,
-    setMode,
-    cardSet,
-    loading,
-    items,
-    index,
-    setIndex,
-    isFlipped,
-    setIsFlipped,
-  } = useCardSetPracticePage({ cardSetId });
+  const { mode, setMode, cardSet, loading, items, index, setIndex, isFlipped, setIsFlipped } =
+    useCardSetPracticePage({ cardSetId });
 
-  const {
-    recognitionAvailable,
-    typingAvailable,
-    contextAvailable,
-    listeningAvailable,
-  } = usePracticeModeAvailability({ items });
+  const { recognitionAvailable, typingAvailable, contextAvailable, listeningAvailable } =
+    usePracticeModeAvailability({ items });
 
   const {
     setStandardMode,
@@ -63,8 +43,8 @@ export function CardSetPracticePage() {
   });
 
   const onBackClick = () => {
-    navigate(`/vocabulary/cards/${cardSetId}`)
-  }
+    navigate(`/vocabulary/cards/${cardSetId}`);
+  };
 
   const buttonStyles = {
     width: '90px',
@@ -73,7 +53,7 @@ export function CardSetPracticePage() {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-  }
+  };
 
   return (
     <div className={style.container}>

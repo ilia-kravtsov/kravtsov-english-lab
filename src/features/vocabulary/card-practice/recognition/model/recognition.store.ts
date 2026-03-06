@@ -1,18 +1,18 @@
 import { createGStore } from 'create-gstore';
 import { useRef, useState } from 'react';
+
 import type { CardWithLexicalUnit } from '@/entities/card/model/card.types';
+import { buildRecognitionPracticeStats } from '@/features/vocabulary/card-practice/shared/model/build-recognition-practice-stats.ts';
+import { readPracticeStats } from '@/features/vocabulary/card-practice/shared/model/practice.storage.ts';
+import type { PracticeStats } from '@/features/vocabulary/card-practice/shared/model/practice.types.ts';
+
+import { writeRecognitionStats } from './recognition.storage';
 import type {
   RecognitionCardStat,
   RecognitionFeedback,
   RecognitionSessionCard,
 } from './recognition.types';
-import { writeRecognitionStats } from './recognition.storage';
 import { norm, round, shuffle, uniqNonEmpty } from './recognition.utils';
-import type { PracticeStats } from '@/features/vocabulary/card-practice/shared/model/practice.types.ts';
-import { readPracticeStats } from '@/features/vocabulary/card-practice/shared/model/practice.storage.ts';
-import {
-  buildRecognitionPracticeStats
-} from '@/features/vocabulary/card-practice/shared/model/build-recognition-practice-stats.ts';
 
 export interface RecognitionState {
   cardSetId: string | null;
@@ -85,8 +85,9 @@ export const useRecognitionStore = createGStore<RecognitionState>(() => {
 
     const correct = norm(card.lexicalUnit.translation ?? '');
 
-    const poolBase = poolOverride ?? uniqNonEmpty(cards.map(c => c.lexicalUnit.translation ?? ''));
-    const pool = poolBase.filter(t => t !== correct);
+    const poolBase =
+      poolOverride ?? uniqNonEmpty(cards.map((c) => c.lexicalUnit.translation ?? ''));
+    const pool = poolBase.filter((t) => t !== correct);
 
     const want = Math.min(3, pool.length);
     const distractors = shuffle(pool).slice(0, want);
@@ -104,8 +105,8 @@ export const useRecognitionStore = createGStore<RecognitionState>(() => {
 
   const start = (id: string, allCards: CardWithLexicalUnit[]) => {
     const filtered = allCards
-      .filter(c => c.lexicalUnit && norm(c.lexicalUnit.translation ?? '').length > 0)
-      .map(c => c as RecognitionSessionCard);
+      .filter((c) => c.lexicalUnit && norm(c.lexicalUnit.translation ?? '').length > 0)
+      .map((c) => c as RecognitionSessionCard);
 
     setCardSetId(id);
     setCards(filtered);
@@ -117,7 +118,7 @@ export const useRecognitionStore = createGStore<RecognitionState>(() => {
     setIsAvailable(ok);
     setIsActive(true);
 
-    const pool = uniqNonEmpty(filtered.map(c => c.lexicalUnit.translation ?? ''));
+    const pool = uniqNonEmpty(filtered.map((c) => c.lexicalUnit.translation ?? ''));
     resetCardState(filtered[0] ?? null, pool);
   };
 
@@ -162,13 +163,13 @@ export const useRecognitionStore = createGStore<RecognitionState>(() => {
         timeMs,
       };
 
-      setStatsByCard(prev => ({ ...prev, [card.id]: stat }));
+      setStatsByCard((prev) => ({ ...prev, [card.id]: stat }));
       return;
     }
 
     setFeedback('wrong');
-    setWrongCount(v => v + 1);
-    setDisabled(prev => ({ ...prev, [picked]: true }));
+    setWrongCount((v) => v + 1);
+    setDisabled((prev) => ({ ...prev, [picked]: true }));
     window.setTimeout(() => setFeedback('idle'), 260);
   };
 
@@ -201,7 +202,7 @@ export const useRecognitionStore = createGStore<RecognitionState>(() => {
     setStatsByCard({});
     setIsFinished(false);
     setIsActive(true);
-    const pool = uniqNonEmpty(cards.map(c => c.lexicalUnit.translation ?? ''));
+    const pool = uniqNonEmpty(cards.map((c) => c.lexicalUnit.translation ?? ''));
     resetCardState(cards[0] ?? null, pool);
   };
 

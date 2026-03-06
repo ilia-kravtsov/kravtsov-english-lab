@@ -1,6 +1,7 @@
 import type { InternalAxiosRequestConfig } from 'axios';
-import { api } from '@/shared/api';
+
 import { useUserStore } from '@/entities/user';
+import { api } from '@/shared/api';
 
 export function setupAuthRequestInterceptor() {
   api.interceptors.request.use((config: InternalAxiosRequestConfig) => {

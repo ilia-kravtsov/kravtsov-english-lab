@@ -1,12 +1,21 @@
-import { type Dispatch, type MouseEvent, type SetStateAction, useEffect, useMemo, useRef } from 'react';
-import { Button } from '@/shared/ui';
+import {
+  type Dispatch,
+  type MouseEvent,
+  type SetStateAction,
+  useEffect,
+  useMemo,
+  useRef,
+} from 'react';
+
 import type { CardWithLexicalUnit } from '@/entities/card/model/card.types.ts';
-import style from './StandardPractice.module.scss';
 import type {
   PracticeSwitchDir,
   PracticeSwitchState,
 } from '@/features/vocabulary/card-practice/model/practice-mode.types.ts';
 import { practiceButtonStyles } from '@/features/vocabulary/card-practice/ui/practice-button.styles.ts';
+import { Button } from '@/shared/ui';
+
+import style from './StandardPractice.module.scss';
 
 const apiBaseUrl = import.meta.env.VITE_API_URL ?? 'http://localhost:3000';
 
@@ -26,14 +35,14 @@ function toAbsoluteMediaUrl(url: string) {
 }
 
 export function StandardPractice({
-                                   items,
-                                   index,
-                                   isFlipped,
-                                   setIsFlipped,
-                                   setIndex,
-                                   switchDir,
-                                   triggerSwitch,
-                                 }: Props) {
+  items,
+  index,
+  isFlipped,
+  setIsFlipped,
+  setIndex,
+  switchDir,
+  triggerSwitch,
+}: Props) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   function animateSwitch(dir: PracticeSwitchDir, commit: () => void) {
@@ -52,7 +61,7 @@ export function StandardPractice({
     if (index >= items.length - 1) return;
 
     animateSwitch('next', () => {
-      setIndex(i => Math.min(i + 1, items.length - 1));
+      setIndex((i) => Math.min(i + 1, items.length - 1));
     });
   }
 
@@ -60,7 +69,7 @@ export function StandardPractice({
     if (index <= 0) return;
 
     animateSwitch('prev', () => {
-      setIndex(i => Math.max(i - 1, 0));
+      setIndex((i) => Math.max(i - 1, 0));
     });
   }
 
@@ -83,7 +92,7 @@ export function StandardPractice({
 
       if (e.code === 'Space') {
         e.preventDefault();
-        setIsFlipped(v => !v);
+        setIsFlipped((v) => !v);
         return;
       }
 
@@ -138,9 +147,9 @@ export function StandardPractice({
         className={isFlipped ? style.flipCardFlipped : style.flipCard}
         role={'button'}
         tabIndex={0}
-        onClick={() => setIsFlipped(v => !v)}
-        onKeyDown={e => {
-          if (e.key === 'Enter') setIsFlipped(v => !v);
+        onClick={() => setIsFlipped((v) => !v)}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') setIsFlipped((v) => !v);
         }}
       >
         <div

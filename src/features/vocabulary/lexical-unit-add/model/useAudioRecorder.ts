@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useRef,useState } from 'react';
 
 const MAX_RECORD_MS = 10_000;
 
@@ -39,7 +39,7 @@ export function useAudioRecorder() {
     mediaRecorder.onstop = () => {
       const blob = new Blob(chunksRef.current, { type: 'audio/webm' });
       setAudioBlob(blob);
-      stream.getTracks().forEach(t => t.stop());
+      stream.getTracks().forEach((t) => t.stop());
 
       clearStopTimer();
       clearTickTimer();
@@ -53,7 +53,7 @@ export function useAudioRecorder() {
     clearTickTimer();
 
     tickTimerRef.current = window.setInterval(() => {
-      setElapsedSec(s => Math.min(10, s + 1));
+      setElapsedSec((s) => Math.min(10, s + 1));
     }, 1000);
 
     clearStopTimer();

@@ -1,10 +1,11 @@
-import style from './RecognitionPractice.module.scss';
+import type { PracticeSwitchState } from '@/features/vocabulary/card-practice/model/practice-mode.types.ts';
+import { useAutoNextOnCorrect } from '@/features/vocabulary/card-practice/shared/model/useAutoNextOnCorrect.ts';
+import { PracticeResults } from '@/features/vocabulary/card-practice/shared/ui/PracticeResults/PracticeResults.tsx';
+import switchAnim from '@/features/vocabulary/card-practice/shared/ui/SwitchAnimation.module.scss';
+
 import { useRecognitionStore } from '../model/recognition.store';
 import { norm } from '../model/recognition.utils';
-import { useAutoNextOnCorrect } from '@/features/vocabulary/card-practice/shared/model/useAutoNextOnCorrect.ts';
-import switchAnim from '@/features/vocabulary/card-practice/shared/ui/SwitchAnimation.module.scss';
-import type { PracticeSwitchState } from '@/features/vocabulary/card-practice/model/practice-mode.types.ts';
-import { PracticeResults } from '@/features/vocabulary/card-practice/shared/ui/PracticeResults/PracticeResults.tsx';
+import style from './RecognitionPractice.module.scss';
 
 type Props = {
   switchDir?: PracticeSwitchState;
@@ -12,23 +13,23 @@ type Props = {
   autoNextCommitDelayMs?: number;
 };
 
-export function RecognitionPractice({switchDir, onAutoNext, autoNextCommitDelayMs}:Props) {
-  const cards = useRecognitionStore(s => s.cards);
-  const index = useRecognitionStore(s => s.index);
-  const feedback = useRecognitionStore(s => s.feedback);
-  const locked = useRecognitionStore(s => s.locked);
+export function RecognitionPractice({ switchDir, onAutoNext, autoNextCommitDelayMs }: Props) {
+  const cards = useRecognitionStore((s) => s.cards);
+  const index = useRecognitionStore((s) => s.index);
+  const feedback = useRecognitionStore((s) => s.feedback);
+  const locked = useRecognitionStore((s) => s.locked);
 
-  const options = useRecognitionStore(s => s.options);
-  const disabled = useRecognitionStore(s => s.disabled);
+  const options = useRecognitionStore((s) => s.options);
+  const disabled = useRecognitionStore((s) => s.disabled);
 
-  const attempts = useRecognitionStore(s => s.attempts);
+  const attempts = useRecognitionStore((s) => s.attempts);
 
-  const isFinished = useRecognitionStore(s => s.isFinished);
-  const cardSetId = useRecognitionStore(s => s.cardSetId);
+  const isFinished = useRecognitionStore((s) => s.isFinished);
+  const cardSetId = useRecognitionStore((s) => s.cardSetId);
 
-  const answer = useRecognitionStore(s => s.answer);
-  const next = useRecognitionStore(s => s.next);
-  const restart = useRecognitionStore(s => s.restart);
+  const answer = useRecognitionStore((s) => s.answer);
+  const next = useRecognitionStore((s) => s.next);
+  const restart = useRecognitionStore((s) => s.restart);
 
   useAutoNextOnCorrect({
     isFinished,
@@ -50,7 +51,7 @@ export function RecognitionPractice({switchDir, onAutoNext, autoNextCommitDelayM
       <PracticeResults
         cardSetId={cardSetId}
         restart={restart}
-        restartTitle={"Restart Recognition"}
+        restartTitle={'Restart Recognition'}
       />
     );
   }
@@ -74,7 +75,7 @@ export function RecognitionPractice({switchDir, onAutoNext, autoNextCommitDelayM
       </div>
 
       <div className={style.options}>
-        {options.map(opt => {
+        {options.map((opt) => {
           const v = norm(opt);
           const isDisabled = Boolean(disabled[v]) || feedback === 'correct';
           const isCorrect = feedback === 'correct' && v === correct;
@@ -84,7 +85,11 @@ export function RecognitionPractice({switchDir, onAutoNext, autoNextCommitDelayM
             <button
               key={v}
               type={'button'}
-              className={[style.optionBtn, isCorrect ? style.optionCorrect : '', isWrong ? style.optionWrong : ''].join(' ')}
+              className={[
+                style.optionBtn,
+                isCorrect ? style.optionCorrect : '',
+                isWrong ? style.optionWrong : '',
+              ].join(' ')}
               disabled={isDisabled}
               onClick={() => answer(v)}
             >

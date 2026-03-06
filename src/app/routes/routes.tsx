@@ -1,25 +1,31 @@
 import { ProtectedRoute } from '@/app/routes/ProtectedRoute.tsx';
-import { Dashboard } from '@/widgets/dashboard';
-import { Home } from '@/pages/home';
-import { Profile } from '@/pages/profile';
-import { Cards, CardSetPracticePage, CardSetsPage, VocabularyLayout, WordsBank } from '@/pages/vocabulary';
+import { AppInitWrapper } from '@/app/ui/AppInitWrapper.tsx';
 import { vocabularyHeaderLinks } from '@/features/vocabulary/config/vocabularyHeaderLinks.ts';
 import { AuthLayout } from '@/pages/auth/auth-layout';
+import { ForgotPassword } from '@/pages/auth/forgot-password';
 import { Login } from '@/pages/auth/login';
 import { Register } from '@/pages/auth/register';
-import { ForgotPassword } from '@/pages/auth/forgot-password';
 import { ResetPassword } from '@/pages/auth/reset-password';
-import { AppInitWrapper } from '@/app/ui/AppInitWrapper.tsx';
 import { DailyPractice } from '@/pages/daily-practice';
-import { Writing } from '@/pages/writing';
-import { Speaking } from '@/pages/speaking';
+import { Home } from '@/pages/home';
 import { Listening } from '@/pages/listening';
-import { Reading } from '@/pages/reading';
-import { Theory } from '@/pages/theory';
-import { Rating } from '@/pages/rating';
-import { Settings } from '@/pages/settings';
 import { NotFound } from '@/pages/not-found';
+import { Profile } from '@/pages/profile';
+import { Rating } from '@/pages/rating';
+import { Reading } from '@/pages/reading';
+import { Settings } from '@/pages/settings';
+import { Speaking } from '@/pages/speaking';
+import { Theory } from '@/pages/theory';
+import {
+  Cards,
+  CardSetPracticePage,
+  CardSetsPage,
+  VocabularyLayout,
+  WordsBank,
+} from '@/pages/vocabulary';
 import { VocabularyIntro } from '@/pages/vocabulary/ui/internal-components/VocabularyIntro/VocabularyIntro.tsx';
+import { Writing } from '@/pages/writing';
+import { Dashboard } from '@/widgets/dashboard';
 
 export const routes = [
   {

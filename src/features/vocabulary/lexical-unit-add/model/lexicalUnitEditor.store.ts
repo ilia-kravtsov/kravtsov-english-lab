@@ -1,5 +1,6 @@
 import { createGStore } from 'create-gstore';
 import { useState } from 'react';
+
 import type { LexicalUnit } from '@/entities/lexical-unit/model/lexical-unit.types';
 
 export type WordsBankTab = 'add' | 'search';
@@ -43,14 +44,14 @@ export const useLexicalUnitEditorStore = createGStore<LexicalUnitEditorState>(()
       setActiveTab('add');
     },
 
-    openAddWithValue: value => {
+    openAddWithValue: (value) => {
       setMode('add');
       setEditingUnit(null);
       setPrefillValue(value);
       setActiveTab('add');
     },
 
-    openUpdate: unit => {
+    openUpdate: (unit) => {
       setMode('update');
       setEditingUnit(unit);
       setPrefillValue('');

@@ -1,4 +1,5 @@
-import { useEffect, useState, type CSSProperties } from 'react';
+import { type CSSProperties,useEffect, useState } from 'react';
+
 import style from './ConfettiBurstPetard.module.scss';
 
 type Props = {

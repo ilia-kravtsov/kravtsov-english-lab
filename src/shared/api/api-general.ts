@@ -5,14 +5,20 @@ export const api = axios.create({
   withCredentials: true,
 });
 
-api.interceptors.request.use(config => {
-  console.log('[API] ->', config.method?.toUpperCase(), config.url, 'authHeader:', Boolean(config.headers?.Authorization));
+api.interceptors.request.use((config) => {
+  console.log(
+    '[API] ->',
+    config.method?.toUpperCase(),
+    config.url,
+    'authHeader:',
+    Boolean(config.headers?.Authorization),
+  );
   return config;
 });
 
 api.interceptors.response.use(
-  res => res,
-  err => {
+  (res) => res,
+  (err) => {
     console.log('[API] <-', err?.response?.status, err?.config?.url);
     return Promise.reject(err);
   },

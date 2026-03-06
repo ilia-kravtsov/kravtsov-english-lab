@@ -1,5 +1,6 @@
 import { createGStore } from 'create-gstore';
 import { useState } from 'react';
+
 import type { User } from './user.types';
 
 export interface UserState {

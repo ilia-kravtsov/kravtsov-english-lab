@@ -1,5 +1,10 @@
 import { api } from '@/shared/api';
-import type { AddLexicalUnitFormValues, LexicalUnit, LexicalUnitSuggestion } from '../model/lexical-unit.types';
+
+import type {
+  AddLexicalUnitFormValues,
+  LexicalUnit,
+  LexicalUnitSuggestion,
+} from '../model/lexical-unit.types';
 
 const blobFileNames: Partial<Record<keyof AddLexicalUnitFormValues, string>> = {
   audio: 'record.webm',
@@ -22,7 +27,7 @@ function toFormData(data: AddLexicalUnitFormValues) {
     }
 
     if (Array.isArray(value)) {
-      value.forEach(v => {
+      value.forEach((v) => {
         if (v != null && String(v).trim() !== '') {
           formData.append(key, String(v));
         }

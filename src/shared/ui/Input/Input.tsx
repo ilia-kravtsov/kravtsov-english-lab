@@ -1,4 +1,5 @@
 import { forwardRef, type InputHTMLAttributes } from 'react';
+
 import style from './Input.module.scss';
 
 type InputProps = InputHTMLAttributes<HTMLInputElement>;

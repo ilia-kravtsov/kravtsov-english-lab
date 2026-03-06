@@ -2,7 +2,7 @@ export type BlobType = Blob | null;
 export type LexicalUnitType = 'word' | 'expression';
 export type StringOrNull = string | null;
 export type Array = string[] | null;
-type PartsOfSpeechOrNull = PartsOfSpeech[] | null
+type PartsOfSpeechOrNull = PartsOfSpeech[] | null;
 export type PartsOfSpeech =
   | 'noun'
   | 'pronoun'

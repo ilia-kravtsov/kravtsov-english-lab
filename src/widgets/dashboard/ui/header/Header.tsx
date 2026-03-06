@@ -1,7 +1,9 @@
-import style from './Header.module.scss';
 import { useMatches } from 'react-router-dom';
+
 import type { RouteHandle } from '@/shared/types/routeHandle.ts';
 import { LinkAsButton } from '@/shared/ui/LinkAsButton/LinkAsButton.tsx';
+
+import style from './Header.module.scss';
 
 export function Header() {
   const matches = useMatches() as Array<{ handle?: RouteHandle }>;

@@ -1,9 +1,11 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import style from './CardSetsPage.module.scss';
-import { Button, ConfirmModal, LinkAsButton } from '@/shared/ui';
+
 import { useCardSetsPage } from '@/features/vocabulary/card-sets/model/useCardSetsPage';
 import { LexicalUnitSearchPanel } from '@/features/vocabulary/lexical-unit-add/ui/LexicalUnitSearchPanel/LexicalUnitSearchPanel';
 import { CardSetsPageHeader } from '@/pages/vocabulary/ui/internal-components/CardSetsPage/CardSetsPageHeader/CardSetsPageHeader.tsx';
+import { Button, ConfirmModal, LinkAsButton } from '@/shared/ui';
+
+import style from './CardSetsPage.module.scss';
 
 export function CardSetsPage() {
   const { cardSetId } = useParams<{ cardSetId: string }>();
@@ -32,8 +34,8 @@ export function CardSetsPage() {
   const cardsShorterAmount = cards.slice(0, 30);
 
   const onBackClick = () => {
-    navigate('/vocabulary/cards')
-  }
+    navigate('/vocabulary/cards');
+  };
 
   const buttonStyles = {
     width: '90px',
@@ -42,20 +44,17 @@ export function CardSetsPage() {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-  }
+  };
 
   return (
     <div className={style.container}>
       <CardSetsPageHeader
-        title={cardSetLoading ? '' : cardSet?.title ?? ''}
+        title={cardSetLoading ? '' : (cardSet?.title ?? '')}
         onBackClick={onBackClick}
         backButtonStyle={buttonStyles}
       >
         {cardSetId && (
-          <LinkAsButton
-            to={`/vocabulary/cards/${cardSetId}/practice`}
-            style={buttonStyles}
-          >
+          <LinkAsButton to={`/vocabulary/cards/${cardSetId}/practice`} style={buttonStyles}>
             Practice
           </LinkAsButton>
         )}
@@ -74,9 +73,7 @@ export function CardSetsPage() {
             playAudio={lexicalSearch.playAudio}
             imageSrc={lexicalSearch.imageSrc}
             variant={'full'}
-            renderNotFound={() => (
-              <div className={style.hint}>Not found in your words bank.</div>
-            )}
+            renderNotFound={() => <div className={style.hint}>Not found in your words bank.</div>}
             renderFoundActions={() => (
               <div style={{ display: 'flex', gap: '12px' }}>
                 <Button
@@ -108,13 +105,11 @@ export function CardSetsPage() {
             {cardsLoading && <div className={style.muted}>Loading…</div>}
           </div>
 
-          {!cardsLoading && cards.length === 0 && (
-            <div className={style.muted}>No cards yet</div>
-          )}
+          {!cardsLoading && cards.length === 0 && <div className={style.muted}>No cards yet</div>}
 
           {!cardsLoading && cards.length > 0 && (
             <div className={style.cardsList}>
-              {cardsShorterAmount.map(c => {
+              {cardsShorterAmount.map((c) => {
                 const value = c.lexicalUnit?.value ?? c.lexicalUnitId;
 
                 return (
@@ -123,7 +118,7 @@ export function CardSetsPage() {
                       type="button"
                       className={style.removeBtn}
                       onClick={() => requestRemove(c)}
-                      aria-label={"Remove from set"}
+                      aria-label={'Remove from set'}
                       disabled={removing}
                     >
                       ×

@@ -1,9 +1,19 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { useForm, type SubmitHandler } from 'react-hook-form';
+import { type SubmitHandler,useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
+
+import {
+  createCardSet,
+  deleteCardSet,
+  getCardSets,
+  updateCardSet,
+} from '@/entities/card-set/api/card-set.api.ts';
+import type {
+  CardSet,
+  CreateCardSetPayload,
+  UpdateCardSetPayload,
+} from '@/entities/card-set/model/card-set.types.ts';
 import { useCardSetsStore } from '@/features/vocabulary/card-sets/model/card-sets.store.ts';
-import type { CardSet, CreateCardSetPayload, UpdateCardSetPayload } from '@/entities/card-set/model/card-set.types.ts';
-import { createCardSet, deleteCardSet, getCardSets, updateCardSet } from '@/entities/card-set/api/card-set.api.ts';
 import { extractErrorMessage } from '@/shared/lib/extractErrorMessage.ts';
 
 type CreateFormValues = {
@@ -21,18 +31,18 @@ function normalizeText(value: string) {
 }
 
 export function useCardSets() {
-  const sets = useCardSetsStore(s => s.sets);
-  const selectedId = useCardSetsStore(s => s.selectedId);
-  const isLoading = useCardSetsStore(s => s.isLoading);
+  const sets = useCardSetsStore((s) => s.sets);
+  const selectedId = useCardSetsStore((s) => s.selectedId);
+  const isLoading = useCardSetsStore((s) => s.isLoading);
 
-  const setSets = useCardSetsStore(s => s.setSets);
-  const setLoading = useCardSetsStore(s => s.setLoading);
-  const select = useCardSetsStore(s => s.select);
-  const removeFromState = useCardSetsStore(s => s.removeFromState);
-  const upsertInState = useCardSetsStore(s => s.upsertInState);
+  const setSets = useCardSetsStore((s) => s.setSets);
+  const setLoading = useCardSetsStore((s) => s.setLoading);
+  const select = useCardSetsStore((s) => s.select);
+  const removeFromState = useCardSetsStore((s) => s.removeFromState);
+  const upsertInState = useCardSetsStore((s) => s.upsertInState);
 
   const selected = useMemo<CardSet | null>(
-    () => sets.find(s => s.id === selectedId) ?? null,
+    () => sets.find((s) => s.id === selectedId) ?? null,
     [sets, selectedId],
   );
 
@@ -82,7 +92,7 @@ export function useCardSets() {
     });
   }, [selected, resetEdit]);
 
-  const submitCreate: SubmitHandler<CreateFormValues> = async values => {
+  const submitCreate: SubmitHandler<CreateFormValues> = async (values) => {
     const payload: CreateCardSetPayload = {
       title: normalizeText(values.title),
       description: values.description.trim() || undefined,
@@ -100,7 +110,7 @@ export function useCardSets() {
     }
   };
 
-  const submitEdit: SubmitHandler<EditFormValues> = async values => {
+  const submitEdit: SubmitHandler<EditFormValues> = async (values) => {
     if (!selected) return;
 
     const payload: UpdateCardSetPayload = {
@@ -126,7 +136,7 @@ export function useCardSets() {
 
     try {
       await deleteCardSet(deleteTarget.id);
-      const next = sets.filter(s => s.id !== deleteTarget.id);
+      const next = sets.filter((s) => s.id !== deleteTarget.id);
       toast.success('Card set deleted');
 
       removeFromState(deleteTarget.id);

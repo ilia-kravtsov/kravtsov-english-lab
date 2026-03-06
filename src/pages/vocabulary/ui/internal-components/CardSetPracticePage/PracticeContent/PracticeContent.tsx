@@ -1,16 +1,18 @@
-import style from './PracticeContent.module.scss';
-import { StandardPractice } from '@/features/vocabulary/card-practice/standard/ui/StandardPractice.tsx';
-import { RecognitionPractice } from '@/features/vocabulary/card-practice/recognition/ui/RecognitionPractice.tsx';
-import { TypingPractice } from '@/features/vocabulary/card-practice/typing/ui/TypingPractice.tsx';
+import type { Dispatch, ReactNode, SetStateAction } from 'react';
+
+import type { CardWithLexicalUnit } from '@/entities/card/model/card.types.ts';
 import { ContextPractice } from '@/features/vocabulary/card-practice/context/ui/ContextPractice.tsx';
 import { ListeningPractice } from '@/features/vocabulary/card-practice/listening/ui/ListeningPractice.tsx';
-import type { CardWithLexicalUnit } from '@/entities/card/model/card.types.ts';
-import type { Dispatch, ReactNode, SetStateAction } from 'react';
 import type {
   PracticeMode,
   PracticeSwitchDir,
   PracticeSwitchState,
 } from '@/features/vocabulary/card-practice/model/practice-mode.types.ts';
+import { RecognitionPractice } from '@/features/vocabulary/card-practice/recognition/ui/RecognitionPractice.tsx';
+import { StandardPractice } from '@/features/vocabulary/card-practice/standard/ui/StandardPractice.tsx';
+import { TypingPractice } from '@/features/vocabulary/card-practice/typing/ui/TypingPractice.tsx';
+
+import style from './PracticeContent.module.scss';
 
 type Props = {
   mode: PracticeMode;
@@ -28,19 +30,19 @@ type Props = {
 };
 
 export function PracticeContent({
-                                  mode,
-                                  loading,
-                                  items,
-                                  index,
-                                  setIndex,
-                                  isFlipped,
-                                  setIsFlipped,
-                                  switchDir,
-                                  triggerSwitch,
-                                  recognitionAvailable,
-                                  typingAvailable,
-                                  listeningAvailable,
-                                }: Props) {
+  mode,
+  loading,
+  items,
+  index,
+  setIndex,
+  isFlipped,
+  setIsFlipped,
+  switchDir,
+  triggerSwitch,
+  recognitionAvailable,
+  typingAvailable,
+  listeningAvailable,
+}: Props) {
   if (loading) {
     return (
       <div className={style.content}>

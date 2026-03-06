@@ -1,10 +1,14 @@
+import axios from 'axios';
 import { useEffect, useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import axios from 'axios';
 import { toast } from 'react-toastify';
 
-import type { AddLexicalUnitFormValues, PartsOfSpeech } from '@/entities/lexical-unit/model/lexical-unit.types';
 import { addLexicalUnit, updateLexicalUnit } from '@/entities/lexical-unit/api/lexical-unit.api';
+import type {
+  AddLexicalUnitFormValues,
+  PartsOfSpeech,
+} from '@/entities/lexical-unit/model/lexical-unit.types';
+
 import { useLexicalUnitEditorStore } from './lexicalUnitEditor.store';
 import { useAudioRecorder } from './useAudioRecorder';
 
@@ -23,7 +27,7 @@ function ensureAtLeastOne(v?: string[] | null) {
 }
 
 function trimNonEmpty(v?: string[] | null) {
-  const list = (v ?? []).map(s => s.trim()).filter(Boolean);
+  const list = (v ?? []).map((s) => s.trim()).filter(Boolean);
   return list.length ? list : undefined;
 }
 
@@ -42,10 +46,10 @@ export const PARTS_OF_SPEECH: PartsOfSpeech[] = [
 ];
 
 export function useAddLexicalUnitForm() {
-  const mode = useLexicalUnitEditorStore(s => s.mode);
-  const editingUnit = useLexicalUnitEditorStore(s => s.editingUnit);
-  const prefillValue = useLexicalUnitEditorStore(s => s.prefillValue);
-  const openSearch = useLexicalUnitEditorStore(s => s.openSearch);
+  const mode = useLexicalUnitEditorStore((s) => s.mode);
+  const editingUnit = useLexicalUnitEditorStore((s) => s.editingUnit);
+  const prefillValue = useLexicalUnitEditorStore((s) => s.prefillValue);
+  const openSearch = useLexicalUnitEditorStore((s) => s.openSearch);
 
   const apiBaseUrl = import.meta.env.VITE_API_URL ?? 'http://localhost:3000';
 
@@ -81,13 +85,13 @@ export function useAddLexicalUnitForm() {
   }, [imageUrlValue]);
 
   const examples = form.watch('examples');
-  const examplesCount = (examples?.length ?? 0);
+  const examplesCount = examples?.length ?? 0;
 
   const synonyms = form.watch('synonyms');
-  const synonymsCount = (synonyms?.length ?? 0);
+  const synonymsCount = synonyms?.length ?? 0;
 
   const antonyms = form.watch('antonyms');
-  const antonymsCount = (antonyms?.length ?? 0);
+  const antonymsCount = antonyms?.length ?? 0;
 
   const addExample = () => {
     const current = examples ?? [''];
@@ -322,11 +326,7 @@ export function useAddLexicalUnitForm() {
         }
       }
       console.error(err);
-      toast.error(
-        mode === 'update'
-          ? 'Failed to update'
-          : 'Failed to save'
-      );
+      toast.error(mode === 'update' ? 'Failed to update' : 'Failed to save');
     } finally {
       setSubmitting(false);
     }
@@ -347,8 +347,10 @@ export function useAddLexicalUnitForm() {
     setValue('soundExample', null);
   };
 
-  const partsOptions: { value: PartsOfSpeech; label: string }[] =
-    PARTS_OF_SPEECH.map(p => ({ value: p, label: p }));
+  const partsOptions: { value: PartsOfSpeech; label: string }[] = PARTS_OF_SPEECH.map((p) => ({
+    value: p,
+    label: p,
+  }));
 
   return {
     // form bindings

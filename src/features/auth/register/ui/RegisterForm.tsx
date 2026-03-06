@@ -1,11 +1,13 @@
 import { Controller, useForm } from 'react-hook-form';
+import { Link } from 'react-router-dom';
+
 import type { RegisterFormData } from '@/features/auth/register/model/register.types.ts';
 import { useRegisterForm } from '@/features/auth/register/model/useRegisterForm.ts';
-import style from './RegisterForm.module.scss';
-import { Input } from '@/shared/ui/Input/Input.tsx';
-import { Checkbox } from '@/shared/ui/Checkbox/Checkbox.tsx';
 import { Button } from '@/shared/ui';
-import { Link } from 'react-router-dom';
+import { Checkbox } from '@/shared/ui/Checkbox/Checkbox.tsx';
+import { Input } from '@/shared/ui/Input/Input.tsx';
+
+import style from './RegisterForm.module.scss';
 
 export function RegisterForm() {
   const {
@@ -78,7 +80,7 @@ export function RegisterForm() {
 
       <div className={style.checkBoxLinkContainer}>
         <Controller
-          name='terms'
+          name="terms"
           control={control}
           defaultValue={false}
           render={({ field }) => (
@@ -86,11 +88,7 @@ export function RegisterForm() {
               label={
                 <>
                   I agree with{' '}
-                  <Link
-                    to='/terms'
-                    onClick={(e) => e.stopPropagation()}
-                    className={style.link}
-                  >
+                  <Link to="/terms" onClick={(e) => e.stopPropagation()} className={style.link}>
                     Terms & Conditions
                   </Link>
                 </>

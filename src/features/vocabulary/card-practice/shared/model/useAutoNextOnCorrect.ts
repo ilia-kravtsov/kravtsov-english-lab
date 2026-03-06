@@ -13,15 +13,15 @@ type Params = {
 };
 
 export function useAutoNextOnCorrect({
-                                       enabled = true,
-                                       isFinished,
-                                       locked,
-                                       feedback,
-                                       next,
-                                       delayMs = 500,
-                                       beforeNext,
-                                       commitDelayMs = 0,
-                                     }: Params) {
+  enabled = true,
+  isFinished,
+  locked,
+  feedback,
+  next,
+  delayMs = 500,
+  beforeNext,
+  commitDelayMs = 0,
+}: Params) {
   useEffect(() => {
     if (!enabled) return;
     if (isFinished) return;
