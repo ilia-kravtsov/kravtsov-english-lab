@@ -64,6 +64,16 @@ export function StandardPractice({
     });
   }
 
+  function restart() {
+    if (items.length === 0) return;
+    if (switchDir) return;
+    if (index === 0 && !isFlipped) return;
+
+    animateSwitch('prev', () => {
+      setIndex(0);
+    });
+  }
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       const t = e.target as HTMLElement | null;
@@ -101,6 +111,7 @@ export function StandardPractice({
 
   const current = items[index] ?? null;
   const unit = current?.lexicalUnit ?? null;
+  const isLastCard = index >= items.length - 1;
 
   const audioSrc = useMemo(() => {
     const url = unit?.audioUrl;
@@ -207,13 +218,22 @@ export function StandardPractice({
         <div className={style.counter}>
           {index + 1} / {items.length}
         </div>
-        <Button
-          type={'button'}
-          title={'Next'}
-          onClick={next}
-          disabled={index >= items.length - 1}
-          style={practiceButtonStyles}
-        />
+        {isLastCard ? (
+          <Button
+            type={'button'}
+            title={'Restart'}
+            onClick={restart}
+            style={practiceButtonStyles}
+          />
+        ) : (
+          <Button
+            type={'button'}
+            title={'Next'}
+            onClick={next}
+            disabled={index >= items.length - 1}
+            style={practiceButtonStyles}
+          />
+        )}
       </div>
     </div>
   );
