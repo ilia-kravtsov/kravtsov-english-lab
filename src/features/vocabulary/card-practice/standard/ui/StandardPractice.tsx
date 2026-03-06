@@ -2,10 +2,12 @@ import { type Dispatch, type MouseEvent, type SetStateAction, useEffect, useMemo
 import { Button } from '@/shared/ui';
 import type { CardWithLexicalUnit } from '@/entities/card/model/card.types.ts';
 import style from './StandardPractice.module.scss';
+import type {
+  PracticeSwitchDir,
+  PracticeSwitchState,
+} from '@/features/vocabulary/card-practice/model/practice-mode.types.ts';
 
 const apiBaseUrl = import.meta.env.VITE_API_URL ?? 'http://localhost:3000';
-
-type CardSwitcher = 'next' | 'prev';
 
 type Props = {
   items: CardWithLexicalUnit[];
@@ -13,8 +15,8 @@ type Props = {
   isFlipped: boolean;
   setIsFlipped: Dispatch<SetStateAction<boolean>>;
   setIndex: Dispatch<SetStateAction<number>>;
-  switchDir: CardSwitcher | null;
-  triggerSwitch: (dir: CardSwitcher) => void;
+  switchDir: PracticeSwitchState;
+  triggerSwitch: (dir: PracticeSwitchDir) => void;
 };
 
 function toAbsoluteMediaUrl(url: string) {
@@ -33,7 +35,7 @@ export function StandardPractice({
                                  }: Props) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
-  function animateSwitch(dir: CardSwitcher, commit: () => void) {
+  function animateSwitch(dir: PracticeSwitchDir, commit: () => void) {
     if (items.length === 0) return;
     if (switchDir) return;
 

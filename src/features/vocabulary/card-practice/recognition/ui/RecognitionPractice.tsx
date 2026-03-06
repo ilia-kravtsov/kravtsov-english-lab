@@ -4,11 +4,11 @@ import { useRecognitionStore } from '../model/recognition.store';
 import { norm } from '../model/recognition.utils';
 import { useAutoNextOnCorrect } from '@/features/vocabulary/card-practice/shared/useAutoNextOnCorrect.ts';
 import switchAnim from '@/features/vocabulary/card-practice/shared/SwitchAnimation.module.scss';
-import type { Flip } from '@/features/vocabulary/card-practice/shared/Flip.type.ts';
 import { ConfettiBurstPetard } from '@/shared/ui/ConfettiBurstPetard/ConfettiBurstPetard.tsx';
+import type { PracticeSwitchDir } from '@/features/vocabulary/card-practice/model/practice-mode.types.ts';
 
 type Props = {
-  switchDir?: Flip;
+  switchDir?: PracticeSwitchDir;
   onAutoNext?: () => void;
   autoNextCommitDelayMs?: number;
 };

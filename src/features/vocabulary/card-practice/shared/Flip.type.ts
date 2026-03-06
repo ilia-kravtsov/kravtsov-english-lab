@@ -1,1 +1,0 @@
-export type Flip = 'next' | 'prev' | null;
