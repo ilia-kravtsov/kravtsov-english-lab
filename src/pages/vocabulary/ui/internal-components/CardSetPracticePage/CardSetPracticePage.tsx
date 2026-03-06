@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import style from './CardSetPracticePage.module.scss';
-import { useSwitchAnimation } from '@/features/vocabulary/card-practice/shared/useSwitchAnimation.ts';
+import { useSwitchAnimation } from '@/features/vocabulary/card-practice/shared/model/useSwitchAnimation.ts';
 import { useCardSetPracticePage } from '@/features/vocabulary/card-practice/model/useCardSetPracticePage.ts';
 import { usePracticeModeAvailability } from '@/features/vocabulary/card-practice/model/usePracticeModeAvailability.ts';
 import { usePracticeModeActions } from '@/features/vocabulary/card-practice/model/usePracticeModeActions.ts';
@@ -67,7 +67,12 @@ export function CardSetPracticePage() {
   }
 
   const buttonStyles = {
-    width: '100px',
+    width: '90px',
+    height: '40px',
+    fontSize: '16px',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   }
 
   return (

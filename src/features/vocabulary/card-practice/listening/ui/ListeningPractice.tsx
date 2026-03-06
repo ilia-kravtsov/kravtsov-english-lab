@@ -1,15 +1,15 @@
-import { useMemo, useRef, useEffect } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { Button, Input } from '@/shared/ui';
 import style from './ListeningPractice.module.scss';
 import { useListeningStore } from '../model/listening.store';
 import { toAbsoluteMediaUrl } from '../model/listening.utils.ts';
-import { useAutoNextOnCorrect } from '@/features/vocabulary/card-practice/shared/useAutoNextOnCorrect.ts';
-import type { Flip } from '@/features/vocabulary/card-practice/shared/Flip.type.ts';
-import switchAnim from '@/features/vocabulary/card-practice/shared/SwitchAnimation.module.scss';
-import { ConfettiBurstPetard } from '@/shared/ui/ConfettiBurstPetard/ConfettiBurstPetard.tsx';
+import { useAutoNextOnCorrect } from '@/features/vocabulary/card-practice/shared/model/useAutoNextOnCorrect.ts';
+import switchAnim from '@/features/vocabulary/card-practice/shared/ui/SwitchAnimation.module.scss';
+import type { PracticeSwitchState } from '@/features/vocabulary/card-practice/model/practice-mode.types.ts';
+import { PracticeResults } from '@/features/vocabulary/card-practice/shared/ui/PracticeResults/PracticeResults.tsx';
 
 type Props = {
-  switchDir?: Flip;
+  switchDir?: PracticeSwitchState;
   onAutoNext?: () => void;
   autoNextCommitDelayMs?: number;
 };
@@ -27,7 +27,6 @@ export function ListeningPractice({switchDir, onAutoNext, autoNextCommitDelayMs}
 
   const isFinished = useListeningStore(s => s.isFinished);
   const cardSetId = useListeningStore(s => s.cardSetId);
-  const getStoredListening = useListeningStore(s => s.getStoredListening);
 
   const submit = useListeningStore(s => s.submit);
   const skip = useListeningStore(s => s.skip);
@@ -72,40 +71,12 @@ export function ListeningPractice({switchDir, onAutoNext, autoNextCommitDelayMs}
   if (!cardSetId) return null;
 
   if (isFinished) {
-    const l = getStoredListening(cardSetId);
     return (
-      <div className={style.result}>
-        <ConfettiBurstPetard />
-        <h3 className={style.sectionTitle}>Results</h3>
-
-        <div className={style.resultBlock}>
-          <div className={style.resultRow}>
-            <div className={style.resultLabel}>Listening</div>
-            <div className={style.resultValue}>
-              {l ? `${l.correctCards}/${l.totalCards} (${l.accuracy}%) · avg ${l.avgTimeMs}ms` : 'Not started'}
-            </div>
-          </div>
-
-          <div className={style.resultRow}>
-            <div className={style.resultLabel}>Recognition</div>
-            <div className={style.resultValue}>Not started</div>
-          </div>
-
-          <div className={style.resultRow}>
-            <div className={style.resultLabel}>Typing</div>
-            <div className={style.resultValue}>Not started</div>
-          </div>
-
-          <div className={style.resultRow}>
-            <div className={style.resultLabel}>Context</div>
-            <div className={style.resultValue}>Not started</div>
-          </div>
-        </div>
-
-        <div className={style.controlsRow}>
-          <Button title={'Restart Listening'} onClick={restart} style={{ width: '200px' }} />
-        </div>
-      </div>
+      <PracticeResults
+        cardSetId={cardSetId}
+        restart={restart}
+        restartTitle={"Restart Listening"}
+      />
     );
   }
 

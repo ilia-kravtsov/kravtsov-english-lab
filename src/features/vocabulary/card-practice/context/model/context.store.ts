@@ -1,9 +1,12 @@
 import { createGStore } from 'create-gstore';
 import { useRef, useState } from 'react';
 import type { CardWithLexicalUnit } from '@/entities/card/model/card.types';
-import type { ContextCardStat, ContextFeedback, ContextSessionCard, ContextStats } from './context.types';
-import { readPracticeStats, writeContextStats } from './context.storage';
+import type { ContextCardStat, ContextFeedback, ContextSessionCard } from './context.types';
+import { writeContextStats } from './context.storage';
 import { norm, pickContextExample, round } from './context.utils';
+import type { PracticeModeStats } from '@/features/vocabulary/card-practice/shared/model/practice.types.ts';
+import { readPracticeStats } from '@/features/vocabulary/card-practice/shared/model/practice.storage.ts';
+import { buildPracticeModeStats } from '@/features/vocabulary/card-practice/shared/model/build-practice-mode-stats.ts';
 
 export interface ContextState {
   cardSetId: string | null;
@@ -34,7 +37,7 @@ export interface ContextState {
   next: () => void;
   restart: () => void;
 
-  getStoredContext: (cardSetId: string) => ContextStats | null;
+  getStoredContext: (cardSetId: string) => PracticeModeStats | null;
 }
 
 export const useContextStore = createGStore<ContextState>(() => {
@@ -69,23 +72,7 @@ export const useContextStore = createGStore<ContextState>(() => {
   };
 
   const finish = (id: string, nextStatsByCard: Record<string, ContextCardStat>) => {
-    const totalCards = cards.length;
-    const completedCards = Object.keys(nextStatsByCard).length;
-    const correctCards = Object.values(nextStatsByCard).filter(s => (s.isCorrect ?? true)).length;
-
-    const timeSum = Object.values(nextStatsByCard).reduce((acc, s) => acc + (s.timeMs || 0), 0);
-    const avgTimeMs = completedCards > 0 ? round(timeSum / completedCards) : 0;
-    const accuracy = totalCards > 0 ? round((correctCards / totalCards) * 100) : 0;
-
-    const payload: ContextStats = {
-      totalCards,
-      completedCards,
-      correctCards,
-      accuracy,
-      avgTimeMs,
-      updatedAt: new Date().toISOString(),
-      byCard: nextStatsByCard,
-    };
+    const payload = buildPracticeModeStats(cards.length, nextStatsByCard);
 
     writeContextStats(id, payload);
     setIsFinished(true);

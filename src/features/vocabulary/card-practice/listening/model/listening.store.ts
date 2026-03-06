@@ -1,14 +1,12 @@
 import { createGStore } from 'create-gstore';
 import { useRef, useState } from 'react';
 import type { CardWithLexicalUnit } from '@/entities/card/model/card.types';
-import type {
-  ListeningCardStat,
-  ListeningFeedback,
-  ListeningSessionCard,
-  ListeningStats,
-} from './listening.types';
-import { readPracticeStats, writeListeningStats } from './listening.storage';
+import type { ListeningCardStat, ListeningFeedback, ListeningSessionCard } from './listening.types';
+import { writeListeningStats } from './listening.storage';
 import { norm, round } from './listening.utils.ts';
+import type { PracticeModeStats } from '@/features/vocabulary/card-practice/shared/model/practice.types.ts';
+import { readPracticeStats } from '@/features/vocabulary/card-practice/shared/model/practice.storage.ts';
+import { buildPracticeModeStats } from '@/features/vocabulary/card-practice/shared/model/build-practice-mode-stats.ts';
 
 export interface ListeningState {
   cardSetId: string | null;
@@ -39,7 +37,7 @@ export interface ListeningState {
   next: () => void;
   restart: () => void;
 
-  getStoredListening: (cardSetId: string) => ListeningStats | null;
+  getStoredListening: (cardSetId: string) => PracticeModeStats | null;
 }
 
 export const useListeningStore = createGStore<ListeningState>(() => {
@@ -74,23 +72,7 @@ export const useListeningStore = createGStore<ListeningState>(() => {
   };
 
   const finish = (id: string, nextStatsByCard: Record<string, ListeningCardStat>) => {
-    const totalCards = cards.length;
-    const completedCards = Object.keys(nextStatsByCard).length;
-    const correctCards = Object.values(nextStatsByCard).filter(s => (s.isCorrect ?? true)).length;
-
-    const timeSum = Object.values(nextStatsByCard).reduce((acc, s) => acc + (s.timeMs || 0), 0);
-    const avgTimeMs = completedCards > 0 ? round(timeSum / completedCards) : 0;
-    const accuracy = totalCards > 0 ? round((correctCards / totalCards) * 100) : 0;
-
-    const payload: ListeningStats = {
-      totalCards,
-      completedCards,
-      correctCards,
-      accuracy,
-      avgTimeMs,
-      updatedAt: new Date().toISOString(),
-      byCard: nextStatsByCard,
-    };
+    const payload = buildPracticeModeStats(cards.length, nextStatsByCard);
 
     writeListeningStats(id, payload);
     setIsFinished(true);

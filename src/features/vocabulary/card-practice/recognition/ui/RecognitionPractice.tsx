@@ -1,14 +1,13 @@
-import { Button } from '@/shared/ui';
 import style from './RecognitionPractice.module.scss';
 import { useRecognitionStore } from '../model/recognition.store';
 import { norm } from '../model/recognition.utils';
-import { useAutoNextOnCorrect } from '@/features/vocabulary/card-practice/shared/useAutoNextOnCorrect.ts';
-import switchAnim from '@/features/vocabulary/card-practice/shared/SwitchAnimation.module.scss';
-import { ConfettiBurstPetard } from '@/shared/ui/ConfettiBurstPetard/ConfettiBurstPetard.tsx';
-import type { PracticeSwitchDir } from '@/features/vocabulary/card-practice/model/practice-mode.types.ts';
+import { useAutoNextOnCorrect } from '@/features/vocabulary/card-practice/shared/model/useAutoNextOnCorrect.ts';
+import switchAnim from '@/features/vocabulary/card-practice/shared/ui/SwitchAnimation.module.scss';
+import type { PracticeSwitchState } from '@/features/vocabulary/card-practice/model/practice-mode.types.ts';
+import { PracticeResults } from '@/features/vocabulary/card-practice/shared/ui/PracticeResults/PracticeResults.tsx';
 
 type Props = {
-  switchDir?: PracticeSwitchDir;
+  switchDir?: PracticeSwitchState;
   onAutoNext?: () => void;
   autoNextCommitDelayMs?: number;
 };
@@ -26,7 +25,6 @@ export function RecognitionPractice({switchDir, onAutoNext, autoNextCommitDelayM
 
   const isFinished = useRecognitionStore(s => s.isFinished);
   const cardSetId = useRecognitionStore(s => s.cardSetId);
-  const getStoredRecognition = useRecognitionStore(s => s.getStoredRecognition);
 
   const answer = useRecognitionStore(s => s.answer);
   const next = useRecognitionStore(s => s.next);
@@ -48,40 +46,12 @@ export function RecognitionPractice({switchDir, onAutoNext, autoNextCommitDelayM
   if (!cardSetId) return null;
 
   if (isFinished) {
-    const r = getStoredRecognition(cardSetId);
     return (
-      <div className={style.result}>
-        <ConfettiBurstPetard />
-        <h3 className={style.sectionTitle}>Results</h3>
-
-        <div className={style.resultBlock}>
-          <div className={style.resultRow}>
-            <div className={style.resultLabel}>Recognition</div>
-            <div className={style.resultValue}>
-              {r ? `${r.correctCards}/${r.totalCards} (${r.accuracy}%) · avg ${r.avgTimeMs}ms` : 'Not started'}
-            </div>
-          </div>
-
-          <div className={style.resultRow}>
-            <div className={style.resultLabel}>Typing</div>
-            <div className={style.resultValue}>Not started</div>
-          </div>
-
-          <div className={style.resultRow}>
-            <div className={style.resultLabel}>Listening</div>
-            <div className={style.resultValue}>Not started</div>
-          </div>
-
-          <div className={style.resultRow}>
-            <div className={style.resultLabel}>Context</div>
-            <div className={style.resultValue}>Not started</div>
-          </div>
-        </div>
-
-        <div className={style.controlsRow}>
-          <Button title={'Restart Recognition'} onClick={restart} style={{ width: '200px' }} />
-        </div>
-      </div>
+      <PracticeResults
+        cardSetId={cardSetId}
+        restart={restart}
+        restartTitle={"Restart Recognition"}
+      />
     );
   }
 
@@ -114,9 +84,7 @@ export function RecognitionPractice({switchDir, onAutoNext, autoNextCommitDelayM
             <button
               key={v}
               type={'button'}
-              className={[style.optionBtn, isCorrect ? style.optionCorrect : '', isWrong ? style.optionWrong : ''].join(
-                ' '
-              )}
+              className={[style.optionBtn, isCorrect ? style.optionCorrect : '', isWrong ? style.optionWrong : ''].join(' ')}
               disabled={isDisabled}
               onClick={() => answer(v)}
             >

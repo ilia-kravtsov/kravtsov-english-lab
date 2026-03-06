@@ -1,9 +1,12 @@
 import { createGStore } from 'create-gstore';
 import { useRef, useState } from 'react';
 import type { CardWithLexicalUnit } from '@/entities/card/model/card.types';
-import type { TypingCardStat, TypingFeedback, TypingSessionCard, TypingStats } from './typing.types';
-import { readPracticeStats, writeTypingStats } from './typing.storage';
+import type { TypingCardStat, TypingFeedback, TypingSessionCard } from './typing.types';
+import { writeTypingStats } from './typing.storage';
 import { norm, round } from './typing.utils';
+import type { PracticeModeStats } from '@/features/vocabulary/card-practice/shared/model/practice.types.ts';
+import { readPracticeStats } from '@/features/vocabulary/card-practice/shared/model/practice.storage.ts';
+import { buildPracticeModeStats } from '@/features/vocabulary/card-practice/shared/model/build-practice-mode-stats.ts';
 
 export interface TypingState {
   cardSetId: string | null;
@@ -34,7 +37,7 @@ export interface TypingState {
   next: () => void;
   restart: () => void;
 
-  getStoredTyping: (cardSetId: string) => TypingStats | null;
+  getStoredTyping: (cardSetId: string) => PracticeModeStats | null;
 }
 
 export const useTypingStore = createGStore<TypingState>(() => {
@@ -69,23 +72,7 @@ export const useTypingStore = createGStore<TypingState>(() => {
   };
 
   const finish = (id: string, nextStatsByCard: Record<string, TypingCardStat>) => {
-    const totalCards = cards.length;
-    const completedCards = Object.keys(nextStatsByCard).length;
-    const correctCards = Object.values(nextStatsByCard).filter(s => (s.isCorrect ?? true)).length;
-
-    const timeSum = Object.values(nextStatsByCard).reduce((acc, s) => acc + (s.timeMs || 0), 0);
-    const avgTimeMs = completedCards > 0 ? round(timeSum / completedCards) : 0;
-    const accuracy = totalCards > 0 ? round((correctCards / totalCards) * 100) : 0;
-
-    const payload: TypingStats = {
-      totalCards,
-      completedCards,
-      correctCards,
-      accuracy,
-      avgTimeMs,
-      updatedAt: new Date().toISOString(),
-      byCard: nextStatsByCard,
-    };
+    const payload = buildPracticeModeStats(cards.length, nextStatsByCard);
 
     writeTypingStats(id, payload);
     setIsFinished(true);

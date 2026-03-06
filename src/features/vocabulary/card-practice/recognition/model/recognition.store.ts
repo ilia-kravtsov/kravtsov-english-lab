@@ -5,10 +5,14 @@ import type {
   RecognitionCardStat,
   RecognitionFeedback,
   RecognitionSessionCard,
-  RecognitionStats,
 } from './recognition.types';
-import { readPracticeStats, writeRecognitionStats } from './recognition.storage';
+import { writeRecognitionStats } from './recognition.storage';
 import { norm, round, shuffle, uniqNonEmpty } from './recognition.utils';
+import type { PracticeStats } from '@/features/vocabulary/card-practice/shared/model/practice.types.ts';
+import { readPracticeStats } from '@/features/vocabulary/card-practice/shared/model/practice.storage.ts';
+import {
+  buildRecognitionPracticeStats
+} from '@/features/vocabulary/card-practice/shared/model/build-recognition-practice-stats.ts';
 
 export interface RecognitionState {
   cardSetId: string | null;
@@ -39,7 +43,7 @@ export interface RecognitionState {
   next: () => void;
   restart: () => void;
 
-  getStoredRecognition: (cardSetId: string) => RecognitionStats | null;
+  getStoredRecognition: (cardSetId: string) => PracticeStats | null;
 }
 
 export const useRecognitionStore = createGStore<RecognitionState>(() => {
@@ -92,23 +96,7 @@ export const useRecognitionStore = createGStore<RecognitionState>(() => {
   };
 
   const finish = (id: string, nextStatsByCard: Record<string, RecognitionCardStat>) => {
-    const totalCards = cards.length;
-    const completedCards = Object.keys(nextStatsByCard).length;
-    const correctCards = completedCards;
-
-    const timeSum = Object.values(nextStatsByCard).reduce((acc, s) => acc + (s.timeMs || 0), 0);
-    const avgTimeMs = completedCards > 0 ? round(timeSum / completedCards) : 0;
-    const accuracy = totalCards > 0 ? round((correctCards / totalCards) * 100) : 0;
-
-    const payload: RecognitionStats = {
-      totalCards,
-      completedCards,
-      correctCards,
-      accuracy,
-      avgTimeMs,
-      updatedAt: new Date().toISOString(),
-      byCard: nextStatsByCard,
-    };
+    const payload = buildRecognitionPracticeStats(cards.length, nextStatsByCard);
 
     writeRecognitionStats(id, payload);
     setIsFinished(true);

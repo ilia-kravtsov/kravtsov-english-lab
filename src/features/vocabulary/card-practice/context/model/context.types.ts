@@ -12,23 +12,6 @@ export type ContextCardStat = {
   skipped?: boolean;
 };
 
-export type ContextStats = {
-  totalCards: number;
-  completedCards: number;
-  correctCards: number;
-  accuracy: number;
-  avgTimeMs: number;
-  updatedAt: string;
-  byCard: Record<string, ContextCardStat>;
-};
-
-export type PracticeStats = {
-  recognition?: unknown;
-  typing?: unknown;
-  listening?: unknown;
-  context?: ContextStats;
-};
-
 export type ContextSessionCard = CardWithLexicalUnit & {
   lexicalUnit: NonNullable<CardWithLexicalUnit['lexicalUnit']>;
   contextExample: string;

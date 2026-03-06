@@ -6,6 +6,7 @@ import type {
   PracticeSwitchDir,
   PracticeSwitchState,
 } from '@/features/vocabulary/card-practice/model/practice-mode.types.ts';
+import { practiceButtonStyles } from '@/features/vocabulary/card-practice/ui/practice-button.styles.ts';
 
 const apiBaseUrl = import.meta.env.VITE_API_URL ?? 'http://localhost:3000';
 
@@ -146,12 +147,12 @@ export function StandardPractice({
             <div className={style.frontBottom}>
               {audioSrc && (
                 <>
-                  <audio ref={audioRef} src={audioSrc} preload={'metadata'} style={{ display: 'none' }} />
+                  <audio ref={audioRef} src={audioSrc} preload={'metadata'} />
                   <Button
                     type={'button'}
                     onClick={playHandler}
                     title={'Play'}
-                    style={{ width: '120px' }}
+                    style={practiceButtonStyles}
                   />
                 </>
               )}
@@ -201,7 +202,7 @@ export function StandardPractice({
           title={'Prev'}
           onClick={prev}
           disabled={index === 0}
-          style={{ width: '120px' }}
+          style={practiceButtonStyles}
         />
         <div className={style.counter}>
           {index + 1} / {items.length}
@@ -211,7 +212,7 @@ export function StandardPractice({
           title={'Next'}
           onClick={next}
           disabled={index >= items.length - 1}
-          style={{ width: '120px' }}
+          style={practiceButtonStyles}
         />
       </div>
     </div>

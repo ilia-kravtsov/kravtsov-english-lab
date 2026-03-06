@@ -7,7 +7,7 @@ import { useRecognitionStore } from '@/features/vocabulary/card-practice/recogni
 import { useTypingStore } from '@/features/vocabulary/card-practice/typing/model/typing.store.ts';
 import { useContextStore } from '@/features/vocabulary/card-practice/context/model/context.store.ts';
 import { useListeningStore } from '@/features/vocabulary/card-practice/listening/model/listening.store.ts';
-import { shuffle } from '@/features/vocabulary/card-practice/shared/shuffle.ts';
+import { shuffle } from '@/features/vocabulary/card-practice/shared/model/shuffle.ts';
 import type { PracticeMode } from '@/features/vocabulary/card-practice/model/practice-mode.types.ts';
 
 type Params = {

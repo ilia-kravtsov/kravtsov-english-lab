@@ -6,7 +6,11 @@ import { ContextPractice } from '@/features/vocabulary/card-practice/context/ui/
 import { ListeningPractice } from '@/features/vocabulary/card-practice/listening/ui/ListeningPractice.tsx';
 import type { CardWithLexicalUnit } from '@/entities/card/model/card.types.ts';
 import type { Dispatch, ReactNode, SetStateAction } from 'react';
-import type { PracticeMode, SwitchDir } from '@/features/vocabulary/card-practice/model/practice-mode.types.ts';
+import type {
+  PracticeMode,
+  PracticeSwitchDir,
+  PracticeSwitchState,
+} from '@/features/vocabulary/card-practice/model/practice-mode.types.ts';
 
 type Props = {
   mode: PracticeMode;
@@ -16,8 +20,8 @@ type Props = {
   setIndex: Dispatch<SetStateAction<number>>;
   isFlipped: boolean;
   setIsFlipped: Dispatch<SetStateAction<boolean>>;
-  switchDir: SwitchDir;
-  triggerSwitch: (dir: 'next' | 'prev') => void;
+  switchDir: PracticeSwitchState;
+  triggerSwitch: (dir: PracticeSwitchDir) => void;
   recognitionAvailable: boolean;
   typingAvailable: boolean;
   listeningAvailable: boolean;

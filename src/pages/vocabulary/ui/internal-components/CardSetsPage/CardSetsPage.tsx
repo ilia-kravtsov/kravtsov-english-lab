@@ -2,12 +2,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import style from './CardSetsPage.module.scss';
 import { Button, ConfirmModal, LinkAsButton } from '@/shared/ui';
 import { useCardSetsPage } from '@/features/vocabulary/card-sets/model/useCardSetsPage';
-import {
-  LexicalUnitSearchPanel,
-} from '@/features/vocabulary/lexical-unit-add/ui/LexicalUnitSearchPanel/LexicalUnitSearchPanel';
-import {
-  CardSetsPageHeader,
-} from '@/pages/vocabulary/ui/internal-components/CardSetsPage/CardSetsPageHeader/CardSetsPageHeader.tsx';
+import { LexicalUnitSearchPanel } from '@/features/vocabulary/lexical-unit-add/ui/LexicalUnitSearchPanel/LexicalUnitSearchPanel';
+import { CardSetsPageHeader } from '@/pages/vocabulary/ui/internal-components/CardSetsPage/CardSetsPageHeader/CardSetsPageHeader.tsx';
 
 export function CardSetsPage() {
   const { cardSetId } = useParams<{ cardSetId: string }>();
@@ -39,18 +35,26 @@ export function CardSetsPage() {
     navigate('/vocabulary/cards')
   }
 
+  const buttonStyles = {
+    width: '90px',
+    height: '40px',
+    fontSize: '16px',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  }
 
   return (
     <div className={style.container}>
       <CardSetsPageHeader
         title={cardSetLoading ? '' : cardSet?.title ?? ''}
         onBackClick={onBackClick}
-        backButtonStyle={{ width: '100px' }}
+        backButtonStyle={buttonStyles}
       >
         {cardSetId && (
           <LinkAsButton
             to={`/vocabulary/cards/${cardSetId}/practice`}
-            style={{ width: '120px', textAlign: 'center' }}
+            style={buttonStyles}
           >
             Practice
           </LinkAsButton>

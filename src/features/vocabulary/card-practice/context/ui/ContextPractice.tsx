@@ -1,14 +1,14 @@
 import { Button, Input } from '@/shared/ui';
 import style from './ContextPractice.module.scss';
-import { useRef, useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useContextStore } from '../model/context.store';
-import { useAutoNextOnCorrect } from '@/features/vocabulary/card-practice/shared/useAutoNextOnCorrect.ts';
-import type { Flip } from '@/features/vocabulary/card-practice/shared/Flip.type.ts';
-import switchAnim from '@/features/vocabulary/card-practice/shared/SwitchAnimation.module.scss';
-import { ConfettiBurstPetard } from '@/shared/ui/ConfettiBurstPetard/ConfettiBurstPetard.tsx';
+import { useAutoNextOnCorrect } from '@/features/vocabulary/card-practice/shared/model/useAutoNextOnCorrect.ts';
+import switchAnim from '@/features/vocabulary/card-practice/shared/ui/SwitchAnimation.module.scss';
+import type { PracticeSwitchState } from '@/features/vocabulary/card-practice/model/practice-mode.types.ts';
+import { PracticeResults } from '@/features/vocabulary/card-practice/shared/ui/PracticeResults/PracticeResults.tsx';
 
 type Props = {
-  switchDir?: Flip;
+  switchDir?: PracticeSwitchState;
   onAutoNext?: () => void;
   autoNextCommitDelayMs?: number;
 };
@@ -26,7 +26,6 @@ export function ContextPractice({switchDir, onAutoNext, autoNextCommitDelayMs}: 
 
   const isFinished = useContextStore(s => s.isFinished);
   const cardSetId = useContextStore(s => s.cardSetId);
-  const getStoredContext = useContextStore(s => s.getStoredContext);
 
   const submit = useContextStore(s => s.submit);
   const skip = useContextStore(s => s.skip);
@@ -56,25 +55,12 @@ export function ContextPractice({switchDir, onAutoNext, autoNextCommitDelayMs}: 
   if (!cardSetId) return null;
 
   if (isFinished) {
-    const c = getStoredContext(cardSetId);
     return (
-      <div className={style.result}>
-        <ConfettiBurstPetard />
-        <h3 className={style.sectionTitle}>Results</h3>
-
-        <div className={style.resultBlock}>
-          <div className={style.resultRow}>
-            <div className={style.resultLabel}>Context</div>
-            <div className={style.resultValue}>
-              {c ? `${c.correctCards}/${c.totalCards} (${c.accuracy}%) · avg ${c.avgTimeMs}ms` : 'Not started'}
-            </div>
-          </div>
-        </div>
-
-        <div className={style.controlsRow}>
-          <Button title={'Restart Context'} onClick={restart} style={{ width: '180px' }} />
-        </div>
-      </div>
+      <PracticeResults
+        cardSetId={cardSetId}
+        restart={restart}
+        restartTitle="Restart Context"
+      />
     );
   }
 

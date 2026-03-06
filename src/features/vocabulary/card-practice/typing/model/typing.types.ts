@@ -12,23 +12,6 @@ export type TypingCardStat = {
   skipped?: boolean;
 };
 
-export type TypingStats = {
-  totalCards: number;
-  completedCards: number;
-  correctCards: number;
-  accuracy: number;
-  avgTimeMs: number;
-  updatedAt: string;
-  byCard: Record<string, TypingCardStat>;
-};
-
-export type PracticeStats = {
-  recognition?: unknown;
-  typing?: TypingStats;
-  listening?: unknown;
-  context?: unknown;
-};
-
 export type TypingSessionCard = CardWithLexicalUnit & {
   lexicalUnit: NonNullable<CardWithLexicalUnit['lexicalUnit']>;
 };
