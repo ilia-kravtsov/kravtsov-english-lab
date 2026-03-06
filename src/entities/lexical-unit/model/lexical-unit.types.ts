@@ -1,6 +1,8 @@
 export type BlobType = Blob | null;
 export type LexicalUnitType = 'word' | 'expression';
-export type Url = string | null
+export type StringOrNull = string | null;
+export type Array = string[] | null;
+type PartsOfSpeechOrNull = PartsOfSpeech[] | null
 export type PartsOfSpeech =
   | 'noun'
   | 'pronoun'
@@ -21,23 +23,23 @@ export interface LexicalUnit {
   translation?: string;
   transcription?: string;
   meaning?: string;
-  antonyms?: string[] | null;
-  synonyms?: string[] | null;
-  partsOfSpeech?: PartsOfSpeech[] | null;
-  examples?: string[] | null;
+  antonyms?: Array;
+  synonyms?: Array;
+  partsOfSpeech?: PartsOfSpeechOrNull;
+  examples?: Array;
   comment?: string;
-  audioUrl?: Url;
-  imageUrl?: Url;
-  soundMeaningUrl?: Url;
-  soundExampleUrl?: Url;
+  audioUrl?: StringOrNull;
+  imageUrl?: StringOrNull;
+  soundMeaningUrl?: StringOrNull;
+  soundExampleUrl?: StringOrNull;
 }
 
 export interface LexicalUnitSuggestion {
   id: string;
   type: LexicalUnitType;
   value: string;
-  translation: string | null;
-  transcription: string | null;
+  translation: StringOrNull;
+  transcription: StringOrNull;
 }
 
 export interface AddLexicalUnitFormValues {
@@ -46,10 +48,10 @@ export interface AddLexicalUnitFormValues {
   translation?: string;
   transcription?: string;
   meaning?: string;
-  antonyms?: string[] | null;
-  synonyms?: string[] | null;
+  antonyms?: Array;
+  synonyms?: Array;
   partsOfSpeech?: PartsOfSpeech[];
-  examples?: string[] | null;
+  examples?: Array;
   comment?: string;
   audio?: BlobType;
   soundMeaning?: BlobType;
