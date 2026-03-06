@@ -5,6 +5,7 @@ import { norm } from '../model/recognition.utils';
 import { useAutoNextOnCorrect } from '@/features/vocabulary/card-practice/shared/useAutoNextOnCorrect.ts';
 import switchAnim from '@/features/vocabulary/card-practice/shared/SwitchAnimation.module.scss';
 import type { Flip } from '@/features/vocabulary/card-practice/shared/Flip.type.ts';
+import { ConfettiBurstPetard } from '@/shared/ui/ConfettiBurstPetard/ConfettiBurstPetard.tsx';
 
 type Props = {
   switchDir?: Flip;
@@ -50,6 +51,7 @@ export function RecognitionPractice({switchDir, onAutoNext, autoNextCommitDelayM
     const r = getStoredRecognition(cardSetId);
     return (
       <div className={style.result}>
+        <ConfettiBurstPetard />
         <h3 className={style.sectionTitle}>Results</h3>
 
         <div className={style.resultBlock}>

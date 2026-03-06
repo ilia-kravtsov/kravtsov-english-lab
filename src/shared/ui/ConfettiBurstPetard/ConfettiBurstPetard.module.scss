@@ -1,0 +1,53 @@
+.wrap {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.origin {
+  position: absolute;
+  left: 50%;
+  top: 42%;
+  transform: translate(-50%, -50%);
+}
+
+.piece {
+  position: absolute;
+  left: 0;
+  top: 0;
+  border-radius: 2px;
+  opacity: 0;
+
+  transform: translate(0, 0) rotate(0deg);
+  will-change: transform, opacity;
+
+  animation-name: confetti-burst;
+  animation-timing-function: cubic-bezier(0.18, 0.82, 0.18, 1);
+  animation-fill-mode: forwards;
+}
+
+@keyframes confetti-burst {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) rotate(0deg) scale(0.9);
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  55% {
+    opacity: 1;
+    transform: translate(var(--dx), var(--dy)) rotate(var(--rot)) scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform:
+            translate(calc(var(--dx) * 1.05), calc(var(--dy) + 85vh))
+            rotate(var(--rot2))
+            scale(0.95);
+  }
+}
