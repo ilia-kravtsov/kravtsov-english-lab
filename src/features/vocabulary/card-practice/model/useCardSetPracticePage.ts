@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 
 import { listCardsWithLexicalUnit } from '@/entities/card/api/card.api';
 import type { CardWithLexicalUnit } from '@/entities/card/model/card.types';
@@ -50,6 +51,12 @@ export function useCardSetPracticePage({ cardSetId }: Params) {
         stopContext();
         stopListening();
         setMode('standard');
+      } catch {
+        setCardSet(null);
+        setItems([]);
+        setIndex(0);
+        setIsFlipped(false);
+        toast.error('Failed to load practice data');
       } finally {
         setLoading(false);
       }

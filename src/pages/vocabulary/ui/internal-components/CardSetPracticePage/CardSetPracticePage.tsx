@@ -1,12 +1,12 @@
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { useCardSetPracticePage } from '@/features/vocabulary/card-practice/model/useCardSetPracticePage.ts';
-import { usePracticeModeActions } from '@/features/vocabulary/card-practice/model/usePracticeModeActions.ts';
-import { usePracticeModeAvailability } from '@/features/vocabulary/card-practice/model/usePracticeModeAvailability.ts';
-import { useSwitchAnimation } from '@/features/vocabulary/card-practice/shared/model/useSwitchAnimation.ts';
-import { PracticeContent } from '@/pages/vocabulary/ui/internal-components/CardSetPracticePage/PracticeContent/PracticeContent.tsx';
-import { PracticeModeSidebar } from '@/pages/vocabulary/ui/internal-components/CardSetPracticePage/PracticeModeSidebar/PracticeModeSidebar.tsx';
-import { CardSetsPageHeader } from '@/pages/vocabulary/ui/internal-components/CardSetsPage/CardSetsPageHeader/CardSetsPageHeader.tsx';
+import { useCardSetPracticePage } from '@/features/vocabulary/card-practice/model/useCardSetPracticePage';
+import { usePracticeModeActions } from '@/features/vocabulary/card-practice/model/usePracticeModeActions';
+import { usePracticeModeAvailability } from '@/features/vocabulary/card-practice/model/usePracticeModeAvailability';
+import { useSwitchAnimation } from '@/features/vocabulary/card-practice/shared/model/useSwitchAnimation';
+import { PracticeContent } from '@/pages/vocabulary/ui/internal-components/CardSetPracticePage/PracticeContent/PracticeContent';
+import { PracticeModeSidebar } from '@/pages/vocabulary/ui/internal-components/CardSetPracticePage/PracticeModeSidebar/PracticeModeSidebar';
+import { CardSetsPageHeader } from '@/pages/vocabulary/ui/internal-components/CardSetsPage/CardSetsPageHeader/CardSetsPageHeader';
 
 import style from './CardSetPracticePage.module.scss';
 
