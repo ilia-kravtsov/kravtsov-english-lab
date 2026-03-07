@@ -10,7 +10,7 @@ import {
 
 import type { LexicalUnit } from '@/entities/lexical-unit';
 import type { LexicalUnitSearchResultState } from '@/features/vocabulary/lexical-unit-add/model/useLexicalUnitSearch';
-import { useLexicalUnitSuggestions } from '@/features/vocabulary/lexical-unit-add/model/useLexicalUnitSuggestions.ts';
+import { useLexicalUnitSuggestions } from '@/features/vocabulary/lexical-unit-add/model/useLexicalUnitSuggestions';
 import { Button } from '@/shared/ui';
 import { Input } from '@/shared/ui/Input/Input';
 
@@ -122,6 +122,9 @@ export function LexicalUnitSearchPanel({
     await runSearch(value);
   };
 
+  const stylesBigButton = { width: '120px' }
+  const stylesMediumButton = { width: '80px' };
+
   return (
     <div className={style.container}>
       <div className={style.searchRow}>
@@ -156,7 +159,7 @@ export function LexicalUnitSearchPanel({
           title={result.status === 'loading' ? 'Searching...' : 'Search'}
           disabled={result.status === 'loading' || !normalizedQuery}
           onClick={handleSearch}
-          style={{ width: '120px' }}
+          style={stylesBigButton}
         />
       </div>
 
@@ -206,7 +209,7 @@ export function LexicalUnitSearchPanel({
                     type={'button'}
                     title={'Play'}
                     onClick={playAudio}
-                    style={{ width: '80px' }}
+                    style={stylesMediumButton}
                   />
                 </div>
               )}
@@ -227,7 +230,7 @@ export function LexicalUnitSearchPanel({
                       type="button"
                       title="Play meaning"
                       onClick={playMeaningAudio}
-                      style={{ width: '80px' }}
+                      style={stylesMediumButton}
                     />
                   </div>
                 )}
@@ -255,7 +258,7 @@ export function LexicalUnitSearchPanel({
                       type={'button'}
                       title={'Play example'}
                       onClick={playExampleAudio}
-                      style={{ width: '80px' }}
+                      style={stylesMediumButton}
                     />
                   </div>
                 )}

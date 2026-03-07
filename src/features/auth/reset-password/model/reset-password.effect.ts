@@ -1,7 +1,7 @@
-import { authApi } from '@/features/auth/api/auth.api.ts';
-import type { ResetPasswordResponse } from '@/features/auth/reset-password/model/reset-password.types.ts';
+import { authApi } from '@/features/auth/api/auth.api';
+import type { ResetPasswordResponse } from '@/features/auth/reset-password/model/reset-password.types';
 
-import type { ResetPasswordDto } from './reset-password.dto.ts';
+import type { ResetPasswordDto } from './reset-password.dto';
 
 export async function resetPasswordEffect(dto: ResetPasswordDto): Promise<ResetPasswordResponse> {
   return await authApi.resetPassword(dto);

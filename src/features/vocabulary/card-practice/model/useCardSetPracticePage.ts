@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react';
 
-import { listCardsWithLexicalUnit } from '@/entities/card/api/card.api.ts';
-import type { CardWithLexicalUnit } from '@/entities/card/model/card.types.ts';
-import { getCardSetById } from '@/entities/card-set/api/card-set.api.ts';
-import type { CardSet } from '@/entities/card-set/model/card-set.types.ts';
-import { useContextStore } from '@/features/vocabulary/card-practice/context/model/context.store.ts';
-import { useListeningStore } from '@/features/vocabulary/card-practice/listening/model/listening.store.ts';
-import type { PracticeMode } from '@/features/vocabulary/card-practice/model/practice-mode.types.ts';
-import { useRecognitionStore } from '@/features/vocabulary/card-practice/recognition/model/recognition.store.ts';
-import { shuffle } from '@/features/vocabulary/card-practice/shared/model/shuffle.ts';
-import { useTypingStore } from '@/features/vocabulary/card-practice/typing/model/typing.store.ts';
+import { listCardsWithLexicalUnit } from '@/entities/card/api/card.api';
+import type { CardWithLexicalUnit } from '@/entities/card/model/card.types';
+import { getCardSetById } from '@/entities/card-set/api/card-set.api';
+import type { CardSet } from '@/entities/card-set/model/card-set.types';
+import { useContextStore } from '@/features/vocabulary/card-practice/context/model/context.store';
+import { useListeningStore } from '@/features/vocabulary/card-practice/listening/model/listening.store';
+import type { PracticeMode } from '@/features/vocabulary/card-practice/model/practice-mode.types';
+import { useRecognitionStore } from '@/features/vocabulary/card-practice/recognition/model/recognition.store';
+import { shuffle } from '@/features/vocabulary/card-practice/shared/model/shuffle';
+import { useTypingStore } from '@/features/vocabulary/card-practice/typing/model/typing.store';
 
 type Params = {
   cardSetId?: string;

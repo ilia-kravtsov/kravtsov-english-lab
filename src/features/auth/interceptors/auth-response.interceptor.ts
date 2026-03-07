@@ -1,8 +1,10 @@
 import type { AxiosError, InternalAxiosRequestConfig } from 'axios';
 
 import { useUserStore } from '@/entities/user';
-import { refreshEffect } from '@/features/auth/refresh/model/refresh.effect.ts';
+import { refreshEffect } from '@/features/auth/refresh/model/refresh.effect';
 import { api } from '@/shared/api';
+
+let refreshPromise: Promise<void> | null = null;
 
 export function setupAuthResponseInterceptor() {
   api.interceptors.response.use(
@@ -22,7 +24,13 @@ export function setupAuthResponseInterceptor() {
       originalRequest._retry = true;
 
       try {
-        await refreshEffect();
+        if (!refreshPromise) {
+          refreshPromise = refreshEffect().finally(() => {
+            refreshPromise = null;
+          });
+        }
+
+        await refreshPromise;
 
         const newAccessToken = useUserStore.getState().accessToken;
 

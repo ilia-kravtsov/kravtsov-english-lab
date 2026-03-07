@@ -1,32 +1,45 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+
+import { showAuthErrorToast } from '@/features/auth/lib/showAuthErrorToast.ts';
 
 import { forgotPasswordEffect } from './forgot-password.effect';
 
 export function useForgotPasswordModel() {
-  const [serverMessage, setServerMessage] = useState<string | null>(null);
+  const [shouldRedirect, setShouldRedirect] = useState(false);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (!shouldRedirect) return;
+
+    const timeoutId = window.setTimeout(() => {
+      navigate('/reset-password');
+    }, 2000);
+
+    return () => {
+      window.clearTimeout(timeoutId);
+    };
+  }, [navigate, shouldRedirect]);
+
   const submit = async (email: string) => {
-    setServerMessage(null);
+    setShouldRedirect(false);
 
     try {
       const response = await forgotPasswordEffect({ email });
-
-      setServerMessage(response.message);
 
       if (response.token) {
         sessionStorage.setItem('reset-token', response.token);
       }
 
-      setTimeout(() => navigate('/reset-password'), 2000);
-    } catch {
-      setServerMessage('Failed to send reset link. Try again.');
+      toast.success(response.message || 'Reset instructions sent');
+      setShouldRedirect(true);
+    } catch (error: unknown) {
+      showAuthErrorToast(error, 'Failed to send reset link. Try again.');
     }
   };
 
   return {
     submit,
-    serverMessage,
   };
 }

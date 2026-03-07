@@ -1,1 +1,1 @@
-export { authApi } from './auth.api.ts';
+export { authApi } from './auth.api';

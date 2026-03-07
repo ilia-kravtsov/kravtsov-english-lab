@@ -1,7 +1,7 @@
 export type BlobType = Blob | null;
 export type LexicalUnitType = 'word' | 'expression';
 export type StringOrNull = string | null;
-export type Array = string[] | null;
+export type StringArrayOrNull = string[] | null;
 type PartsOfSpeechOrNull = PartsOfSpeech[] | null;
 export type PartsOfSpeech =
   | 'noun'
@@ -23,10 +23,10 @@ export interface LexicalUnit {
   translation?: string;
   transcription?: string;
   meaning?: string;
-  antonyms?: Array;
-  synonyms?: Array;
+  antonyms?: StringArrayOrNull;
+  synonyms?: StringArrayOrNull;
   partsOfSpeech?: PartsOfSpeechOrNull;
-  examples?: Array;
+  examples?: StringArrayOrNull;
   comment?: string;
   audioUrl?: StringOrNull;
   imageUrl?: StringOrNull;
@@ -48,10 +48,10 @@ export interface AddLexicalUnitFormValues {
   translation?: string;
   transcription?: string;
   meaning?: string;
-  antonyms?: Array;
-  synonyms?: Array;
+  antonyms?: StringArrayOrNull;
+  synonyms?: StringArrayOrNull;
   partsOfSpeech?: PartsOfSpeech[];
-  examples?: Array;
+  examples?: StringArrayOrNull;
   comment?: string;
   audio?: BlobType;
   soundMeaning?: BlobType;

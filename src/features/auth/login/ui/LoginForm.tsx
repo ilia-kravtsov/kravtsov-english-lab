@@ -1,11 +1,11 @@
 import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 
-import type { LoginFormData } from '@/features/auth/login/model/login.types.ts';
-import { useLoginForm } from '@/features/auth/login/model/useLoginForm.ts';
+import type { LoginFormData } from '@/features/auth/login/model/login.types';
+import { useLoginForm } from '@/features/auth/login/model/useLoginForm';
 import { Button } from '@/shared/ui';
-import { Checkbox } from '@/shared/ui/Checkbox/Checkbox.tsx';
-import { Input } from '@/shared/ui/Input/Input.tsx';
+import { Checkbox } from '@/shared/ui/Checkbox/Checkbox';
+import { Input } from '@/shared/ui/Input/Input';
 
 import style from './LoginForm.module.scss';
 
@@ -16,7 +16,7 @@ export function LoginForm() {
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<LoginFormData>();
-  const { submit, serverError } = useLoginForm();
+  const { submit } = useLoginForm();
 
   const onSubmit: SubmitHandler<LoginFormData> = async (data) => {
     await submit(data);
@@ -76,8 +76,6 @@ export function LoginForm() {
         disabled={isSubmitting}
         title={isSubmitting ? 'Logging in...' : 'Login'}
       />
-
-      {serverError && <div className={style.serverError}>{serverError}</div>}
     </form>
   );
 }

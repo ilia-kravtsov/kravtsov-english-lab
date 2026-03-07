@@ -1,9 +1,9 @@
 import { Controller } from 'react-hook-form';
 
-import { useAddLexicalUnitForm } from '@/features/vocabulary/lexical-unit-add/model/useAddLexicalUnitForm.ts';
+import { useAddLexicalUnitForm } from '@/features/vocabulary/lexical-unit-add/model/useAddLexicalUnitForm';
 import { Button, Textarea } from '@/shared/ui';
-import { Input } from '@/shared/ui/Input/Input.tsx';
-import { MultiSelect } from '@/shared/ui/MultiSelect/MultiSelect.tsx';
+import { Input } from '@/shared/ui/Input/Input';
+import { MultiSelect } from '@/shared/ui/MultiSelect/MultiSelect';
 
 import style from './AddLexicalUnitForm.module.scss';
 
@@ -78,6 +78,11 @@ export function AddLexicalUnitForm() {
     removeAntonym,
   } = useAddLexicalUnitForm();
 
+  const stylesLargeButton = { width: '160px', fontSize: '16px' };
+  const stylesBigButton = { minWidth: '144px' };
+  const stylesMediumButton = { minWidth: '56px' };
+  const stylesSmallButton = { minWidth: '44px' };
+
   return (
     <form onSubmit={submit} className={style.container}>
       <Input {...register('value', { required: true })} placeholder={'word or expression *'} />
@@ -94,7 +99,7 @@ export function AddLexicalUnitForm() {
           type={'button'}
           className={style.button}
           onClick={recording ? stopRecording : startRecording}
-          style={{ minWidth: '144px' }}
+          style={stylesBigButton}
         >
           {recording ? 'Stop Recording' : 'Record a Sound'}
         </button>
@@ -119,7 +124,7 @@ export function AddLexicalUnitForm() {
               className={style.button}
               onClick={isPlaying ? pause : play}
               disabled={!audioBlob}
-              style={{ width: '56px' }}
+              style={stylesMediumButton}
             >
               {isPlaying ? 'Pause' : 'Play'}
             </button>
@@ -129,7 +134,7 @@ export function AddLexicalUnitForm() {
               className={style.button}
               onClick={handleResetAudio}
               disabled={!audioBlob}
-              style={{ width: '56px' }}
+              style={stylesMediumButton}
             >
               Reset
             </button>
@@ -148,7 +153,7 @@ export function AddLexicalUnitForm() {
           type={'button'}
           className={style.button}
           onClick={meaningRecording ? stopMeaningRecording : startMeaningRecording}
-          style={{ width: '144px' }}
+          style={stylesBigButton}
         >
           {meaningRecording ? 'Stop Meaning' : 'Record Meaning'}
         </button>
@@ -173,7 +178,7 @@ export function AddLexicalUnitForm() {
               className={style.button}
               onClick={meaningIsPlaying ? pauseMeaning : playMeaning}
               disabled={!meaningAudioBlob}
-              style={{ width: '56px' }}
+              style={stylesMediumButton}
             >
               {meaningIsPlaying ? 'Pause' : 'Play'}
             </button>
@@ -183,7 +188,7 @@ export function AddLexicalUnitForm() {
               className={style.button}
               onClick={handleResetMeaningAudio}
               disabled={!meaningAudioBlob}
-              style={{ width: '56px' }}
+              style={stylesMediumButton}
             >
               Reset
             </button>
@@ -202,7 +207,7 @@ export function AddLexicalUnitForm() {
           type={'button'}
           className={style.button}
           onClick={exampleRecording ? stopExampleRecording : startExampleRecording}
-          style={{ width: '144px' }}
+          style={stylesBigButton}
         >
           {exampleRecording ? 'Stop Example' : 'Record Example'}
         </button>
@@ -227,7 +232,7 @@ export function AddLexicalUnitForm() {
               className={style.button}
               onClick={exampleIsPlaying ? pauseExample : playExample}
               disabled={!exampleAudioBlob}
-              style={{ width: '56px' }}
+              style={stylesMediumButton}
             >
               {exampleIsPlaying ? 'Pause' : 'Play'}
             </button>
@@ -237,7 +242,7 @@ export function AddLexicalUnitForm() {
               className={style.button}
               onClick={handleResetExampleAudio}
               disabled={!exampleAudioBlob}
-              style={{ width: '56px' }}
+              style={stylesMediumButton}
             >
               Reset
             </button>
@@ -285,7 +290,7 @@ export function AddLexicalUnitForm() {
                   type={'button'}
                   title={'+'}
                   onClick={addSynonym}
-                  style={{ width: '44px' }}
+                  style={stylesSmallButton}
                 />
               )}
               {synonymsCount > 1 && (
@@ -293,7 +298,7 @@ export function AddLexicalUnitForm() {
                   type={'button'}
                   title={'🗑'}
                   onClick={() => removeSynonym(i)}
-                  style={{ width: '44px' }}
+                  style={stylesSmallButton}
                 />
               )}
             </div>
@@ -314,7 +319,7 @@ export function AddLexicalUnitForm() {
                   type={'button'}
                   title={'+'}
                   onClick={addAntonym}
-                  style={{ width: '44px' }}
+                  style={stylesSmallButton}
                 />
               )}
               {antonymsCount > 1 && (
@@ -322,7 +327,7 @@ export function AddLexicalUnitForm() {
                   type={'button'}
                   title={'🗑'}
                   onClick={() => removeAntonym(i)}
-                  style={{ width: '44px' }}
+                  style={stylesSmallButton}
                 />
               )}
             </div>
@@ -344,7 +349,7 @@ export function AddLexicalUnitForm() {
                   type={'button'}
                   title={'+'}
                   onClick={addExample}
-                  style={{ width: '44px' }}
+                  style={stylesSmallButton}
                 />
               )}
               {examplesCount > 1 && (
@@ -352,7 +357,7 @@ export function AddLexicalUnitForm() {
                   type={'button'}
                   title={'🗑'}
                   onClick={() => removeExample(i)}
-                  style={{ width: '44px' }}
+                  style={stylesSmallButton}
                 />
               )}
             </div>
@@ -373,7 +378,7 @@ export function AddLexicalUnitForm() {
               ? 'Update'
               : 'Save'
         }
-        style={{ width: '160px', fontSize: '16px' }}
+        style={stylesLargeButton}
       />
     </form>
   );

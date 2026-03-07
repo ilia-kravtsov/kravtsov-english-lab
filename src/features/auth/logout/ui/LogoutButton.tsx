@@ -1,8 +1,9 @@
 import { useState } from 'react';
 
-import { useLogout } from '@/features/auth/logout/model/useLogout.ts';
+import { useLogout } from '@/features/auth/logout/model/useLogout';
 import { Button } from '@/shared/ui/Button/Button';
-import { ConfirmModal } from '@/shared/ui/Modal/ConfirmModal.tsx';
+import { logoutButtonStyles } from '@/shared/ui/ButtonStyles/logout-button.styles';
+import { ConfirmModal } from '@/shared/ui/Modal/ConfirmModal';
 
 export function LogoutButton() {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -21,19 +22,9 @@ export function LogoutButton() {
     setModalOpen(true);
   };
 
-  const buttonStyles = {
-    width: '120px',
-    height: '40px',
-    outline: '1px solid white',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    fontSize: '14px',
-  };
-
   return (
     <>
-      <Button title="Logout" onClick={handleClick} style={buttonStyles} />
+      <Button title="Logout" onClick={handleClick} style={logoutButtonStyles} />
       <ConfirmModal
         isOpen={isModalOpen}
         title={'Confirm Logout'}

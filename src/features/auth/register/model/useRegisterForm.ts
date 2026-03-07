@@ -1,18 +1,15 @@
-import axios from 'axios';
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
-import type { RegisterFormData } from '@/features/auth/register/model/register.types.ts';
+import { showAuthErrorToast } from '@/features/auth/lib/showAuthErrorToast.ts';
+import type { RegisterFormData } from '@/features/auth/register/model/register.types';
 
 import { registerEffect } from '../model/register.effect';
 
 export function useRegisterForm() {
-  const [serverError, setServerError] = useState<string | null>(null);
   const navigate = useNavigate();
 
-  const onSubmit = async (data: RegisterFormData) => {
-    setServerError(null);
-
+  const submit = async (data: RegisterFormData) => {
     try {
       await registerEffect({
         firstName: data.firstName,
@@ -21,16 +18,12 @@ export function useRegisterForm() {
         password: data.password,
       });
 
+      toast.success('Registration successful');
       navigate('/login', { replace: true });
-    } catch (err: unknown) {
-      if (axios.isAxiosError(err)) {
-        setServerError(err.response?.data?.message || 'Registration failed');
-        return;
-      }
-
-      setServerError('Unexpected registration error');
+    } catch (error: unknown) {
+      showAuthErrorToast(error, 'Registration failed');
     }
   };
 
-  return { onSubmit, serverError };
+  return { submit };
 }

@@ -2,9 +2,9 @@ import { createGStore } from 'create-gstore';
 import { useRef, useState } from 'react';
 
 import type { CardWithLexicalUnit } from '@/entities/card/model/card.types';
-import { buildPracticeModeStats } from '@/features/vocabulary/card-practice/shared/model/build-practice-mode-stats.ts';
-import { readPracticeStats } from '@/features/vocabulary/card-practice/shared/model/practice.storage.ts';
-import type { PracticeModeStats } from '@/features/vocabulary/card-practice/shared/model/practice.types.ts';
+import { buildPracticeModeStats } from '@/features/vocabulary/card-practice/shared/model/build-practice-mode-stats';
+import { readPracticeStats } from '@/features/vocabulary/card-practice/shared/model/practice.storage';
+import type { PracticeModeStats } from '@/features/vocabulary/card-practice/shared/model/practice.types';
 
 import { writeContextStats } from './context.storage';
 import type { ContextCardStat, ContextFeedback, ContextSessionCard } from './context.types';

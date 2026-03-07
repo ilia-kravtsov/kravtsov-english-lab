@@ -1,6 +1,6 @@
-import type { PracticeSwitchState } from '@/features/vocabulary/card-practice/model/practice-mode.types.ts';
-import { useAutoNextOnCorrect } from '@/features/vocabulary/card-practice/shared/model/useAutoNextOnCorrect.ts';
-import { PracticeResults } from '@/features/vocabulary/card-practice/shared/ui/PracticeResults/PracticeResults.tsx';
+import type { PracticeSwitchState } from '@/features/vocabulary/card-practice/model/practice-mode.types';
+import { useAutoNextOnCorrect } from '@/features/vocabulary/card-practice/shared/model/useAutoNextOnCorrect';
+import { PracticeResults } from '@/features/vocabulary/card-practice/shared/ui/PracticeResults/PracticeResults';
 import switchAnim from '@/features/vocabulary/card-practice/shared/ui/SwitchAnimation.module.scss';
 
 import { useRecognitionStore } from '../model/recognition.store';
@@ -60,17 +60,17 @@ export function RecognitionPractice({ switchDir, onAutoNext, autoNextCommitDelay
 
   const correct = norm(unit.translation ?? '');
 
+  const stylesCard = [
+    style.card,
+    switchDir === 'next' ? switchAnim.switchNext : '',
+    switchDir === 'prev' ? switchAnim.switchPrev : '',
+    feedback === 'correct' ? style.cardCorrect : '',
+    feedback === 'wrong' ? style.cardWrong : '',
+  ].join(' ')
+
   return (
     <div className={style.wrap}>
-      <div
-        className={[
-          style.card,
-          switchDir === 'next' ? switchAnim.switchNext : '',
-          switchDir === 'prev' ? switchAnim.switchPrev : '',
-          feedback === 'correct' ? style.cardCorrect : '',
-          feedback === 'wrong' ? style.cardWrong : '',
-        ].join(' ')}
-      >
+      <div className={stylesCard}>
         <div className={style.value}>{unit.value}</div>
       </div>
 
@@ -80,16 +80,17 @@ export function RecognitionPractice({ switchDir, onAutoNext, autoNextCommitDelay
           const isDisabled = Boolean(disabled[v]) || feedback === 'correct';
           const isCorrect = feedback === 'correct' && v === correct;
           const isWrong = Boolean(disabled[v]);
+          const stylesOptionButton = [
+            style.optionBtn,
+            isCorrect ? style.optionCorrect : '',
+            isWrong ? style.optionWrong : '',
+          ].join(' ')
 
           return (
             <button
               key={v}
               type={'button'}
-              className={[
-                style.optionBtn,
-                isCorrect ? style.optionCorrect : '',
-                isWrong ? style.optionWrong : '',
-              ].join(' ')}
+              className={stylesOptionButton}
               disabled={isDisabled}
               onClick={() => answer(v)}
             >

@@ -1,11 +1,11 @@
-import { Controller, useForm } from 'react-hook-form';
+import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 
-import type { RegisterFormData } from '@/features/auth/register/model/register.types.ts';
-import { useRegisterForm } from '@/features/auth/register/model/useRegisterForm.ts';
+import type { RegisterFormData } from '@/features/auth/register/model/register.types';
+import { useRegisterForm } from '@/features/auth/register/model/useRegisterForm';
 import { Button } from '@/shared/ui';
-import { Checkbox } from '@/shared/ui/Checkbox/Checkbox.tsx';
-import { Input } from '@/shared/ui/Input/Input.tsx';
+import { Checkbox } from '@/shared/ui/Checkbox/Checkbox';
+import { Input } from '@/shared/ui/Input/Input';
 
 import style from './RegisterForm.module.scss';
 
@@ -16,7 +16,11 @@ export function RegisterForm() {
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<RegisterFormData>();
-  const { onSubmit, serverError } = useRegisterForm();
+  const { submit } = useRegisterForm();
+
+  const onSubmit: SubmitHandler<RegisterFormData> = async (data) => {
+    await submit(data);
+  };
 
   return (
     <form className={style.container} onSubmit={handleSubmit(onSubmit)}>
@@ -42,7 +46,7 @@ export function RegisterForm() {
           <Input
             type={'text'}
             id={'lastName'}
-            data-error={!!errors.password}
+            data-error={!!errors.lastName}
             placeholder={'Brown'}
             {...register('lastName', { required: 'Last Name is required' })}
           />
@@ -83,6 +87,9 @@ export function RegisterForm() {
           name="terms"
           control={control}
           defaultValue={false}
+          rules={{
+            required: 'You must accept Terms & Conditions',
+          }}
           render={({ field }) => (
             <Checkbox
               label={
@@ -99,7 +106,7 @@ export function RegisterForm() {
             />
           )}
         />
-        <div className={style.errorSlot}>{errors.terms?.message}</div>
+        <div className={style.errorSlotTerms}>{errors.terms?.message}</div>
       </div>
 
       <Button
@@ -108,7 +115,6 @@ export function RegisterForm() {
         title={isSubmitting ? 'Registering...' : 'Register'}
       />
 
-      {serverError && <div className={style.serverError}>{serverError}</div>}
     </form>
   );
 }

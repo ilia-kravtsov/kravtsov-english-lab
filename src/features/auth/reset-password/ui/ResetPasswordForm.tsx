@@ -16,7 +16,7 @@ export function ResetPasswordForm() {
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<FormData>();
-  const { submit, serverMessage } = useResetPasswordModel();
+  const { submit } = useResetPasswordModel();
 
   const onSubmit: SubmitHandler<FormData> = async ({ password }) => {
     await submit(password);
@@ -41,8 +41,6 @@ export function ResetPasswordForm() {
         title={isSubmitting ? 'Saving...' : 'Reset password'}
         disabled={isSubmitting}
       />
-
-      {serverMessage && <div className={style.serverMessage}>{serverMessage}</div>}
     </form>
   );
 }

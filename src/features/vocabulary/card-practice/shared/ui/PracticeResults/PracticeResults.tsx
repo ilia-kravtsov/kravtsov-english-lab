@@ -1,7 +1,7 @@
-import type { PracticeMode } from '@/features/vocabulary/card-practice/model/practice-mode.types.ts';
-import { readPracticeStats } from '@/features/vocabulary/card-practice/shared/model/practice.storage.ts';
+import type { PracticeMode } from '@/features/vocabulary/card-practice/model/practice-mode.types';
+import { readPracticeStats } from '@/features/vocabulary/card-practice/shared/model/practice.storage';
 import { Button } from '@/shared/ui';
-import { ConfettiBurstPetard } from '@/shared/ui/ConfettiBurstPetard/ConfettiBurstPetard.tsx';
+import { ConfettiBurstPetard } from '@/shared/ui/ConfettiBurstPetard/ConfettiBurstPetard';
 
 import style from './PracticeResults.module.scss';
 

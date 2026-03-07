@@ -19,6 +19,12 @@
 
   .errorSlot {
     @include form.errorSlot;
+    bottom: 55px;
+  }
+
+  .errorSlotTerms {
+    @include form.errorSlot;
+    bottom: 47px;
   }
 
   .checkBoxLinkContainer {

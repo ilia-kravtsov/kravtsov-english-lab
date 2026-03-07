@@ -61,7 +61,6 @@ export function TypingPractice({ switchDir, onAutoNext, autoNextCommitDelayMs }:
     return (
       <PracticeResults
         cardSetId={cardSetId}
-        mode={'typing'}
         restart={restart}
         restartTitle={'Restart Typing'}
       />

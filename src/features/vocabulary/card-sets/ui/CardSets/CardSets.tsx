@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { Button, ConfirmModal, Input } from '@/shared/ui';
 
-import { useCardSets } from '../../model/useCardSets.ts';
+import { useCardSets } from '../../model/useCardSets';
 import style from './CardSets.module.scss';
 
 export function CardSets() {

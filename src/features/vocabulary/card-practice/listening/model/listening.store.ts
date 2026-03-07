@@ -2,13 +2,13 @@ import { createGStore } from 'create-gstore';
 import { useRef, useState } from 'react';
 
 import type { CardWithLexicalUnit } from '@/entities/card/model/card.types';
-import { buildPracticeModeStats } from '@/features/vocabulary/card-practice/shared/model/build-practice-mode-stats.ts';
-import { readPracticeStats } from '@/features/vocabulary/card-practice/shared/model/practice.storage.ts';
-import type { PracticeModeStats } from '@/features/vocabulary/card-practice/shared/model/practice.types.ts';
+import { buildPracticeModeStats } from '@/features/vocabulary/card-practice/shared/model/build-practice-mode-stats';
+import { readPracticeStats } from '@/features/vocabulary/card-practice/shared/model/practice.storage';
+import type { PracticeModeStats } from '@/features/vocabulary/card-practice/shared/model/practice.types';
 
 import { writeListeningStats } from './listening.storage';
 import type { ListeningCardStat, ListeningFeedback, ListeningSessionCard } from './listening.types';
-import { norm, round } from './listening.utils.ts';
+import { norm, round } from './listening.utils';
 
 export interface ListeningState {
   cardSetId: string | null;

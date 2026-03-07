@@ -7,14 +7,14 @@ import {
   deleteCardSet,
   getCardSets,
   updateCardSet,
-} from '@/entities/card-set/api/card-set.api.ts';
+} from '@/entities/card-set/api/card-set.api';
 import type {
   CardSet,
   CreateCardSetPayload,
   UpdateCardSetPayload,
-} from '@/entities/card-set/model/card-set.types.ts';
-import { useCardSetsStore } from '@/features/vocabulary/card-sets/model/card-sets.store.ts';
-import { extractErrorMessage } from '@/shared/lib/extractErrorMessage.ts';
+} from '@/entities/card-set/model/card-set.types';
+import { useCardSetsStore } from '@/features/vocabulary/card-sets/model/card-sets.store';
+import { extractErrorMessage } from '@/shared/lib/extractErrorMessage';
 
 type CreateFormValues = {
   title: string;

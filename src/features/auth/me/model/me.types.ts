@@ -3,5 +3,5 @@ export interface MeResponse {
   email: string;
   firstName: string;
   lastName: string;
-  createdAt: Date;
+  createdAt: string;
 }

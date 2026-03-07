@@ -3,7 +3,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import type {
   PracticeSwitchDir,
   PracticeSwitchState,
-} from '@/features/vocabulary/card-practice/model/practice-mode.types.ts';
+} from '@/features/vocabulary/card-practice/model/practice-mode.types';
 
 export function useSwitchAnimation(totalMs = 260) {
   const [dir, setDir] = useState<PracticeSwitchState>(null);

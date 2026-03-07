@@ -277,7 +277,6 @@ export function useAddLexicalUnitForm() {
       const normalizedSynonyms = trimNonEmpty(data.synonyms ?? []);
       const normalizedAntonyms = trimNonEmpty(data.antonyms ?? []);
 
-      console.log(data);
       const payload: AddLexicalUnitFormValues = {
         ...data,
         value: normalized,

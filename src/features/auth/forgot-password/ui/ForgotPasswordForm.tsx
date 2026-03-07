@@ -1,8 +1,8 @@
 import { type SubmitHandler, useForm } from 'react-hook-form';
 
-import { useForgotPasswordModel } from '@/features/auth/forgot-password/model/forgot-password.model.ts';
+import { useForgotPasswordModel } from '@/features/auth/forgot-password/model/forgot-password.model';
 import { Button } from '@/shared/ui';
-import { Input } from '@/shared/ui/Input/Input.tsx';
+import { Input } from '@/shared/ui/Input/Input';
 
 import style from './ForgotPasswordForm.module.scss';
 
@@ -16,7 +16,7 @@ export function ForgotPasswordForm() {
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<FormData>();
-  const { submit, serverMessage } = useForgotPasswordModel();
+  const { submit } = useForgotPasswordModel();
 
   const onSubmit: SubmitHandler<FormData> = async ({ email }) => {
     await submit(email);
@@ -41,8 +41,6 @@ export function ForgotPasswordForm() {
         disabled={isSubmitting}
         title={isSubmitting ? 'Sending...' : 'Send reset link'}
       />
-
-      {serverMessage && <div className={style.serverMessage}>{serverMessage}</div>}
     </form>
   );
 }

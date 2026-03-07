@@ -7,12 +7,12 @@ import {
   useRef,
 } from 'react';
 
-import type { CardWithLexicalUnit } from '@/entities/card/model/card.types.ts';
+import type { CardWithLexicalUnit } from '@/entities/card/model/card.types';
 import type {
   PracticeSwitchDir,
   PracticeSwitchState,
-} from '@/features/vocabulary/card-practice/model/practice-mode.types.ts';
-import { practiceButtonStyles } from '@/features/vocabulary/card-practice/ui/practice-button.styles.ts';
+} from '@/features/vocabulary/card-practice/model/practice-mode.types';
+import { practiceButtonStyles } from '@/features/vocabulary/card-practice/ui/practice-button.styles';
 import { Button } from '@/shared/ui';
 
 import style from './StandardPractice.module.scss';

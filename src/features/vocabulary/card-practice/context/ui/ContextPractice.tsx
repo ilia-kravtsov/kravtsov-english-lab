@@ -1,8 +1,8 @@
 import { useEffect, useRef } from 'react';
 
-import type { PracticeSwitchState } from '@/features/vocabulary/card-practice/model/practice-mode.types.ts';
-import { useAutoNextOnCorrect } from '@/features/vocabulary/card-practice/shared/model/useAutoNextOnCorrect.ts';
-import { PracticeResults } from '@/features/vocabulary/card-practice/shared/ui/PracticeResults/PracticeResults.tsx';
+import type { PracticeSwitchState } from '@/features/vocabulary/card-practice/model/practice-mode.types';
+import { useAutoNextOnCorrect } from '@/features/vocabulary/card-practice/shared/model/useAutoNextOnCorrect';
+import { PracticeResults } from '@/features/vocabulary/card-practice/shared/ui/PracticeResults/PracticeResults';
 import switchAnim from '@/features/vocabulary/card-practice/shared/ui/SwitchAnimation.module.scss';
 import { Button, Input } from '@/shared/ui';
 

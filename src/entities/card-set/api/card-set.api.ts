@@ -4,15 +4,10 @@ import type {
   CardSet,
   CreateCardSetPayload,
   UpdateCardSetPayload,
-} from '../model/card-set.types.ts';
+} from '../model/card-set.types';
 
 export async function getCardSets() {
   const res = await api.get<CardSet[]>('/card-sets/with-counts');
-  return res.data;
-}
-
-export async function getCardSet(id: string) {
-  const res = await api.get<CardSet>(`/card-sets/${id}`);
   return res.data;
 }
 

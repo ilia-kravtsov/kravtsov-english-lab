@@ -1,4 +1,4 @@
-import { useSearchLexicalUnit } from '@/features/vocabulary/lexical-unit-add/model/useSearchLexicalUnit.ts';
+import { useSearchLexicalUnit } from '@/features/vocabulary/lexical-unit-add/model/useSearchLexicalUnit';
 import { LexicalUnitSearchPanel } from '@/features/vocabulary/lexical-unit-add/ui/LexicalUnitSearchPanel/LexicalUnitSearchPanel';
 import { Button, ConfirmModal } from '@/shared/ui';
 

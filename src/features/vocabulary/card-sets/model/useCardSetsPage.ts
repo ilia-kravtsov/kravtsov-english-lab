@@ -3,8 +3,8 @@ import { toast } from 'react-toastify';
 
 import { createCard, deleteCard, listCardsWithLexicalUnit } from '@/entities/card/api/card.api';
 import type { CardWithLexicalUnit } from '@/entities/card/model/card.types';
-import { getCardSetById } from '@/entities/card-set/api/card-set.api.ts';
-import type { CardSet } from '@/entities/card-set/model/card-set.types.ts';
+import { getCardSetById } from '@/entities/card-set/api/card-set.api';
+import type { CardSet } from '@/entities/card-set/model/card-set.types';
 import { useLexicalUnitSearch } from '@/features/vocabulary/lexical-unit-add/model/useLexicalUnitSearch';
 
 export function useCardSetsPage(cardSetId: string | undefined) {

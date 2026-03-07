@@ -1,4 +1,4 @@
-import type { PracticeModeStats } from '@/features/vocabulary/card-practice/shared/model/practice.types.ts';
+import type { PracticeModeStats } from '@/features/vocabulary/card-practice/shared/model/practice.types';
 
 import { writePracticeModeStats } from '../../shared/model/practice.storage';
 

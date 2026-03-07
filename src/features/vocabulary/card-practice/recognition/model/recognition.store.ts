@@ -2,17 +2,16 @@ import { createGStore } from 'create-gstore';
 import { useRef, useState } from 'react';
 
 import type { CardWithLexicalUnit } from '@/entities/card/model/card.types';
-import { buildRecognitionPracticeStats } from '@/features/vocabulary/card-practice/shared/model/build-recognition-practice-stats.ts';
-import { readPracticeStats } from '@/features/vocabulary/card-practice/shared/model/practice.storage.ts';
-import type { PracticeStats } from '@/features/vocabulary/card-practice/shared/model/practice.types.ts';
+import {
+  buildRecognitionPracticeStats
+} from '@/features/vocabulary/card-practice/shared/model/build-recognition-practice-stats';
+import { readPracticeStats } from '@/features/vocabulary/card-practice/shared/model/practice.storage';
+import type { PracticeStats } from '@/features/vocabulary/card-practice/shared/model/practice.types';
+import { shuffle } from '@/features/vocabulary/card-practice/shared/model/shuffle.ts';
 
 import { writeRecognitionStats } from './recognition.storage';
-import type {
-  RecognitionCardStat,
-  RecognitionFeedback,
-  RecognitionSessionCard,
-} from './recognition.types';
-import { norm, round, shuffle, uniqNonEmpty } from './recognition.utils';
+import type { RecognitionCardStat, RecognitionFeedback, RecognitionSessionCard, } from './recognition.types';
+import { norm, round, uniqNonEmpty } from './recognition.utils';
 
 export interface RecognitionState {
   cardSetId: string | null;
@@ -180,6 +179,7 @@ export const useRecognitionStore = createGStore<RecognitionState>(() => {
     if (!id) return;
 
     const isLast = index >= cards.length - 1;
+
     if (isLast) {
       finish(id, statsByCard);
       return;
@@ -191,8 +191,7 @@ export const useRecognitionStore = createGStore<RecognitionState>(() => {
   };
 
   const restart = () => {
-    const id = cardSetId;
-    if (!id) return;
+    if (!cardSetId) return;
     if (cards.length < 2) {
       setIsAvailable(false);
       return;
