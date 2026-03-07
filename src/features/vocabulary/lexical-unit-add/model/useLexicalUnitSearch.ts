@@ -53,6 +53,10 @@ export function useLexicalUnitSearch() {
     return result.unit.imageUrl ?? null;
   }, [result]);
 
+  const resetResult = () => {
+    setResult({ status: 'idle' });
+  };
+
   const runSearch = async (valueArg?: string) => {
     const value = (valueArg ?? normalizedQuery).trim();
     if (!value) {
@@ -70,8 +74,7 @@ export function useLexicalUnitSearch() {
       }
       setResult({ status: 'found', unit: data });
       setQuery('');
-    } catch (e) {
-      console.error(e);
+    } catch {
       setResult({ status: 'error' });
       toast.error('Search failed');
       setQuery('');
@@ -101,6 +104,7 @@ export function useLexicalUnitSearch() {
     result,
 
     runSearch,
+    resetResult,
 
     audioRef,
     audioSrc,

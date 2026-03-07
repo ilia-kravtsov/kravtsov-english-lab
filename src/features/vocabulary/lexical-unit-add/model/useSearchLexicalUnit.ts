@@ -16,6 +16,7 @@ export function useSearchLexicalUnit() {
     normalizedQuery,
     result,
     runSearch,
+    resetResult,
 
     audioRef,
     audioSrc,
@@ -61,12 +62,14 @@ export function useSearchLexicalUnit() {
     if (result.status !== 'found') return;
 
     setDeleting(true);
+
     try {
       await deleteLexicalUnit(result.unit.id);
       setConfirmOpen(false);
+      resetResult();
+      setQuery('');
       toast.success('Deleted');
-    } catch (e) {
-      console.error(e);
+    } catch {
       toast.error('Failed to delete');
     } finally {
       setDeleting(false);
