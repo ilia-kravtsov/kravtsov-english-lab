@@ -6,43 +6,32 @@ import {
   buildRecognitionPracticeStats
 } from '@/features/vocabulary/card-practice/shared/model/build-recognition-practice-stats';
 import { readPracticeStats } from '@/features/vocabulary/card-practice/shared/model/practice.storage';
-import type { PracticeStats } from '@/features/vocabulary/card-practice/shared/model/practice.types';
+import type { PracticeModeStats } from '@/features/vocabulary/card-practice/shared/model/practice.types';
 import { shuffle } from '@/features/vocabulary/card-practice/shared/model/shuffle.ts';
+import type {
+  BasePracticeState,
+  TextInputCardStat,
+  TextInputFeedback,
+  TextInputSessionCard,
+} from '@/features/vocabulary/card-practice/shared/model/text-input-practice.types.ts';
+import { round } from '@/features/vocabulary/card-practice/shared/model/text-input-practice.utils.ts';
 
 import { writeRecognitionStats } from './recognition.storage';
-import type { RecognitionCardStat, RecognitionFeedback, RecognitionSessionCard, } from './recognition.types';
-import { norm, round, uniqNonEmpty } from './recognition.utils';
+import { norm, uniqNonEmpty } from './recognition.utils';
 
-export interface RecognitionState {
-  cardSetId: string | null;
-
-  isAvailable: boolean;
-  isActive: boolean;
-  isFinished: boolean;
-
-  cards: RecognitionSessionCard[];
-  index: number;
-
-  feedback: RecognitionFeedback;
-  locked: boolean;
-
+export interface RecognitionState
+  extends BasePracticeState<
+    TextInputSessionCard,
+    TextInputFeedback,
+    TextInputCardStat
+  > {
   options: string[];
   disabled: Record<string, true>;
   selected: string | null;
 
-  attempts: number;
-  wrongCount: number;
-
-  statsByCard: Record<string, RecognitionCardStat>;
-
-  start: (cardSetId: string, allCards: CardWithLexicalUnit[]) => void;
-  stop: () => void;
-
   answer: (option: string) => void;
-  next: () => void;
-  restart: () => void;
 
-  getStoredRecognition: (cardSetId: string) => PracticeStats | null;
+  getStoredRecognition: (cardSetId: string) => PracticeModeStats | null;
 }
 
 export const useRecognitionStore = createGStore<RecognitionState>(() => {
@@ -52,10 +41,10 @@ export const useRecognitionStore = createGStore<RecognitionState>(() => {
   const [isActive, setIsActive] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
 
-  const [cards, setCards] = useState<RecognitionSessionCard[]>([]);
+  const [cards, setCards] = useState<TextInputSessionCard[]>([]);
   const [index, setIndex] = useState(0);
 
-  const [feedback, setFeedback] = useState<RecognitionFeedback>('idle');
+  const [feedback, setFeedback] = useState<TextInputFeedback>('idle');
   const [locked, setLocked] = useState(false);
 
   const [options, setOptions] = useState<string[]>([]);
@@ -65,11 +54,11 @@ export const useRecognitionStore = createGStore<RecognitionState>(() => {
   const [attempts, setAttempts] = useState(0);
   const [wrongCount, setWrongCount] = useState(0);
 
-  const [statsByCard, setStatsByCard] = useState<Record<string, RecognitionCardStat>>({});
+  const [statsByCard, setStatsByCard] = useState<Record<string, TextInputCardStat>>({});
 
   const shownAtRef = useRef(0);
 
-  const resetCardState = (card: RecognitionSessionCard | null, poolOverride?: string[]) => {
+  const resetCardState = (card: TextInputSessionCard | null, poolOverride?: string[]) => {
     setFeedback('idle');
     setLocked(false);
     setDisabled({});
@@ -95,7 +84,7 @@ export const useRecognitionStore = createGStore<RecognitionState>(() => {
     shownAtRef.current = performance.now();
   };
 
-  const finish = (id: string, nextStatsByCard: Record<string, RecognitionCardStat>) => {
+  const finish = (id: string, nextStatsByCard: Record<string, TextInputCardStat>) => {
     const payload = buildRecognitionPracticeStats(cards.length, nextStatsByCard);
 
     writeRecognitionStats(id, payload);
@@ -105,7 +94,7 @@ export const useRecognitionStore = createGStore<RecognitionState>(() => {
   const start = (id: string, allCards: CardWithLexicalUnit[]) => {
     const filtered = allCards
       .filter((c) => c.lexicalUnit && norm(c.lexicalUnit.translation ?? '').length > 0)
-      .map((c) => c as RecognitionSessionCard);
+      .map((c) => c as TextInputSessionCard);
 
     setCardSetId(id);
     setCards(filtered);
@@ -154,7 +143,7 @@ export const useRecognitionStore = createGStore<RecognitionState>(() => {
 
       const timeMs = round(performance.now() - shownAtRef.current);
 
-      const stat: RecognitionCardStat = {
+      const stat: TextInputCardStat = {
         cardId: card.id,
         lexicalUnitId: card.lexicalUnitId,
         attempts: nextAttempts,

@@ -21,7 +21,24 @@ export type TextInputSessionCard = CardWithLexicalUnit & {
   lexicalUnit: NonNullable<CardWithLexicalUnit['lexicalUnit']>;
 };
 
-export interface TextInputPracticeState<TCard, TFeedback, TStat> {
+export interface TextInputPracticeState<TCard, TFeedback, TStat>
+  extends BasePracticeState<TCard, TFeedback, TStat> {
+  input: string;
+
+  setInput: (value: string) => void;
+  submit: () => void;
+  skip: () => void;
+}
+
+export type GetStoredPracticeModeStats = (cardSetId: string) => PracticeModeStats | null;
+
+export type WriteStatsFn<TStat extends TextInputCardStat> = (
+  id: string,
+  payload: ReturnType<typeof buildPracticeModeStats<TStat>>,
+) => void;
+
+
+export interface BasePracticeState<TCard, TFeedback, TStat> {
   cardSetId: string | null;
 
   isAvailable: boolean;
@@ -34,8 +51,6 @@ export interface TextInputPracticeState<TCard, TFeedback, TStat> {
   feedback: TFeedback;
   locked: boolean;
 
-  input: string;
-
   attempts: number;
   wrongCount: number;
 
@@ -44,16 +59,6 @@ export interface TextInputPracticeState<TCard, TFeedback, TStat> {
   start: (cardSetId: string, allCards: CardWithLexicalUnit[]) => void;
   stop: () => void;
 
-  setInput: (value: string) => void;
-  submit: () => void;
-  skip: () => void;
   next: () => void;
   restart: () => void;
 }
-
-export type GetStoredPracticeModeStats = (cardSetId: string) => PracticeModeStats | null;
-
-export type WriteStatsFn<TStat extends TextInputCardStat> = (
-  id: string,
-  payload: ReturnType<typeof buildPracticeModeStats<TStat>>,
-) => void;

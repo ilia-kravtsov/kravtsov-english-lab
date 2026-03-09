@@ -5,6 +5,7 @@ export function norm(s: string) {
 export function uniqNonEmpty(values: string[]) {
   const set = new Set<string>();
   const out: string[] = [];
+
   for (const v of values) {
     const x = norm(v);
     if (!x) continue;
@@ -12,9 +13,6 @@ export function uniqNonEmpty(values: string[]) {
     set.add(x);
     out.push(x);
   }
-  return out;
-}
 
-export function round(n: number) {
-  return Math.round(n);
+  return out;
 }
