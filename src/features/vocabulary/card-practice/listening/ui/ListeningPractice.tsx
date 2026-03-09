@@ -4,10 +4,10 @@ import type { PracticeSwitchState } from '@/features/vocabulary/card-practice/mo
 import { useAutoNextOnCorrect } from '@/features/vocabulary/card-practice/shared/model/useAutoNextOnCorrect.ts';
 import { PracticeResults } from '@/features/vocabulary/card-practice/shared/ui/PracticeResults/PracticeResults.tsx';
 import switchAnim from '@/features/vocabulary/card-practice/shared/ui/SwitchAnimation.module.scss';
+import { toAbsoluteMediaUrl } from '@/shared/lib/url/toAbsoluteMediaUrl.ts';
 import { Button, Input } from '@/shared/ui';
 
 import { useListeningStore } from '../model/listening.store';
-import { toAbsoluteMediaUrl } from '../model/listening.utils.ts';
 import style from './ListeningPractice.module.scss';
 
 type Props = {
