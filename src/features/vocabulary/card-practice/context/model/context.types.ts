@@ -1,19 +1,6 @@
-import type { CardWithLexicalUnit } from '@/entities/card/model/card.types';
+import type { TextInputSessionCard } from '@/features/vocabulary/card-practice/shared/model/text-input-practice.types.ts';
 
-export type ContextFeedback = 'idle' | 'correct' | 'wrong';
-
-export type ContextCardStat = {
-  cardId: string;
-  lexicalUnitId: string;
-  attempts: number;
-  wrongCount: number;
-  timeMs: number;
-  isCorrect?: boolean;
-  skipped?: boolean;
-};
-
-export type ContextSessionCard = CardWithLexicalUnit & {
-  lexicalUnit: NonNullable<CardWithLexicalUnit['lexicalUnit']>;
+export type ContextSessionCard = TextInputSessionCard & {
   contextExample: string;
   contextMasked: string;
 };

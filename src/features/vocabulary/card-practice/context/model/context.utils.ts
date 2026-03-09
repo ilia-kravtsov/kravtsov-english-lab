@@ -1,11 +1,3 @@
-export function norm(s: string) {
-  return s.trim().toLowerCase();
-}
-
-export function round(n: number) {
-  return Math.round(n);
-}
-
 export function escapeRegExp(s: string) {
   return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
