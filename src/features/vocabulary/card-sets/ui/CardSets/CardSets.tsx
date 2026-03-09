@@ -1,6 +1,9 @@
 import { useNavigate } from 'react-router-dom';
 
-import { Button, ConfirmModal, Input } from '@/shared/ui';
+import { CardSetsCreateForm } from '@/features/vocabulary/card-sets/ui/CardSets/CardSetsCreateForm/CardSetsCreateForm.tsx';
+import { CardSetsEditForm } from '@/features/vocabulary/card-sets/ui/CardSets/CardSetsEditForm/CardSetsEditForm.tsx';
+import { CardSetsList } from '@/features/vocabulary/card-sets/ui/CardSets/CardSetsList/CardSetsList.tsx';
+import { ConfirmModal } from '@/shared/ui';
 
 import { useCardSets } from '../../model/useCardSets';
 import style from './CardSets.module.scss';
@@ -35,113 +38,33 @@ export function CardSets() {
   return (
     <div className={style.container}>
       <div className={style.sectionContainer}>
-        <div className={style.sectionCreateCardSet}>
-          <h2 className={style.title}>Create Card Set</h2>
-          <form onSubmit={handleSubmitCreate(submitCreate)}>
-            <div className={style.formRow}>
-              <div className={style.formField}>
-                <span className={style.label}>Title</span>
-                <Input
-                  placeholder={'Travel France'}
-                  {...registerCreate('title', { required: true })}
-                />
-                {createErrors.title && <span className={style.error}>Title is required</span>}
-              </div>
+        <CardSetsCreateForm
+          registerCreate={registerCreate}
+          handleSubmitCreate={handleSubmitCreate}
+          submitCreate={submitCreate}
+          createErrors={createErrors}
+          isCreating={isCreating}
+        />
 
-              <div className={style.formField}>
-                <span className={style.label}>Description</span>
-                <Input placeholder={'Short note'} {...registerCreate('description')} />
-              </div>
-
-              <div className={style.buttonContainer}>
-                <Button
-                  title={isCreating ? 'Creating...' : 'Create'}
-                  type={'submit'}
-                  disabled={isCreating}
-                  style={{ width: '100%' }}
-                />
-              </div>
-            </div>
-          </form>
-        </div>
-        {selectedId && (
-          <div className={style.sectionEdit}>
-            <div className={style.headerRow}>
-              <h2 className={style.title}>Edit Card Set</h2>
-              <p>Click the Edit button on the Card Set to change the title and description</p>
-            </div>
-
-            {!selected && <div className={style.muted}>Select a card set</div>}
-
-            {selected && (
-              <form onSubmit={handleSubmitEdit(submitEdit)}>
-                <div className={style.formRow}>
-                  <div className={style.formField}>
-                    <span className={style.label}>Title</span>
-                    <Input {...registerEdit('title', { required: true })} />
-                    {editErrors.title && <span className={style.error}>Title is required</span>}
-                  </div>
-
-                  <div className={style.formField}>
-                    <span className={style.label}>Description</span>
-                    <Input {...registerEdit('description')} />
-                  </div>
-
-                  <Button
-                    title={isEditing ? 'Saving...' : 'Save'}
-                    type={'submit'}
-                    disabled={isEditing}
-                  />
-                </div>
-              </form>
-            )}
-          </div>
-        )}
+        <CardSetsEditForm
+          selectedId={selectedId}
+          selected={selected}
+          registerEdit={registerEdit}
+          handleSubmitEdit={handleSubmitEdit}
+          submitEdit={submitEdit}
+          editErrors={editErrors}
+          isEditing={isEditing}
+        />
       </div>
 
-      <div className={style.sectionYourCardSets}>
-        <div className={style.headerRow}>
-          <h2 className={style.title}>Your Card Sets</h2>
-        </div>
-
-        {isLoading && <div className={style.muted}>Loading...</div>}
-
-        {!isLoading && sets.length === 0 && <div className={style.muted}>No card sets yet</div>}
-
-        {!isLoading && sets.length > 0 && (
-          <div className={style.list}>
-            {sets.map((s) => {
-              const active = s.id === selectedId;
-
-              return (
-                <div
-                  key={s.id}
-                  className={`${style.item} ${active ? style.itemActive : ''}`}
-                  onClick={() => navigate(`/vocabulary/cards/${s.id}`)}
-                  role={'button'}
-                  tabIndex={0}
-                >
-                  <div className={style.itemDesc}>{s.description}</div>
-                  <div className={style.itemTitle}>{s.title}</div>
-                  <div className={style.itemCount}>{s.cardsCount} cards</div>
-                  <div className={style.itemActions} onClick={(e) => e.stopPropagation()}>
-                    <Button
-                      title={'Edit'}
-                      onClick={() => select(s.id)}
-                      style={{ width: '100px' }}
-                    />
-                    <Button
-                      title={'Delete'}
-                      onClick={() => requestDelete(s)}
-                      style={{ width: '100px' }}
-                    />
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        )}
-      </div>
+      <CardSetsList
+        sets={sets}
+        selectedId={selectedId}
+        isLoading={isLoading}
+        onOpen={(id) => navigate(`/vocabulary/cards/${id}`)}
+        onEdit={select}
+        onDelete={requestDelete}
+      />
 
       <ConfirmModal
         isOpen={deleteTarget != null}

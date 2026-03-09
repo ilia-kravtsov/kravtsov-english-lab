@@ -8,11 +8,11 @@ import type {
   AddLexicalUnitFormValues,
   PartsOfSpeech,
 } from '@/entities/lexical-unit/model/lexical-unit.types';
+import { API_BASE_URL } from '@/shared/config/api.ts';
+import { isAbsoluteUrl } from '@/shared/lib/url/isAbsoluteUrl.ts';
 
 import { useLexicalUnitEditorStore } from './lexicalUnitEditor.store';
 import { useAudioRecorder } from './useAudioRecorder';
-import { API_BASE_URL } from '@/shared/config/api.ts';
-import { isAbsoluteUrl } from '@/shared/lib/url/isAbsoluteUrl.ts';
 
 function normalizeValue(value: string) {
   return value.trim().replace(/\s+/g, ' ');
