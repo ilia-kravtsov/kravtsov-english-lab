@@ -1,6 +1,7 @@
-const apiBaseUrl = import.meta.env.VITE_API_URL ?? 'http://localhost:3000';
+import { API_BASE_URL } from '@/shared/config/api.ts';
+import { isAbsoluteUrl } from '@/shared/lib/url/isAbsoluteUrl.ts';
 
 export function toAbsoluteMediaUrl(url: string) {
-  if (url.startsWith('http://') || url.startsWith('https://')) return url;
-  return `${apiBaseUrl}${url}`;
+  if (isAbsoluteUrl(url)) return url;
+  return `${API_BASE_URL}${url}`;
 }

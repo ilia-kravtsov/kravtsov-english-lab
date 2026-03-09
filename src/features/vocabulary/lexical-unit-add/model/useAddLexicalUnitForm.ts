@@ -11,6 +11,8 @@ import type {
 
 import { useLexicalUnitEditorStore } from './lexicalUnitEditor.store';
 import { useAudioRecorder } from './useAudioRecorder';
+import { API_BASE_URL } from '@/shared/config/api.ts';
+import { isAbsoluteUrl } from '@/shared/lib/url/isAbsoluteUrl.ts';
 
 function normalizeValue(value: string) {
   return value.trim().replace(/\s+/g, ' ');
@@ -51,8 +53,6 @@ export function useAddLexicalUnitForm() {
   const prefillValue = useLexicalUnitEditorStore((s) => s.prefillValue);
   const openSearch = useLexicalUnitEditorStore((s) => s.openSearch);
 
-  const apiBaseUrl = import.meta.env.VITE_API_URL ?? 'http://localhost:3000';
-
   const form = useForm<AddLexicalUnitFormValues>({
     defaultValues: {
       value: '',
@@ -81,7 +81,7 @@ export function useAddLexicalUnitForm() {
 
     if (raw.startsWith('http://') || raw.startsWith('https://')) return raw;
 
-    return `${apiBaseUrl}${raw}`;
+    return `${API_BASE_URL}${raw}`;
   }, [imageUrlValue]);
 
   const examples = form.watch('examples');
@@ -180,35 +180,35 @@ export function useAddLexicalUnitForm() {
     if (!editingUnit?.audioUrl) return null;
     if (audioBlob) return null;
     const url = editingUnit.audioUrl;
-    if (url.startsWith('http://') || url.startsWith('https://')) return url;
-    return `${apiBaseUrl}${url}`;
-  }, [mode, editingUnit?.audioUrl, audioBlob, apiBaseUrl]);
+    if (isAbsoluteUrl(url)) return url;
+    return `${API_BASE_URL}${url}`;
+  }, [mode, editingUnit?.audioUrl, audioBlob, API_BASE_URL]);
 
   const remoteMeaningAudioSrc = useMemo(() => {
     if (mode !== 'update') return null;
     if (!editingUnit?.soundMeaningUrl) return null;
     if (meaningRecorder.audioBlob) return null;
     const url = editingUnit.soundMeaningUrl;
-    if (url.startsWith('http://') || url.startsWith('https://')) return url;
-    return `${apiBaseUrl}${url}`;
-  }, [mode, editingUnit?.soundMeaningUrl, meaningRecorder.audioBlob, apiBaseUrl]);
+    if (isAbsoluteUrl(url)) return url;
+    return `${API_BASE_URL}${url}`;
+  }, [mode, editingUnit?.soundMeaningUrl, meaningRecorder.audioBlob, API_BASE_URL]);
 
   const remoteExampleAudioSrc = useMemo(() => {
     if (mode !== 'update') return null;
     if (!editingUnit?.soundExampleUrl) return null;
     if (exampleRecorder.audioBlob) return null;
     const url = editingUnit.soundExampleUrl;
-    if (url.startsWith('http://') || url.startsWith('https://')) return url;
-    return `${apiBaseUrl}${url}`;
-  }, [mode, editingUnit?.soundExampleUrl, exampleRecorder.audioBlob, apiBaseUrl]);
+    if (isAbsoluteUrl(url)) return url;
+    return `${API_BASE_URL}${url}`;
+  }, [mode, editingUnit?.soundExampleUrl, exampleRecorder.audioBlob, API_BASE_URL]);
 
   const remoteImageSrc = useMemo(() => {
     if (mode !== 'update') return null;
     if (!editingUnit?.imageUrl) return null;
     const url = editingUnit.imageUrl;
-    if (url.startsWith('http://') || url.startsWith('https://')) return url;
-    return `${apiBaseUrl}${url}`;
-  }, [mode, editingUnit?.imageUrl, apiBaseUrl]);
+    if (isAbsoluteUrl(url)) return url;
+    return `${API_BASE_URL}${url}`;
+  }, [mode, editingUnit?.imageUrl, API_BASE_URL]);
 
   useEffect(() => {
     if (audioBlob) {

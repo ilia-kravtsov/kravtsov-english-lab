@@ -1,23 +1,15 @@
-import {
-  type Dispatch,
-  type MouseEvent,
-  type SetStateAction,
-  useEffect,
-  useMemo,
-  useRef,
-} from 'react';
+import { type Dispatch, type KeyboardEvent, type SetStateAction } from 'react';
 
 import type { CardWithLexicalUnit } from '@/entities/card/model/card.types';
 import type {
   PracticeSwitchDir,
   PracticeSwitchState,
 } from '@/features/vocabulary/card-practice/model/practice-mode.types';
+import { useStandardPractice } from '@/features/vocabulary/card-practice/standard/model/useStandardPractice.ts';
 import { practiceButtonStyles } from '@/features/vocabulary/card-practice/ui/practice-button.styles';
 import { Button } from '@/shared/ui';
 
 import style from './StandardPractice.module.scss';
-
-const apiBaseUrl = import.meta.env.VITE_API_URL ?? 'http://localhost:3000';
 
 type Props = {
   items: CardWithLexicalUnit[];
@@ -29,11 +21,6 @@ type Props = {
   triggerSwitch: (dir: PracticeSwitchDir) => void;
 };
 
-function toAbsoluteMediaUrl(url: string) {
-  if (url.startsWith('http://') || url.startsWith('https://')) return url;
-  return `${apiBaseUrl}${url}`;
-}
-
 export function StandardPractice({
   items,
   index,
@@ -43,103 +30,40 @@ export function StandardPractice({
   switchDir,
   triggerSwitch,
 }: Props) {
-  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const {
+    audioRef,
+    current,
+    unit,
+    isLastCard,
+    audioSrc,
+    hasBackContent,
+    next,
+    prev,
+    restart,
+    toggleFlip,
+    playHandler,
+  } = useStandardPractice({
+    items,
+    index,
+    isFlipped,
+    setIsFlipped,
+    setIndex,
+    switchDir,
+    triggerSwitch,
+  });
 
-  function animateSwitch(dir: PracticeSwitchDir, commit: () => void) {
-    if (items.length === 0) return;
-    if (switchDir) return;
-
-    setIsFlipped(false);
-    triggerSwitch(dir);
-
-    window.setTimeout(() => {
-      commit();
-    }, 130);
+  function handleCardKeyDown(e: KeyboardEvent<HTMLDivElement>) {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      toggleFlip();
+    }
   }
 
-  function next() {
-    if (index >= items.length - 1) return;
-
-    animateSwitch('next', () => {
-      setIndex((i) => Math.min(i + 1, items.length - 1));
-    });
-  }
-
-  function prev() {
-    if (index <= 0) return;
-
-    animateSwitch('prev', () => {
-      setIndex((i) => Math.max(i - 1, 0));
-    });
-  }
-
-  function restart() {
-    if (items.length === 0) return;
-    if (switchDir) return;
-    if (index === 0 && !isFlipped) return;
-
-    animateSwitch('prev', () => {
-      setIndex(0);
-    });
-  }
-
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      const t = e.target as HTMLElement | null;
-      const tag = t?.tagName?.toLowerCase();
-
-      if (tag === 'input' || tag === 'textarea') return;
-
-      if (e.code === 'Space') {
-        e.preventDefault();
-        setIsFlipped((v) => !v);
-        return;
-      }
-
-      if (e.key === 'ArrowRight') {
-        if (switchDir) return;
-        if (index < items.length - 1) {
-          e.preventDefault();
-          next();
-        }
-        return;
-      }
-
-      if (e.key === 'ArrowLeft') {
-        if (switchDir) return;
-        if (index > 0) {
-          e.preventDefault();
-          prev();
-        }
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown, true);
-    return () => window.removeEventListener('keydown', handleKeyDown, true);
-  }, [index, items.length, switchDir]);
-
-  const current = items[index] ?? null;
-  const unit = current?.lexicalUnit ?? null;
-  const isLastCard = index >= items.length - 1;
-
-  const audioSrc = useMemo(() => {
-    const url = unit?.audioUrl;
-    if (!url) return null;
-    return toAbsoluteMediaUrl(url);
-  }, [unit]);
-
-  const hasBackContent = Boolean(unit?.translation || unit?.synonyms?.length || unit?.meaning);
-
-  const playAudio = () => {
-    if (!audioRef.current) return;
-    audioRef.current.currentTime = 0;
-    void audioRef.current.play();
-  };
-
-  const playHandler = (e: MouseEvent<HTMLButtonElement>) => {
-    e.stopPropagation();
-    playAudio();
-  };
+  const flipStyles = [
+    style.flipInner,
+    switchDir === 'next' ? style.flipInnerSwitchNext : '',
+    switchDir === 'prev' ? style.flipInnerSwitchPrev : '',
+  ].join(' ');
 
   return (
     <div className={style.standardContainer}>
@@ -147,18 +71,10 @@ export function StandardPractice({
         className={isFlipped ? style.flipCardFlipped : style.flipCard}
         role={'button'}
         tabIndex={0}
-        onClick={() => setIsFlipped((v) => !v)}
-        onKeyDown={(e) => {
-          if (e.key === 'Enter') setIsFlipped((v) => !v);
-        }}
+        onClick={toggleFlip}
+        onKeyDown={handleCardKeyDown}
       >
-        <div
-          className={[
-            style.flipInner,
-            switchDir === 'next' ? style.flipInnerSwitchNext : '',
-            switchDir === 'prev' ? style.flipInnerSwitchPrev : '',
-          ].join(' ')}
-        >
+        <div className={flipStyles}>
           <div className={style.cardFaceFront}>
             <div className={style.frontTop}>
               <div className={style.value}>{unit?.value ?? current?.lexicalUnitId}</div>

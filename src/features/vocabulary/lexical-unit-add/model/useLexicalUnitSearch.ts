@@ -3,13 +3,13 @@ import { toast } from 'react-toastify';
 
 import { searchLexicalUnitByValue } from '@/entities/lexical-unit/api/lexical-unit.api';
 import type { LexicalUnit } from '@/entities/lexical-unit/model/lexical-unit.types';
-
-const apiBaseUrl = import.meta.env.VITE_API_URL ?? 'http://localhost:3000';
+import { API_BASE_URL } from '@/shared/config/api.ts';
+import { isAbsoluteUrl } from '@/shared/lib/url/isAbsoluteUrl.ts';
 
 const toAbsUrl = (url?: string | null) => {
   if (!url) return null;
-  if (url.startsWith('http://') || url.startsWith('https://')) return url;
-  return `${apiBaseUrl}${url}`;
+  if (isAbsoluteUrl(url)) return url;
+  return `${API_BASE_URL}${url}`;
 };
 
 export type LexicalUnitSearchResultState =
@@ -35,9 +35,9 @@ export function useLexicalUnitSearch() {
     const url = result.unit.audioUrl;
     if (!url) return null;
 
-    if (url.startsWith('http://') || url.startsWith('https://')) return url;
+    if (isAbsoluteUrl(url)) return url;
 
-    return `${apiBaseUrl}${url}`;
+    return `${API_BASE_URL}${url}`;
   }, [result]);
   const meaningAudioSrc = useMemo(() => {
     if (result.status !== 'found') return null;
