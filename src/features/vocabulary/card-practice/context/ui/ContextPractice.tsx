@@ -1,9 +1,7 @@
-import { useEffect, useRef } from 'react';
-
 import type { PracticeSwitchState } from '@/features/vocabulary/card-practice/model/practice-mode.types';
-import { useAutoNextOnCorrect } from '@/features/vocabulary/card-practice/shared/model/useAutoNextOnCorrect';
+import { useTextInputPracticeHandlers } from '@/features/vocabulary/card-practice/shared/model/useTextInputPracticeHandlers.ts';
+import { useTextInputPracticeView } from '@/features/vocabulary/card-practice/shared/model/useTextInputPracticeView';
 import { PracticeResults } from '@/features/vocabulary/card-practice/shared/ui/PracticeResults/PracticeResults';
-import switchAnim from '@/features/vocabulary/card-practice/shared/ui/SwitchAnimation.module.scss';
 import { Button, Input } from '@/shared/ui';
 
 import { useContextStore } from '../model/context.store';
@@ -34,25 +32,24 @@ export function ContextPractice({ switchDir, onAutoNext, autoNextCommitDelayMs }
   const next = useContextStore((s) => s.next);
   const restart = useContextStore((s) => s.restart);
 
-  const inputRef = useRef<HTMLInputElement | null>(null);
-
-  useEffect(() => {
-    if (!locked) {
-      inputRef.current?.focus();
-    }
-  }, [index, locked]);
-
-  useAutoNextOnCorrect({
-    isFinished,
+  const { inputRef, current } = useTextInputPracticeView({
+    cards,
+    index,
     locked,
+    isFinished,
     feedback,
     next,
-    delayMs: 450,
-    beforeNext: onAutoNext,
-    commitDelayMs: autoNextCommitDelayMs ?? 130,
+    onAutoNext,
+    autoNextCommitDelayMs,
   });
 
-  const current = cards[index] ?? null;
+  const { cardStyles, handleInputChange, handleInputKeyDown } = useTextInputPracticeHandlers({
+    style,
+    switchDir,
+    feedback,
+    setInput,
+    submit,
+  });
 
   if (!cardSetId) return null;
 
@@ -66,15 +63,7 @@ export function ContextPractice({ switchDir, onAutoNext, autoNextCommitDelayMs }
 
   return (
     <div className={style.wrap}>
-      <div
-        className={[
-          style.card,
-          switchDir === 'next' ? switchAnim.switchNext : '',
-          switchDir === 'prev' ? switchAnim.switchPrev : '',
-          feedback === 'correct' ? style.cardCorrect : '',
-          feedback === 'wrong' ? style.cardWrong : '',
-        ].join(' ')}
-      >
+      <div className={cardStyles}>
         <div className={style.promptLabel}>Fill the gap:</div>
         <div className={style.promptValue}>{current.contextMasked}</div>
         <div className={style.hint}>
@@ -87,15 +76,10 @@ export function ContextPractice({ switchDir, onAutoNext, autoNextCommitDelayMs }
         <Input
           ref={inputRef}
           value={input}
-          onChange={(e) => setInput(e.target.value)}
+          onChange={handleInputChange}
           placeholder={'Type lexical unit'}
           disabled={locked}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter') {
-              e.preventDefault();
-              submit();
-            }
-          }}
+          onKeyDown={handleInputKeyDown}
         />
         <Button title={'Check'} onClick={submit} disabled={locked} style={{ width: '120px' }} />
         <Button title={'Skip'} onClick={skip} style={{ width: '120px' }} />

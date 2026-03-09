@@ -1,10 +1,9 @@
-import { useEffect, useRef } from 'react';
-
-import type { PracticeSwitchState } from '@/features/vocabulary/card-practice/model/practice-mode.types.ts';
-import { useAutoNextOnCorrect } from '@/features/vocabulary/card-practice/shared/model/useAutoNextOnCorrect.ts';
-import { PracticeResults } from '@/features/vocabulary/card-practice/shared/ui/PracticeResults/PracticeResults.tsx';
-import switchAnim from '@/features/vocabulary/card-practice/shared/ui/SwitchAnimation.module.scss';
+import type { PracticeSwitchState } from '@/features/vocabulary/card-practice/model/practice-mode.types';
+import { useTextInputPracticeHandlers } from '@/features/vocabulary/card-practice/shared/model/useTextInputPracticeHandlers.ts';
+import { useTextInputPracticeView } from '@/features/vocabulary/card-practice/shared/model/useTextInputPracticeView';
+import { PracticeResults } from '@/features/vocabulary/card-practice/shared/ui/PracticeResults/PracticeResults';
 import { Button, Input } from '@/shared/ui';
+import { mediumButtonStyles } from '@/shared/ui/ButtonStyles/logout-button.styles.ts';
 
 import { useTypingStore } from '../model/typing.store';
 import style from './TypingPractice.module.scss';
@@ -34,36 +33,32 @@ export function TypingPractice({ switchDir, onAutoNext, autoNextCommitDelayMs }:
   const next = useTypingStore((s) => s.next);
   const restart = useTypingStore((s) => s.restart);
 
-  const inputRef = useRef<HTMLInputElement | null>(null);
-
-  useEffect(() => {
-    if (!locked) {
-      inputRef.current?.focus();
-    }
-  }, [index, locked]);
-
-  useAutoNextOnCorrect({
-    isFinished,
+  const { inputRef, current } = useTextInputPracticeView({
+    cards,
+    index,
     locked,
+    isFinished,
     feedback,
     next,
-    delayMs: 450,
-    beforeNext: onAutoNext,
-    commitDelayMs: autoNextCommitDelayMs ?? 130,
+    onAutoNext,
+    autoNextCommitDelayMs,
   });
 
-  const current = cards[index] ?? null;
+  const { cardStyles, handleInputChange, handleInputKeyDown } = useTextInputPracticeHandlers({
+    style,
+    switchDir,
+    feedback,
+    setInput,
+    submit,
+  });
+
   const unit = current?.lexicalUnit ?? null;
 
   if (!cardSetId) return null;
 
   if (isFinished) {
     return (
-      <PracticeResults
-        cardSetId={cardSetId}
-        restart={restart}
-        restartTitle={'Restart Typing'}
-      />
+      <PracticeResults cardSetId={cardSetId} restart={restart} restartTitle={'Restart Typing'} />
     );
   }
 
@@ -71,15 +66,7 @@ export function TypingPractice({ switchDir, onAutoNext, autoNextCommitDelayMs }:
 
   return (
     <div className={style.wrap}>
-      <div
-        className={[
-          style.card,
-          switchDir === 'next' ? switchAnim.switchNext : '',
-          switchDir === 'prev' ? switchAnim.switchPrev : '',
-          feedback === 'correct' ? style.cardCorrect : '',
-          feedback === 'wrong' ? style.cardWrong : '',
-        ].join(' ')}
-      >
+      <div className={cardStyles}>
         <div className={style.promptLabel}>Translate:</div>
         <div className={style.promptValue}>{unit.translation}</div>
         <div className={style.hint}>
@@ -92,25 +79,15 @@ export function TypingPractice({ switchDir, onAutoNext, autoNextCommitDelayMs }:
         <Input
           ref={inputRef}
           value={input}
-          onChange={(e) => setInput(e.target.value)}
+          onChange={handleInputChange}
           placeholder={'Type lexical unit'}
           disabled={locked}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter') {
-              e.preventDefault();
-              submit();
-            }
-          }}
+          onKeyDown={handleInputKeyDown}
         />
 
         <div className={style.buttonsContainer}>
-          <Button
-            title={'Check'}
-            onClick={submit}
-            disabled={locked}
-            style={{ width: '100px', fontSize: '16px' }}
-          />
-          <Button title={'Skip'} onClick={skip} style={{ width: '100px', fontSize: '16px' }} />
+          <Button title={'Check'} onClick={submit} disabled={locked} style={mediumButtonStyles} />
+          <Button title={'Skip'} onClick={skip} style={mediumButtonStyles} />
         </div>
       </div>
 

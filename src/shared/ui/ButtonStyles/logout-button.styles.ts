@@ -9,3 +9,8 @@ export const logoutButtonStyles: CSSProperties = {
   alignItems: 'center',
   fontSize: '14px',
 };
+
+export const mediumButtonStyles: CSSProperties = {
+  width: '100px',
+  fontSize: '16px'
+}

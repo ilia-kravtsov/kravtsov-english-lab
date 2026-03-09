@@ -80,17 +80,17 @@ export function ListeningPractice({ switchDir, onAutoNext, autoNextCommitDelayMs
 
   if (!current || !unit) return null;
 
+  const cardStyles = [
+    style.card,
+    switchDir === 'next' ? switchAnim.switchNext : '',
+    switchDir === 'prev' ? switchAnim.switchPrev : '',
+    feedback === 'correct' ? style.cardCorrect : '',
+    feedback === 'wrong' ? style.cardWrong : '',
+  ].join(' ')
+
   return (
     <div className={style.wrap}>
-      <div
-        className={[
-          style.card,
-          switchDir === 'next' ? switchAnim.switchNext : '',
-          switchDir === 'prev' ? switchAnim.switchPrev : '',
-          feedback === 'correct' ? style.cardCorrect : '',
-          feedback === 'wrong' ? style.cardWrong : '',
-        ].join(' ')}
-      >
+      <div className={cardStyles}>
         <div className={style.promptLabel}>Listen and type:</div>
         <div className={style.audioRow}>
           {audioSrc && (
