@@ -3,7 +3,7 @@ import { useTextInputPracticeHandlers } from '@/features/vocabulary/card-practic
 import { useTextInputPracticeView } from '@/features/vocabulary/card-practice/shared/model/useTextInputPracticeView';
 import { PracticeResults } from '@/features/vocabulary/card-practice/shared/ui/PracticeResults/PracticeResults';
 import { Button, Input } from '@/shared/ui';
-import { mediumButtonStyles } from '@/shared/ui/ButtonStyles/logout-button.styles.ts';
+import { mediumButtonStyles } from '@/shared/ui/ButtonStyles/button.styles.ts';
 
 import { useTypingStore } from '../model/typing.store';
 import style from './TypingPractice.module.scss';

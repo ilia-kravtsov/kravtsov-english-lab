@@ -7,6 +7,7 @@ import { useSwitchAnimation } from '@/features/vocabulary/card-practice/shared/m
 import { PracticeContent } from '@/pages/vocabulary/ui/internal-components/CardSetPracticePage/PracticeContent/PracticeContent';
 import { PracticeModeSidebar } from '@/pages/vocabulary/ui/internal-components/CardSetPracticePage/PracticeModeSidebar/PracticeModeSidebar';
 import { CardSetsPageHeader } from '@/pages/vocabulary/ui/internal-components/CardSetsPage/CardSetsPageHeader/CardSetsPageHeader';
+import { smallButtonStyles } from '@/shared/ui/ButtonStyles/button.styles.ts';
 
 import style from './CardSetPracticePage.module.scss';
 
@@ -46,21 +47,12 @@ export function CardSetPracticePage() {
     navigate(`/vocabulary/cards/${cardSetId}`);
   };
 
-  const buttonStyles = {
-    width: '90px',
-    height: '40px',
-    fontSize: '16px',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-  };
-
   return (
     <div className={style.container}>
       <CardSetsPageHeader
         title={cardSet?.title ?? 'Practice'}
         onBackClick={onBackClick}
-        backButtonStyle={buttonStyles}
+        backButtonStyle={smallButtonStyles}
       />
 
       <div className={style.body}>

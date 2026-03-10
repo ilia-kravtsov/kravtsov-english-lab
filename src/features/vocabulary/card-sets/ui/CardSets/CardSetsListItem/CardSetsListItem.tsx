@@ -2,6 +2,7 @@ import type { KeyboardEvent } from 'react';
 
 import type { useCardSets } from '@/features/vocabulary/card-sets/model/useCardSets.ts';
 import { Button } from '@/shared/ui';
+import { mediumButtonStyles } from '@/shared/ui/ButtonStyles/button.styles.ts';
 
 import style from '../CardSets.module.scss';
 
@@ -43,8 +44,8 @@ export function CardSetsListItem({
       <div className={style.itemCount}>{item.cardsCount} cards</div>
 
       <div className={style.itemActions} onClick={(e) => e.stopPropagation()}>
-        <Button title={'Edit'} onClick={onEdit} style={{ width: '100px' }} />
-        <Button title={'Delete'} onClick={onDelete} style={{ width: '100px' }} />
+        <Button title={'Edit'} onClick={onEdit} style={mediumButtonStyles} />
+        <Button title={'Delete'} onClick={onDelete} style={mediumButtonStyles} />
       </div>
     </div>
   );
