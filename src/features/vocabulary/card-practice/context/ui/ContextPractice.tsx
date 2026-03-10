@@ -6,6 +6,7 @@ import { Button, Input } from '@/shared/ui';
 
 import { useContextStore } from '../model/context.store';
 import style from './ContextPractice.module.scss';
+import { normalButtonWide } from '@/shared/ui/ButtonStyles/button.styles.ts';
 
 type Props = {
   switchDir?: PracticeSwitchState;
@@ -55,7 +56,7 @@ export function ContextPractice({ switchDir, onAutoNext, autoNextCommitDelayMs }
 
   if (isFinished) {
     return (
-      <PracticeResults cardSetId={cardSetId} restart={restart} restartTitle="Restart Context" />
+      <PracticeResults cardSetId={cardSetId} restart={restart} restartTitle={"Restart Context"} />
     );
   }
 
@@ -81,8 +82,8 @@ export function ContextPractice({ switchDir, onAutoNext, autoNextCommitDelayMs }
           disabled={locked}
           onKeyDown={handleInputKeyDown}
         />
-        <Button title={'Check'} onClick={submit} disabled={locked} style={{ width: '120px' }} />
-        <Button title={'Skip'} onClick={skip} style={{ width: '120px' }} />
+        <Button title={'Check'} onClick={submit} disabled={locked} style={normalButtonWide} />
+        <Button title={'Skip'} onClick={skip} style={normalButtonWide} />
       </div>
 
       <div className={style.controlsRow}>

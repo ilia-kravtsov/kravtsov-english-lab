@@ -27,3 +27,16 @@ export const smallButtonStyles: CSSProperties = {
 export const wideButtonStyles: CSSProperties = {
   width: '140px',
 };
+
+export const normalButtonWide: CSSProperties = {
+  width: '120px'
+}
+
+export const practiceButtonStyles: CSSProperties = {
+  padding: '10px 20px',
+  height: '40px',
+  fontSize: '16px',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+};

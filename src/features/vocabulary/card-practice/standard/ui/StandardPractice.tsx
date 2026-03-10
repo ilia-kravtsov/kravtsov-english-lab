@@ -1,13 +1,11 @@
 import { type Dispatch, type KeyboardEvent, type SetStateAction } from 'react';
 
 import type { CardWithLexicalUnit } from '@/entities/card/model/card.types';
-import type {
-  PracticeSwitchDir,
-  PracticeSwitchState,
-} from '@/features/vocabulary/card-practice/model/practice-mode.types';
-import { useStandardPractice } from '@/features/vocabulary/card-practice/standard/model/useStandardPractice.ts';
-import { practiceButtonStyles } from '@/features/vocabulary/card-practice/ui/practice-button.styles';
-import { Button } from '@/shared/ui';
+import type { PracticeSwitchDir } from '@/features/vocabulary/card-practice/model/practice-mode.types';
+import { useStandardPractice } from '@/features/vocabulary/card-practice/standard/model/useStandardPractice';
+import { StandardPracticeBack } from '@/features/vocabulary/card-practice/standard/ui/StandardPracticeBack';
+import { StandardPracticeControls } from '@/features/vocabulary/card-practice/standard/ui/StandardPracticeControls';
+import { StandardPracticeFront } from '@/features/vocabulary/card-practice/standard/ui/StandardPracticeFront';
 
 import style from './StandardPractice.module.scss';
 
@@ -17,7 +15,7 @@ type Props = {
   isFlipped: boolean;
   setIsFlipped: Dispatch<SetStateAction<boolean>>;
   setIndex: Dispatch<SetStateAction<number>>;
-  switchDir: PracticeSwitchState;
+  switchDir?: PracticeSwitchDir;
   triggerSwitch: (dir: PracticeSwitchDir) => void;
 };
 
@@ -52,18 +50,19 @@ export function StandardPractice({
     triggerSwitch,
   });
 
-  function handleCardKeyDown(e: KeyboardEvent<HTMLDivElement>) {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      toggleFlip();
-    }
-  }
+  const handleCardKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
+    if (e.key !== 'Enter') return;
+    e.preventDefault();
+    toggleFlip();
+  };
 
   const flipStyles = [
     style.flipInner,
     switchDir === 'next' ? style.flipInnerSwitchNext : '',
     switchDir === 'prev' ? style.flipInnerSwitchPrev : '',
   ].join(' ');
+
+  const frontValue = unit?.value ?? current?.lexicalUnitId ?? '';
 
   return (
     <div className={style.standardContainer}>
@@ -75,91 +74,25 @@ export function StandardPractice({
         onKeyDown={handleCardKeyDown}
       >
         <div className={flipStyles}>
-          <div className={style.cardFaceFront}>
-            <div className={style.frontTop}>
-              <div className={style.value}>{unit?.value ?? current?.lexicalUnitId}</div>
-            </div>
+          <StandardPracticeFront
+            value={frontValue}
+            audioRef={audioRef}
+            audioSrc={audioSrc}
+            onPlay={playHandler}
+          />
 
-            <div className={style.frontBottom}>
-              {audioSrc && (
-                <>
-                  <audio ref={audioRef} src={audioSrc} preload={'metadata'} />
-                  <Button
-                    type={'button'}
-                    onClick={playHandler}
-                    title={'Play'}
-                    style={practiceButtonStyles}
-                  />
-                </>
-              )}
-              {!audioSrc && <div className={style.muted}> </div>}
-            </div>
-          </div>
-
-          <div className={style.cardFaceBack}>
-            <div className={style.backContent}>
-              {unit?.translation && (
-                <div className={style.backRow}>
-                  <div className={style.backValue}>{unit.translation}</div>
-                </div>
-              )}
-
-              {unit?.synonyms?.length && (
-                <div className={style.backRow}>
-                  <div className={style.backValue}>{unit.synonyms.join(', ')}</div>
-                </div>
-              )}
-
-              {unit?.meaning && (
-                <div className={style.backRow}>
-                  <div className={style.backValue}>{unit.meaning}</div>
-                </div>
-              )}
-
-              {Array.isArray(unit?.examples) && unit.examples.length > 0 && (
-                <div className={style.backRow}>
-                  <div className={style.backValue}>
-                    {unit.examples.map((ex, i) => (
-                      <div key={i}>{ex}</div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {!hasBackContent && <div className={style.muted}>No details</div>}
-            </div>
-          </div>
+          <StandardPracticeBack unit={unit} hasBackContent={hasBackContent} />
         </div>
       </div>
 
-      <div className={style.controlsRow}>
-        <Button
-          type={'button'}
-          title={'Prev'}
-          onClick={prev}
-          disabled={index === 0}
-          style={practiceButtonStyles}
-        />
-        <div className={style.counter}>
-          {index + 1} / {items.length}
-        </div>
-        {isLastCard ? (
-          <Button
-            type={'button'}
-            title={'Restart'}
-            onClick={restart}
-            style={practiceButtonStyles}
-          />
-        ) : (
-          <Button
-            type={'button'}
-            title={'Next'}
-            onClick={next}
-            disabled={index >= items.length - 1}
-            style={practiceButtonStyles}
-          />
-        )}
-      </div>
+      <StandardPracticeControls
+        index={index}
+        total={items.length}
+        isLastCard={isLastCard}
+        onPrev={prev}
+        onNext={next}
+        onRestart={restart}
+      />
     </div>
   );
 }

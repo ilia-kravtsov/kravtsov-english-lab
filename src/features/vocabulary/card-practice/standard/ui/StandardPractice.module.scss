@@ -95,6 +95,10 @@
   line-height: 1.35;
 }
 
+.translation {
+  font-size: var(--font-size-tertiary);
+}
+
 .flipCardFlipped .flipInner {
   transform: rotateX(180deg);
 }

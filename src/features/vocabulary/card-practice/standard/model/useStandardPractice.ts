@@ -1,4 +1,4 @@
-import { type Dispatch, type MouseEvent, type SetStateAction,useEffect, useMemo, useRef } from 'react';
+import { type Dispatch, type SetStateAction, useEffect, useMemo, useRef, type MouseEvent } from 'react';
 
 import type { CardWithLexicalUnit } from '@/entities/card/model/card.types.ts';
 import type {
@@ -13,19 +13,19 @@ type Params = {
   isFlipped: boolean;
   setIsFlipped: Dispatch<SetStateAction<boolean>>;
   setIndex: Dispatch<SetStateAction<number>>;
-  switchDir: PracticeSwitchState;
+  switchDir: PracticeSwitchState | undefined;
   triggerSwitch: (dir: PracticeSwitchDir) => void;
 };
 
 export function useStandardPractice({
-                                      items,
-                                      index,
-                                      isFlipped,
-                                      setIsFlipped,
-                                      setIndex,
-                                      switchDir,
-                                      triggerSwitch,
-                                    }: Params) {
+  items,
+  index,
+  isFlipped,
+  setIsFlipped,
+  setIndex,
+  switchDir,
+  triggerSwitch,
+}: Params) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const current = items[index] ?? null;
@@ -88,7 +88,7 @@ export function useStandardPractice({
     void audioRef.current.play();
   };
 
-  const playHandler = (e: MouseEvent<HTMLButtonElement>) => {
+  const playHandler = (e: MouseEvent<HTMLButtonElement>): void => {
     e.stopPropagation();
     playAudio();
   };
