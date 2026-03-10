@@ -5,10 +5,10 @@ import { createCard, deleteCard, listCardsWithLexicalUnit } from '@/entities/car
 import type { CardWithLexicalUnit } from '@/entities/card/model/card.types';
 import { getCardSetById } from '@/entities/card-set/api/card-set.api';
 import type { CardSet } from '@/entities/card-set/model/card-set.types';
-import { useLexicalUnitSearch } from '@/features/vocabulary/lexical-unit-add/model/useLexicalUnitSearch';
+import { useLexicalUnitSearchQuery } from '@/features/vocabulary/lexical-unit-add/model/useLexicalUnitSearchQuery.ts';
 
 export function useCardSetsPage(cardSetId: string | undefined) {
-  const lexicalSearch = useLexicalUnitSearch();
+  const lexicalSearch = useLexicalUnitSearchQuery();
 
   const [cards, setCards] = useState<CardWithLexicalUnit[]>([]);
   const [cardsLoading, setCardsLoading] = useState(false);

@@ -4,9 +4,9 @@ import { toast } from 'react-toastify';
 import { deleteLexicalUnit } from '@/entities/lexical-unit/api/lexical-unit.api';
 
 import { useLexicalUnitEditorStore } from './lexicalUnitEditor.store';
-import { useLexicalUnitSearch } from './useLexicalUnitSearch';
+import { useLexicalUnitSearchQuery } from './useLexicalUnitSearchQuery.ts';
 
-export function useSearchLexicalUnit() {
+export function useLexicalUnitSearchController() {
   const openAddWithValue = useLexicalUnitEditorStore((s) => s.openAddWithValue);
   const openUpdate = useLexicalUnitEditorStore((s) => s.openUpdate);
 
@@ -31,7 +31,7 @@ export function useSearchLexicalUnit() {
     playExampleAudio,
 
     imageSrc,
-  } = useLexicalUnitSearch();
+  } = useLexicalUnitSearchQuery();
 
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [deleting, setDeleting] = useState(false);

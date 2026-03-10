@@ -14,7 +14,7 @@ import {
   MAX_ITEMS,
   PARTS_OPTIONS,
   useObjectUrl,
-} from '@/features/vocabulary/lexical-unit-add/model/useAddLexicalUnitForm/useAddLexicalUnitFormHelpers.ts';
+} from '@/features/vocabulary/lexical-unit-add/model/useAddLexicalUnitForm/useAddLexicalUnitForm.config.ts';
 import { toAbsoluteMediaUrl } from '@/shared/lib/url/toAbsoluteMediaUrl.ts';
 
 import { useLexicalUnitEditorStore } from '../lexicalUnitEditor.store.ts';

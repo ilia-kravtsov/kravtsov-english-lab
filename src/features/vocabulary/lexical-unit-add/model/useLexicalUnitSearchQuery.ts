@@ -24,7 +24,7 @@ export type LexicalUnitSearchResultState =
   | { status: 'found'; unit: LexicalUnit }
   | { status: 'error' };
 
-export function useLexicalUnitSearch() {
+export function useLexicalUnitSearchQuery() {
   const [query, setQuery] = useState('');
   const [result, setResult] = useState<LexicalUnitSearchResultState>({ status: 'idle' });
 

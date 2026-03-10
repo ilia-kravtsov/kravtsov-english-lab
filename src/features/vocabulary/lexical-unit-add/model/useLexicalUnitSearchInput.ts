@@ -7,7 +7,7 @@ import {
   useState,
 } from 'react';
 
-import type { LexicalUnitSearchResultState } from './useLexicalUnitSearch';
+import type { LexicalUnitSearchResultState } from './useLexicalUnitSearchQuery.ts';
 import { useLexicalUnitSuggestions } from './useLexicalUnitSuggestions';
 
 type Params = {
@@ -18,7 +18,7 @@ type Params = {
   runSearch: (valueArg?: string) => Promise<void> | void;
 };
 
-export function useLexicalUnitSearchPanel({
+export function useLexicalUnitSearchInput({
                                             query,
                                             setQuery,
                                             normalizedQuery,

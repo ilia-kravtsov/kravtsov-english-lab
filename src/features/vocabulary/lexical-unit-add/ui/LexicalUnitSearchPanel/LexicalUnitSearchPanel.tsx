@@ -1,8 +1,8 @@
 import { type ReactNode, type RefObject } from 'react';
 
 import type { LexicalUnit } from '@/entities/lexical-unit';
-import type { LexicalUnitSearchResultState } from '@/features/vocabulary/lexical-unit-add/model/useLexicalUnitSearch';
-import { useLexicalUnitSearchPanel } from '@/features/vocabulary/lexical-unit-add/model/useLexicalUnitSearchPanel';
+import type { LexicalUnitSearchResultState } from '@/features/vocabulary/lexical-unit-add/model/useLexicalUnitSearchQuery.ts';
+import { useLexicalUnitSearchInput } from '@/features/vocabulary/lexical-unit-add/model/useLexicalUnitSearchInput.ts';
 import { LexicalUnitSearchInput } from '@/features/vocabulary/lexical-unit-add/ui/LexicalUnitSearchPanel/components/LexicalUnitSearchInput.tsx';
 import { LexicalUnitSearchResult } from '@/features/vocabulary/lexical-unit-add/ui/LexicalUnitSearchPanel/components/LexicalUnitSearchResult.tsx';
 
@@ -71,7 +71,7 @@ export function LexicalUnitSearchPanel({
     handleFocus,
     handleSearch,
     handlePickSuggestion,
-  } = useLexicalUnitSearchPanel({
+  } = useLexicalUnitSearchInput({
     query,
     setQuery,
     normalizedQuery,

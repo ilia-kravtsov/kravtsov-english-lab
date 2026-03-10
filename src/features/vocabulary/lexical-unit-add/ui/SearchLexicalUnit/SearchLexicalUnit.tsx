@@ -1,4 +1,4 @@
-import { useSearchLexicalUnit } from '@/features/vocabulary/lexical-unit-add/model/useSearchLexicalUnit';
+import { useLexicalUnitSearchController } from '@/features/vocabulary/lexical-unit-add/model/useLexicalUnitSearchController.ts';
 import { LexicalUnitSearchPanel } from '@/features/vocabulary/lexical-unit-add/ui/LexicalUnitSearchPanel/LexicalUnitSearchPanel';
 import { Button, ConfirmModal } from '@/shared/ui';
 
@@ -34,7 +34,7 @@ export function SearchLexicalUnit() {
     playExampleAudio,
 
     imageSrc,
-  } = useSearchLexicalUnit();
+  } = useLexicalUnitSearchController();
 
   return (
     <div className={style.container}>
