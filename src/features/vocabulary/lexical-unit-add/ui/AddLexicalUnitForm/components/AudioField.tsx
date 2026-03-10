@@ -1,0 +1,94 @@
+import type { CSSProperties } from 'react';
+
+import type { AudioFieldModel } from '@/features/vocabulary/lexical-unit-add/model/useAddLexicalUnitForm/useAddLexicalUnitFormHelpers.ts';
+
+import style from '../AddLexicalUnitForm.module.scss';
+
+type Props = {
+  audio: AudioFieldModel;
+  idleTitle: string;
+  recordingTitle: string;
+  recordButtonStyle: CSSProperties;
+  actionButtonStyle: CSSProperties;
+};
+
+export function AudioField({
+  audio,
+  idleTitle,
+  recordingTitle,
+  recordButtonStyle,
+  actionButtonStyle,
+}: Props) {
+
+  const {
+    recording,
+    audioBlob,
+    audioUrl,
+    remoteAudioSrc,
+    audioRef,
+    isPlaying,
+    elapsedSec,
+    maxSec,
+    startRecording,
+    stopRecording,
+    play,
+    pause,
+    reset,
+  } = audio;
+
+  return (
+    <div className={style.audioContainer}>
+      {!audioBlob && remoteAudioSrc && (
+        <div className={style.remoteAudio}>
+          <audio controls preload={'metadata'} src={remoteAudioSrc} />
+        </div>
+      )}
+
+      <button
+        type={'button'}
+        className={style.button}
+        onClick={recording ? stopRecording : startRecording}
+        style={recordButtonStyle}
+      >
+        {recording ? recordingTitle : idleTitle}
+      </button>
+
+      {recording && (
+        <span className={style.recordHint}>
+          Recording… {elapsedSec}/{maxSec}s
+        </span>
+      )}
+
+      {audioBlob && (
+        <>
+          <audio
+            ref={audioRef}
+            src={audioUrl ?? undefined}
+            onEnded={pause}
+            className={style.audio}
+          />
+
+          <button
+            type={'button'}
+            className={style.button}
+            onClick={isPlaying ? pause : play}
+            disabled={!audioBlob}
+            style={actionButtonStyle}
+          >
+            {isPlaying ? 'Pause' : 'Play'}
+          </button>
+
+          <button
+            type={'button'}
+            className={style.button}
+            onClick={reset}
+            disabled={!audioBlob}
+            style={actionButtonStyle}
+          >
+            Reset
+          </button>
+        </>
+      )}
+    </div>
+  );
+}

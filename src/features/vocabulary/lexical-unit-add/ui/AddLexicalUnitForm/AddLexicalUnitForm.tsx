@@ -1,11 +1,16 @@
 import { Controller } from 'react-hook-form';
 
-import { useAddLexicalUnitForm } from '@/features/vocabulary/lexical-unit-add/model/useAddLexicalUnitForm';
+import { useAddLexicalUnitForm } from '@/features/vocabulary/lexical-unit-add/model/useAddLexicalUnitForm/useAddLexicalUnitForm.ts';
+import { AudioField } from '@/features/vocabulary/lexical-unit-add/ui/AddLexicalUnitForm/components/AudioField.tsx';
 import { Button, Textarea } from '@/shared/ui';
 import { Input } from '@/shared/ui/Input/Input';
 import { MultiSelect } from '@/shared/ui/MultiSelect/MultiSelect';
 
 import style from './AddLexicalUnitForm.module.scss';
+import { ImageField } from '@/features/vocabulary/lexical-unit-add/ui/AddLexicalUnitForm/components/ImageField.tsx';
+import {
+  DynamicListField
+} from '@/features/vocabulary/lexical-unit-add/ui/AddLexicalUnitForm/components/DynamicListField.tsx';
 
 export function AddLexicalUnitForm() {
   const {
@@ -15,50 +20,11 @@ export function AddLexicalUnitForm() {
     submitting,
 
     partsOptions,
-
-    recording,
-    audioBlob,
-    audioURL,
-    remoteAudioSrc,
-    audioRef,
-    isPlaying,
-    elapsedSec,
-    maxSec,
-
-    startRecording,
-    stopRecording,
-    play,
-    pause,
-    handleResetAudio,
     control,
 
-    meaningRecording,
-    meaningAudioBlob,
-    meaningAudioURL,
-    remoteMeaningAudioSrc,
-    meaningAudioRef,
-    meaningIsPlaying,
-    meaningElapsedSec,
-    meaningMaxSec,
-    startMeaningRecording,
-    stopMeaningRecording,
-    playMeaning,
-    pauseMeaning,
-    handleResetMeaningAudio,
-
-    exampleRecording,
-    exampleAudioBlob,
-    exampleAudioURL,
-    remoteExampleAudioSrc,
-    exampleAudioRef,
-    exampleIsPlaying,
-    exampleElapsedSec,
-    exampleMaxSec,
-    startExampleRecording,
-    stopExampleRecording,
-    playExample,
-    pauseExample,
-    handleResetExampleAudio,
+    mainAudio,
+    meaningAudio,
+    exampleAudio,
 
     imagePreviewSrc,
 
@@ -88,181 +54,37 @@ export function AddLexicalUnitForm() {
       <Input {...register('value', { required: true })} placeholder={'word or expression *'} />
       <Input {...register('translation')} placeholder={'translation *'} />
 
-      <div className={style.audioContainer}>
-        {!audioBlob && remoteAudioSrc && (
-          <div className={style.remoteAudio}>
-            <audio controls preload={'metadata'} src={remoteAudioSrc} />
-          </div>
-        )}
+      <AudioField
+        audio={mainAudio}
+        idleTitle={'Record a Sound'}
+        recordingTitle={'Stop Recording'}
+        recordButtonStyle={stylesBigButton}
+        actionButtonStyle={stylesMediumButton}
+      />
 
-        <button
-          type={'button'}
-          className={style.button}
-          onClick={recording ? stopRecording : startRecording}
-          style={stylesBigButton}
-        >
-          {recording ? 'Stop Recording' : 'Record a Sound'}
-        </button>
+      <AudioField
+        audio={meaningAudio}
+        idleTitle={'Record Meaning'}
+        recordingTitle={'Stop Meaning'}
+        recordButtonStyle={stylesBigButton}
+        actionButtonStyle={stylesMediumButton}
+      />
 
-        {recording && (
-          <span className={style.recordHint}>
-            Recording… {elapsedSec}/{maxSec}s
-          </span>
-        )}
-
-        {audioBlob && (
-          <>
-            <audio
-              ref={audioRef}
-              src={audioURL ?? undefined}
-              onEnded={() => pause()}
-              className={style.audio}
-            />
-
-            <button
-              type={'button'}
-              className={style.button}
-              onClick={isPlaying ? pause : play}
-              disabled={!audioBlob}
-              style={stylesMediumButton}
-            >
-              {isPlaying ? 'Pause' : 'Play'}
-            </button>
-
-            <button
-              type={'button'}
-              className={style.button}
-              onClick={handleResetAudio}
-              disabled={!audioBlob}
-              style={stylesMediumButton}
-            >
-              Reset
-            </button>
-          </>
-        )}
-      </div>
-
-      <div className={style.audioContainer}>
-        {!meaningAudioBlob && remoteMeaningAudioSrc && (
-          <div className={style.remoteAudio}>
-            <audio controls preload={'metadata'} src={remoteMeaningAudioSrc} />
-          </div>
-        )}
-
-        <button
-          type={'button'}
-          className={style.button}
-          onClick={meaningRecording ? stopMeaningRecording : startMeaningRecording}
-          style={stylesBigButton}
-        >
-          {meaningRecording ? 'Stop Meaning' : 'Record Meaning'}
-        </button>
-
-        {meaningRecording && (
-          <span className={style.recordHint}>
-            Recording… {meaningElapsedSec}/{meaningMaxSec}s
-          </span>
-        )}
-
-        {meaningAudioBlob && (
-          <>
-            <audio
-              ref={meaningAudioRef}
-              src={meaningAudioURL ?? undefined}
-              onEnded={() => pauseMeaning()}
-              className={style.audio}
-            />
-
-            <button
-              type={'button'}
-              className={style.button}
-              onClick={meaningIsPlaying ? pauseMeaning : playMeaning}
-              disabled={!meaningAudioBlob}
-              style={stylesMediumButton}
-            >
-              {meaningIsPlaying ? 'Pause' : 'Play'}
-            </button>
-
-            <button
-              type={'button'}
-              className={style.button}
-              onClick={handleResetMeaningAudio}
-              disabled={!meaningAudioBlob}
-              style={stylesMediumButton}
-            >
-              Reset
-            </button>
-          </>
-        )}
-      </div>
-
-      <div className={style.audioContainer}>
-        {!exampleAudioBlob && remoteExampleAudioSrc && (
-          <div className={style.remoteAudio}>
-            <audio controls preload={'metadata'} src={remoteExampleAudioSrc} />
-          </div>
-        )}
-
-        <button
-          type={'button'}
-          className={style.button}
-          onClick={exampleRecording ? stopExampleRecording : startExampleRecording}
-          style={stylesBigButton}
-        >
-          {exampleRecording ? 'Stop Example' : 'Record Example'}
-        </button>
-
-        {exampleRecording && (
-          <span className={style.recordHint}>
-            Recording… {exampleElapsedSec}/{exampleMaxSec}s
-          </span>
-        )}
-
-        {exampleAudioBlob && (
-          <>
-            <audio
-              ref={exampleAudioRef}
-              src={exampleAudioURL ?? undefined}
-              onEnded={() => pauseExample()}
-              className={style.audio}
-            />
-
-            <button
-              type={'button'}
-              className={style.button}
-              onClick={exampleIsPlaying ? pauseExample : playExample}
-              disabled={!exampleAudioBlob}
-              style={stylesMediumButton}
-            >
-              {exampleIsPlaying ? 'Pause' : 'Play'}
-            </button>
-
-            <button
-              type={'button'}
-              className={style.button}
-              onClick={handleResetExampleAudio}
-              disabled={!exampleAudioBlob}
-              style={stylesMediumButton}
-            >
-              Reset
-            </button>
-          </>
-        )}
-      </div>
+      <AudioField
+        audio={exampleAudio}
+        idleTitle={'Record Example'}
+        recordingTitle={'Stop Example'}
+        recordButtonStyle={stylesBigButton}
+        actionButtonStyle={stylesMediumButton}
+      />
 
       <Input {...register('transcription')} placeholder={'transcription'} />
-
       <Textarea {...register('meaning')} placeholder={'meaning in English'} />
 
-      <div className={style.imageContainer}>
-        {imagePreviewSrc && (
-          <div className={style.imagePreview}>
-            <img src={imagePreviewSrc} alt={'lexical unit image'} />
-          </div>
-        )}
-
-        <Input {...register('imageUrl')} placeholder={'image link https://...'} />
-      </div>
+      <ImageField
+        imagePreviewSrc={imagePreviewSrc}
+        imageUrlInputProps={register('imageUrl')}
+      />
 
       <Controller
         control={control}
@@ -277,93 +99,51 @@ export function AddLexicalUnitForm() {
         )}
       />
 
-      <div className={style.examplesList}>
-        {synonyms.map((_, i) => (
-          <div key={`syn-${i}`} className={style.examplesRow}>
-            <Input
-              {...register(`synonyms.${i}` as const)}
-              placeholder={i === 0 ? 'synonym' : `synonym ${i + 1}`}
-            />
-            <div className={style.examplesActions}>
-              {synonymsCount < 5 && i === synonymsCount - 1 && (
-                <Button
-                  type={'button'}
-                  title={'+'}
-                  onClick={addSynonym}
-                  style={stylesSmallButton}
-                />
-              )}
-              {synonymsCount > 1 && (
-                <Button
-                  type={'button'}
-                  title={'🗑'}
-                  onClick={() => removeSynonym(i)}
-                  style={stylesSmallButton}
-                />
-              )}
-            </div>
-          </div>
-        ))}
-      </div>
+      <DynamicListField
+        items={synonyms}
+        count={synonymsCount}
+        onAdd={addSynonym}
+        onRemove={removeSynonym}
+        addButtonStyle={stylesSmallButton}
+        getKey={(index) => `syn-${index}`}
+        renderField={(index) => (
+          <Input
+            {...register(`synonyms.${index}` as const)}
+            placeholder={index === 0 ? 'synonym' : `synonym ${index + 1}`}
+          />
+        )}
+      />
 
-      <div className={style.examplesList}>
-        {antonyms.map((_, i) => (
-          <div key={`ant-${i}`} className={style.examplesRow}>
-            <Input
-              {...register(`antonyms.${i}` as const)}
-              placeholder={i === 0 ? 'antonym' : `antonym ${i + 1}`}
-            />
-            <div className={style.examplesActions}>
-              {antonymsCount < 5 && i === antonymsCount - 1 && (
-                <Button
-                  type={'button'}
-                  title={'+'}
-                  onClick={addAntonym}
-                  style={stylesSmallButton}
-                />
-              )}
-              {antonymsCount > 1 && (
-                <Button
-                  type={'button'}
-                  title={'🗑'}
-                  onClick={() => removeAntonym(i)}
-                  style={stylesSmallButton}
-                />
-              )}
-            </div>
-          </div>
-        ))}
-      </div>
+      <DynamicListField
+        items={antonyms}
+        count={antonymsCount}
+        onAdd={addAntonym}
+        onRemove={removeAntonym}
+        addButtonStyle={stylesSmallButton}
+        getKey={(index) => `ant-${index}`}
+        renderField={(index) => (
+          <Input
+            {...register(`antonyms.${index}` as const)}
+            placeholder={index === 0 ? 'antonym' : `antonym ${index + 1}`}
+          />
+        )}
+      />
 
-      <div className={style.examplesList}>
-        {examples.map((_, i) => (
-          <div key={i} className={style.examplesRow}>
-            <Textarea
-              {...register(`examples.${i}` as const)}
-              placeholder={i === 0 ? 'example' : `example ${i + 1}`}
-              rows={2}
-            />
-            <div className={style.examplesActions}>
-              {examplesCount < 5 && i === examplesCount - 1 && (
-                <Button
-                  type={'button'}
-                  title={'+'}
-                  onClick={addExample}
-                  style={stylesSmallButton}
-                />
-              )}
-              {examplesCount > 1 && (
-                <Button
-                  type={'button'}
-                  title={'🗑'}
-                  onClick={() => removeExample(i)}
-                  style={stylesSmallButton}
-                />
-              )}
-            </div>
-          </div>
-        ))}
-      </div>
+      <DynamicListField
+        items={examples}
+        count={examplesCount}
+        onAdd={addExample}
+        onRemove={removeExample}
+        addButtonStyle={stylesSmallButton}
+        getKey={(index) => index}
+        renderField={(index) => (
+          <Textarea
+            {...register(`examples.${index}` as const)}
+            placeholder={index === 0 ? 'example' : `example ${index + 1}`}
+            rows={2}
+          />
+        )}
+      />
 
       <Textarea {...register('comment')} placeholder={'comment'} />
       <Button

@@ -3,14 +3,7 @@ import { toast } from 'react-toastify';
 
 import { searchLexicalUnitByValue } from '@/entities/lexical-unit/api/lexical-unit.api';
 import type { LexicalUnit } from '@/entities/lexical-unit/model/lexical-unit.types';
-import { API_BASE_URL } from '@/shared/config/api.ts';
-import { isAbsoluteUrl } from '@/shared/lib/url/isAbsoluteUrl.ts';
-
-const toAbsUrl = (url?: string | null): string | null => {
-  if (!url) return null;
-  if (isAbsoluteUrl(url)) return url;
-  return `${API_BASE_URL}${url}`;
-};
+import { toAbsoluteMediaUrl } from '@/shared/lib/url/toAbsoluteMediaUrl.ts';
 
 const useCreateAudioControls = (src: string | null) => {
   const ref = useRef<HTMLAudioElement | null>(null);
@@ -40,9 +33,9 @@ export function useLexicalUnitSearch() {
   const normalizedQuery = query.trim();
   const unit = result.status === 'found' ? result.unit : null;
 
-  const audioSrc = toAbsUrl(unit?.audioUrl);
-  const meaningAudioSrc = toAbsUrl(unit?.soundMeaningUrl);
-  const exampleAudioSrc = toAbsUrl(unit?.soundExampleUrl);
+  const audioSrc = toAbsoluteMediaUrl(unit?.audioUrl);
+  const meaningAudioSrc = toAbsoluteMediaUrl(unit?.soundMeaningUrl);
+  const exampleAudioSrc = toAbsoluteMediaUrl(unit?.soundExampleUrl);
   const imageSrc = unit?.imageUrl ?? null;
 
   const { ref: audioRef, play: playAudio } = useCreateAudioControls(audioSrc);
