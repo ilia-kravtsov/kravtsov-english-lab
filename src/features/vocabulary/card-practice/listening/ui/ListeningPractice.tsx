@@ -1,22 +1,23 @@
 import { useEffect, useRef } from 'react';
 
-import type { PracticeSwitchState } from '@/features/vocabulary/card-practice/model/practice-mode.types.ts';
-import { useAutoNextOnCorrect } from '@/features/vocabulary/card-practice/shared/model/useAutoNextOnCorrect.ts';
-import { PracticeResults } from '@/features/vocabulary/card-practice/shared/ui/PracticeResults/PracticeResults.tsx';
+import { getPracticeCardClassName } from '@/features/vocabulary/card-practice/shared/lib/getPracticeCardStyles.ts';
+import type { PracticeViewProps } from '@/features/vocabulary/card-practice/shared/model/practice-view.types.ts';
+import { usePracticeView } from '@/features/vocabulary/card-practice/shared/model/usePracticeView.ts';
+import { PracticeGuard } from '@/features/vocabulary/card-practice/shared/ui/PracticeGuard.tsx';
+import { PracticeProgress } from '@/features/vocabulary/card-practice/shared/ui/PracticeProgress.tsx';
 import switchAnim from '@/features/vocabulary/card-practice/shared/ui/SwitchAnimation.module.scss';
 import { toAbsoluteMediaUrl } from '@/shared/lib/url/toAbsoluteMediaUrl.ts';
 import { Button, Input } from '@/shared/ui';
 
 import { useListeningStore } from '../model/listening.store';
 import style from './ListeningPractice.module.scss';
+import { normalButtonWide, wideButtonStyles } from '@/shared/ui/ButtonStyles/button.styles.ts';
 
-type Props = {
-  switchDir?: PracticeSwitchState;
-  onAutoNext?: () => void;
-  autoNextCommitDelayMs?: number;
-};
-
-export function ListeningPractice({ switchDir, onAutoNext, autoNextCommitDelayMs }: Props) {
+export function ListeningPractice({
+  switchDir,
+  onAutoNext,
+  autoNextCommitDelayMs,
+}: PracticeViewProps) {
   const cards = useListeningStore((s) => s.cards);
   const index = useListeningStore((s) => s.index);
   const feedback = useListeningStore((s) => s.feedback);
@@ -35,37 +36,23 @@ export function ListeningPractice({ switchDir, onAutoNext, autoNextCommitDelayMs
   const next = useListeningStore((s) => s.next);
   const restart = useListeningStore((s) => s.restart);
 
-  const inputRef = useRef<HTMLInputElement | null>(null);
-
-  useEffect(() => {
-    if (!locked) {
-      inputRef.current?.focus();
-    }
-  }, [index, locked]);
-
-  useAutoNextOnCorrect({
-    isFinished,
+  const { inputRef, current } = usePracticeView({
+    cards,
+    index,
     locked,
+    isFinished,
     feedback,
     next,
-    delayMs: 450,
-    beforeNext: onAutoNext,
-    commitDelayMs: autoNextCommitDelayMs ?? 130,
+    onAutoNext,
+    autoNextCommitDelayMs,
+    withInputFocus: true,
   });
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const autoPlayedCardKeyRef = useRef<string | null>(null);
 
-  const current = cards[index] ?? null;
   const unit = current?.lexicalUnit ?? null;
-
   const audioSrc = toAbsoluteMediaUrl(unit?.audioUrl);
-
-  const playAudio = () => {
-    if (!audioRef.current) return;
-    audioRef.current.currentTime = 0;
-    void audioRef.current.play();
-  };
 
   useEffect(() => {
     if (!current?.id || !audioSrc) return;
@@ -104,72 +91,70 @@ export function ListeningPractice({ switchDir, onAutoNext, autoNextCommitDelayMs
     };
   }, [current?.id, audioSrc]);
 
-  if (!cardSetId) return null;
+  const playAudio = () => {
+    if (!audioRef.current) return;
+    audioRef.current.currentTime = 0;
+    void audioRef.current.play();
+  };
 
-  if (isFinished) {
-    return (
-      <PracticeResults cardSetId={cardSetId} restart={restart} restartTitle={'Restart Listening'} />
-    );
-  }
-
-  if (!current || !unit) return null;
-
-  const cardStyles = [
-    style.card,
-    switchDir === 'next' ? switchAnim.switchNext : '',
-    switchDir === 'prev' ? switchAnim.switchPrev : '',
-    feedback === 'correct' ? style.cardCorrect : '',
-    feedback === 'wrong' ? style.cardWrong : '',
-  ].join(' ');
+  const cardStyles = getPracticeCardClassName(style, switchAnim, switchDir, feedback);
 
   return (
-    <div className={style.wrap}>
-      <div className={cardStyles}>
-        <div className={style.promptLabel}>Listen and type:</div>
-        <div className={style.audioRow}>
-          {audioSrc && (
-            <audio ref={audioRef} src={audioSrc} preload={'metadata'} style={{ display: 'none' }} />
-          )}
-          <Button
-            type={'button'}
-            title={'Play'}
-            onClick={playAudio}
-            disabled={!audioSrc}
-            style={{ width: '140px' }}
+    <PracticeGuard
+      cardSetId={cardSetId}
+      isFinished={isFinished}
+      restart={restart}
+      restartTitle={'Restart Listening'}
+      isReady={Boolean(current && unit)}
+    >
+      <div className={style.wrap}>
+        <div className={cardStyles}>
+          <div className={style.promptLabel}>Listen and type:</div>
+          <div className={style.audioRow}>
+            {audioSrc && (
+              <audio
+                ref={audioRef}
+                src={audioSrc}
+                preload={'metadata'}
+                style={{ display: 'none' }}
+              />
+            )}
+            <Button
+              type={'button'}
+              title={'Play'}
+              onClick={playAudio}
+              disabled={!audioSrc}
+              style={wideButtonStyles}
+            />
+          </div>
+          <div className={style.hint}>
+            <div className={style.hintLabel}>Hint</div>
+            <div className={style.hintValue}>{unit?.translation ?? '—'}</div>
+          </div>
+        </div>
+
+        <div className={style.formRow}>
+          <Input
+            ref={inputRef}
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder={'Type lexical unit'}
+            disabled={locked}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                e.preventDefault();
+                submit();
+              }
+            }}
           />
+          <div className={style.buttonsContainer}>
+            <Button title={'Check'} onClick={submit} disabled={locked} style={normalButtonWide} />
+            <Button title={'Skip'} onClick={skip} style={normalButtonWide} />
+          </div>
         </div>
-        <div className={style.hint}>
-          <div className={style.hintLabel}>Hint</div>
-          <div className={style.hintValue}>{unit?.translation ?? '—'}</div>
-        </div>
-      </div>
 
-      <div className={style.formRow}>
-        <Input
-          ref={inputRef}
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          placeholder={'Type lexical unit'}
-          disabled={locked}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter') {
-              e.preventDefault();
-              submit();
-            }
-          }}
-        />
-        <div className={style.buttonsContainer}>
-          <Button title={'Check'} onClick={submit} disabled={locked} style={{ width: '120px' }} />
-          <Button title={'Skip'} onClick={skip} style={{ width: '120px' }} />
-        </div>
+        <PracticeProgress index={index} total={cards.length} attempts={attempts} style={style} />
       </div>
-
-      <div className={style.controlsRow}>
-        <div className={style.counter}>
-          {index + 1} / {cards.length}
-        </div>
-        <div className={style.meta}>Attempts: {attempts}</div>
-      </div>
-    </div>
+    </PracticeGuard>
   );
 }

@@ -1,19 +1,19 @@
-import type { PracticeSwitchState } from '@/features/vocabulary/card-practice/model/practice-mode.types';
-import { useAutoNextOnCorrect } from '@/features/vocabulary/card-practice/shared/model/useAutoNextOnCorrect';
-import { PracticeResults } from '@/features/vocabulary/card-practice/shared/ui/PracticeResults/PracticeResults';
+import { getPracticeCardClassName } from '@/features/vocabulary/card-practice/shared/lib/getPracticeCardStyles.ts';
+import type { PracticeViewProps } from '@/features/vocabulary/card-practice/shared/model/practice-view.types.ts';
+import { usePracticeView } from '@/features/vocabulary/card-practice/shared/model/usePracticeView.ts';
+import { PracticeGuard } from '@/features/vocabulary/card-practice/shared/ui/PracticeGuard.tsx';
+import { PracticeProgress } from '@/features/vocabulary/card-practice/shared/ui/PracticeProgress.tsx';
 import switchAnim from '@/features/vocabulary/card-practice/shared/ui/SwitchAnimation.module.scss';
 
 import { useRecognitionStore } from '../model/recognition.store';
 import { norm } from '../model/recognition.utils';
 import style from './RecognitionPractice.module.scss';
 
-type Props = {
-  switchDir?: PracticeSwitchState;
-  onAutoNext?: () => void;
-  autoNextCommitDelayMs?: number;
-};
-
-export function RecognitionPractice({ switchDir, onAutoNext, autoNextCommitDelayMs }: Props) {
+export function RecognitionPractice({
+  switchDir,
+  onAutoNext,
+  autoNextCommitDelayMs,
+}: PracticeViewProps) {
   const cards = useRecognitionStore((s) => s.cards);
   const index = useRecognitionStore((s) => s.index);
   const feedback = useRecognitionStore((s) => s.feedback);
@@ -31,81 +31,64 @@ export function RecognitionPractice({ switchDir, onAutoNext, autoNextCommitDelay
   const next = useRecognitionStore((s) => s.next);
   const restart = useRecognitionStore((s) => s.restart);
 
-  useAutoNextOnCorrect({
-    isFinished,
+  const { current } = usePracticeView({
+    cards,
+    index,
     locked,
+    isFinished,
     feedback,
     next,
-    delayMs: 450,
-    beforeNext: onAutoNext,
-    commitDelayMs: autoNextCommitDelayMs ?? 130,
+    onAutoNext,
+    autoNextCommitDelayMs,
   });
 
-  const current = cards[index] ?? null;
   const unit = current?.lexicalUnit ?? null;
 
-  if (!cardSetId) return null;
+  const correct = norm(unit?.translation ?? '');
 
-  if (isFinished) {
-    return (
-      <PracticeResults
-        cardSetId={cardSetId}
-        restart={restart}
-        restartTitle={'Restart Recognition'}
-      />
-    );
-  }
-
-  if (!current || !unit) return null;
-
-  const correct = norm(unit.translation ?? '');
-
-  const stylesCard = [
-    style.card,
-    switchDir === 'next' ? switchAnim.switchNext : '',
-    switchDir === 'prev' ? switchAnim.switchPrev : '',
-    feedback === 'correct' ? style.cardCorrect : '',
-    feedback === 'wrong' ? style.cardWrong : '',
-  ].join(' ')
+  const cardStyles = getPracticeCardClassName(style, switchAnim, switchDir, feedback);
 
   return (
-    <div className={style.wrap}>
-      <div className={stylesCard}>
-        <div className={style.value}>{unit.value}</div>
-      </div>
-
-      <div className={style.options}>
-        {options.map((opt) => {
-          const v = norm(opt);
-          const isDisabled = Boolean(disabled[v]) || feedback === 'correct';
-          const isCorrect = feedback === 'correct' && v === correct;
-          const isWrong = Boolean(disabled[v]);
-          const stylesOptionButton = [
-            style.optionBtn,
-            isCorrect ? style.optionCorrect : '',
-            isWrong ? style.optionWrong : '',
-          ].join(' ')
-
-          return (
-            <button
-              key={v}
-              type={'button'}
-              className={stylesOptionButton}
-              disabled={isDisabled}
-              onClick={() => answer(v)}
-            >
-              {v}
-            </button>
-          );
-        })}
-      </div>
-
-      <div className={style.controlsRow}>
-        <div className={style.counter}>
-          {index + 1} / {cards.length}
+    <PracticeGuard
+      cardSetId={cardSetId}
+      isFinished={isFinished}
+      restart={restart}
+      restartTitle={'Restart Recognition'}
+      isReady={Boolean(current && unit)}
+    >
+      <div className={style.wrap}>
+        <div className={cardStyles}>
+          <div className={style.value}>{unit?.value}</div>
         </div>
-        <div className={style.meta}>Attempts: {attempts}</div>
+
+        <div className={style.options}>
+          {options.map((opt) => {
+            const v = norm(opt);
+            const isDisabled = Boolean(disabled[v]) || feedback === 'correct';
+            const isCorrect = feedback === 'correct' && v === correct;
+            const isWrong = Boolean(disabled[v]);
+            const stylesOptionButton = [
+              style.optionBtn,
+              isCorrect ? style.optionCorrect : '',
+              isWrong ? style.optionWrong : '',
+            ].join(' ');
+
+            return (
+              <button
+                key={v}
+                type={'button'}
+                className={stylesOptionButton}
+                disabled={isDisabled}
+                onClick={() => answer(v)}
+              >
+                {v}
+              </button>
+            );
+          })}
+        </div>
+
+        <PracticeProgress index={index} total={cards.length} attempts={attempts} style={style} />
       </div>
-    </div>
+    </PracticeGuard>
   );
 }

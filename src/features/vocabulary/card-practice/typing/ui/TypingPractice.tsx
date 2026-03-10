@@ -1,20 +1,19 @@
-import type { PracticeSwitchState } from '@/features/vocabulary/card-practice/model/practice-mode.types';
+import { usePracticeView } from '@/features/vocabulary/card-practice/shared/model/usePracticeView.ts';
 import { useTextInputPracticeHandlers } from '@/features/vocabulary/card-practice/shared/model/useTextInputPracticeHandlers.ts';
-import { useTextInputPracticeView } from '@/features/vocabulary/card-practice/shared/model/useTextInputPracticeView';
-import { PracticeResults } from '@/features/vocabulary/card-practice/shared/ui/PracticeResults/PracticeResults';
+import { PracticeGuard } from '@/features/vocabulary/card-practice/shared/ui/PracticeGuard.tsx';
 import { Button, Input } from '@/shared/ui';
 import { mediumButtonStyles } from '@/shared/ui/ButtonStyles/button.styles.ts';
 
 import { useTypingStore } from '../model/typing.store';
 import style from './TypingPractice.module.scss';
+import type { PracticeViewProps } from '@/features/vocabulary/card-practice/shared/model/practice-view.types.ts';
+import { PracticeProgress } from '@/features/vocabulary/card-practice/shared/ui/PracticeProgress.tsx';
 
-type Props = {
-  switchDir?: PracticeSwitchState;
-  onAutoNext?: () => void;
-  autoNextCommitDelayMs?: number;
-};
-
-export function TypingPractice({ switchDir, onAutoNext, autoNextCommitDelayMs }: Props) {
+export function TypingPractice({
+  switchDir,
+  onAutoNext,
+  autoNextCommitDelayMs,
+}: PracticeViewProps) {
   const cards = useTypingStore((s) => s.cards);
   const index = useTypingStore((s) => s.index);
   const feedback = useTypingStore((s) => s.feedback);
@@ -33,7 +32,7 @@ export function TypingPractice({ switchDir, onAutoNext, autoNextCommitDelayMs }:
   const next = useTypingStore((s) => s.next);
   const restart = useTypingStore((s) => s.restart);
 
-  const { inputRef, current } = useTextInputPracticeView({
+  const { inputRef, current } = usePracticeView({
     cards,
     index,
     locked,
@@ -42,6 +41,7 @@ export function TypingPractice({ switchDir, onAutoNext, autoNextCommitDelayMs }:
     next,
     onAutoNext,
     autoNextCommitDelayMs,
+    withInputFocus: true,
   });
 
   const { cardStyles, handleInputChange, handleInputKeyDown } = useTextInputPracticeHandlers({
@@ -54,49 +54,42 @@ export function TypingPractice({ switchDir, onAutoNext, autoNextCommitDelayMs }:
 
   const unit = current?.lexicalUnit ?? null;
 
-  if (!cardSetId) return null;
-
-  if (isFinished) {
-    return (
-      <PracticeResults cardSetId={cardSetId} restart={restart} restartTitle={'Restart Typing'} />
-    );
-  }
-
-  if (!current || !unit) return null;
-
   return (
-    <div className={style.wrap}>
-      <div className={cardStyles}>
-        <div className={style.promptLabel}>Translate:</div>
-        <div className={style.promptValue}>{unit.translation}</div>
-        <div className={style.hint}>
-          <div className={style.hintLabel}>Meaning in English</div>
-          <div className={style.hintValue}>{unit.meaning ?? '—'}</div>
+    <PracticeGuard
+      cardSetId={cardSetId}
+      isFinished={isFinished}
+      restart={restart}
+      restartTitle={'Restart Typing'}
+      isReady={Boolean(current && unit)}
+    >
+      <div className={style.wrap}>
+        <div className={cardStyles}>
+          <div className={style.promptLabel}>Translate:</div>
+          <div className={style.promptValue}>{unit?.translation}</div>
+          <div className={style.hint}>
+            <div className={style.hintLabel}>{unit?.meaning && 'Meaning in English'}</div>
+            <div className={style.hintValue}>{unit?.meaning}</div>
+          </div>
         </div>
-      </div>
 
-      <div className={style.formRow}>
-        <Input
-          ref={inputRef}
-          value={input}
-          onChange={handleInputChange}
-          placeholder={'Type lexical unit'}
-          disabled={locked}
-          onKeyDown={handleInputKeyDown}
-        />
+        <div className={style.formRow}>
+          <Input
+            ref={inputRef}
+            value={input}
+            onChange={handleInputChange}
+            placeholder={'Type lexical unit'}
+            disabled={locked}
+            onKeyDown={handleInputKeyDown}
+          />
 
-        <div className={style.buttonsContainer}>
-          <Button title={'Check'} onClick={submit} disabled={locked} style={mediumButtonStyles} />
-          <Button title={'Skip'} onClick={skip} style={mediumButtonStyles} />
+          <div className={style.buttonsContainer}>
+            <Button title={'Check'} onClick={submit} disabled={locked} style={mediumButtonStyles} />
+            <Button title={'Skip'} onClick={skip} style={mediumButtonStyles} />
+          </div>
         </div>
-      </div>
 
-      <div className={style.controlsRow}>
-        <div className={style.counter}>
-          {index + 1} / {cards.length}
-        </div>
-        <div className={style.meta}>Attempts: {attempts}</div>
+        <PracticeProgress index={index} total={cards.length} attempts={attempts} style={style} />
       </div>
-    </div>
+    </PracticeGuard>
   );
 }
