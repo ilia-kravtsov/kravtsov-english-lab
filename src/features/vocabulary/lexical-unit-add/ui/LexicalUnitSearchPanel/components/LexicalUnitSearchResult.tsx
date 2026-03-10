@@ -129,7 +129,7 @@ export function LexicalUnitSearchResult({
 
       {variant === 'full' && imageSrc && (
         <div className={style.imageBox}>
-          <img src={imageSrc} alt={unit.value} />
+          <img className={style.imageBoxImage} src={imageSrc} alt={unit.value} />
         </div>
       )}
 

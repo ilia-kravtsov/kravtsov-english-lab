@@ -60,10 +60,10 @@
   transform: translateX(-50%);
   display: flex;
   justify-content: center;
+}
 
-  .muted {
-    opacity: 0.7;
-  }
+.muted {
+  opacity: 0.7;
 }
 
 .cardFaceBack {
@@ -85,18 +85,9 @@
   text-align: center;
 }
 
-.backLabel {
-  opacity: 0.65;
-  font-weight: 600;
-}
-
 .backValue {
   font-size: var(--font-size-secondary);
   line-height: 1.35;
-}
-
-.translation {
-  font-size: var(--font-size-tertiary);
 }
 
 .flipCardFlipped .flipInner {

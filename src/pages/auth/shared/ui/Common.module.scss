@@ -1,0 +1,7 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: var(--max-width-primary);
+  width: 100%;
+}

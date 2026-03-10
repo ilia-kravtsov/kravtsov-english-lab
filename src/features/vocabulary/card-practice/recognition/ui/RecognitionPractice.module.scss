@@ -1,41 +1,10 @@
-.wrap {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-}
-
-.card {
-  width: min(720px, 100%);
-  min-height: 260px;
-  border-radius: var(--border-radius-primary);
-  box-shadow: var(--shadow-primary);
-  padding: 24px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 14px;
-}
-
-.cardCorrect {
-  animation: flashCorrect 420ms ease;
-}
-
-.cardWrong {
-  animation: flashWrong 320ms ease;
-}
+@use '@/features/vocabulary/card-practice/shared/ui/PracticeLayout.module' as *;
+@use '@/features/vocabulary/card-practice/shared/ui/PracticeCardFeedback.module' as *;
 
 .value {
   font-size: var(--font-size-large);
   text-align: center;
   line-height: 1.1;
-}
-
-.counter {
-  opacity: 0.7;
-  font-size: 14px;
 }
 
 .options {
@@ -69,98 +38,4 @@
 .optionWrong {
   outline: 2px solid rgba(231, 76, 60, 0.7);
   background: rgba(231, 76, 60, 0.12);
-}
-
-.controlsRow {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.meta {
-  min-width: 120px;
-  text-align: center;
-  opacity: 0.75;
-}
-
-.result {
-  width: min(720px, 100%);
-  border-radius: var(--border-radius-primary);
-  box-shadow: var(--shadow-primary);
-  padding: 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.sectionTitle {
-  font-weight: 600;
-  opacity: 0.9;
-}
-
-.resultBlock {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.resultRow {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 10px 12px;
-  border-radius: var(--border-radius-primary);
-  box-shadow: var(--shadow-primary);
-}
-
-.resultLabel {
-  font-weight: 600;
-  opacity: 0.9;
-}
-
-.resultValue {
-  opacity: 0.8;
-  text-align: right;
-}
-
-@keyframes flashCorrect {
-  0% {
-    box-shadow: var(--shadow-primary);
-    background: transparent;
-  }
-  40% {
-    background: rgba(46, 204, 113, 0.14);
-    box-shadow:
-      0 0 0 2px rgba(46, 204, 113, 0.45),
-      var(--shadow-primary);
-  }
-  100% {
-    box-shadow: var(--shadow-primary);
-    background: transparent;
-  }
-}
-
-@keyframes flashWrong {
-  0% {
-    box-shadow: var(--shadow-primary);
-    background: transparent;
-    transform: translateX(0);
-  }
-  35% {
-    background: rgba(231, 76, 60, 0.14);
-    box-shadow:
-      0 0 0 2px rgba(231, 76, 60, 0.45),
-      var(--shadow-primary);
-    transform: translateX(-6px);
-  }
-  70% {
-    transform: translateX(6px);
-  }
-  100% {
-    box-shadow: var(--shadow-primary);
-    background: transparent;
-    transform: translateX(0);
-  }
 }

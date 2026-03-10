@@ -6,38 +6,20 @@
   gap: 40px;
   width: 100%;
   padding: 20px;
+}
 
-  .subtitle {
-    font-size: var(--font-size-primary);
-  }
+.subtitle {
+  font-size: var(--font-size-primary);
+}
 
-  .paragraphContainer {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
+.paragraphContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
 
-  .paragraph {
-    max-width: 600px;
-    width: 100%;
-    font-size: var(--font-size-primary);
-
-    .line {
-      display: block;
-    }
-  }
-
-  .list {
-    display: flex;
-    justify-content: space-evenly;
-    gap: 40px;
-    width: 100%;
-
-    .item {
-      max-width: 50%;
-
-      .itemHeader {
-      }
-    }
-  }
+.paragraph {
+  max-width: 600px;
+  width: 100%;
+  font-size: var(--font-size-primary);
 }

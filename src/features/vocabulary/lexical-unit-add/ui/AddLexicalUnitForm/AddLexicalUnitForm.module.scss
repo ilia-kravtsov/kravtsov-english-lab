@@ -4,105 +4,99 @@
   align-items: center;
   gap: 20px;
   width: 100%;
+}
 
-  .twoFieldsBox {
-    width: 100%;
-    display: flex;
-    gap: 20px;
-  }
+.audioContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  flex-wrap: wrap;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  padding: 8px 10px;
+  border-radius: 6px;
+  background-color: var(--background-color-primary);
+}
 
-  .audioContainer {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    width: 100%;
-    flex-wrap: wrap;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-    padding: 8px 10px;
-    border-radius: 6px;
-    background-color: var(--background-color-primary);
+.button {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: none;
+  background-color: var(--background-color-secondary);
+  color: var(--background-color-primary);
 
-    .button {
-      padding: 6px 10px;
-      border-radius: 6px;
-      border: none;
-      background-color: var(--background-color-secondary);
-      color: var(--background-color-primary);
+  font-size: var(--font-size-small);
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
 
-      font-size: var(--font-size-small);
-      cursor: pointer;
-      transition: opacity 0.2s ease;
-    }
+.button:hover {
+  opacity: 0.85;
+}
 
-    .button:hover {
-      opacity: 0.85;
-    }
+.audio {
+  height: 28px;
+  width: 180px;
+  flex: 0 0 auto;
+}
 
-    .audio {
-      height: 28px;
-      width: 180px;
-      flex: 0 0 auto;
-    }
+.remoteAudioContainer {
+  flex: 0 0 100%;
+  display: flex;
+  align-items: center;
+  padding-top: 6px;
+}
 
-    .remoteAudio {
-      flex: 0 0 100%;
-      display: flex;
-      align-items: center;
-      padding-top: 6px;
-    }
+.remoteAudio {
+  width: 100%;
+  max-width: 420px;
+  height: 32px;
+}
 
-    .remoteAudio audio {
-      width: 100%;
-      max-width: 420px;
-      height: 32px;
-    }
-  }
+.imageContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 10px;
+  flex-wrap: wrap;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  padding: var(--padding-primary);
+  border-radius: var(--border-radius-primary);
+  background-color: var(--background-color-primary);
+}
 
-  .imageContainer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    gap: 10px;
-    flex-wrap: wrap;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-    padding: var(--padding-primary);
-    border-radius: var(--border-radius-primary);
-    background-color: var(--background-color-primary);
-  }
+.imagePreview {
+  max-width: 220px;
+  max-height: 220px;
+  flex: 0 0 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
 
-  .imagePreview {
-    max-width: 220px;
-    max-height: 220px;
-    flex: 0 0 100%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-  }
+.imagePreviewImage {
+  max-width: 320px;
+  max-height: 220px;
+  border-radius: var(--border-radius-primary);
+  object-fit: cover;
+}
 
-  .imagePreview img {
-    max-width: 320px;
-    max-height: 220px;
-    border-radius: var(--border-radius-primary);
-    object-fit: cover;
-  }
+.examplesList {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
 
-  .examplesList {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
+.examplesRow {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  align-items: start;
+}
 
-  .examplesRow {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 10px;
-    align-items: start;
-  }
-
-  .examplesActions {
-    display: flex;
-    gap: 8px;
-  }
+.examplesActions {
+  display: flex;
+  gap: 8px;
 }

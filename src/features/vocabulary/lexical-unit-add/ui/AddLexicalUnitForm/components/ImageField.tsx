@@ -12,7 +12,7 @@ export function ImageField({ imagePreviewSrc, imageUrlInputProps }: Props) {
     <div className={style.imageContainer}>
       {imagePreviewSrc && (
         <div className={style.imagePreview}>
-          <img src={imagePreviewSrc} alt={'lexical unit image'} />
+          <img className={style.imagePreviewImage} src={imagePreviewSrc} alt={'lexical unit image'} />
         </div>
       )}
 

@@ -7,69 +7,65 @@
   width: 100%;
   padding: 20px;
   color: var(--font-color-primary);
+}
 
-  .panel {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 50%;
-    height: 100%;
-    background: var(--font-color-primary);
-    clip-path: polygon(0 0, 100% 0, 85% 100%, 0 100%);
-    transition:
-      transform 0.3s ease-out,
-      clip-path 0.3s ease-out;
-    z-index: 1;
-  }
+.panel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: var(--font-color-primary);
+  clip-path: polygon(0 0, 100% 0, 85% 100%, 0 100%);
+  transition:
+          transform 0.3s ease-out,
+          clip-path 0.3s ease-out;
+  z-index: 1;
+}
 
-  .formWrapper {
-    width: 40%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition:
-      transform 0.6s ease-in-out,
-      opacity 0.6s ease-in-out;
-    z-index: 2;
-  }
+.formWrapper {
+  width: 40%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+          transform 0.6s ease-in-out,
+          opacity 0.6s ease-in-out;
+  z-index: 2;
+}
 
-  .infoPanel {
-    width: 40%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition:
-      transform 0.6s ease-in-out,
-      opacity 0.6s ease-in-out;
-    z-index: 2;
-  }
+.infoPanel {
+  width: 40%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+          transform 0.6s ease-in-out,
+          opacity 0.6s ease-in-out;
+  z-index: 2;
+}
 
-  .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 40px;
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
 
-    .header {
-      font-family: var(--font-family-secondary), serif;
-      font-size: var(--font-size-secondary);
-      text-align: center;
-      color: var(--font-color-secondary);
-    }
+.header {
+  font-family: var(--font-family-secondary), serif;
+  font-size: var(--font-size-secondary);
+  text-align: center;
+  color: var(--font-color-secondary);
+}
 
-    .paragraph {
-      text-align: center;
-      max-width: 400px;
-      font-size: var(--font-size-primary);
-      color: var(--font-color-secondary);
-    }
-
-    .link {
-      font-size: var(--font-size-primary);
-    }
-  }
+.paragraph {
+  text-align: center;
+  max-width: 400px;
+  font-size: var(--font-size-primary);
+  color: var(--font-color-secondary);
 }
 
 [data-state='login'] {

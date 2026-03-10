@@ -39,8 +39,13 @@ export function AudioField({
   return (
     <div className={style.audioContainer}>
       {!audioBlob && remoteAudioSrc && (
-        <div className={style.remoteAudio}>
-          <audio controls preload={'metadata'} src={remoteAudioSrc} />
+        <div className={style.remoteAudioContainer}>
+          <audio
+            className={style.remoteAudio}
+            controls
+            preload={'metadata'}
+            src={remoteAudioSrc}
+          />
         </div>
       )}
 

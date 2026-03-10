@@ -1,0 +1,47 @@
+.cardCorrect {
+  animation: flashCorrect 420ms ease;
+}
+
+.cardWrong {
+  animation: flashWrong 320ms ease;
+}
+
+@keyframes flashCorrect {
+  0% {
+    box-shadow: var(--shadow-primary);
+    background: transparent;
+  }
+  40% {
+    background: rgba(46, 204, 113, 0.14);
+    box-shadow:
+            0 0 0 2px rgba(46, 204, 113, 0.45),
+            var(--shadow-primary);
+  }
+  100% {
+    box-shadow: var(--shadow-primary);
+    background: transparent;
+  }
+}
+
+@keyframes flashWrong {
+  0% {
+    box-shadow: var(--shadow-primary);
+    background: transparent;
+    transform: translateX(0);
+  }
+  35% {
+    background: rgba(231, 76, 60, 0.14);
+    box-shadow:
+            0 0 0 2px rgba(231, 76, 60, 0.45),
+            var(--shadow-primary);
+    transform: translateX(-6px);
+  }
+  70% {
+    transform: translateX(6px);
+  }
+  100% {
+    box-shadow: var(--shadow-primary);
+    background: transparent;
+    transform: translateX(0);
+  }
+}

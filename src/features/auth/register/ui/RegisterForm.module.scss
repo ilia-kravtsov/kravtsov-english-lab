@@ -7,37 +7,33 @@
   gap: 15px;
   min-width: 350px;
   width: 100%;
+}
 
-  .inputsContainer {
-    display: flex;
-    gap: 10px;
-  }
+.inputsContainer {
+  display: flex;
+  gap: 10px;
+}
 
-  .inputContainer {
-    @include form.inputContainer(15px);
-  }
+.inputContainer {
+  @include form.inputContainer(15px);
+}
 
-  .errorSlot {
-    @include form.errorSlot;
-    bottom: 55px;
-  }
+.errorSlot {
+  @include form.errorSlot;
+  bottom: 55px;
+}
 
-  .errorSlotTerms {
-    @include form.errorSlot;
-    bottom: 47px;
-  }
+.errorSlotTerms {
+  @include form.errorSlot;
+  bottom: 47px;
+}
 
-  .checkBoxLinkContainer {
-    display: flex;
-    justify-content: space-between;
-  }
+.checkBoxLinkContainer {
+  display: flex;
+  justify-content: space-between;
+}
 
-  .serverError {
-    @include form.serverError;
-  }
-
-  .link {
-    text-decoration: underline;
-    text-underline-offset: 5px;
-  }
+.link {
+  text-decoration: underline;
+  text-underline-offset: 5px;
 }
