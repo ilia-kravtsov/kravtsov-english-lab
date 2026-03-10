@@ -1,4 +1,4 @@
-export { VocabularyLayout } from '@/pages/vocabulary/ui/component/VocabularyLayout.tsx';
+export { VocabularyLayout } from '@/pages/vocabulary/ui/VocabularyLayout/VocabularyLayout.tsx';
 export { Cards } from '@/pages/vocabulary/ui/internal-components/Cards/Cards.tsx';
 export { CardSetPracticePage } from '@/pages/vocabulary/ui/internal-components/CardSetPracticePage/CardSetPracticePage.tsx';
 export { CardSetsPage } from '@/pages/vocabulary/ui/internal-components/CardSetsPage/CardSetsPage.tsx';

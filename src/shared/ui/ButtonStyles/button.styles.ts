@@ -23,3 +23,7 @@ export const smallButtonStyles = {
   justifyContent: 'center',
   alignItems: 'center',
 };
+
+export const wideButtonStyles: CSSProperties = {
+  width: '140px',
+}

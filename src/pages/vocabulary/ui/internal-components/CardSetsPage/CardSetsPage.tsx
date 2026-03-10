@@ -2,8 +2,11 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import { useCardSetsPage } from '@/features/vocabulary/card-sets/model/useCardSetsPage';
 import { LexicalUnitSearchPanel } from '@/features/vocabulary/lexical-unit-add/ui/LexicalUnitSearchPanel/LexicalUnitSearchPanel';
-import { CardSetsPageHeader } from '@/pages/vocabulary/ui/internal-components/CardSetsPage/CardSetsPageHeader/CardSetsPageHeader.tsx';
-import { Button, ConfirmModal, LinkAsButton } from '@/shared/ui';
+import { CardSetsCardsList } from '@/pages/vocabulary/ui/internal-components/CardSetsPage/components/CardSetsCardsList.tsx';
+import { CardSetsPageHeader } from '@/pages/vocabulary/ui/internal-components/CardSetsPage/components/CardSetsPageHeader/CardSetsPageHeader.tsx';
+import { CardSetsSearchActions } from '@/pages/vocabulary/ui/internal-components/CardSetsPage/components/CardSetsSearchActions.tsx';
+import { ConfirmModal, LinkAsButton } from '@/shared/ui';
+import { smallButtonStyles } from '@/shared/ui/ButtonStyles/button.styles.ts';
 
 import style from './CardSetsPage.module.scss';
 
@@ -32,29 +35,55 @@ export function CardSetsPage() {
   } = useCardSetsPage(cardSetId);
 
   const cardsShorterAmount = cards.slice(0, 30);
+  const pageTitle = cardSetLoading ? '' : (cardSet?.title ?? '');
+
+  const removeModalMessage = removeTarget?.lexicalUnit?.value
+    ? `Remove "${removeTarget.lexicalUnit.value}" from this set?`
+    : 'Remove this item from this set?';
 
   const onBackClick = () => {
     navigate('/vocabulary/cards');
   };
 
-  const buttonStyles = {
-    width: '90px',
-    height: '40px',
-    fontSize: '16px',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
+  const onAddClick = () => {
+    void addToSet();
+  };
+
+  const onRemoveFoundClick = () => {
+    if (!foundCardInSet) return;
+    requestRemove(foundCardInSet);
+  };
+
+  const onConfirmRemove = () => {
+    void confirmRemove();
+  };
+
+  const renderNotFound = () => {
+    return <div className={style.hint}>Not found in your words bank.</div>;
+  };
+
+  const renderFoundActions = () => {
+    return (
+      <CardSetsSearchActions
+        inSet={inSet}
+        adding={adding}
+        removing={removing}
+        hasFoundCardInSet={!!foundCardInSet}
+        onAdd={onAddClick}
+        onRemove={onRemoveFoundClick}
+      />
+    );
   };
 
   return (
     <div className={style.container}>
       <CardSetsPageHeader
-        title={cardSetLoading ? '' : (cardSet?.title ?? '')}
+        title={pageTitle}
         onBackClick={onBackClick}
-        backButtonStyle={buttonStyles}
+        backButtonStyle={smallButtonStyles}
       >
         {cardSetId && (
-          <LinkAsButton to={`/vocabulary/cards/${cardSetId}/practice`} style={buttonStyles}>
+          <LinkAsButton to={`/vocabulary/cards/${cardSetId}/practice`} style={smallButtonStyles}>
             Practice
           </LinkAsButton>
         )}
@@ -73,78 +102,27 @@ export function CardSetsPage() {
             playAudio={lexicalSearch.playAudio}
             imageSrc={lexicalSearch.imageSrc}
             variant={'full'}
-            renderNotFound={() => <div className={style.hint}>Not found in your words bank.</div>}
-            renderFoundActions={() => (
-              <div style={{ display: 'flex', gap: '12px' }}>
-                <Button
-                  type={'button'}
-                  title={inSet ? 'Already added' : adding ? 'Adding...' : 'Add'}
-                  disabled={adding || inSet}
-                  onClick={() => void addToSet()}
-                  style={{ width: '140px' }}
-                />
-
-                <Button
-                  type={'button'}
-                  title={removing ? 'Removing...' : 'Remove'}
-                  disabled={removing || !foundCardInSet}
-                  onClick={() => {
-                    if (!foundCardInSet) return;
-                    requestRemove(foundCardInSet);
-                  }}
-                  style={{ width: '140px' }}
-                />
-              </div>
-            )}
+            renderNotFound={renderNotFound}
+            renderFoundActions={renderFoundActions}
           />
         </div>
 
         <div className={style.right}>
-          <div className={style.cardsHeader}>
-            <h3 className={style.cardsTitle}>First 30 cards in set</h3>
-            {cardsLoading && <div className={style.muted}>Loading…</div>}
-          </div>
-
-          {!cardsLoading && cards.length === 0 && <div className={style.muted}>No cards yet</div>}
-
-          {!cardsLoading && cards.length > 0 && (
-            <div className={style.cardsList}>
-              {cardsShorterAmount.map((c) => {
-                const value = c.lexicalUnit?.value ?? c.lexicalUnitId;
-
-                return (
-                  <div key={c.id} className={style.cardItem}>
-                    <button
-                      type="button"
-                      className={style.removeBtn}
-                      onClick={() => requestRemove(c)}
-                      aria-label={'Remove from set'}
-                      disabled={removing}
-                    >
-                      ×
-                    </button>
-
-                    <div className={style.cardTopRow}>
-                      <div className={style.cardValue}>{value}</div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          )}
+          <CardSetsCardsList
+            cards={cardsShorterAmount}
+            cardsLoading={cardsLoading}
+            removing={removing}
+            onRequestRemove={requestRemove}
+          />
         </div>
       </div>
 
       <ConfirmModal
         isOpen={removeTarget != null}
         title={'Remove lexical unit from set?'}
-        message={
-          removeTarget?.lexicalUnit?.value
-            ? `Remove "${removeTarget.lexicalUnit.value}" from this set?`
-            : 'Remove this item from this set?'
-        }
+        message={removeModalMessage}
         onCancel={cancelRemove}
-        onConfirm={() => void confirmRemove()}
+        onConfirm={onConfirmRemove}
       />
     </div>
   );

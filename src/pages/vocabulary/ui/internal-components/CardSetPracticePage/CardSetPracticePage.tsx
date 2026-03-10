@@ -6,7 +6,7 @@ import { usePracticeModeAvailability } from '@/features/vocabulary/card-practice
 import { useSwitchAnimation } from '@/features/vocabulary/card-practice/shared/model/useSwitchAnimation';
 import { PracticeContent } from '@/pages/vocabulary/ui/internal-components/CardSetPracticePage/PracticeContent/PracticeContent';
 import { PracticeModeSidebar } from '@/pages/vocabulary/ui/internal-components/CardSetPracticePage/PracticeModeSidebar/PracticeModeSidebar';
-import { CardSetsPageHeader } from '@/pages/vocabulary/ui/internal-components/CardSetsPage/CardSetsPageHeader/CardSetsPageHeader';
+import { CardSetsPageHeader } from '@/pages/vocabulary/ui/internal-components/CardSetsPage/components/CardSetsPageHeader/CardSetsPageHeader';
 import { smallButtonStyles } from '@/shared/ui/ButtonStyles/button.styles.ts';
 
 import style from './CardSetPracticePage.module.scss';
