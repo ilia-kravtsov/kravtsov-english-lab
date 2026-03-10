@@ -46,8 +46,6 @@ function format(stat?: PracticeModeStats) {
 
   const parts: string[] = [];
 
-  parts.push(`${stat.completedCards}/${stat.totalCards} completed`);
-
   if (stat.firstTryCorrectCards !== undefined && stat.totalCards > 0) {
     const firstTry = Math.round((stat.firstTryCorrectCards / stat.totalCards) * 100);
     parts.push(`first try ${firstTry}%`);
