@@ -37,22 +37,22 @@
     transform: translateY(0);
     opacity: 1;
   }
+}
 
-  .title {
-    margin: 0 0 12px;
-    font-size: 18px;
-    color: var(--font-color-primary);
-  }
+.title {
+  margin: 0 0 12px;
+  font-size: 18px;
+  color: var(--font-color-primary);
+}
 
-  .paragraph {
-    margin: 0 0 24px;
-    font-size: 14px;
-    color: var(--font-color-primary);
-  }
+.paragraph {
+  margin: 0 0 24px;
+  font-size: 14px;
+  color: var(--font-color-primary);
+}
 
-  .actions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 12px;
-  }
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
 }

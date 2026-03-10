@@ -13,9 +13,9 @@ export const buttonStyles: CSSProperties = {
 export const mediumButtonStyles: CSSProperties = {
   width: '100px',
   fontSize: '16px'
-}
+};
 
-export const smallButtonStyles = {
+export const smallButtonStyles: CSSProperties = {
   width: '90px',
   height: '40px',
   fontSize: '16px',
@@ -26,4 +26,4 @@ export const smallButtonStyles = {
 
 export const wideButtonStyles: CSSProperties = {
   width: '140px',
-}
+};

@@ -1,4 +1,4 @@
-import { API_BASE_URL } from '@/shared/config/api.ts';
+import { API_BASE_URL } from '@/shared/config/api-base-url.ts';
 
 import { isAbsoluteUrl } from './isAbsoluteUrl';
 

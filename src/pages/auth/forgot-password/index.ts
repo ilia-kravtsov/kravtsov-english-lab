@@ -1,1 +1,1 @@
-export { ForgotPassword } from './ui/ForgotPassword.tsx';
+export { ForgotPassword } from './ui/ForgotPassword';

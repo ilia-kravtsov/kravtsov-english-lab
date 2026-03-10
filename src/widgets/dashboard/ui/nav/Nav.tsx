@@ -1,7 +1,7 @@
 import { forwardRef, type Ref } from 'react';
-import type { NavLink } from 'react-router-dom';
 
 import { LinkAsButton } from '@/shared/ui/LinkAsButton/LinkAsButton.tsx';
+import { linkStyles } from '@/shared/ui/LinkStyles/link.styles.ts';
 
 import style from './Nav.module.scss';
 
@@ -30,12 +30,6 @@ export const Nav = forwardRef<HTMLDivElement, Props>(
       { id: 'rating', to: 'rating', title: 'Rating' },
       { id: 'settings', to: 'settings', title: 'Settings' },
     ];
-
-    const linkStyles = {
-      height: '40px',
-      width: '100%',
-      fontSize: '14px',
-    };
 
     const containerStyles = `${style.container} ${!isOpen ? style.collapsed : ''}`;
 

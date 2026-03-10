@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 
-import { BurgerButton } from '@/shared/ui/BurgerButton/BurgerButton.tsx';
-import { Footer } from '@/widgets/dashboard/ui/footer/Footer.tsx';
-import { Header } from '@/widgets/dashboard/ui/header/Header.tsx';
-import { Nav } from '@/widgets/dashboard/ui/nav/Nav.tsx';
+import { BurgerButton } from '@/shared/ui/BurgerButton/BurgerButton';
+import { Footer } from '@/widgets/dashboard/ui/footer/Footer';
+import { Header } from '@/widgets/dashboard/ui/header/Header';
+import { Nav } from '@/widgets/dashboard/ui/nav/Nav';
 
 import style from './Dashboard.module.scss';
 
@@ -31,8 +31,8 @@ export function Dashboard() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const isNavMenuOpen = () => {
-    setIsOpen(!isOpen);
+  const handleToggleNav = () => {
+    setIsOpen((prev) => !prev);
   };
 
   const handleClick = () => {
@@ -43,7 +43,7 @@ export function Dashboard() {
     <div className={style.container}>
       <Header />
 
-      <BurgerButton toggleBurger={isNavMenuOpen} isOpen={isOpen} ref={toggleMenuRef} />
+      <BurgerButton toggleBurger={handleToggleNav} isOpen={isOpen} ref={toggleMenuRef} />
 
       <Nav onLinkClick={handleClick} isOpen={isOpen} ref={navRef} />
 

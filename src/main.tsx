@@ -8,10 +8,10 @@ import { ToastContainer } from 'react-toastify';
 
 import { initAuth } from '@/app/initAuth/initAuth';
 import { setupAuth } from '@/app/providers';
-import { router } from '@/app/providers/router.tsx';
+import { router } from '@/app/providers/router';
 
 setupAuth();
-initAuth();
+void initAuth();
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

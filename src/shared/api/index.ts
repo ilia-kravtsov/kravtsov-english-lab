@@ -1,1 +1,1 @@
-export { api } from './api-general.ts';
+export { api } from './api-general';

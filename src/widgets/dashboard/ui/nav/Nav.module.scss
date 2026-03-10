@@ -41,7 +41,7 @@
     opacity 0.25s ease,
     transform 0.25s ease;
 
-  scrollbar-width: thin;
+  scrollbar-width: none;
   scrollbar-color: var(--background-color-primary) var(--background-color-secondary);
 
   .link {
@@ -57,11 +57,6 @@
 
 .menu > * {
   flex-shrink: 0;
-}
-
-.menu {
-  overflow-y: auto;
-  scrollbar-width: none;
 }
 
 .menu::-webkit-scrollbar {

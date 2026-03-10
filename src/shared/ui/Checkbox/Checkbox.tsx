@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { v4 } from 'uuid';
+import { useId } from 'react';
 
 import style from './Checkbox.module.scss';
 
@@ -11,7 +11,7 @@ interface Props {
 }
 
 export const Checkbox = ({ size = 24, label, checked = false, onChange }: Props) => {
-  const checkBoxId = `checkbox_id_${v4()}`;
+  const checkBoxId = `checkbox_${useId()}`;
 
   const checkBoxSize = {
     width: size,

@@ -1,27 +1,16 @@
 import { useMatches } from 'react-router-dom';
 
-import type { RouteHandle } from '@/shared/types/routeHandle.ts';
-import { LinkAsButton } from '@/shared/ui/LinkAsButton/LinkAsButton.tsx';
+import type { RouteHandle } from '@/shared/types/routeHandle';
+import { LinkAsButton } from '@/shared/ui/LinkAsButton/LinkAsButton';
+import { linkStyles } from '@/shared/ui/LinkStyles/link.styles.ts';
 
 import style from './Header.module.scss';
 
 export function Header() {
   const matches = useMatches() as Array<{ handle?: RouteHandle }>;
 
-  const headerLinks = (() => {
-    const match = [...matches].reverse().find((m) => m.handle?.headerLinks);
-
-    return match?.handle?.headerLinks ?? [];
-  })();
-
-  const linkStyles = {
-    height: '40px',
-    width: '120px',
-    fontSize: '14px',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-  };
+  const match = [...matches].reverse().find((m) => m.handle?.headerLinks);
+  const headerLinks = match?.handle?.headerLinks ?? [];
 
   return (
     <header className={style.container}>

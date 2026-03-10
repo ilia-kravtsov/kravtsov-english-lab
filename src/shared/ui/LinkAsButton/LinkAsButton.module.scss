@@ -34,7 +34,7 @@
   }
 
   &:focus-visible {
-    outline: 2px solid var(--color-accent);
+    outline: 2px solid var(--accent-color-primary);
     outline-offset: 2px;
   }
 
@@ -42,6 +42,6 @@
     pointer-events: none;
     opacity: 0.6;
     cursor: not-allowed;
-    background-color: var(--color-3);
+    background-color: var(--background-color-primary);
   }
 }

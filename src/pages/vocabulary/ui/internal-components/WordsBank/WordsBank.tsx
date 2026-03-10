@@ -1,6 +1,6 @@
 import { AddLexicalUnitForm } from '@/features/vocabulary/lexical-unit-add';
-import { useLexicalUnitEditorStore } from '@/features/vocabulary/lexical-unit-add/model/lexicalUnitEditor.store.ts';
-import { SearchLexicalUnit } from '@/features/vocabulary/lexical-unit-add/ui/SearchLexicalUnit/SearchLexicalUnit.tsx';
+import { useLexicalUnitEditorStore } from '@/features/vocabulary/lexical-unit-add/model/lexicalUnitEditor.store';
+import { SearchLexicalUnit } from '@/features/vocabulary/lexical-unit-add/ui/SearchLexicalUnit/SearchLexicalUnit';
 
 import style from './WordsBank.module.scss';
 
@@ -16,6 +16,7 @@ export function WordsBank() {
         <button
           className={`${style.tab} ${activeTab === 'add' ? style.active : ''}`}
           onClick={openAdd}
+          type={"button"}
         >
           {mode === 'update' ? 'Update' : 'Add'}
         </button>
@@ -23,6 +24,7 @@ export function WordsBank() {
         <button
           className={`${style.tab} ${activeTab === 'search' ? style.active : ''}`}
           onClick={openSearch}
+          type={"button"}
         >
           Search
         </button>
