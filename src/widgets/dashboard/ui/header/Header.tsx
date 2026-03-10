@@ -2,7 +2,7 @@ import { useMatches } from 'react-router-dom';
 
 import type { RouteHandle } from '@/shared/types/routeHandle';
 import { LinkAsButton } from '@/shared/ui/LinkAsButton/LinkAsButton';
-import { linkStyles } from '@/shared/ui/LinkStyles/link.styles.ts';
+import { linkStyles } from '@/shared/ui/LinkStyles/link.styles';
 
 import style from './Header.module.scss';
 

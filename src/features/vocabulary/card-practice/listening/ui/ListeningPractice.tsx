@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
 import type { PracticeSwitchState } from '@/features/vocabulary/card-practice/model/practice-mode.types.ts';
 import { useAutoNextOnCorrect } from '@/features/vocabulary/card-practice/shared/model/useAutoNextOnCorrect.ts';
@@ -54,21 +54,55 @@ export function ListeningPractice({ switchDir, onAutoNext, autoNextCommitDelayMs
   });
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const autoPlayedCardKeyRef = useRef<string | null>(null);
 
   const current = cards[index] ?? null;
   const unit = current?.lexicalUnit ?? null;
 
-  const audioSrc = useMemo(() => {
-    const url = unit?.audioUrl;
-    if (!url) return null;
-    return toAbsoluteMediaUrl(url);
-  }, [unit?.audioUrl]);
+  const audioSrc = toAbsoluteMediaUrl(unit?.audioUrl);
 
   const playAudio = () => {
     if (!audioRef.current) return;
     audioRef.current.currentTime = 0;
     void audioRef.current.play();
   };
+
+  useEffect(() => {
+    if (!current?.id || !audioSrc) return;
+
+    const autoPlayKey = `${current.id}:${audioSrc}`;
+    if (autoPlayedCardKeyRef.current === autoPlayKey) return;
+
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    autoPlayedCardKeyRef.current = autoPlayKey;
+
+    const tryPlay = async () => {
+      try {
+        audio.currentTime = 0;
+        await audio.play();
+      } catch {
+        autoPlayedCardKeyRef.current = null;
+      }
+    };
+
+    if (audio.readyState >= 2) {
+      void tryPlay();
+      return;
+    }
+
+    const handleLoadedData = () => {
+      audio.removeEventListener('loadeddata', handleLoadedData);
+      void tryPlay();
+    };
+
+    audio.addEventListener('loadeddata', handleLoadedData);
+
+    return () => {
+      audio.removeEventListener('loadeddata', handleLoadedData);
+    };
+  }, [current?.id, audioSrc]);
 
   if (!cardSetId) return null;
 
@@ -86,7 +120,7 @@ export function ListeningPractice({ switchDir, onAutoNext, autoNextCommitDelayMs
     switchDir === 'prev' ? switchAnim.switchPrev : '',
     feedback === 'correct' ? style.cardCorrect : '',
     feedback === 'wrong' ? style.cardWrong : '',
-  ].join(' ')
+  ].join(' ');
 
   return (
     <div className={style.wrap}>
