@@ -1,17 +1,16 @@
-import { useEffect, useRef } from 'react';
-
-import { getPracticeCardClassName } from '@/features/vocabulary/card-practice/shared/lib/getPracticeCardStyles.ts';
-import type { PracticeViewProps } from '@/features/vocabulary/card-practice/shared/model/practice-view.types.ts';
-import { usePracticeView } from '@/features/vocabulary/card-practice/shared/model/usePracticeView.ts';
-import { PracticeGuard } from '@/features/vocabulary/card-practice/shared/ui/PracticeGuard.tsx';
-import { PracticeProgress } from '@/features/vocabulary/card-practice/shared/ui/PracticeProgress.tsx';
+import { useListeningAudio } from '@/features/vocabulary/card-practice/listening/model/useListeningAudio';
+import { getPracticeCardClassName } from '@/features/vocabulary/card-practice/shared/lib/getPracticeCardStyles';
+import type { PracticeViewProps } from '@/features/vocabulary/card-practice/shared/model/practice-view.types';
+import { usePracticeView } from '@/features/vocabulary/card-practice/shared/model/usePracticeView';
+import { useTextInputPracticeHandlers } from '@/features/vocabulary/card-practice/shared/model/useTextInputPracticeHandlers';
+import { PracticeGuard } from '@/features/vocabulary/card-practice/shared/ui/PracticeGuard';
+import { PracticeProgress } from '@/features/vocabulary/card-practice/shared/ui/PracticeProgress';
 import switchAnim from '@/features/vocabulary/card-practice/shared/ui/SwitchAnimation.module.scss';
-import { toAbsoluteMediaUrl } from '@/shared/lib/url/toAbsoluteMediaUrl.ts';
 import { Button, Input } from '@/shared/ui';
+import { normalButtonWide, wideButtonStyles } from '@/shared/ui/ButtonStyles/button.styles';
 
 import { useListeningStore } from '../model/listening.store';
 import style from './ListeningPractice.module.scss';
-import { normalButtonWide, wideButtonStyles } from '@/shared/ui/ButtonStyles/button.styles.ts';
 
 export function ListeningPractice({
   switchDir,
@@ -48,54 +47,20 @@ export function ListeningPractice({
     withInputFocus: true,
   });
 
-  const audioRef = useRef<HTMLAudioElement | null>(null);
-  const autoPlayedCardKeyRef = useRef<string | null>(null);
+  const { handleInputChange, handleInputKeyDown } = useTextInputPracticeHandlers({
+    style,
+    switchDir,
+    feedback,
+    setInput,
+    submit,
+  });
 
   const unit = current?.lexicalUnit ?? null;
-  const audioSrc = toAbsoluteMediaUrl(unit?.audioUrl);
 
-  useEffect(() => {
-    if (!current?.id || !audioSrc) return;
-
-    const autoPlayKey = `${current.id}:${audioSrc}`;
-    if (autoPlayedCardKeyRef.current === autoPlayKey) return;
-
-    const audio = audioRef.current;
-    if (!audio) return;
-
-    autoPlayedCardKeyRef.current = autoPlayKey;
-
-    const tryPlay = async () => {
-      try {
-        audio.currentTime = 0;
-        await audio.play();
-      } catch {
-        autoPlayedCardKeyRef.current = null;
-      }
-    };
-
-    if (audio.readyState >= 2) {
-      void tryPlay();
-      return;
-    }
-
-    const handleLoadedData = () => {
-      audio.removeEventListener('loadeddata', handleLoadedData);
-      void tryPlay();
-    };
-
-    audio.addEventListener('loadeddata', handleLoadedData);
-
-    return () => {
-      audio.removeEventListener('loadeddata', handleLoadedData);
-    };
-  }, [current?.id, audioSrc]);
-
-  const playAudio = () => {
-    if (!audioRef.current) return;
-    audioRef.current.currentTime = 0;
-    void audioRef.current.play();
-  };
+  const { audioRef, audioSrc, playAudio } = useListeningAudio({
+    cardId: current?.id,
+    audioUrl: unit?.audioUrl,
+  });
 
   const cardStyles = getPracticeCardClassName(style, switchAnim, switchDir, feedback);
 
@@ -129,7 +94,7 @@ export function ListeningPractice({
           </div>
           <div className={style.hint}>
             <div className={style.hintLabel}>Hint</div>
-            <div className={style.hintValue}>{unit?.translation ?? '—'}</div>
+            <div className={style.hintValue}>{unit?.translation}</div>
           </div>
         </div>
 
@@ -137,15 +102,10 @@ export function ListeningPractice({
           <Input
             ref={inputRef}
             value={input}
-            onChange={(e) => setInput(e.target.value)}
+            onChange={handleInputChange}
             placeholder={'Type lexical unit'}
             disabled={locked}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter') {
-                e.preventDefault();
-                submit();
-              }
-            }}
+            onKeyDown={handleInputKeyDown}
           />
           <div className={style.buttonsContainer}>
             <Button title={'Check'} onClick={submit} disabled={locked} style={normalButtonWide} />

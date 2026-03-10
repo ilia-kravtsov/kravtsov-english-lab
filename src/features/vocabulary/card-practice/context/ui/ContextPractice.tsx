@@ -1,10 +1,10 @@
-import type { PracticeViewProps } from '@/features/vocabulary/card-practice/shared/model/practice-view.types.ts';
-import { usePracticeView } from '@/features/vocabulary/card-practice/shared/model/usePracticeView.ts';
-import { useTextInputPracticeHandlers } from '@/features/vocabulary/card-practice/shared/model/useTextInputPracticeHandlers.ts';
-import { PracticeGuard } from '@/features/vocabulary/card-practice/shared/ui/PracticeGuard.tsx';
-import { PracticeProgress } from '@/features/vocabulary/card-practice/shared/ui/PracticeProgress.tsx';
+import type { PracticeViewProps } from '@/features/vocabulary/card-practice/shared/model/practice-view.types';
+import { usePracticeView } from '@/features/vocabulary/card-practice/shared/model/usePracticeView';
+import { useTextInputPracticeHandlers } from '@/features/vocabulary/card-practice/shared/model/useTextInputPracticeHandlers';
+import { PracticeGuard } from '@/features/vocabulary/card-practice/shared/ui/PracticeGuard';
+import { PracticeProgress } from '@/features/vocabulary/card-practice/shared/ui/PracticeProgress';
 import { Button, Input } from '@/shared/ui';
-import { normalButtonWide } from '@/shared/ui/ButtonStyles/button.styles.ts';
+import { normalButtonWide } from '@/shared/ui/ButtonStyles/button.styles';
 
 import { useContextStore } from '../model/context.store';
 import style from './ContextPractice.module.scss';
@@ -14,6 +14,7 @@ export function ContextPractice({
   onAutoNext,
   autoNextCommitDelayMs,
 }: PracticeViewProps) {
+
   const cards = useContextStore((s) => s.cards);
   const index = useContextStore((s) => s.index);
   const feedback = useContextStore((s) => s.feedback);

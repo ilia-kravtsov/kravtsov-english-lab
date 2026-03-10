@@ -1,8 +1,8 @@
-import { getPracticeCardClassName } from '@/features/vocabulary/card-practice/shared/lib/getPracticeCardStyles.ts';
-import type { PracticeViewProps } from '@/features/vocabulary/card-practice/shared/model/practice-view.types.ts';
-import { usePracticeView } from '@/features/vocabulary/card-practice/shared/model/usePracticeView.ts';
-import { PracticeGuard } from '@/features/vocabulary/card-practice/shared/ui/PracticeGuard.tsx';
-import { PracticeProgress } from '@/features/vocabulary/card-practice/shared/ui/PracticeProgress.tsx';
+import { getPracticeCardClassName } from '@/features/vocabulary/card-practice/shared/lib/getPracticeCardStyles';
+import type { PracticeViewProps } from '@/features/vocabulary/card-practice/shared/model/practice-view.types';
+import { usePracticeView } from '@/features/vocabulary/card-practice/shared/model/usePracticeView';
+import { PracticeGuard } from '@/features/vocabulary/card-practice/shared/ui/PracticeGuard';
+import { PracticeProgress } from '@/features/vocabulary/card-practice/shared/ui/PracticeProgress';
 import switchAnim from '@/features/vocabulary/card-practice/shared/ui/SwitchAnimation.module.scss';
 
 import { useRecognitionStore } from '../model/recognition.store';
@@ -14,6 +14,7 @@ export function RecognitionPractice({
   onAutoNext,
   autoNextCommitDelayMs,
 }: PracticeViewProps) {
+
   const cards = useRecognitionStore((s) => s.cards);
   const index = useRecognitionStore((s) => s.index);
   const feedback = useRecognitionStore((s) => s.feedback);

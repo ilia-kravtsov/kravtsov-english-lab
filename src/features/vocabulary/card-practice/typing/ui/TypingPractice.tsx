@@ -1,19 +1,20 @@
-import { usePracticeView } from '@/features/vocabulary/card-practice/shared/model/usePracticeView.ts';
-import { useTextInputPracticeHandlers } from '@/features/vocabulary/card-practice/shared/model/useTextInputPracticeHandlers.ts';
-import { PracticeGuard } from '@/features/vocabulary/card-practice/shared/ui/PracticeGuard.tsx';
+import type { PracticeViewProps } from '@/features/vocabulary/card-practice/shared/model/practice-view.types';
+import { usePracticeView } from '@/features/vocabulary/card-practice/shared/model/usePracticeView';
+import { useTextInputPracticeHandlers } from '@/features/vocabulary/card-practice/shared/model/useTextInputPracticeHandlers';
+import { PracticeGuard } from '@/features/vocabulary/card-practice/shared/ui/PracticeGuard';
+import { PracticeProgress } from '@/features/vocabulary/card-practice/shared/ui/PracticeProgress';
 import { Button, Input } from '@/shared/ui';
-import { mediumButtonStyles } from '@/shared/ui/ButtonStyles/button.styles.ts';
+import { mediumButtonStyles } from '@/shared/ui/ButtonStyles/button.styles';
 
 import { useTypingStore } from '../model/typing.store';
 import style from './TypingPractice.module.scss';
-import type { PracticeViewProps } from '@/features/vocabulary/card-practice/shared/model/practice-view.types.ts';
-import { PracticeProgress } from '@/features/vocabulary/card-practice/shared/ui/PracticeProgress.tsx';
 
 export function TypingPractice({
   switchDir,
   onAutoNext,
   autoNextCommitDelayMs,
 }: PracticeViewProps) {
+
   const cards = useTypingStore((s) => s.cards);
   const index = useTypingStore((s) => s.index);
   const feedback = useTypingStore((s) => s.feedback);
