@@ -1,9 +1,9 @@
 import { useState } from 'react';
 
 import { useLogout } from '@/features/auth/logout/model/use-logout.ts';
-import { Button } from '@/shared/ui/Button/Button';
+import { Button } from '@/shared/ui/button/Button';
 import { buttonStyles } from '@/shared/lib/styles/button.styles.ts';
-import { ConfirmModal } from '@/shared/ui/Modal/ConfirmModal';
+import { ConfirmModal } from '@/shared/ui/modal/ConfirmModal';
 
 export function LogoutButton() {
   const [isModalOpen, setModalOpen] = useState(false);

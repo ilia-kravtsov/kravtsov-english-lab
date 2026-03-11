@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 
 import type { RouteHandle } from '@/shared/types/route-handle.ts';
 import { PageHomeLink } from '@/shared/ui';
-import { LinkAsButton } from '@/shared/ui/LinkAsButton/LinkAsButton';
+import { LinkAsButton } from '@/shared/ui/link-as-button/LinkAsButton';
 import { linkStyles } from '@/shared/lib/styles/link.styles.ts';
 
 import style from './Header.module.scss';

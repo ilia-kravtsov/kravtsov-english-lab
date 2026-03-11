@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 import type { RegisterFormData } from '@/features/auth/register/model/register.types';
 import { useRegisterForm } from '@/features/auth/register/model/use-register-form.ts';
 import { Button } from '@/shared/ui';
-import { Checkbox } from '@/shared/ui/Checkbox/Checkbox';
-import { Input } from '@/shared/ui/Input/Input';
+import { Checkbox } from '@/shared/ui/checkbox/Checkbox';
+import { Input } from '@/shared/ui/input/Input';
 
 import style from './RegisterForm.module.scss';
 

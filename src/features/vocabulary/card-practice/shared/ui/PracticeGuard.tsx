@@ -1,6 +1,6 @@
 import { type JSX, type ReactNode } from 'react';
 
-import { PracticeResults } from '@/features/vocabulary/card-practice/shared/ui/PracticeResults/PracticeResults.tsx';
+import { PracticeResults } from '@/features/vocabulary/card-practice/shared/ui/practice-results/PracticeResults.tsx';
 
 type Props = {
   cardSetId: string | null;

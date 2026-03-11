@@ -6,7 +6,7 @@ import { createRoot } from 'react-dom/client';
 import { RouterProvider } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 
-import { initAuthApp } from '@/app/init-auth-app.ts';
+import { initAuthApp } from '@/app/init-auth/init-auth-app.ts';
 import { router } from '@/app/providers/router';
 
 initAuthApp();

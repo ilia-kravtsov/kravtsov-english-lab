@@ -2,10 +2,10 @@ import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 
 import type { LoginFormData } from '@/features/auth/login/model/login.types';
-import { useLoginForm } from '@/features/auth/login/model/useLoginForm';
+import { useLoginForm } from '@/features/auth/login/model/use-login-form.ts';
 import { Button } from '@/shared/ui';
-import { Checkbox } from '@/shared/ui/Checkbox/Checkbox';
-import { Input } from '@/shared/ui/Input/Input';
+import { Checkbox } from '@/shared/ui/checkbox/Checkbox';
+import { Input } from '@/shared/ui/input/Input';
 
 import style from './LoginForm.module.scss';
 

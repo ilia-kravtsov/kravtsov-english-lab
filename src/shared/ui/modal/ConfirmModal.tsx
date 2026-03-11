@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import { Button } from '@/shared/ui/Button/Button';
+import { Button } from '@/shared/ui/button/Button';
 
 import style from './ConfirmModal.module.scss';
 

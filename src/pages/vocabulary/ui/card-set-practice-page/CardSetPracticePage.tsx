@@ -4,8 +4,8 @@ import { useCardSetPracticePage } from '@/features/vocabulary/card-practice/mode
 import { usePracticeModeActions } from '@/features/vocabulary/card-practice/model/use-practice-mode-actions.ts';
 import { usePracticeModeAvailability } from '@/features/vocabulary/card-practice/model/use-practice-mode-availability.ts';
 import { useSwitchAnimation } from '@/features/vocabulary/card-practice/shared/model/use-switch-animation.ts';
-import { PracticeContent } from '@/pages/vocabulary/ui/card-set-practice-page/PracticeContent/PracticeContent.tsx';
-import { PracticeModeSidebar } from '@/pages/vocabulary/ui/card-set-practice-page/PracticeModeSidebar/PracticeModeSidebar.tsx';
+import { PracticeContent } from '@/pages/vocabulary/ui/card-set-practice-page/practice-content/PracticeContent.tsx';
+import { PracticeModeSidebar } from '@/pages/vocabulary/ui/card-set-practice-page/practice-mode-sidebar/PracticeModeSidebar.tsx';
 import { CardSetsPageHeader } from '@/pages/vocabulary/ui/card-sets-page/card-sets-page-header/CardSetsPageHeader.tsx';
 import { smallButtonStyles } from '@/shared/lib/styles/button.styles.ts';
 

@@ -1,6 +1,6 @@
 import type { ComponentProps } from 'react';
 
-import { Input } from '@/shared/ui/Input/Input.tsx';
+import { Input } from '@/shared/ui/input/Input.tsx';
 
 import style from './AddLexicalUnitForm.module.scss';
 

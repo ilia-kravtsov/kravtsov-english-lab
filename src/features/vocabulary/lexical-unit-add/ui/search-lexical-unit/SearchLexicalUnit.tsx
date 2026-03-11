@@ -1,5 +1,5 @@
 import { useLexicalUnitSearchController } from '@/features/vocabulary/lexical-unit-add/model/use-lexical-unit-search-controller.ts';
-import { LexicalUnitSearchPanel } from '@/features/vocabulary/lexical-unit-add/ui/LexicalUnitSearchPanel/LexicalUnitSearchPanel';
+import { LexicalUnitSearchPanel } from '@/features/vocabulary/lexical-unit-add/ui/lexical-unit-search-panel/LexicalUnitSearchPanel';
 import { Button, ConfirmModal } from '@/shared/ui';
 
 import style from './SearchLexicalUnit.module.scss';

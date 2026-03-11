@@ -2,7 +2,7 @@ import { type SubmitHandler, useForm } from 'react-hook-form';
 
 import { useForgotPasswordModel } from '@/features/auth/forgot-password/model/forgot-password.model';
 import { Button } from '@/shared/ui';
-import { Input } from '@/shared/ui/Input/Input';
+import { Input } from '@/shared/ui/input/Input';
 
 import style from './ForgotPasswordForm.module.scss';
 

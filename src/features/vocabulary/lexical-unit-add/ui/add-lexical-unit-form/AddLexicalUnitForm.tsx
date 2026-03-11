@@ -1,12 +1,12 @@
 import { Controller } from 'react-hook-form';
 
 import { useAddLexicalUnitForm } from '@/features/vocabulary/lexical-unit-add/model/add-lexical-unit-form/use-add-lexical-unit-form.ts';
-import { AudioField } from '@/features/vocabulary/lexical-unit-add/ui/AddLexicalUnitForm/AudioField.tsx';
-import { DynamicListField } from '@/features/vocabulary/lexical-unit-add/ui/AddLexicalUnitForm/DynamicListField.tsx';
-import { ImageField } from '@/features/vocabulary/lexical-unit-add/ui/AddLexicalUnitForm/ImageField.tsx';
+import { AudioField } from '@/features/vocabulary/lexical-unit-add/ui/add-lexical-unit-form/AudioField.tsx';
+import { DynamicListField } from '@/features/vocabulary/lexical-unit-add/ui/add-lexical-unit-form/DynamicListField.tsx';
+import { ImageField } from '@/features/vocabulary/lexical-unit-add/ui/add-lexical-unit-form/ImageField.tsx';
 import { Button, Textarea } from '@/shared/ui';
-import { Input } from '@/shared/ui/Input/Input';
-import { MultiSelect } from '@/shared/ui/MultiSelect/MultiSelect';
+import { Input } from '@/shared/ui/input/Input';
+import { MultiSelect } from '@/shared/ui/multi-select/MultiSelect';
 
 import style from './AddLexicalUnitForm.module.scss';
 

@@ -1,6 +1,6 @@
 import { Outlet, useLocation } from 'react-router-dom';
 
-import { LinkAsButton } from '@/shared/ui/LinkAsButton/LinkAsButton';
+import { LinkAsButton } from '@/shared/ui/link-as-button/LinkAsButton';
 
 import style from './AuthLayout.module.scss';
 

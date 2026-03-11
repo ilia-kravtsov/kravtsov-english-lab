@@ -1,11 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 
-import { CardSetsCreateForm } from '@/features/vocabulary/card-sets/ui/CardSets/CardSetsCreateForm/CardSetsCreateForm.tsx';
-import { CardSetsEditForm } from '@/features/vocabulary/card-sets/ui/CardSets/CardSetsEditForm/CardSetsEditForm.tsx';
-import { CardSetsList } from '@/features/vocabulary/card-sets/ui/CardSets/CardSetsList/CardSetsList.tsx';
+import { CardSetsCreateForm } from '@/features/vocabulary/card-sets/ui/card-sets-create-form/CardSetsCreateForm.tsx';
+import { CardSetsEditForm } from '@/features/vocabulary/card-sets/ui/card-sets-edit-form/CardSetsEditForm.tsx';
+import { CardSetsList } from '@/features/vocabulary/card-sets/ui/card-sets-list/CardSetsList.tsx';
 import { ConfirmModal } from '@/shared/ui';
 
-import { useCardSets } from '../../model/use-card-sets.ts';
+import { useCardSets } from '../model/use-card-sets.ts';
 import style from './CardSets.module.scss';
 
 export function CardSets() {

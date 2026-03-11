@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
-import { showAuthErrorToast } from '@/features/auth/lib/show-auth-error-toast.ts';
+import { showAuthErrorToast } from '@/features/auth/session/lib/show-auth-error-toast.ts';
 
 import type { LoginDto } from './login.dto';
 import { loginEffect } from './login.effect';

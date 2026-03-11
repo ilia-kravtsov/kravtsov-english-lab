@@ -2,7 +2,7 @@ import { type SubmitHandler, useForm } from 'react-hook-form';
 
 import { useResetPasswordModel } from '@/features/auth/reset-password/model/reset-password.model.ts';
 import { Button } from '@/shared/ui';
-import { Input } from '@/shared/ui/Input/Input.tsx';
+import { Input } from '@/shared/ui/input/Input.tsx';
 
 import style from './ResetPasswordForm.module.scss';
 

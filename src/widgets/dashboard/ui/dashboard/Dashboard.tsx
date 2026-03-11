@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 
-import { BurgerButton } from '@/shared/ui/BurgerButton/BurgerButton';
+import { BurgerButton } from '@/shared/ui/burger-button/BurgerButton';
 import { Footer } from '@/widgets/dashboard/ui/footer/Footer';
 import { Header } from '@/widgets/dashboard/ui/header/Header';
 import { Nav } from '@/widgets/dashboard/ui/nav/Nav';

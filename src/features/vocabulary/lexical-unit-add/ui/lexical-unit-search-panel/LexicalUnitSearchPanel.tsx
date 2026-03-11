@@ -3,8 +3,8 @@ import { type ReactNode, type RefObject } from 'react';
 import type { LexicalUnit } from '@/entities/lexical-unit';
 import type { LexicalUnitSearchResultState } from '@/features/vocabulary/lexical-unit-add/model/use-lexical-unit-search-query.ts';
 import { useLexicalUnitSearchInput } from '@/features/vocabulary/lexical-unit-add/model/use-lexical-unit-search-input.ts';
-import { LexicalUnitSearchInput } from '@/features/vocabulary/lexical-unit-add/ui/LexicalUnitSearchPanel/LexicalUnitSearchInput.tsx';
-import { LexicalUnitSearchResult } from '@/features/vocabulary/lexical-unit-add/ui/LexicalUnitSearchPanel/LexicalUnitSearchResult.tsx';
+import { LexicalUnitSearchInput } from '@/features/vocabulary/lexical-unit-add/ui/lexical-unit-search-panel/LexicalUnitSearchInput.tsx';
+import { LexicalUnitSearchResult } from '@/features/vocabulary/lexical-unit-add/ui/lexical-unit-search-panel/LexicalUnitSearchResult.tsx';
 
 import style from './LexicalUnitSearchPanel.module.scss';
 

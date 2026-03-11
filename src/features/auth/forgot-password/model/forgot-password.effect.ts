@@ -1,4 +1,4 @@
-import { authApi } from '@/features/auth/api/auth.api';
+import { authApi } from '@/features/auth/session/api/auth.api';
 
 import type { ForgotPasswordDto } from './forgot-password.dto';
 import type { ForgotPasswordResponse } from './forgot-password.types';

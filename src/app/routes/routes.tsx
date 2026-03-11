@@ -1,5 +1,5 @@
 import { ProtectedRoute } from '@/app/routes/ProtectedRoute';
-import { AppInitWrapper } from '@/app/ui/app-init-wrapper.tsx';
+import { AppInitWrapper } from '@/app/ui/AppInitWrapper.tsx';
 import { AuthLayout } from '@/pages/auth/auth-layout';
 import { ForgotPassword } from '@/pages/auth/forgot-password';
 import { Login } from '@/pages/auth/login';

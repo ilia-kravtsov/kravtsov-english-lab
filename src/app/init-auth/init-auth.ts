@@ -1,5 +1,5 @@
-import { useUserStore } from '@/features/auth/user';
 import { meEffect } from '@/features/auth/me/model/me.effect';
+import { useUserStore } from '@/features/auth/user';
 
 export async function initAuth() {
   const accessToken = localStorage.getItem('accessToken');

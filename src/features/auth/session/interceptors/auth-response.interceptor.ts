@@ -1,7 +1,7 @@
 import type { AxiosError, InternalAxiosRequestConfig } from 'axios';
 
+import { refreshEffect } from '@/features/auth/refresh/model/refresh.effect.ts';
 import { useUserStore } from '@/features/auth/user';
-import { refreshEffect } from '@/features/auth/refresh/model/refresh.effect';
 import { api } from '@/shared/api';
 
 let refreshPromise: Promise<void> | null = null;

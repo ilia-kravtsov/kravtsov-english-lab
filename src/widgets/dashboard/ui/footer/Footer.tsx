@@ -1,5 +1,5 @@
 import { LogoutButton } from '@/features/auth/logout';
-import { LinkAsButton } from '@/shared/ui/LinkAsButton/LinkAsButton';
+import { LinkAsButton } from '@/shared/ui/link-as-button/LinkAsButton';
 import { linkStyles } from '@/shared/lib/styles/link.styles.ts';
 
 import style from './Footer.module.scss';
