@@ -113,7 +113,7 @@ export function useAddLexicalUnitForm() {
     resetAudio();
     meaningRecorder.reset();
     exampleRecorder.reset();
-  }, [mode, editingUnit, reset, resetAudio, meaningRecorder, exampleRecorder]);
+  }, [mode, editingUnit, reset]);
 
   useEffect(() => {
     if (mode !== 'add' || !prefillValue) return;

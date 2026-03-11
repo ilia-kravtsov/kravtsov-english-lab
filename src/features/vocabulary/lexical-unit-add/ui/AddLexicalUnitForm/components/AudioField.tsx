@@ -36,19 +36,12 @@ export function AudioField({
     reset,
   } = audio;
 
+  const audioSrc = audioBlob ? (audioUrl ?? undefined) : remoteAudioSrc;
+  const hasAnyAudio = Boolean(audioSrc);
+  const hasRecordedAudio = Boolean(audioBlob);
+
   return (
     <div className={style.audioContainer}>
-      {!audioBlob && remoteAudioSrc && (
-        <div className={style.remoteAudioContainer}>
-          <audio
-            className={style.remoteAudio}
-            controls
-            preload={'metadata'}
-            src={remoteAudioSrc}
-          />
-        </div>
-      )}
-
       <button
         type={'button'}
         className={style.button}
@@ -64,34 +57,36 @@ export function AudioField({
         </span>
       )}
 
-      {audioBlob && (
+      {hasAnyAudio && (
         <>
           <audio
             ref={audioRef}
-            src={audioUrl ?? undefined}
+            src={audioSrc!}
             onEnded={pause}
             className={style.audio}
+            preload={'metadata'}
           />
 
           <button
             type={'button'}
             className={style.button}
             onClick={isPlaying ? pause : play}
-            disabled={!audioBlob}
             style={actionButtonStyle}
           >
-            {isPlaying ? 'Pause' : 'Play'}
+            {isPlaying ? 'Stop' : 'Play'}
           </button>
 
-          <button
-            type={'button'}
-            className={style.button}
-            onClick={reset}
-            disabled={!audioBlob}
-            style={actionButtonStyle}
-          >
-            Reset
-          </button>
+          {hasRecordedAudio && (
+            <button
+              type={'button'}
+              className={style.button}
+              onClick={reset}
+              disabled={!audioBlob}
+              style={actionButtonStyle}
+            >
+              Reset
+            </button>
+          )}
         </>
       )}
     </div>

@@ -2,15 +2,15 @@ import { Controller } from 'react-hook-form';
 
 import { useAddLexicalUnitForm } from '@/features/vocabulary/lexical-unit-add/model/useAddLexicalUnitForm/useAddLexicalUnitForm.ts';
 import { AudioField } from '@/features/vocabulary/lexical-unit-add/ui/AddLexicalUnitForm/components/AudioField.tsx';
+import {
+  DynamicListField
+} from '@/features/vocabulary/lexical-unit-add/ui/AddLexicalUnitForm/components/DynamicListField.tsx';
+import { ImageField } from '@/features/vocabulary/lexical-unit-add/ui/AddLexicalUnitForm/components/ImageField.tsx';
 import { Button, Textarea } from '@/shared/ui';
 import { Input } from '@/shared/ui/Input/Input';
 import { MultiSelect } from '@/shared/ui/MultiSelect/MultiSelect';
 
 import style from './AddLexicalUnitForm.module.scss';
-import { ImageField } from '@/features/vocabulary/lexical-unit-add/ui/AddLexicalUnitForm/components/ImageField.tsx';
-import {
-  DynamicListField
-} from '@/features/vocabulary/lexical-unit-add/ui/AddLexicalUnitForm/components/DynamicListField.tsx';
 
 export function AddLexicalUnitForm() {
   const {
