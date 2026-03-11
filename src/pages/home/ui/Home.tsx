@@ -1,3 +1,7 @@
+import { NavLink } from 'react-router-dom';
+
+import { dashboardSections } from '@/shared/config/dashboardSections';
+
 import style from './Home.module.scss';
 
 export function Home() {
@@ -27,31 +31,16 @@ export function Home() {
           </p>
         </div>
 
-        <div className={style.cards}>
-          <article className={style.card}>
-            <span className={style.cardIndex}>01</span>
-            <h2 className={style.cardTitle}>Build vocabulary</h2>
-            <p className={style.cardText}>
-              Create your own word bank and organize it into convenient study sets.
-            </p>
-          </article>
-
-          <article className={style.card}>
-            <span className={style.cardIndex}>02</span>
-            <h2 className={style.cardTitle}>Practice actively</h2>
-            <p className={style.cardText}>
-              Train with different exercise modes designed for repetition and retention.
-            </p>
-          </article>
-
-          <article className={style.card}>
-            <span className={style.cardIndex}>03</span>
-            <h2 className={style.cardTitle}>Speak with confidence</h2>
-            <p className={style.cardText}>
-              Develop fluency and feel more natural when communicating in English.
-            </p>
-          </article>
-        </div>
+        <ul className={style.cards}>
+          {dashboardSections.map((section) => (
+            <li key={section.id} className={style.cardItem}>
+              <NavLink to={section.to} className={style.card}>
+                <h2 className={style.cardTitle}>{section.title}</h2>
+                <p className={style.cardText}>{section.description}</p>
+              </NavLink>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );

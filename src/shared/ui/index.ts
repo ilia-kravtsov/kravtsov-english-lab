@@ -6,3 +6,4 @@ export { Checkbox } from '@/shared/ui/Checkbox/Checkbox';
 export { Input } from '@/shared/ui/Input/Input';
 export { LinkAsButton } from '@/shared/ui/LinkAsButton/LinkAsButton';
 export { ConfirmModal } from '@/shared/ui/Modal/ConfirmModal';
+export { PageHomeLink } from '@/shared/ui/PageHomeLink/PageHomeLink.tsx';
