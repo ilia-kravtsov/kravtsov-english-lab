@@ -1,10 +1,10 @@
 import { useMatches } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 
-import type { RouteHandle } from '@/shared/types/routeHandle';
+import type { RouteHandle } from '@/shared/types/route-handle.ts';
 import { PageHomeLink } from '@/shared/ui';
 import { LinkAsButton } from '@/shared/ui/LinkAsButton/LinkAsButton';
-import { linkStyles } from '@/shared/ui/LinkStyles/link.styles';
+import { linkStyles } from '@/shared/lib/styles/link.styles.ts';
 
 import style from './Header.module.scss';
 

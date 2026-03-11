@@ -2,7 +2,7 @@ import type { RefObject } from 'react';
 
 import { Button } from '@/shared/ui';
 
-import style from '../LexicalUnitSearchPanel.module.scss';
+import style from './LexicalUnitSearchPanel.module.scss';
 
 type Props = {
   audioRef: RefObject<HTMLAudioElement | null>;

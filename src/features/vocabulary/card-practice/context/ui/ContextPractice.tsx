@@ -1,10 +1,10 @@
 import type { PracticeViewProps } from '@/features/vocabulary/card-practice/shared/model/practice-view.types';
-import { usePracticeView } from '@/features/vocabulary/card-practice/shared/model/usePracticeView';
-import { useTextInputPracticeHandlers } from '@/features/vocabulary/card-practice/shared/model/useTextInputPracticeHandlers';
+import { usePracticeView } from '@/features/vocabulary/card-practice/shared/model/use-practice-view.ts';
+import { useTextInputPracticeHandlers } from '@/features/vocabulary/card-practice/shared/model/use-text-input-practice-handlers.ts';
 import { PracticeGuard } from '@/features/vocabulary/card-practice/shared/ui/PracticeGuard';
 import { PracticeProgress } from '@/features/vocabulary/card-practice/shared/ui/PracticeProgress';
 import { Button, Input } from '@/shared/ui';
-import { normalButtonWide } from '@/shared/ui/ButtonStyles/button.styles';
+import { normalButtonWide } from '@/shared/lib/styles/button.styles.ts';
 
 import { useContextStore } from '../model/context.store';
 import style from './ContextPractice.module.scss';

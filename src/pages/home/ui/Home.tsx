@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 
-import { dashboardSections } from '@/shared/config/dashboardSections';
+import { dashboardSections } from '@/shared/config/dashboard-sections.ts';
 
 import style from './Home.module.scss';
 

@@ -1,6 +1,5 @@
 import { ProtectedRoute } from '@/app/routes/ProtectedRoute';
-import { AppInitWrapper } from '@/app/ui/AppInitWrapper';
-import { vocabularyHeaderLinks } from '@/features/vocabulary/config/vocabularyHeaderLinks';
+import { AppInitWrapper } from '@/app/ui/app-init-wrapper.tsx';
 import { AuthLayout } from '@/pages/auth/auth-layout';
 import { ForgotPassword } from '@/pages/auth/forgot-password';
 import { Login } from '@/pages/auth/login';
@@ -23,7 +22,8 @@ import {
   VocabularyLayout,
   WordsBank,
 } from '@/pages/vocabulary';
-import { VocabularyIntro } from '@/pages/vocabulary/ui/internal-components/VocabularyIntro/VocabularyIntro';
+import { vocabularyHeaderLinks } from '@/pages/vocabulary/model/vocabulary-header-links.ts';
+import { VocabularyIntro } from '@/pages/vocabulary/ui/vocabulary-layout/vocabulary-intro/VocabularyIntro.tsx';
 import { Writing } from '@/pages/writing';
 import { Dashboard } from '@/widgets/dashboard';
 

@@ -1,4 +1,4 @@
-import type { useCardSets } from '@/features/vocabulary/card-sets/model/useCardSets.ts';
+import type { useCardSets } from '@/features/vocabulary/card-sets/model/use-card-sets.ts';
 import { Button, Input } from '@/shared/ui';
 
 import style from '../CardSets.module.scss';

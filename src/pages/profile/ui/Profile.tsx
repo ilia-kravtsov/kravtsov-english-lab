@@ -1,4 +1,4 @@
-import { useUserStore } from '@/entities/user';
+import { useUserStore } from '@/features/auth/user';
 
 import style from './Profile.module.scss';
 

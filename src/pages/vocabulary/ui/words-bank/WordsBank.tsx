@@ -1,6 +1,6 @@
 import { AddLexicalUnitForm } from '@/features/vocabulary/lexical-unit-add';
 import { useLexicalUnitEditorStore } from '@/features/vocabulary/lexical-unit-add/model/lexical-unit-editor.store.ts';
-import { SearchLexicalUnit } from '@/features/vocabulary/lexical-unit-add/ui/SearchLexicalUnit/SearchLexicalUnit';
+import { SearchLexicalUnit } from '@/features/vocabulary/lexical-unit-add/ui/SearchLexicalUnit/SearchLexicalUnit.tsx';
 
 import style from './WordsBank.module.scss';
 

@@ -1,4 +1,4 @@
-import { useUserStore } from '@/entities/user';
+import { useUserStore } from '@/features/auth/user';
 import type { WithChildren } from '@/shared/types/react.types';
 
 export function AppInitWrapper({ children }: WithChildren) {

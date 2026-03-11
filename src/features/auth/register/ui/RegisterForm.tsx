@@ -2,7 +2,7 @@ import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 
 import type { RegisterFormData } from '@/features/auth/register/model/register.types';
-import { useRegisterForm } from '@/features/auth/register/model/useRegisterForm';
+import { useRegisterForm } from '@/features/auth/register/model/use-register-form.ts';
 import { Button } from '@/shared/ui';
 import { Checkbox } from '@/shared/ui/Checkbox/Checkbox';
 import { Input } from '@/shared/ui/Input/Input';

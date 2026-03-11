@@ -1,8 +1,8 @@
 import type { KeyboardEvent } from 'react';
 
-import type { useCardSets } from '@/features/vocabulary/card-sets/model/useCardSets.ts';
+import type { useCardSets } from '@/features/vocabulary/card-sets/model/use-card-sets.ts';
 import { Button } from '@/shared/ui';
-import { mediumButtonStyles } from '@/shared/ui/ButtonStyles/button.styles.ts';
+import { mediumButtonStyles } from '@/shared/lib/styles/button.styles.ts';
 
 import style from '../CardSets.module.scss';
 

@@ -2,7 +2,7 @@ import type { CSSProperties, ReactNode } from 'react';
 
 import { Button } from '@/shared/ui';
 
-import style from '../AddLexicalUnitForm.module.scss';
+import style from './AddLexicalUnitForm.module.scss';
 
 type Props = {
   items: string[];

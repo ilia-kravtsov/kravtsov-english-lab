@@ -1,6 +1,6 @@
-import { getPracticeCardClassName } from '@/features/vocabulary/card-practice/shared/lib/getPracticeCardStyles';
+import { getPracticeCardClassName } from '@/features/vocabulary/card-practice/shared/lib/get-practice-card-styles.ts';
 import type { PracticeViewProps } from '@/features/vocabulary/card-practice/shared/model/practice-view.types';
-import { usePracticeView } from '@/features/vocabulary/card-practice/shared/model/usePracticeView';
+import { usePracticeView } from '@/features/vocabulary/card-practice/shared/model/use-practice-view.ts';
 import { PracticeGuard } from '@/features/vocabulary/card-practice/shared/ui/PracticeGuard';
 import { PracticeProgress } from '@/features/vocabulary/card-practice/shared/ui/PracticeProgress';
 import switchAnim from '@/features/vocabulary/card-practice/shared/ui/SwitchAnimation.module.scss';

@@ -8,7 +8,7 @@ import type {
   TextInputFeedback,
   TextInputPracticeState,
 } from '@/features/vocabulary/card-practice/shared/model/text-input-practice.types.ts';
-import { useTextInputPracticeState } from '@/features/vocabulary/card-practice/shared/model/useTextInputPracticeState.ts';
+import { useTextInputPracticeState } from '@/features/vocabulary/card-practice/shared/model/use-text-input-practice-state.ts';
 
 import { writeContextStats } from './context.storage';
 import type { ContextSessionCard } from './context.types';

@@ -1,10 +1,10 @@
 import { type ReactNode, type RefObject } from 'react';
 
 import type { LexicalUnit } from '@/entities/lexical-unit';
-import type { LexicalUnitSearchResultState } from '@/features/vocabulary/lexical-unit-add/model/useLexicalUnitSearchQuery.ts';
-import { useLexicalUnitSearchInput } from '@/features/vocabulary/lexical-unit-add/model/useLexicalUnitSearchInput.ts';
-import { LexicalUnitSearchInput } from '@/features/vocabulary/lexical-unit-add/ui/LexicalUnitSearchPanel/components/LexicalUnitSearchInput.tsx';
-import { LexicalUnitSearchResult } from '@/features/vocabulary/lexical-unit-add/ui/LexicalUnitSearchPanel/components/LexicalUnitSearchResult.tsx';
+import type { LexicalUnitSearchResultState } from '@/features/vocabulary/lexical-unit-add/model/use-lexical-unit-search-query.ts';
+import { useLexicalUnitSearchInput } from '@/features/vocabulary/lexical-unit-add/model/use-lexical-unit-search-input.ts';
+import { LexicalUnitSearchInput } from '@/features/vocabulary/lexical-unit-add/ui/LexicalUnitSearchPanel/LexicalUnitSearchInput.tsx';
+import { LexicalUnitSearchResult } from '@/features/vocabulary/lexical-unit-add/ui/LexicalUnitSearchPanel/LexicalUnitSearchResult.tsx';
 
 import style from './LexicalUnitSearchPanel.module.scss';
 

@@ -1,8 +1,8 @@
 import type { CSSProperties } from 'react';
 
-import type { AudioFieldModel } from '@/features/vocabulary/lexical-unit-add/model/useAddLexicalUnitForm/useAddLexicalUnitForm.config.ts';
+import type { AudioFieldModel } from '@/features/vocabulary/lexical-unit-add/model/add-lexical-unit-form/add-lexical-unit-form.config.ts';
 
-import style from '../AddLexicalUnitForm.module.scss';
+import style from './AddLexicalUnitForm.module.scss';
 
 type Props = {
   audio: AudioFieldModel;

@@ -1,13 +1,13 @@
-import { useListeningAudio } from '@/features/vocabulary/card-practice/listening/model/useListeningAudio';
-import { getPracticeCardClassName } from '@/features/vocabulary/card-practice/shared/lib/getPracticeCardStyles';
+import { useListeningAudio } from '@/features/vocabulary/card-practice/listening/model/use-listening-audio.ts';
+import { getPracticeCardClassName } from '@/features/vocabulary/card-practice/shared/lib/get-practice-card-styles.ts';
 import type { PracticeViewProps } from '@/features/vocabulary/card-practice/shared/model/practice-view.types';
-import { usePracticeView } from '@/features/vocabulary/card-practice/shared/model/usePracticeView';
-import { useTextInputPracticeHandlers } from '@/features/vocabulary/card-practice/shared/model/useTextInputPracticeHandlers';
+import { usePracticeView } from '@/features/vocabulary/card-practice/shared/model/use-practice-view.ts';
+import { useTextInputPracticeHandlers } from '@/features/vocabulary/card-practice/shared/model/use-text-input-practice-handlers.ts';
 import { PracticeGuard } from '@/features/vocabulary/card-practice/shared/ui/PracticeGuard';
 import { PracticeProgress } from '@/features/vocabulary/card-practice/shared/ui/PracticeProgress';
 import switchAnim from '@/features/vocabulary/card-practice/shared/ui/SwitchAnimation.module.scss';
 import { Button, Input } from '@/shared/ui';
-import { normalButtonWide, wideButtonStyles } from '@/shared/ui/ButtonStyles/button.styles';
+import { normalButtonWide, wideButtonStyles } from '@/shared/lib/styles/button.styles.ts';
 
 import { useListeningStore } from '../model/listening.store';
 import style from './ListeningPractice.module.scss';

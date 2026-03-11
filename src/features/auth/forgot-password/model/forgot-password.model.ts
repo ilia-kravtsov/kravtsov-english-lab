@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-import { showAuthErrorToast } from '@/features/auth/lib/showAuthErrorToast.ts';
+import { showAuthErrorToast } from '@/features/auth/lib/show-auth-error-toast.ts';
 
 import { forgotPasswordEffect } from './forgot-password.effect';
 

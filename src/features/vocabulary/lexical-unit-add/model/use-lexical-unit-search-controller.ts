@@ -3,8 +3,8 @@ import { toast } from 'react-toastify';
 
 import { deleteLexicalUnit } from '@/entities/lexical-unit/api/lexical-unit.api';
 
-import { useLexicalUnitEditorStore } from './lexicalUnitEditor.store';
-import { useLexicalUnitSearchQuery } from './useLexicalUnitSearchQuery.ts';
+import { useLexicalUnitEditorStore } from './lexical-unit-editor.store.ts';
+import { useLexicalUnitSearchQuery } from './use-lexical-unit-search-query.ts';
 
 export function useLexicalUnitSearchController() {
   const openAddWithValue = useLexicalUnitEditorStore((s) => s.openAddWithValue);

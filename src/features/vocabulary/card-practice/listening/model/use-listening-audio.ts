@@ -1,6 +1,6 @@
 import { type RefObject, useEffect, useMemo, useRef } from 'react';
 
-import { toAbsoluteMediaUrl } from '@/shared/lib/url/toAbsoluteMediaUrl.ts';
+import { toAbsoluteMediaUrl } from '@/shared/lib/url/to-absolute-media-url.ts';
 
 type Params = {
   cardId?: string;

@@ -1,9 +1,9 @@
 import type { ChangeEvent, KeyboardEvent, RefObject } from 'react';
 
 import { Button } from '@/shared/ui';
-import { Input } from '@/shared/ui/Input/Input';
+import { Input } from '@/shared/ui/Input/Input.tsx';
 
-import style from '../LexicalUnitSearchPanel.module.scss';
+import style from './LexicalUnitSearchPanel.module.scss';
 
 type SuggestionItem = {
   id: string;

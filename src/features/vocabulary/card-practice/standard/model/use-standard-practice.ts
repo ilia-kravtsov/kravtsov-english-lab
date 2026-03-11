@@ -5,7 +5,7 @@ import type {
   PracticeSwitchDir,
   PracticeSwitchState,
 } from '@/features/vocabulary/card-practice/model/practice-mode.types.ts';
-import { toAbsoluteMediaUrl } from '@/shared/lib/url/toAbsoluteMediaUrl.ts';
+import { toAbsoluteMediaUrl } from '@/shared/lib/url/to-absolute-media-url.ts';
 
 type Params = {
   items: CardWithLexicalUnit[];

@@ -1,4 +1,4 @@
-import type { useCardSets } from '@/features/vocabulary/card-sets/model/useCardSets.ts';
+import type { useCardSets } from '@/features/vocabulary/card-sets/model/use-card-sets.ts';
 import { CardSetsListItem } from '@/features/vocabulary/card-sets/ui/CardSets/CardSetsListItem/CardSetsListItem.tsx';
 
 import style from '../CardSets.module.scss';

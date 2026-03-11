@@ -1,8 +1,11 @@
 import { type Dispatch, type KeyboardEvent, type SetStateAction } from 'react';
 
 import type { CardWithLexicalUnit } from '@/entities/card/model/card.types';
-import type { PracticeSwitchDir } from '@/features/vocabulary/card-practice/model/practice-mode.types';
-import { useStandardPractice } from '@/features/vocabulary/card-practice/standard/model/useStandardPractice';
+import type {
+  PracticeSwitchDir,
+  PracticeSwitchState,
+} from '@/features/vocabulary/card-practice/model/practice-mode.types';
+import { useStandardPractice } from '@/features/vocabulary/card-practice/standard/model/use-standard-practice.ts';
 import { StandardPracticeBack } from '@/features/vocabulary/card-practice/standard/ui/StandardPracticeBack';
 import { StandardPracticeControls } from '@/features/vocabulary/card-practice/standard/ui/StandardPracticeControls';
 import { StandardPracticeFront } from '@/features/vocabulary/card-practice/standard/ui/StandardPracticeFront';
@@ -15,7 +18,7 @@ type Props = {
   isFlipped: boolean;
   setIsFlipped: Dispatch<SetStateAction<boolean>>;
   setIndex: Dispatch<SetStateAction<number>>;
-  switchDir?: PracticeSwitchDir;
+  switchDir?: PracticeSwitchState;
   triggerSwitch: (dir: PracticeSwitchDir) => void;
 };
 

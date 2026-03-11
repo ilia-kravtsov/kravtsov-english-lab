@@ -1,10 +1,12 @@
-import { Input } from '@/shared/ui/Input/Input';
+import type { ComponentProps } from 'react';
 
-import style from '../AddLexicalUnitForm.module.scss';
+import { Input } from '@/shared/ui/Input/Input.tsx';
+
+import style from './AddLexicalUnitForm.module.scss';
 
 type Props = {
   imagePreviewSrc: string | null;
-  imageUrlInputProps: React.ComponentProps<typeof Input>;
+  imageUrlInputProps: ComponentProps<typeof Input>;
 };
 
 export function ImageField({ imagePreviewSrc, imageUrlInputProps }: Props) {

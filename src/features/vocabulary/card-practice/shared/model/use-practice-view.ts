@@ -1,7 +1,7 @@
 import { type RefObject, useEffect, useRef } from 'react';
 
 import type { TextInputFeedback } from '@/features/vocabulary/card-practice/shared/model/text-input-practice.types';
-import { useAutoNextOnCorrect } from '@/features/vocabulary/card-practice/shared/model/useAutoNextOnCorrect.ts';
+import { useAutoNextOnCorrect } from '@/features/vocabulary/card-practice/shared/model/use-auto-next-on-correct.ts';
 
 type Params<TCard> = {
   cards: TCard[];

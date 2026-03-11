@@ -5,7 +5,7 @@ import { CardSetsEditForm } from '@/features/vocabulary/card-sets/ui/CardSets/Ca
 import { CardSetsList } from '@/features/vocabulary/card-sets/ui/CardSets/CardSetsList/CardSetsList.tsx';
 import { ConfirmModal } from '@/shared/ui';
 
-import { useCardSets } from '../../model/useCardSets';
+import { useCardSets } from '../../model/use-card-sets.ts';
 import style from './CardSets.module.scss';
 
 export function CardSets() {

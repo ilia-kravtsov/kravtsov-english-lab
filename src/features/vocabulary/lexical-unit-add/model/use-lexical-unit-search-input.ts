@@ -7,8 +7,8 @@ import {
   useState,
 } from 'react';
 
-import type { LexicalUnitSearchResultState } from './useLexicalUnitSearchQuery.ts';
-import { useLexicalUnitSuggestions } from './useLexicalUnitSuggestions';
+import type { LexicalUnitSearchResultState } from './use-lexical-unit-search-query.ts';
+import { useLexicalUnitSuggestions } from './use-lexical-unit-suggestions.ts';
 
 type Params = {
   query: string;

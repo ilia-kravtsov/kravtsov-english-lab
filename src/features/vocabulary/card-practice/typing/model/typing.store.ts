@@ -9,7 +9,7 @@ import type {
   TextInputPracticeState,
   TextInputSessionCard,
 } from '@/features/vocabulary/card-practice/shared/model/text-input-practice.types.ts';
-import { useTextInputPracticeState } from '@/features/vocabulary/card-practice/shared/model/useTextInputPracticeState.ts';
+import { useTextInputPracticeState } from '@/features/vocabulary/card-practice/shared/model/use-text-input-practice-state.ts';
 
 import { writeTypingStats } from './typing.storage';
 

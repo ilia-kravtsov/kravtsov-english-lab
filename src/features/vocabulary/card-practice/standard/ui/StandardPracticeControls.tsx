@@ -1,5 +1,5 @@
 import { Button } from '@/shared/ui';
-import { practiceButtonStyles } from '@/shared/ui/ButtonStyles/button.styles.ts';
+import { practiceButtonStyles } from '@/shared/lib/styles/button.styles.ts';
 
 import style from './StandardPractice.module.scss';
 

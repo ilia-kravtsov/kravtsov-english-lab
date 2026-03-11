@@ -14,7 +14,7 @@ import type {
   UpdateCardSetPayload,
 } from '@/entities/card-set/model/card-set.types';
 import { useCardSetsStore } from '@/features/vocabulary/card-sets/model/card-sets.store';
-import { extractErrorMessage } from '@/shared/lib/extractErrorMessage';
+import { extractErrorMessage } from '@/shared/lib/extract-error-message.ts';
 
 type CreateFormValues = {
   title: string;

@@ -1,6 +1,6 @@
 import { Navigate } from 'react-router-dom';
 
-import { useUserStore } from '@/entities/user';
+import { useUserStore } from '@/features/auth/user';
 import type { WithChildren } from '@/shared/types/react.types';
 
 export function ProtectedRoute({ children }: WithChildren) {

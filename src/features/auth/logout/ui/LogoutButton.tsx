@@ -1,8 +1,8 @@
 import { useState } from 'react';
 
-import { useLogout } from '@/features/auth/logout/model/useLogout';
+import { useLogout } from '@/features/auth/logout/model/use-logout.ts';
 import { Button } from '@/shared/ui/Button/Button';
-import { buttonStyles } from '@/shared/ui/ButtonStyles/button.styles.ts';
+import { buttonStyles } from '@/shared/lib/styles/button.styles.ts';
 import { ConfirmModal } from '@/shared/ui/Modal/ConfirmModal';
 
 export function LogoutButton() {

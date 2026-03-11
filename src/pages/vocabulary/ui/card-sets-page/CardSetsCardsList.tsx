@@ -1,6 +1,6 @@
 import type { CardWithLexicalUnit } from '@/entities/card/model/card.types.ts';
 
-import style from '../CardSetsPage.module.scss';
+import style from './CardSetsPage.module.scss';
 
 type Props = {
   cards: CardWithLexicalUnit[];

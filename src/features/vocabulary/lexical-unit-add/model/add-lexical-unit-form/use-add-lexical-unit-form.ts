@@ -14,11 +14,11 @@ import {
   MAX_ITEMS,
   PARTS_OPTIONS,
   useObjectUrl,
-} from '@/features/vocabulary/lexical-unit-add/model/add-lexical-unit-form/useAddLexicalUnitForm.config.ts';
-import { toAbsoluteMediaUrl } from '@/shared/lib/url/toAbsoluteMediaUrl.ts';
+} from '@/features/vocabulary/lexical-unit-add/model/add-lexical-unit-form/add-lexical-unit-form.config.ts';
+import { toAbsoluteMediaUrl } from '@/shared/lib/url/to-absolute-media-url.ts';
 
 import { useLexicalUnitEditorStore } from '../lexical-unit-editor.store.ts';
-import { useAudioRecorder } from '../useAudioRecorder.ts';
+import { useAudioRecorder } from '../use-audio-recorder.ts';
 
 export function useAddLexicalUnitForm() {
   const mode = useLexicalUnitEditorStore((s) => s.mode);

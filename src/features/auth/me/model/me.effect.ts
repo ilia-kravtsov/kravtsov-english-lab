@@ -1,4 +1,4 @@
-import { type User, useUserStore } from '@/entities/user';
+import { type User, useUserStore } from '@/features/auth/user';
 import { authApi } from '@/features/auth/api/auth.api';
 
 export async function meEffect(): Promise<void> {

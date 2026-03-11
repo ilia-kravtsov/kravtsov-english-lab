@@ -1,4 +1,4 @@
-import { useUserStore } from '@/entities/user';
+import { useUserStore } from '@/features/auth/user';
 import { meEffect } from '@/features/auth/me/model/me.effect';
 
 export async function initAuth() {

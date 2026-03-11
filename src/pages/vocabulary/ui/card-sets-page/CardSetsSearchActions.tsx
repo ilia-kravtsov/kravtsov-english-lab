@@ -1,5 +1,5 @@
 import { Button } from '@/shared/ui';
-import { wideButtonStyles } from '@/shared/ui/ButtonStyles/button.styles.ts';
+import { wideButtonStyles } from '@/shared/lib/styles/button.styles.ts';
 
 type Props = {
   inSet: boolean;

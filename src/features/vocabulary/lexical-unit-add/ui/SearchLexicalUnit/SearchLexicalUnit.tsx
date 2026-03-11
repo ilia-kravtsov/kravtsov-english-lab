@@ -1,4 +1,4 @@
-import { useLexicalUnitSearchController } from '@/features/vocabulary/lexical-unit-add/model/useLexicalUnitSearchController.ts';
+import { useLexicalUnitSearchController } from '@/features/vocabulary/lexical-unit-add/model/use-lexical-unit-search-controller.ts';
 import { LexicalUnitSearchPanel } from '@/features/vocabulary/lexical-unit-add/ui/LexicalUnitSearchPanel/LexicalUnitSearchPanel';
 import { Button, ConfirmModal } from '@/shared/ui';
 
