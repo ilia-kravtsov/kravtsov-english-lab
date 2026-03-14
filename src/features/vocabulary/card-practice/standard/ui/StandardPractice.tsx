@@ -1,26 +1,12 @@
-import { type Dispatch, type KeyboardEvent, type SetStateAction } from 'react';
+import { type KeyboardEvent } from 'react';
 
-import type { CardWithLexicalUnit } from '@/entities/card/model/card.types';
-import type {
-  PracticeSwitchDir,
-  PracticeSwitchState,
-} from '@/features/vocabulary/card-practice/model/practice-mode.types';
+import type { Params } from '@/features/vocabulary/card-practice/standard/model/standard-practice.types.ts';
 import { useStandardPractice } from '@/features/vocabulary/card-practice/standard/model/use-standard-practice.ts';
 import { StandardPracticeBack } from '@/features/vocabulary/card-practice/standard/ui/StandardPracticeBack';
 import { StandardPracticeControls } from '@/features/vocabulary/card-practice/standard/ui/StandardPracticeControls';
 import { StandardPracticeFront } from '@/features/vocabulary/card-practice/standard/ui/StandardPracticeFront';
 
 import style from './StandardPractice.module.scss';
-
-type Props = {
-  items: CardWithLexicalUnit[];
-  index: number;
-  isFlipped: boolean;
-  setIsFlipped: Dispatch<SetStateAction<boolean>>;
-  setIndex: Dispatch<SetStateAction<number>>;
-  switchDir?: PracticeSwitchState;
-  triggerSwitch: (dir: PracticeSwitchDir) => void;
-};
 
 export function StandardPractice({
   items,
@@ -30,7 +16,7 @@ export function StandardPractice({
   setIndex,
   switchDir,
   triggerSwitch,
-}: Props) {
+}: Params) {
   const {
     audioRef,
     current,

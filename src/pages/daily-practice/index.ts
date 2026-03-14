@@ -1,1 +1,1 @@
-export { DailyPractice } from './ui/DailyPractice.tsx';
+export { DailyPractice } from './ui/DailyPractice';

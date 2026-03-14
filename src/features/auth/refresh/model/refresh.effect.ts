@@ -1,5 +1,5 @@
-import { useUserStore } from '@/features/auth/user';
 import { authApi } from '@/features/auth/session/api/auth.api';
+import { useUserStore } from '@/features/auth/user';
 
 export async function refreshEffect(): Promise<void> {
   try {

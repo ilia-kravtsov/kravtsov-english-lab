@@ -6,8 +6,8 @@ import { useTextInputPracticeHandlers } from '@/features/vocabulary/card-practic
 import { PracticeGuard } from '@/features/vocabulary/card-practice/shared/ui/PracticeGuard';
 import { PracticeProgress } from '@/features/vocabulary/card-practice/shared/ui/PracticeProgress';
 import switchAnim from '@/features/vocabulary/card-practice/shared/ui/SwitchAnimation.module.scss';
-import { Button, Input } from '@/shared/ui';
 import { normalButtonWide, wideButtonStyles } from '@/shared/lib/styles/button.styles.ts';
+import { Button, Input } from '@/shared/ui';
 
 import { useListeningStore } from '../model/listening.store';
 import style from './ListeningPractice.module.scss';

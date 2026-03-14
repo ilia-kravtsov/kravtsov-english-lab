@@ -1,4 +1,4 @@
-import type { PracticeMode } from '@/features/vocabulary/card-practice/model/practice-mode.types';
+import type { PracticeMode } from '@/features/vocabulary/card-practice/shared/model/practice-mode.types.ts';
 
 const key = (cardSetId: string) => `practiceStats:${cardSetId}`;
 

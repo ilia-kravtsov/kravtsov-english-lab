@@ -3,12 +3,12 @@ import type { Dispatch, ReactNode, SetStateAction } from 'react';
 import type { CardWithLexicalUnit } from '@/entities/card/model/card.types.ts';
 import { ContextPractice } from '@/features/vocabulary/card-practice/context/ui/ContextPractice.tsx';
 import { ListeningPractice } from '@/features/vocabulary/card-practice/listening/ui/ListeningPractice.tsx';
+import { RecognitionPractice } from '@/features/vocabulary/card-practice/recognition/ui/RecognitionPractice.tsx';
 import type {
   PracticeMode,
   PracticeSwitchDir,
   PracticeSwitchState,
-} from '@/features/vocabulary/card-practice/model/practice-mode.types.ts';
-import { RecognitionPractice } from '@/features/vocabulary/card-practice/recognition/ui/RecognitionPractice.tsx';
+} from '@/features/vocabulary/card-practice/shared/model/practice-mode.types.ts';
 import { StandardPractice } from '@/features/vocabulary/card-practice/standard/ui/StandardPractice.tsx';
 import { TypingPractice } from '@/features/vocabulary/card-practice/typing/ui/TypingPractice.tsx';
 

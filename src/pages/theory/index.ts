@@ -1,1 +1,1 @@
-export { Theory } from './ui/Theory.tsx';
+export { Theory } from './ui/Theory';

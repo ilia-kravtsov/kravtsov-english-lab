@@ -19,7 +19,7 @@ import { round } from '@/features/vocabulary/card-practice/shared/model/text-inp
 import { writeRecognitionStats } from './recognition.storage';
 import { norm, uniqNonEmpty } from './recognition.utils';
 
-export interface RecognitionState
+interface RecognitionState
   extends BasePracticeState<
     TextInputSessionCard,
     TextInputFeedback,

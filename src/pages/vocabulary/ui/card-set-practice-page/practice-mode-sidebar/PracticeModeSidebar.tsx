@@ -1,4 +1,4 @@
-import type { PracticeMode } from '@/features/vocabulary/card-practice/model/practice-mode.types.ts';
+import type { PracticeMode } from '@/features/vocabulary/card-practice/shared/model/practice-mode.types.ts';
 
 import style from './PracticeModeSidebar.module.scss';
 

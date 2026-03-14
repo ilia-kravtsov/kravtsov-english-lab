@@ -1,7 +1,7 @@
 import type { MouseEvent, RefObject } from 'react';
 
-import { Button } from '@/shared/ui';
 import { practiceButtonStyles } from '@/shared/lib/styles/button.styles.ts';
+import { Button } from '@/shared/ui';
 
 import style from './StandardPractice.module.scss';
 

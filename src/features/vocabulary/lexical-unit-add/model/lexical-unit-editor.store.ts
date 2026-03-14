@@ -6,7 +6,7 @@ import type { LexicalUnit } from '@/entities/lexical-unit/model/lexical-unit.typ
 export type WordsBankTab = 'add' | 'search';
 export type EditorMode = 'add' | 'update';
 
-export interface LexicalUnitEditorState {
+interface LexicalUnitEditorState {
   activeTab: WordsBankTab;
   mode: EditorMode;
   prefillValue: string;

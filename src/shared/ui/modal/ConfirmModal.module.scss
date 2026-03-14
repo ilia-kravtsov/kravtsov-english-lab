@@ -20,7 +20,7 @@
 }
 
 .modal {
-  background-color: var(--background-color-primary);
+  background-color: var(--bg-color-primary);
   padding: 24px;
   border-radius: var(--border-radius-primary);
   min-width: 320px;
@@ -42,13 +42,13 @@
 .title {
   margin: 0 0 12px;
   font-size: 18px;
-  color: var(--font-color-primary);
+  color: var(--text-color-primary);
 }
 
 .paragraph {
   margin: 0 0 24px;
   font-size: 14px;
-  color: var(--font-color-primary);
+  color: var(--text-color-primary);
 }
 
 .actions {

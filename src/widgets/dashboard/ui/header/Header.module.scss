@@ -1,6 +1,6 @@
 .container {
   position: fixed;
-  background-color: var(--background-color-secondary);
+  background-color: var(--bg-color-secondary);
   width: 100%;
   height: var(--header-height);
   display: flex;
@@ -21,8 +21,8 @@
       width: 130px;
       height: 36px;
       font-size: 14px;
-      outline: 1px solid var(--background-color-primary);
-      color: var(--font-color-secondary);
+      outline: 1px solid var(--bg-color-primary);
+      color: var(--text-color-secondary);
       border-radius: var(--border-radius-primary);
 
       opacity: 0;

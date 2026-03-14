@@ -1,27 +1,11 @@
-import type { PracticeMode } from '@/features/vocabulary/card-practice/model/practice-mode.types';
+import type { PracticeModeStats } from '@/features/vocabulary/card-practice/shared';
 import { readPracticeStats } from '@/features/vocabulary/card-practice/shared/model/practice.storage';
+import type { PracticeStats } from '@/features/vocabulary/card-practice/shared/model/practice.types.ts';
+import type { PracticeMode } from '@/features/vocabulary/card-practice/shared/model/practice-mode.types.ts';
 import { Button } from '@/shared/ui';
 import { ConfettiBurstPetard } from '@/shared/ui/confetti-burst-petard/ConfettiBurstPetard';
 
 import style from './PracticeResults.module.scss';
-
-export type PracticeStats = {
-  recognition?: PracticeModeStats;
-  typing?: PracticeModeStats;
-  listening?: PracticeModeStats;
-  context?: PracticeModeStats;
-};
-
-export type PracticeModeStats = {
-  totalCards: number;
-  completedCards: number;
-  firstTryCorrectCards: number;
-  wrongAnswers: number;
-  skippedCards: number;
-  totalAnswers: number;
-  correctAnswers: number;
-  avgTimeMs: number;
-};
 
 type Props = {
   cardSetId: string;

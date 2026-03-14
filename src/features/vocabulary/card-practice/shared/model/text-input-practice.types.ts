@@ -1,9 +1,7 @@
 import type { CardWithLexicalUnit } from '@/entities/card/model/card.types';
-import type {
-  buildPracticeModeStats
-} from '@/features/vocabulary/card-practice/shared/model/build-practice-mode-stats.ts';
+import type { buildPracticeModeStats } from '@/features/vocabulary/card-practice/shared/model/build-practice-mode-stats';
 
-import type { PracticeModeStats } from './practice.types.ts';
+import type { PracticeModeStats } from './practice.types';
 
 export type TextInputFeedback = 'idle' | 'correct' | 'wrong';
 

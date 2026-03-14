@@ -1,1 +1,1 @@
-export { Rating } from './ui/Rating.tsx';
+export { Rating } from './ui/Rating';

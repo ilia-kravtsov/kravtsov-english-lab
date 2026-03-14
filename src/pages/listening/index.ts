@@ -1,1 +1,1 @@
-export { Listening } from './ui/Listening.tsx';
+export { Listening } from './ui/Listening';

@@ -14,7 +14,7 @@ import { writeContextStats } from './context.storage';
 import type { ContextSessionCard } from './context.types';
 import { pickContextExample } from './context.utils';
 
-export interface ContextState extends TextInputPracticeState<
+interface ContextState extends TextInputPracticeState<
   ContextSessionCard,
   TextInputFeedback,
   TextInputCardStat

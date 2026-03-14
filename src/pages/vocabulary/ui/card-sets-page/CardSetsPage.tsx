@@ -2,11 +2,11 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import { useCardSetsPage } from '@/features/vocabulary/card-sets/model/use-card-sets-page.ts';
 import { LexicalUnitSearchPanel } from '@/features/vocabulary/lexical-unit-add/ui/lexical-unit-search-panel/LexicalUnitSearchPanel';
-import { CardSetsCardsList } from '@/pages/vocabulary/ui/card-sets-page/CardSetsCardsList.tsx';
 import { CardSetsPageHeader } from '@/pages/vocabulary/ui/card-sets-page/card-sets-page-header/CardSetsPageHeader.tsx';
+import { CardSetsCardsList } from '@/pages/vocabulary/ui/card-sets-page/CardSetsCardsList.tsx';
 import { CardSetsSearchActions } from '@/pages/vocabulary/ui/card-sets-page/CardSetsSearchActions.tsx';
-import { ConfirmModal, LinkAsButton } from '@/shared/ui';
 import { smallButtonStyles } from '@/shared/lib/styles/button.styles.ts';
+import { ConfirmModal, LinkAsButton } from '@/shared/ui';
 
 import style from './CardSetsPage.module.scss';
 

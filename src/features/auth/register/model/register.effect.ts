@@ -1,5 +1,5 @@
-import { useUserStore } from '@/features/auth/user';
 import { authApi } from '@/features/auth/session/api/auth.api';
+import { useUserStore } from '@/features/auth/user';
 
 import type { RegisterDto } from './register.dto';
 

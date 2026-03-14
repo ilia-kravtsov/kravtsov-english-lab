@@ -15,15 +15,15 @@
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   padding: 8px 10px;
   border-radius: 6px;
-  background-color: var(--background-color-primary);
+  background-color: var(--bg-color-primary);
 }
 
 .button {
   padding: 6px 10px;
   border-radius: 6px;
   border: none;
-  background-color: var(--background-color-secondary);
-  color: var(--background-color-primary);
+  background-color: var(--bg-color-secondary);
+  color: var(--bg-color-primary);
 
   font-size: var(--font-size-small);
   cursor: pointer;
@@ -63,7 +63,7 @@
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   padding: var(--padding-primary);
   border-radius: var(--border-radius-primary);
-  background-color: var(--background-color-primary);
+  background-color: var(--bg-color-primary);
 }
 
 .imagePreview {

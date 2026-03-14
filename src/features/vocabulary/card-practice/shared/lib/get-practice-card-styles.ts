@@ -1,4 +1,4 @@
-import type { PracticeSwitchState } from '@/features/vocabulary/card-practice/model/practice-mode.types';
+import type { PracticeSwitchState } from '@/features/vocabulary/card-practice/shared/model/practice-mode.types.ts';
 import type { TextInputFeedback } from '@/features/vocabulary/card-practice/shared/model/text-input-practice.types';
 
 export function getPracticeCardClassName(

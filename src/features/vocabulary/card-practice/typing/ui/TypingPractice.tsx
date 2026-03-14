@@ -3,8 +3,8 @@ import { usePracticeView } from '@/features/vocabulary/card-practice/shared/mode
 import { useTextInputPracticeHandlers } from '@/features/vocabulary/card-practice/shared/model/use-text-input-practice-handlers.ts';
 import { PracticeGuard } from '@/features/vocabulary/card-practice/shared/ui/PracticeGuard';
 import { PracticeProgress } from '@/features/vocabulary/card-practice/shared/ui/PracticeProgress';
-import { Button, Input } from '@/shared/ui';
 import { mediumButtonStyles } from '@/shared/lib/styles/button.styles.ts';
+import { Button, Input } from '@/shared/ui';
 
 import { useTypingStore } from '../model/typing.store';
 import style from './TypingPractice.module.scss';

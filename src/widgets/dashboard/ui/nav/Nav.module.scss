@@ -11,7 +11,7 @@
   flex-direction: column;
   gap: 20px;
 
-  background-color: var(--background-color-secondary);
+  background-color: var(--bg-color-secondary);
 
   transform: translateX(0);
   transition: transform 0.35s ease;
@@ -42,7 +42,7 @@
     transform 0.25s ease;
 
   scrollbar-width: none;
-  scrollbar-color: var(--background-color-primary) var(--background-color-secondary);
+  scrollbar-color: var(--bg-color-primary) var(--bg-color-secondary);
 }
 
 .collapsed .menu {

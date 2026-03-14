@@ -13,7 +13,7 @@ import { useTextInputPracticeState } from '@/features/vocabulary/card-practice/s
 
 import { writeTypingStats } from './typing.storage';
 
-export interface TypingState extends TextInputPracticeState<
+interface TypingState extends TextInputPracticeState<
   TextInputSessionCard,
   TextInputFeedback,
   TextInputCardStat

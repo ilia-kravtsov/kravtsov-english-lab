@@ -1,3 +1,5 @@
+import { round } from '@/features/vocabulary/card-practice/shared/model/text-input-practice.utils';
+
 import type { PracticeModeStats } from './practice.types';
 
 type RecognitionCardStatLike = {
@@ -5,8 +7,6 @@ type RecognitionCardStatLike = {
   wrongCount: number;
   timeMs?: number;
 };
-
-const round = (n: number) => Math.round(n);
 
 export function buildRecognitionPracticeStats<T extends RecognitionCardStatLike>(
   totalCards: number,

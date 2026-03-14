@@ -1,21 +1,7 @@
-import { type Dispatch, type SetStateAction, useEffect, useMemo, useRef, type MouseEvent } from 'react';
-
-import type { CardWithLexicalUnit } from '@/entities/card/model/card.types.ts';
-import type {
-  PracticeSwitchDir,
-  PracticeSwitchState,
-} from '@/features/vocabulary/card-practice/model/practice-mode.types.ts';
+import { type MouseEvent, useEffect, useMemo, useRef } from 'react';
+import type { PracticeSwitchDir } from '@/features/vocabulary/card-practice/shared/model/practice-mode.types.ts';
 import { toAbsoluteMediaUrl } from '@/shared/lib/url/to-absolute-media-url.ts';
-
-type Params = {
-  items: CardWithLexicalUnit[];
-  index: number;
-  isFlipped: boolean;
-  setIsFlipped: Dispatch<SetStateAction<boolean>>;
-  setIndex: Dispatch<SetStateAction<number>>;
-  switchDir: PracticeSwitchState | undefined;
-  triggerSwitch: (dir: PracticeSwitchDir) => void;
-};
+import type { Params } from '@/features/vocabulary/card-practice/standard/model/standard-practice.types.ts';
 
 export function useStandardPractice({
   items,

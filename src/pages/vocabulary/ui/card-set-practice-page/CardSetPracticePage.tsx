@@ -1,8 +1,8 @@
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { useCardSetPracticePage } from '@/features/vocabulary/card-practice/model/use-card-set-practice-page.ts';
-import { usePracticeModeActions } from '@/features/vocabulary/card-practice/model/use-practice-mode-actions.ts';
-import { usePracticeModeAvailability } from '@/features/vocabulary/card-practice/model/use-practice-mode-availability.ts';
+import { useCardSetPracticePage } from '@/features/vocabulary/card-practice/shared/model/use-card-set-practice-page.ts';
+import { usePracticeModeActions } from '@/features/vocabulary/card-practice/shared/model/use-practice-mode-actions.ts';
+import { usePracticeModeAvailability } from '@/features/vocabulary/card-practice/shared/model/use-practice-mode-availability.ts';
 import { useSwitchAnimation } from '@/features/vocabulary/card-practice/shared/model/use-switch-animation.ts';
 import { PracticeContent } from '@/pages/vocabulary/ui/card-set-practice-page/practice-content/PracticeContent.tsx';
 import { PracticeModeSidebar } from '@/pages/vocabulary/ui/card-set-practice-page/practice-mode-sidebar/PracticeModeSidebar.tsx';

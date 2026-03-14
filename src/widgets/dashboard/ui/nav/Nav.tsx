@@ -1,8 +1,8 @@
 import { forwardRef, type Ref } from 'react';
 
-import { dashboardSections } from '@/shared/config/dashboard-sections.ts';
-import { LinkAsButton } from '@/shared/ui/link-as-button/LinkAsButton.tsx';
-import { linkStyles } from '@/shared/lib/styles/link.styles.ts';
+import { dashboardSections } from '@/shared/config/dashboard-sections';
+import { linkStyles } from '@/shared/lib/styles/link.styles';
+import { LinkAsButton } from '@/shared/ui/link-as-button/LinkAsButton';
 
 import style from './Nav.module.scss';
 

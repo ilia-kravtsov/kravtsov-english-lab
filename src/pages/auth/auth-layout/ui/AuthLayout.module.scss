@@ -6,7 +6,7 @@
   height: 100vh;
   width: 100%;
   padding: 20px;
-  color: var(--font-color-primary);
+  color: var(--text-color-primary);
 }
 
 .panel {
@@ -15,7 +15,7 @@
   left: 0;
   width: 50%;
   height: 100%;
-  background: var(--font-color-primary);
+  background: var(--text-color-primary);
   clip-path: polygon(0 0, 100% 0, 85% 100%, 0 100%);
   transition:
           transform 0.3s ease-out,
@@ -58,14 +58,14 @@
   font-family: var(--font-family-secondary), serif;
   font-size: var(--font-size-secondary);
   text-align: center;
-  color: var(--font-color-secondary);
+  color: var(--text-color-secondary);
 }
 
 .paragraph {
   text-align: center;
   max-width: 400px;
   font-size: var(--font-size-primary);
-  color: var(--font-color-secondary);
+  color: var(--text-color-secondary);
 }
 
 [data-state='login'] {

@@ -9,7 +9,7 @@ import { Nav } from '@/widgets/dashboard/ui/nav/Nav';
 import style from './Dashboard.module.scss';
 
 export function Dashboard() {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const navRef = useRef<HTMLDivElement>(null);
   const toggleMenuRef = useRef<HTMLButtonElement>(null);
 

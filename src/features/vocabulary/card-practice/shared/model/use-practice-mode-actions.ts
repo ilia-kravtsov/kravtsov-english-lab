@@ -1,9 +1,9 @@
-import type { CardWithLexicalUnit } from '@/entities/card/model/card.types';
-import { useContextStore } from '@/features/vocabulary/card-practice/context/model/context.store';
-import { useListeningStore } from '@/features/vocabulary/card-practice/listening/model/listening.store';
-import type { PracticeMode } from '@/features/vocabulary/card-practice/model/practice-mode.types';
-import { useRecognitionStore } from '@/features/vocabulary/card-practice/recognition/model/recognition.store';
-import { useTypingStore } from '@/features/vocabulary/card-practice/typing/model/typing.store';
+import type { CardWithLexicalUnit } from '@/entities/card/model/card.types.ts';
+import { useContextStore } from '@/features/vocabulary/card-practice/context/model/context.store.ts';
+import { useListeningStore } from '@/features/vocabulary/card-practice/listening/model/listening.store.ts';
+import { useRecognitionStore } from '@/features/vocabulary/card-practice/recognition/model/recognition.store.ts';
+import type { PracticeMode } from '@/features/vocabulary/card-practice/shared/model/practice-mode.types.ts';
+import { useTypingStore } from '@/features/vocabulary/card-practice/typing/model/typing.store.ts';
 
 type Params = {
   cardSetId?: string;

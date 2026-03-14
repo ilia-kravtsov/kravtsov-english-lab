@@ -1,9 +1,10 @@
-export { MultiSelect } from '@/shared/ui/multi-select/MultiSelect';
-export { Textarea } from '@/shared/ui/textarea/Textarea';
 export { BurgerButton } from '@/shared/ui/burger-button/BurgerButton';
 export { Button } from '@/shared/ui/button/Button';
 export { Checkbox } from '@/shared/ui/checkbox/Checkbox';
+export { ConfettiBurstPetard } from '@/shared/ui/confetti-burst-petard/ConfettiBurstPetard';
 export { Input } from '@/shared/ui/input/Input';
 export { LinkAsButton } from '@/shared/ui/link-as-button/LinkAsButton';
 export { ConfirmModal } from '@/shared/ui/modal/ConfirmModal';
-export { PageHomeLink } from '@/shared/ui/page-home-link/PageHomeLink.tsx';
+export { MultiSelect } from '@/shared/ui/multi-select/MultiSelect';
+export { PageHomeLink } from '@/shared/ui/page-home-link/PageHomeLink';
+export { Textarea } from '@/shared/ui/textarea/Textarea';

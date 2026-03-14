@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 
-import type { CardWithLexicalUnit } from '@/entities/card/model/card.types';
-import { pickContextExample } from '@/features/vocabulary/card-practice/context/model/context.utils';
+import type { CardWithLexicalUnit } from '@/entities/card/model/card.types.ts';
+import { pickContextExample } from '@/features/vocabulary/card-practice/context/model/context.utils.ts';
 
 type Params = {
   items: CardWithLexicalUnit[];

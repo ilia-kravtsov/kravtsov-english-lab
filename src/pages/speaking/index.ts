@@ -1,1 +1,1 @@
-export { Speaking } from './ui/Speaking.tsx';
+export { Speaking } from './ui/Speaking';

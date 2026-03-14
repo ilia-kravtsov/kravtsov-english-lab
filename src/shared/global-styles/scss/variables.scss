@@ -1,68 +1,135 @@
 :root {
   // colors
-  //--background-color-primary: #F4F1EC;
-  --background-color-primary: #fff;
-  --background-color-secondary: #1a1a1a;
-  --background-color-tertiary: radial-gradient(circle at top, rgb(255 255 255 / 0.06), transparent 30%),
-  linear-gradient(180deg, #0f0f10 0%, #090909 100%);;
-  --font-color-primary: #1a1a1a;
-  --font-color-secondary: #f4f1ec;
+  --bg-color-primary: #fff;
+  --bg-color-secondary: #1a1a1a;
+  --bg-color-tertiary:
+          radial-gradient(circle at top, rgb(255 255 255 / 0.06), transparent 30%),
+          linear-gradient(180deg, #0f0f10 0%, #090909 100%);
+  --bg-color-gradient-primary:
+          linear-gradient(180deg, rgb(255 255 255 / 0.05),
+          rgb(255 255 255 / 0.02));
+
+  --text-color-primary: #1a1a1a;
+  --text-color-secondary: #f4f1ec;
+  --text-color-muted: rgb(255 255 255 / 0.8);
+  --text-color-soft: rgb(255 255 255 / 0.72);
+  --text-color-faint: rgb(255 255 255 / 0.68);
+  --text-color-meta: rgb(255 255 255 / 0.42);
+
+  --border-color-primary: rgb(255 255 255 / 0.12);
+  --border-color-secondary: rgb(255 255 255 / 0.1);
+  --border-color-tertiary: rgb(255 255 255 / 0.14);
+  --border-color-hover: rgb(255 255 255 / 0.18);
+  --border-color-focus: rgb(255 255 255 / 0.22);
   --outline-color-primary: #000;
+
+  --surface-color-primary: rgb(255 255 255 / 0.04);
+  --surface-color-secondary: rgb(255 255 255 / 0.03);
+  --surface-color-tertiary: rgb(255 255 255 / 0.06);
+  --surface-color-hover: rgb(255 255 255 / 0.09);
+
+  --overlay-color-primary: rgb(255 255 255 / 0.08);
+  --overlay-color-secondary: rgb(255 255 255 / 0.06);
+  --overlay-color-tertiary: rgb(255 255 255 / 0.03);
+
   --accent-color-primary: #3b5bff;
+
   --error-color-primary: #e5484d;
   --error-color-secondary: #b00020;
 
   // sizes
+  --container-width-primary: 1120px;
+  --content-width-primary: 760px;
+  --content-width-secondary: 720px;
+
+  --section-padding-x: 24px;
+  --section-padding-y: 48px;
+
+  --panel-padding-primary: 56px;
+  --panel-padding-secondary: 40px;
+  --panel-padding-tertiary: 28px;
+
+  --panel-padding-x-tablet: 24px;
+  --panel-padding-x-mobile: 18px;
+
+  --badge-padding-y: 8px;
+  --badge-padding-x: 14px;
+
+  --card-padding-primary: 24px;
+  --card-min-height-primary: 220px;
+
+  --gap-primary: 18px;
+  --gap-secondary: 28px;
+  --gap-large: 36px;
+  --gap-xl: 32px;
+  --gap-card-meta: 20px;
+  --gap-title: 12px;
+  --gap-lead: 24px;
+
+  --divider-height: 1px;
+
   --font-size-primary: 18px;
   --font-size-secondary: 24px;
   --font-size-tertiary: 28px;
   --font-size-small: 14px;
   --font-size-large: 48px;
-  --header-height: 10vh;
   --font-error-primary: 14px;
+
+  --header-height: 10vh;
   --max-width-primary: 50%;
   --padding-primary: 12px;
+
+  --section-padding-y-mobile: 24px;
+  --section-padding-x-mobile: 14px;
 
   // shapes
   --border-radius-primary: 6px;
   --transform-scale-push-size: 0.98;
+
   --shadow-primary: 0 0 3px rgba(0, 0, 0, 0.2);
   --shadow-secondary: 0 0 2px rgba(0, 0, 0, 0.4);
-  --shadow-third: 0 0 1px rgba(0, 0, 0, 0.2);
+  --shadow-tertiary: 0 0 1px rgba(0, 0, 0, 0.2);
   --shadow-active: 0 0 8px rgba(77, 163, 255, 0.6);
+  --shadow-panel-primary:
+          0 24px 80px rgb(0 0 0 / 0.45),
+          inset 0 1px 0 var(--overlay-color-primary);
+  --shadow-card-inset: inset 0 1px 0 var(--overlay-color-secondary);
+
+  --transition-duration-fast: 0.2s;
+  --transition-timing-default: ease-in-out;
+  --translate-hover-y: -4px;
 
   // fonts
   --font-family-primary: 'Baskervville';
   --font-family-secondary: 'Baskervville'; // 'Roboto' 'PT Sans Narrow' 'PT Sans'
+  --font-size-badge: 12px;
+  --font-size-meta: 13px;
+  --font-size-body-sm: 15px;
+  --font-size-body-md: 16px;
+  --font-size-lead-mobile: 18px;
+  --font-size-card-title: 22px;
 
-  // additional
-  --bg-color-1: #393939;
-  --bg-color-2: #353941;
-  --accent-color-1: #1e90ff;
-  --accent-color-2: #b22222;
-  --font-color-1: #fff;
-  --font-color-2: #000;
-  --font-family-1: 'Playfair Display';
-  --font-family-2: 'Old Standard TT';
-  --font-size-1: 24px;
-  --font-weight-1: 300;
-  --font-weight-2: 500;
-  --font-weight-3: 600;
-  --letter-spacing-1: 1px;
-  --color-1: #1f75af;
-  --color-2: #fd4343;
-  --color-3: #e0e0e0;
-  --color-4: #a5543a;
-  --color-5: #817c7c;
-  --color-6: darkgreen;
-  --border-color: 1px solid silver;
+  --font-weight-medium: 600;
+  --font-weight-bold: 700;
+  --font-weight-extra-bold: 800;
+
+  --letter-spacing-wide: 0.14em;
+  --letter-spacing-wider: 0.16em;
+  --letter-spacing-tight: -0.02em;
+  --letter-spacing-tighter: -0.04em;
+
+  --line-height-tight: 0.96;
+  --line-height-heading: 1.2;
+  --line-height-body: 1.6;
+  --line-height-body-wide: 1.75;
+  --line-height-body-widest: 1.8;
 }
 
 [data-theme='dark'] {
   // colors
-  --background-color-primary: #fff;
-  --background-color-secondary: #000;
-  --font-color-primary: #000;
-  --font-color-secondary: #fff;
+  --bg-color-primary: #fff;
+  --bg-color-secondary: #000;
+  --text-color-primary: #000;
+  --text-color-secondary: #fff;
   --outline-color-primary: #000;
 }
