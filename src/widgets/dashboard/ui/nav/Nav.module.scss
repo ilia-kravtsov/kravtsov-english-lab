@@ -1,60 +1,114 @@
 .container {
   position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   top: var(--header-height, 60px);
   left: 0;
   z-index: 1;
 
-  width: 17vw;
+  width: clamp(240px, 17vw, 250px);
   height: calc(100vh - var(--header-height));
 
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-
-  background-color: var(--bg-color-secondary);
+  padding: 24px 24px;
 
   transform: translateX(0);
   transition: transform 0.35s ease;
 
   overflow: hidden;
-
-  @media (min-width: 2000px) {
-    width: 10vw;
-  }
 }
 
 .collapsed {
-  transform: translateX(-100%);
+  transform: translateX(calc(-100% - 24px));
 }
 
 .menu {
-  flex: 1;
+  position: relative;
+
+  height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
-  padding: 10px 40px;
+  gap: 16px;
+
+  padding: 24px 18px;
   overflow-y: auto;
+
+  border: 1px solid var(--border-color-primary);
+  border-radius: var(--border-radius-primary);
+
+  background:
+          var(--bg-color-gradient-primary),
+          linear-gradient(180deg, #0f0f10 0%, #090909 100%);
+
+  box-shadow:
+          0 24px 80px rgb(0 0 0 / 0.45),
+          inset 0 1px 0 rgb(255 255 255 / 0.08);
+
   opacity: 1;
   transform: translateX(0);
+
   transition:
-    opacity 0.25s ease,
-    transform 0.25s ease;
+          opacity 0.25s ease,
+          transform 0.25s ease;
 
   scrollbar-width: none;
-  scrollbar-color: var(--bg-color-primary) var(--bg-color-secondary);
+}
+
+.menu::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+
+  background:
+          linear-gradient(135deg, rgb(255 255 255 / 0.06), transparent 38%),
+          linear-gradient(315deg, rgb(255 255 255 / 0.03), transparent 30%);
+
+  pointer-events: none;
 }
 
 .collapsed .menu {
   opacity: 0;
-  transform: translateX(-200px);
+  transform: translateX(-48px);
   pointer-events: none;
 }
 
 .menu > * {
+  position: relative;
+  z-index: 1;
   flex-shrink: 0;
 }
 
 .menu::-webkit-scrollbar {
   display: none;
+}
+
+@media (width <= 960px) {
+  .container {
+    width: min(320px, calc(100vw - 32px));
+    padding: 0 0 24px 24px;
+  }
+
+  .collapsed {
+    transform: translateX(-120%);
+  }
+
+  .menu {
+    gap: 14px;
+    padding: 20px 16px;
+  }
+}
+
+@media (width <= 640px) {
+  .container {
+    width: calc(100vw - 28px);
+    height: calc(100vh - var(--header-height) - 14px);
+    padding: 0 14px 14px;
+  }
+
+  .menu {
+    gap: 12px;
+    padding: 18px 14px;
+  }
 }
