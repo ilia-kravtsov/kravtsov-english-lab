@@ -37,6 +37,9 @@
   --error-color-primary: #e5484d;
   --error-color-secondary: #b00020;
 
+  --surface-color-quaternary: rgb(255 255 255 / 0.02);
+  --surface-color-quinary: rgb(255 255 255 / 0.08);
+
   // sizes
   --container-width-primary: 1120px;
   --content-width-primary: 760px;
@@ -82,6 +85,18 @@
   --section-padding-y-mobile: 24px;
   --section-padding-x-mobile: 14px;
 
+  --dashboard-header-height: 72px;
+  --dashboard-footer-height: 72px;
+  --dashboard-nav-width: 280px;
+
+  --dashboard-shell-padding: 24px;
+  --dashboard-shell-padding-mobile: 14px;
+
+  --z-index-header: 1000;
+  --z-index-nav: 900;
+
+  --blur-primary: 18px;
+
   // shapes
   --border-radius-primary: 6px;
   --transform-scale-push-size: 0.98;
@@ -94,10 +109,14 @@
           0 24px 80px rgb(0 0 0 / 0.45),
           inset 0 1px 0 var(--overlay-color-primary);
   --shadow-card-inset: inset 0 1px 0 var(--overlay-color-secondary);
+  --shadow-panel-secondary:
+          0 18px 48px rgb(0 0 0 / 0.32),
+          inset 0 1px 0 rgb(255 255 255 / 0.05);
 
   --transition-duration-fast: 0.2s;
   --transition-timing-default: ease-in-out;
   --translate-hover-y: -4px;
+  --dashboard-nav-offset: calc((var(--dashboard-nav-width) + var(--dashboard-shell-padding)) * -1);
 
   // fonts
   --font-family-primary: 'Baskervville';
@@ -127,9 +146,9 @@
 
 [data-theme='dark'] {
   // colors
-  --bg-color-primary: #fff;
-  --bg-color-secondary: #000;
-  --text-color-primary: #000;
-  --text-color-secondary: #fff;
-  --outline-color-primary: #000;
+  //--bg-color-primary: #fff;
+  //--bg-color-secondary: #000;
+  //--text-color-primary: #000;
+  //--text-color-secondary: #fff;
+  //--outline-color-primary: #000;
 }

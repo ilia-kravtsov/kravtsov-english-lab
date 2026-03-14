@@ -1,8 +1,8 @@
 import { useMatches } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 
-import { linkStyles } from '@/shared/lib/styles/link.styles.ts';
-import type { RouteHandle } from '@/shared/types/route-handle.ts';
+import { linkStyles } from '@/shared/lib/styles/link.styles';
+import type { RouteHandle } from '@/shared/types/route-handle';
 import { PageHomeLink } from '@/shared/ui';
 import { LinkAsButton } from '@/shared/ui/link-as-button/LinkAsButton';
 

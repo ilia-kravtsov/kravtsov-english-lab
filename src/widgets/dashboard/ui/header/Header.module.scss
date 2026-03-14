@@ -1,73 +1,62 @@
 .container {
   position: fixed;
-  background-color: var(--bg-color-secondary);
-  width: 100%;
+  inset: 0 0 auto 0;
+  z-index: 1000;
+
   height: var(--header-height);
   display: flex;
   align-items: center;
-  justify-content: end;
-  padding-right: 40px;
+  justify-content: flex-end;
+  padding: 0 40px;
+
+  background:
+          var(--bg-color-gradient-primary),
+          linear-gradient(180deg, #0f0f10 0%, #090909 100%);
+
+  border-bottom: 1px solid var(--border-color-primary);
+
+  box-shadow:
+          0 24px 80px rgb(0 0 0 / 0.45),
+          inset 0 1px 0 rgb(255 255 255 / 0.08);
+
+  overflow: hidden;
+}
+
+.container::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+          linear-gradient(135deg, rgb(255 255 255 / 0.06), transparent 38%),
+          linear-gradient(315deg, rgb(255 255 255 / 0.03), transparent 30%);
+  pointer-events: none;
+}
+
+.navContainer {
+  position: relative;
+  z-index: 1;
+
+  display: flex;
+  align-items: center;
   gap: 20px;
-  z-index: 1000;
+}
+
+@media (width <= 960px) {
+  .container {
+    padding: 0 24px 0 72px;
+  }
 
   .navContainer {
-    display: flex;
-    gap: 20px;
+    gap: 16px;
+  }
+}
 
-    .navLink {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 130px;
-      height: 36px;
-      font-size: 14px;
-      outline: 1px solid var(--bg-color-primary);
-      color: var(--text-color-secondary);
-      border-radius: var(--border-radius-primary);
+@media (width <= 640px) {
+  .container {
+    padding: 0 14px 0 64px;
+  }
 
-      opacity: 0;
-      transform: translateY(-10px);
-      pointer-events: none;
-
-      animation: navLinkFadeIn 0.25s forwards;
-
-      &:not(:disabled):active {
-        transform: scale(var(--transform-scale-push-size));
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-      }
-
-      &:disabled {
-        background-color: var(--color-3);
-        cursor: not-allowed;
-        opacity: 0.6;
-      }
-    }
-
-    .navLink:nth-child(1) {
-      animation-delay: 0.2s;
-    }
-    .navLink:nth-child(2) {
-      animation-delay: 0.15s;
-    }
-    .navLink:nth-child(3) {
-      animation-delay: 0.1s;
-    }
-    .navLink:nth-child(4) {
-      animation-delay: 0.05s;
-    }
-
-    .navLinkVisible {
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: auto;
-    }
-
-    @keyframes navLinkFadeIn {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-        pointer-events: auto;
-      }
-    }
+  .navContainer {
+    gap: 12px;
   }
 }

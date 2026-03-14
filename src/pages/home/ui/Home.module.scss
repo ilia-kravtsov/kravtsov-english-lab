@@ -37,6 +37,9 @@
   z-index: 1;
   display: inline-flex;
   align-items: center;
+  max-width: 270px;
+  width: 100%;
+  text-align: center;
   padding: var(--badge-padding-y) var(--badge-padding-x);
   border: 1px solid var(--border-color-tertiary);
   border-radius: var(--border-radius-primary);
