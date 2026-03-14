@@ -78,7 +78,7 @@
   --font-size-large: 48px;
   --font-error-primary: 14px;
 
-  --header-height: 10vh;
+  --header-height: 11vh;
   --max-width-primary: 50%;
   --padding-primary: 12px;
 
@@ -116,6 +116,7 @@
   --transition-duration-fast: 0.2s;
   --transition-timing-default: ease-in-out;
   --translate-hover-y: -4px;
+  --translate-hover-y-secondary: -2px;
   --dashboard-nav-offset: calc((var(--dashboard-nav-width) + var(--dashboard-shell-padding)) * -1);
 
   // fonts

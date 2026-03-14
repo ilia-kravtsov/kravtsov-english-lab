@@ -1,5 +1,6 @@
 import { ProtectedRoute } from '@/app/routes/ProtectedRoute';
-import { AppInitWrapper } from '@/app/ui/AppInitWrapper.tsx';
+import { AppInitWrapper } from '@/app/ui/AppInitWrapper';
+import { CardSets } from '@/features/vocabulary/card-sets';
 import { AuthLayout } from '@/pages/auth/auth-layout';
 import { ForgotPassword } from '@/pages/auth/forgot-password';
 import { Login } from '@/pages/auth/login';
@@ -15,15 +16,9 @@ import { Reading } from '@/pages/reading';
 import { Settings } from '@/pages/settings';
 import { Speaking } from '@/pages/speaking';
 import { Theory } from '@/pages/theory';
-import {
-  Cards,
-  CardSetPracticePage,
-  CardSetsPage,
-  VocabularyLayout,
-  WordsBank,
-} from '@/pages/vocabulary';
-import { vocabularyHeaderLinks } from '@/pages/vocabulary/model/vocabulary-header-links.ts';
-import { VocabularyIntro } from '@/pages/vocabulary/ui/vocabulary-layout/vocabulary-intro/VocabularyIntro.tsx';
+import { CardSetPracticePage, CardSetsPage, VocabularyLayout, WordsBank } from '@/pages/vocabulary';
+import { vocabularyHeaderLinks } from '@/pages/vocabulary/model/vocabulary-header-links';
+import { VocabularyIntro } from '@/pages/vocabulary/ui/vocabulary-layout/vocabulary-intro/VocabularyIntro';
 import { Writing } from '@/pages/writing';
 import { Dashboard } from '@/widgets/dashboard';
 
@@ -56,7 +51,7 @@ export const routes = [
         },
         children: [
           { index: true, element: <VocabularyIntro /> },
-          { path: 'cards', element: <Cards /> },
+          { path: 'cards', element: <CardSets /> },
           { path: 'cards/:cardSetId', element: <CardSetsPage /> },
           { path: 'cards/:cardSetId/practice', element: <CardSetPracticePage /> },
           { path: 'words-bank', element: <WordsBank /> },

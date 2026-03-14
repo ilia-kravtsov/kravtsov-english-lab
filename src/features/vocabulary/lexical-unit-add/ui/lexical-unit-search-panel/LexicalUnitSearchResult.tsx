@@ -2,8 +2,8 @@ import type { ReactNode, RefObject } from 'react';
 
 import type { LexicalUnit } from '@/entities/lexical-unit';
 
-import style from './LexicalUnitSearchPanel.module.scss';
 import { LexicalUnitSearchAudio } from './LexicalUnitSearchAudio.tsx';
+import style from './LexicalUnitSearchPanel.module.scss';
 
 type Props = {
   unit: LexicalUnit;

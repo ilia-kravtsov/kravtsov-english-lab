@@ -45,7 +45,7 @@ export function LexicalUnitSearchInput({
         <Input
           value={query}
           onChange={onChange}
-          placeholder={'Find lexical unit in the bank'}
+          placeholder={'Find words in the bank'}
           onKeyDown={onKeyDown}
           onFocus={onFocus}
         />

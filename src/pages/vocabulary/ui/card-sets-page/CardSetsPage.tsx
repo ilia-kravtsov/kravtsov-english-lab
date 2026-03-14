@@ -1,11 +1,11 @@
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { useCardSetsPage } from '@/features/vocabulary/card-sets/model/use-card-sets-page.ts';
+import { useCardSetsPage } from '@/features/vocabulary/card-sets/model/use-card-sets-page';
 import { LexicalUnitSearchPanel } from '@/features/vocabulary/lexical-unit-add/ui/lexical-unit-search-panel/LexicalUnitSearchPanel';
-import { CardSetsPageHeader } from '@/pages/vocabulary/ui/card-sets-page/card-sets-page-header/CardSetsPageHeader.tsx';
-import { CardSetsCardsList } from '@/pages/vocabulary/ui/card-sets-page/CardSetsCardsList.tsx';
-import { CardSetsSearchActions } from '@/pages/vocabulary/ui/card-sets-page/CardSetsSearchActions.tsx';
-import { smallButtonStyles } from '@/shared/lib/styles/button.styles.ts';
+import { CardSetsPageHeader } from '@/pages/vocabulary/ui/card-sets-page/card-sets-page-header/CardSetsPageHeader';
+import { CardSetsCardsList } from '@/pages/vocabulary/ui/card-sets-page/CardSetsCardsList';
+import { CardSetsSearchActions } from '@/pages/vocabulary/ui/card-sets-page/CardSetsSearchActions';
+import { smallButtonStyles } from '@/shared/lib/styles/button.styles';
 import { ConfirmModal, LinkAsButton } from '@/shared/ui';
 
 import style from './CardSetsPage.module.scss';

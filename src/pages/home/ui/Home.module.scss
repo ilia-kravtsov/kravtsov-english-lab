@@ -128,13 +128,13 @@
           background var(--transition-duration-fast) var(--transition-timing-default);
 
   &:hover {
-    transform: translateY(var(--translate-hover-y));
+    transform: translateY(var(--translate-hover-y-secondary));
     border-color: var(--border-color-hover);
     background: linear-gradient(180deg, var(--surface-color-hover), var(--surface-color-primary));
   }
 
   &:focus-visible {
-    transform: translateY(var(--translate-hover-y));
+    transform: translateY(var(--translate-hover-y-secondary));
     border-color: var(--border-color-focus);
     background: linear-gradient(180deg, var(--surface-color-hover), var(--surface-color-primary));
     outline: none;

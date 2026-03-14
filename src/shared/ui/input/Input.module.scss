@@ -1,20 +1,55 @@
 .input {
   width: 100%;
   box-sizing: border-box;
+  min-width: 0;
+
   padding: var(--padding-primary);
-  border: none;
+
+  border: 1px solid var(--border-color-primary);
+  border-radius: var(--border-radius-primary);
+
   font-family: inherit;
-  background-color: transparent;
   font-size: var(--font-size-primary);
-  color: var(--text-color-primary);
-  box-shadow: var(--shadow-primary);
-  border-radius: 6px;
+  color: var(--text-color-secondary);
+
+  background:
+          linear-gradient(
+                          180deg,
+                          rgb(255 255 255 / 0.08),
+                          rgb(255 255 255 / 0.04)
+          ),
+          var(--surface-color-primary);
+
+  box-shadow: var(--shadow-card-inset);
+
+  backdrop-filter: blur(calc(var(--blur-primary) * 0.6));
+
+  transition:
+          border-color var(--transition-duration-fast) var(--transition-timing-default),
+          box-shadow var(--transition-duration-fast) var(--transition-timing-default),
+          background var(--transition-duration-fast) var(--transition-timing-default);
+}
+
+.input::placeholder {
+  color: var(--text-color-soft);
+}
+
+.input:hover {
+  border-color: var(--border-color-hover);
 }
 
 .input:focus {
-  outline: 1px solid var(--outline-color-primary);
+  outline: none;
+  border-color: var(--border-color-focus);
+  box-shadow:
+          var(--shadow-card-inset),
+          0 0 0 1px var(--border-color-focus);
 }
 
+.input:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
 @keyframes shake {
   0% {
     transform: translateX(0);
@@ -36,4 +71,10 @@
 .input[data-error='true'] {
   border-color: var(--error-color-primary);
   animation: shake 0.35s;
+}
+
+.input[data-error='true']:focus {
+  box-shadow:
+          var(--shadow-card-inset),
+          0 0 0 1px var(--error-color-primary);
 }
