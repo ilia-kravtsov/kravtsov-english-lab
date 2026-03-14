@@ -1,8 +1,7 @@
 import { useState } from 'react';
 
-import { useLogout } from '@/features/auth/logout/model/use-logout.ts';
+import { useLogout } from '@/features/auth/logout/model/use-logout';
 import { Button } from '@/shared/ui/button/Button';
-import { buttonStyles } from '@/shared/lib/styles/button.styles.ts';
 import { ConfirmModal } from '@/shared/ui/modal/ConfirmModal';
 
 export function LogoutButton() {
@@ -24,7 +23,7 @@ export function LogoutButton() {
 
   return (
     <>
-      <Button title="Logout" onClick={handleClick} style={buttonStyles} />
+      <Button title="Logout" onClick={handleClick} />
       <ConfirmModal
         isOpen={isModalOpen}
         title={'Confirm Logout'}
