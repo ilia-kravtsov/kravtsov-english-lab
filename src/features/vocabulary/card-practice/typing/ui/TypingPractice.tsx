@@ -1,12 +1,13 @@
 import type { PracticeViewProps } from '@/features/vocabulary/card-practice/shared/model/practice-view.types';
-import { usePracticeView } from '@/features/vocabulary/card-practice/shared/model/use-practice-view.ts';
-import { useTextInputPracticeHandlers } from '@/features/vocabulary/card-practice/shared/model/use-text-input-practice-handlers.ts';
+import { usePracticeView } from '@/features/vocabulary/card-practice/shared/model/use-practice-view';
+import { useTextInputPracticeHandlers } from '@/features/vocabulary/card-practice/shared/model/use-text-input-practice-handlers';
 import { PracticeGuard } from '@/features/vocabulary/card-practice/shared/ui/PracticeGuard';
 import { PracticeProgress } from '@/features/vocabulary/card-practice/shared/ui/PracticeProgress';
-import { mediumButtonStyles } from '@/shared/lib/styles/button.styles.ts';
+import { mediumButtonStyles } from '@/shared/lib/styles/button.styles';
 import { Button, Input } from '@/shared/ui';
 
 import { useTypingStore } from '../model/typing.store';
+import styles from './../../shared/ui/CommonHint.module.scss';
 import style from './TypingPractice.module.scss';
 
 export function TypingPractice({
@@ -67,9 +68,9 @@ export function TypingPractice({
         <div className={cardStyles}>
           <div className={style.promptLabel}>Translate:</div>
           <div className={style.promptValue}>{unit?.translation}</div>
-          <div className={style.hint}>
-            <div className={style.hintLabel}>{unit?.meaning && 'Meaning in English'}</div>
-            <div className={style.hintValue}>{unit?.meaning}</div>
+          <div className={styles.hint}>
+            <div className={styles.hintLabel}>{unit?.meaning && 'Meaning in English'}</div>
+            <div className={styles.hintValue}>{unit?.meaning}</div>
           </div>
         </div>
 
@@ -89,7 +90,7 @@ export function TypingPractice({
           </div>
         </div>
 
-        <PracticeProgress index={index} total={cards.length} attempts={attempts} style={style} />
+        <PracticeProgress index={index} total={cards.length} attempts={attempts} />
       </div>
     </PracticeGuard>
   );

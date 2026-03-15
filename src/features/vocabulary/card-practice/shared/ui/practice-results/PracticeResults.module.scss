@@ -1,16 +1,40 @@
 .result {
+  position: relative;
+
   width: min(720px, 100%);
-  border-radius: var(--border-radius-primary);
-  box-shadow: var(--shadow-primary);
   padding: 24px;
+
   display: flex;
   flex-direction: column;
   gap: 16px;
+
+  border: 1px solid var(--border-color-primary);
+  border-radius: var(--border-radius-primary);
+
+  background: var(--glass-bg-primary);
+  box-shadow: var(--shadow-panel-primary);
+  backdrop-filter: blur(var(--blur-primary));
+
+  overflow: hidden;
+}
+
+.result::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--glass-overlay);
+  pointer-events: none;
+}
+
+.result > * {
+  position: relative;
+  z-index: 1;
 }
 
 .sectionTitle {
+  color: var(--text-color-secondary);
   font-weight: 600;
-  opacity: 0.9;
+  opacity: 0.95;
 }
 
 .resultBlock {
@@ -20,22 +44,47 @@
 }
 
 .resultRow {
+  position: relative;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
+
   padding: 10px 12px;
+
+  border: 1px solid var(--border-color-secondary);
   border-radius: var(--border-radius-primary);
-  box-shadow: var(--shadow-primary);
+
+  background: var(--glass-bg-secondary);
+  box-shadow: var(--shadow-card-inset);
+  backdrop-filter: blur(calc(var(--blur-primary) * 0.75));
+
+  overflow: hidden;
+}
+
+.resultRow::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--glass-highlight);
+  pointer-events: none;
+}
+
+.resultRow > * {
+  position: relative;
+  z-index: 1;
 }
 
 .resultLabel {
+  color: var(--text-color-secondary);
   font-weight: 600;
-  opacity: 0.9;
+  opacity: 0.92;
 }
 
 .resultValue {
-  opacity: 0.8;
+  color: var(--text-color-soft);
+  opacity: 0.9;
   text-align: right;
 }
 
@@ -44,4 +93,30 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+@media (max-width: 640px) {
+  .result {
+    padding: 20px;
+  }
+
+  .resultRow {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .resultValue {
+    width: 100%;
+    text-align: left;
+  }
+
+  .controlsRow {
+    align-items: stretch;
+  }
+}
+
+@media (max-width: 480px) {
+  .result {
+    padding: 16px;
+  }
 }

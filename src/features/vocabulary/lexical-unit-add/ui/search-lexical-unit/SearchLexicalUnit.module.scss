@@ -5,72 +5,7 @@
   width: 100%;
 }
 
-.searchRow {
-  display: flex;
-  gap: 12px;
-  width: 100%;
-}
-
 .hint {
   font-size: 13px;
   opacity: 0.8;
-}
-
-.notFoundBox {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  align-items: flex-start;
-}
-
-.resultBox {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  width: 100%;
-}
-
-.imageBox {
-  width: 100%;
-  display: flex;
-  justify-content: flex-start;
-}
-
-.imageBox img {
-  max-width: 220px;
-  max-height: 220px;
-  border-radius: var(--border-radius-primary);
-  object-fit: cover;
-}
-
-.fields {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.fieldRow {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.fieldBlock {
-  display: flex;
-  gap: 20px;
-}
-
-.label {
-  font-weight: 600;
-  font-size: 13px;
-  opacity: 0.85;
-}
-
-.value {
-  font-size: 13px;
-}
-
-.actions {
-  display: flex;
-  gap: 12px;
 }

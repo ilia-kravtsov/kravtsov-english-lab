@@ -1,47 +1,105 @@
 .cardCorrect {
-  animation: flashCorrect 420ms ease;
+  animation: flashCorrect 520ms cubic-bezier(.2,.7,.3,1);
+}
+
+.cardCorrect::after {
+  animation: correctRipple 520ms cubic-bezier(.2,.7,.3,1);
+  background: radial-gradient(
+                  circle,
+                  rgba(46, 204, 113, 0.26) 0%,
+                  rgba(46, 204, 113, 0.12) 34%,
+                  rgba(46, 204, 113, 0.06) 52%,
+                  transparent 74%
+  );
 }
 
 .cardWrong {
   animation: flashWrong 320ms ease;
 }
 
+.cardCorrect,
+.cardWrong {
+  position: relative;
+  overflow: hidden;
+}
+
+.cardCorrect::after {
+  content: '';
+  position: absolute;
+  inset: -20%;
+  pointer-events: none;
+  opacity: 0;
+  transform: scale(0.72);
+  border-radius: inherit;
+  background: radial-gradient(
+                  circle,
+                  rgba(46, 204, 113, 0.26) 0%,
+                  rgba(46, 204, 113, 0.12) 34%,
+                  rgba(46, 204, 113, 0.06) 52%,
+                  transparent 74%
+  );
+  animation: correctRipple 520ms cubic-bezier(.2,.7,.3,1);
+}
+
 @keyframes flashCorrect {
   0% {
-    box-shadow: var(--shadow-primary);
-    background: transparent;
+    box-shadow: var(--shadow-panel-primary);
+    transform: scale(1);
   }
-  40% {
-    background: rgba(46, 204, 113, 0.14);
+  35% {
     box-shadow:
-            0 0 0 2px rgba(46, 204, 113, 0.45),
-            var(--shadow-primary);
+            0 0 0 2px rgba(46, 204, 113, 0.35),
+            0 0 22px rgba(46, 204, 113, 0.35),
+            var(--shadow-panel-primary);
+    transform: scale(1.01);
   }
   100% {
-    box-shadow: var(--shadow-primary);
-    background: transparent;
+    box-shadow: var(--shadow-panel-primary);
+    transform: scale(1);
   }
 }
 
 @keyframes flashWrong {
+
   0% {
-    box-shadow: var(--shadow-primary);
-    background: transparent;
+    box-shadow: var(--shadow-panel-primary);
     transform: translateX(0);
   }
-  35% {
-    background: rgba(231, 76, 60, 0.14);
+
+  25% {
     box-shadow:
-            0 0 0 2px rgba(231, 76, 60, 0.45),
-            var(--shadow-primary);
-    transform: translateX(-6px);
+            0 0 0 2px rgba(231, 76, 60, 0.35),
+            0 0 18px rgba(231, 76, 60, 0.3),
+            var(--shadow-panel-primary);
+
+    transform: translateX(-4px);
   }
-  70% {
-    transform: translateX(6px);
+
+  50% {
+    transform: translateX(4px);
+  }
+
+  75% {
+    transform: translateX(-2px);
+  }
+
+  100% {
+    box-shadow: var(--shadow-panel-primary);
+    transform: translateX(0);
+  }
+
+}
+
+@keyframes correctRipple {
+  0% {
+    opacity: 0;
+    transform: scale(0.72);
+  }
+  30% {
+    opacity: 1;
   }
   100% {
-    box-shadow: var(--shadow-primary);
-    background: transparent;
-    transform: translateX(0);
+    opacity: 0;
+    transform: scale(1.22);
   }
 }

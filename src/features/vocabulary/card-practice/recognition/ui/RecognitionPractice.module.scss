@@ -1,10 +1,56 @@
 @use '@/features/vocabulary/card-practice/shared/ui/PracticeLayout.module' as *;
 @use '@/features/vocabulary/card-practice/shared/ui/PracticeCardFeedback.module' as *;
 
+.wrap {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--gap-primary);
+}
+
+.card {
+  position: relative;
+  width: min(720px, 100%);
+  min-height: 320px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: var(--gap-primary);
+
+  padding: var(--panel-padding-secondary);
+
+  border: 1px solid var(--border-color-primary);
+  border-radius: var(--border-radius-primary);
+
+  background: var(--glass-bg-primary);
+  box-shadow: var(--shadow-panel-primary);
+  backdrop-filter: blur(var(--blur-primary));
+
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--glass-highlight);
+  pointer-events: none;
+}
+
+.card > * {
+  position: relative;
+  z-index: 1;
+}
+
 .value {
+  color: var(--text-color-secondary);
   font-size: var(--font-size-large);
-  text-align: center;
   line-height: 1.1;
+  text-align: center;
+  word-break: break-word;
 }
 
 .options {
@@ -15,14 +61,44 @@
 }
 
 .optionBtn {
-  border: none;
-  border-radius: var(--border-radius-primary);
+  position: relative;
+  min-height: 48px;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
   padding: 12px 14px;
+
+  border: 1px solid var(--border-color-secondary);
+  border-radius: var(--border-radius-primary);
+
+  background: var(--glass-bg-secondary);
+  box-shadow: var(--shadow-card-primary);
+  backdrop-filter: blur(calc(var(--blur-primary) * 0.75));
+
+  color: var(--text-color-secondary);
   text-align: left;
   cursor: pointer;
-  box-shadow: var(--shadow-primary);
-  background: transparent;
-  min-height: 48px;
+
+  transition:
+          transform var(--transition-duration-fast) var(--transition-timing-default),
+          border-color var(--transition-duration-fast) var(--transition-timing-default),
+          background var(--transition-duration-fast) var(--transition-timing-default),
+          box-shadow var(--transition-duration-fast) var(--transition-timing-default);
+}
+
+.optionBtn:hover:not(:disabled) {
+  transform: translateY(var(--translate-hover-y));
+  border-color: var(--border-color-hover);
+  background: var(--glass-bg-hover);
+}
+
+.optionBtn:focus-visible {
+  outline: none;
+  transform: translateY(var(--translate-hover-y));
+  border-color: var(--border-color-focus);
+  background: var(--glass-bg-hover);
 }
 
 .optionBtn:disabled {
@@ -31,11 +107,48 @@
 }
 
 .optionCorrect {
-  outline: 2px solid rgba(46, 204, 113, 0.7);
-  background: rgba(46, 204, 113, 0.12);
+  border-color: rgba(46, 204, 113, 0.55);
+  background:
+          linear-gradient(180deg, rgba(46, 204, 113, 0.16), rgba(46, 204, 113, 0.1)),
+          var(--glass-bg-secondary);
+  box-shadow:
+          0 0 0 1px rgba(46, 204, 113, 0.28),
+          var(--shadow-card-primary);
 }
 
 .optionWrong {
-  outline: 2px solid rgba(231, 76, 60, 0.7);
-  background: rgba(231, 76, 60, 0.12);
+  border-color: rgba(231, 76, 60, 0.55);
+  background:
+          linear-gradient(180deg, rgba(231, 76, 60, 0.16), rgba(231, 76, 60, 0.1)),
+          var(--glass-bg-secondary);
+  box-shadow:
+          0 0 0 1px rgba(231, 76, 60, 0.28),
+          var(--shadow-card-primary);
+}
+
+@media (max-width: 768px) {
+  .card {
+    min-height: 280px;
+    padding: var(--panel-padding-tertiary);
+  }
+
+  .options {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    min-height: 240px;
+    padding: var(--panel-padding-x-mobile);
+  }
+
+  .value {
+    font-size: var(--font-size-secondary);
+  }
+
+  .optionBtn {
+    min-height: 44px;
+    padding: 10px 12px;
+  }
 }

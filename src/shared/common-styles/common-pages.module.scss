@@ -1,19 +1,88 @@
 @mixin container {
+  position: relative;
+
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 20px;
-  padding: 20px;
-  min-height: 70vh;
+  gap: var(--gap-secondary);
+
+  min-height: calc(100vh - 140px);
+  padding: var(--section-padding-z) var(--section-padding-x);
+
+  color: var(--text-color-secondary);
+  background: var(--bg-color-tertiary);
+
+  overflow: hidden;
 }
 
 @mixin header {
-  font-size: var(--font-size-secondary);
+  position: relative;
+  z-index: 1;
+
+  margin: 0;
+
+  font-size: clamp(34px, 5vw, 56px);
+  line-height: var(--line-height-tight);
+  font-weight: var(--font-weight-extra-bold);
+  letter-spacing: var(--letter-spacing-tighter);
+  text-align: center;
+  text-wrap: balance;
+  color: var(--text-color-secondary);
 }
 
 @mixin paragraph {
-  max-width: 600px;
-  width: 100%;
-  font-size: var(--font-size-primary);
+  position: relative;
+  z-index: 1;
+
+  width: min(100%, 720px);
+  margin: 0;
+  padding: var(--panel-padding-secondary);
+
+  border: 1px solid var(--border-color-primary);
+  border-radius: var(--border-radius-primary);
+
+  background: var(--bg-color-gradient-primary);
+  box-shadow: var(--shadow-panel-primary);
+
+  font-size: var(--font-size-body-md);
+  line-height: var(--line-height-relaxed);
+  color: var(--text-color-soft);
+  text-align: center;
+
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--glass-highlight);
+    pointer-events: none;
+  }
+}
+
+@media (width <= 960px) {
+  @mixin container {
+    padding: var(--section-padding-y) var(--section-padding-x);
+  }
+
+  @mixin paragraph {
+    padding: var(--panel-padding-tertiary);
+  }
+}
+
+@media (width <= 640px) {
+  @mixin container {
+    min-height: auto;
+    padding: var(--section-padding-y-mobile) var(--section-padding-x-mobile);
+  }
+
+  @mixin header {
+    font-size: var(--font-size-heading-lg);
+  }
+
+  @mixin paragraph {
+    width: 100%;
+    font-size: var(--font-size-body-sm);
+  }
 }

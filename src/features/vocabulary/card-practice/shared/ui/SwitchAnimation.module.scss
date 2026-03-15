@@ -37,11 +37,11 @@
 }
 
 .switchNext {
-  animation: switchYPrev 260ms ease;
+  animation: switchYPrev 360ms ease;
   transform-style: preserve-3d;
 }
 
 .switchPrev {
-  animation: switchYNext 260ms ease;
+  animation: switchYNext 360ms ease;
   transform-style: preserve-3d;
 }

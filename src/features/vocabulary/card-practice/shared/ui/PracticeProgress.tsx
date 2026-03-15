@@ -1,19 +1,20 @@
 import { type JSX } from 'react';
 
+import style from './PracticeProgress.module.scss';
+
 type Props = {
   index: number;
   total: number;
   attempts: number;
-  style: CSSModuleClasses;
 };
 
-export function PracticeProgress({ index, total, attempts, style }: Props): JSX.Element {
+export function PracticeProgress({ index, total, attempts }: Props): JSX.Element {
   return (
     <div className={style.controlsRow}>
+      <div className={style.meta}>Attempts: {attempts}</div>
       <div className={style.counter}>
         {index + 1} / {total}
       </div>
-      <div className={style.meta}>Attempts: {attempts}</div>
     </div>
   );
 }

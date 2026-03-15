@@ -1,12 +1,13 @@
 import type { PracticeViewProps } from '@/features/vocabulary/card-practice/shared/model/practice-view.types';
-import { usePracticeView } from '@/features/vocabulary/card-practice/shared/model/use-practice-view.ts';
-import { useTextInputPracticeHandlers } from '@/features/vocabulary/card-practice/shared/model/use-text-input-practice-handlers.ts';
+import { usePracticeView } from '@/features/vocabulary/card-practice/shared/model/use-practice-view';
+import { useTextInputPracticeHandlers } from '@/features/vocabulary/card-practice/shared/model/use-text-input-practice-handlers';
 import { PracticeGuard } from '@/features/vocabulary/card-practice/shared/ui/PracticeGuard';
 import { PracticeProgress } from '@/features/vocabulary/card-practice/shared/ui/PracticeProgress';
+import { mediumButtonStyles, normalButtonWide } from '@/shared/lib/styles/button.styles';
 import { Button, Input } from '@/shared/ui';
-import { normalButtonWide } from '@/shared/lib/styles/button.styles.ts';
 
 import { useContextStore } from '../model/context.store';
+import styles from './../../shared/ui/CommonHint.module.scss';
 import style from './ContextPractice.module.scss';
 
 export function ContextPractice({
@@ -67,9 +68,9 @@ export function ContextPractice({
         <div className={cardStyles}>
           <div className={style.promptLabel}>Fill the gap:</div>
           <div className={style.promptValue}>{current?.contextMasked}</div>
-          <div className={style.hint}>
-            <div className={style.hintLabel}>Hint</div>
-            <div className={style.hintValue}>{current?.lexicalUnit.translation}</div>
+          <div className={styles.hint}>
+            <div className={styles.hintLabel}>Hint</div>
+            <div className={styles.hintValue}>{current?.lexicalUnit.translation}</div>
           </div>
         </div>
 
@@ -82,11 +83,11 @@ export function ContextPractice({
             disabled={locked}
             onKeyDown={handleInputKeyDown}
           />
-          <Button title={'Check'} onClick={submit} disabled={locked} style={normalButtonWide} />
-          <Button title={'Skip'} onClick={skip} style={normalButtonWide} />
+          <Button title={'Check'} onClick={submit} disabled={locked} style={mediumButtonStyles} />
+          <Button title={'Skip'} onClick={skip} style={mediumButtonStyles} />
         </div>
 
-        <PracticeProgress index={index} total={cards.length} attempts={attempts} style={style} />
+        <PracticeProgress index={index} total={cards.length} attempts={attempts} />
       </div>
     </PracticeGuard>
   );

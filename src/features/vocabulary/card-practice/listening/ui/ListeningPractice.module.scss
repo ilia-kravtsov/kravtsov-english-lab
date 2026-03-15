@@ -2,38 +2,58 @@
 @use '@/features/vocabulary/card-practice/shared/ui/PracticeCardFeedback.module' as *;
 
 .promptLabel {
-  opacity: 0.7;
+  color: var(--text-color-soft);
+  font-size: var(--font-size-body-sm);
+  line-height: var(--line-height-body);
+  text-align: center;
+  opacity: 0.82;
 }
 
 .audioRow {
+  width: 100%;
+
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
 }
 
-.hint {
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: var(--border-radius-primary);
-}
-
-.hintLabel {
-  text-align: center;
-  font-size: var(--font-size-primary);
-  opacity: 0.7;
-}
-
-.hintValue {
-  font-size: var(--font-size-primary);
-  opacity: 0.9;
-}
-
 .formRow {
-  display: flex;
   width: min(720px, 100%);
-  gap: 20px;
+
+  display: flex;
+  align-items: stretch;
+  gap: 12px;
 }
 
 .buttonsContainer {
   display: flex;
-  gap: 20px;
+  align-items: stretch;
+  gap: 12px;
+}
+
+@media (max-width: 768px) {
+  .formRow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .buttonsContainer {
+    width: 100%;
+    gap: 10px;
+  }
+
+  .buttonsContainer > * {
+    flex: 1 1 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .hint {
+    padding: 12px 14px;
+  }
+
+  .buttonsContainer {
+    flex-direction: column;
+  }
 }

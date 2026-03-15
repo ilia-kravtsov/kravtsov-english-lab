@@ -1,0 +1,28 @@
+.controlsRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-left: -20px;
+}
+
+.counter,
+.meta {
+  min-width: 80px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 10px;
+
+  border: 1px solid var(--border-color-tertiary);
+  border-radius: var(--border-radius-primary);
+
+  background: var(--glass-bg-secondary);
+  box-shadow: var(--shadow-card-primary);
+  backdrop-filter: blur(calc(var(--blur-primary) * 0.75));
+
+  color: var(--text-color-soft);
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-body);
+  text-align: center;
+}

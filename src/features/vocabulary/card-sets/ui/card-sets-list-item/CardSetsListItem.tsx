@@ -37,11 +37,11 @@ export function CardSetsListItem({ item, active, onOpen, onEdit, onDelete }: Pro
 
       <div className={style.itemActions} onClick={(e) => e.stopPropagation()}>
         <button className={style.iconButton} onClick={onEdit} aria-label={'Edit card set'}>
-          ✏️
+          Edit
         </button>
 
         <button className={style.iconButton} onClick={onDelete} aria-label={'Delete card set'}>
-          🗑
+          Delete
         </button>
       </div>
     </div>

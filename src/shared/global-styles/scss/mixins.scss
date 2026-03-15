@@ -1,0 +1,47 @@
+@mixin glassBlock {
+  flex-wrap: wrap;
+
+  padding: var(--padding-primary);
+  border: 1px solid var(--border-color-secondary);
+  border-radius: var(--border-radius-primary);
+
+  background: linear-gradient(
+                  180deg,
+                  var(--surface-color-tertiary),
+                  var(--surface-color-secondary)
+  );
+
+  box-shadow: var(--shadow-card-inset);
+
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--glass-overlay);
+    pointer-events: none;
+  }
+}
+
+@mixin glassPanel {
+  padding: var(--panel-padding-secondary);
+
+  border: 1px solid var(--border-color-primary);
+  border-radius: var(--border-radius-primary);
+
+  background: var(--bg-color-gradient-primary);
+  box-shadow: var(--shadow-panel-primary);
+
+  backdrop-filter: blur(16px);
+
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--glass-highlight);
+    pointer-events: none;
+  }
+}

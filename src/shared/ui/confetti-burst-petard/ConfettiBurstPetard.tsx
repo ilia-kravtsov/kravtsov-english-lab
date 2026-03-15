@@ -1,4 +1,5 @@
-import { type CSSProperties,useEffect, useState } from 'react';
+import { type CSSProperties, useEffect, useMemo, useState } from 'react';
+import { createPortal } from 'react-dom';
 
 import style from './ConfettiBurstPetard.module.scss';
 
@@ -64,16 +65,16 @@ function genPieces(pieces: number): Piece[] {
 export function ConfettiBurstPetard({ pieces = 70, maxDurationMs = 2200 }: Props) {
   const [active, setActive] = useState(true);
 
-  const [items] = useState<Piece[]>(() => genPieces(pieces));
+  const items = useMemo(() => genPieces(pieces), [pieces]);
 
   useEffect(() => {
     const t = window.setTimeout(() => setActive(false), maxDurationMs);
     return () => window.clearTimeout(t);
   }, [maxDurationMs]);
 
-  if (!active) return null;
+  if (!active || typeof document === 'undefined') return null;
 
-  return (
+  return createPortal(
     <div className={style.wrap} aria-hidden>
       <div className={style.origin}>
         {items.map((p, i) => {
@@ -92,6 +93,7 @@ export function ConfettiBurstPetard({ pieces = 70, maxDurationMs = 2200 }: Props
           return <span key={i} className={style.piece} style={s} />;
         })}
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }

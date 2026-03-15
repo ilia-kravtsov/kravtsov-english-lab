@@ -63,24 +63,23 @@ export function PracticeResults({ cardSetId, restart, restartTitle }: Props) {
   const stats = readPracticeStats(cardSetId) as PracticeStats;
 
   return (
-    <div className={style.result}>
+    <>
       <ConfettiBurstPetard />
 
-      <h3 className={style.sectionTitle}>Results</h3>
+      <div className={style.result}>
+        <h3 className={style.sectionTitle}>Results</h3>
 
-      <div className={style.resultBlock}>
-        <Row label={MODE_LABEL.recognition} value={format(stats.recognition)} />
+        <div className={style.resultBlock}>
+          <Row label={MODE_LABEL.recognition} value={format(stats.recognition)} />
+          <Row label={MODE_LABEL.typing} value={format(stats.typing)} />
+          <Row label={MODE_LABEL.listening} value={format(stats.listening)} />
+          <Row label={MODE_LABEL.context} value={format(stats.context)} />
+        </div>
 
-        <Row label={MODE_LABEL.typing} value={format(stats.typing)} />
-
-        <Row label={MODE_LABEL.listening} value={format(stats.listening)} />
-
-        <Row label={MODE_LABEL.context} value={format(stats.context)} />
+        <div className={style.controlsRow}>
+          <Button title={restartTitle} onClick={restart} style={{ width: '200px' }} />
+        </div>
       </div>
-
-      <div className={style.controlsRow}>
-        <Button title={restartTitle} onClick={restart} style={{ width: '200px' }} />
-      </div>
-    </div>
+    </>
   );
 }

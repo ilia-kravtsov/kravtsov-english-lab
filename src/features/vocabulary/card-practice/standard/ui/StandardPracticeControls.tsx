@@ -1,6 +1,7 @@
-import { practiceButtonStyles } from '@/shared/lib/styles/button.styles.ts';
+import { practiceButtonStyles } from '@/shared/lib/styles/button.styles';
 import { Button } from '@/shared/ui';
 
+import styles from '../../shared/ui/PracticeProgress.module.scss';
 import style from './StandardPractice.module.scss';
 
 type Props = {
@@ -30,7 +31,7 @@ export function StandardPracticeControls({
         style={practiceButtonStyles}
       />
 
-      <div className={style.counter}>
+      <div className={styles.counter}>
         {index + 1} / {total}
       </div>
 

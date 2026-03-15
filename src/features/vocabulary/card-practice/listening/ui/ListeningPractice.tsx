@@ -1,15 +1,19 @@
-import { useListeningAudio } from '@/features/vocabulary/card-practice/listening/model/use-listening-audio.ts';
-import { getPracticeCardClassName } from '@/features/vocabulary/card-practice/shared/lib/get-practice-card-styles.ts';
+import { useListeningAudio } from '@/features/vocabulary/card-practice/listening/model/use-listening-audio';
+import { getPracticeCardClassName } from '@/features/vocabulary/card-practice/shared/lib/get-practice-card-styles';
 import type { PracticeViewProps } from '@/features/vocabulary/card-practice/shared/model/practice-view.types';
-import { usePracticeView } from '@/features/vocabulary/card-practice/shared/model/use-practice-view.ts';
-import { useTextInputPracticeHandlers } from '@/features/vocabulary/card-practice/shared/model/use-text-input-practice-handlers.ts';
+import { usePracticeView } from '@/features/vocabulary/card-practice/shared/model/use-practice-view';
+import { useTextInputPracticeHandlers } from '@/features/vocabulary/card-practice/shared/model/use-text-input-practice-handlers';
 import { PracticeGuard } from '@/features/vocabulary/card-practice/shared/ui/PracticeGuard';
 import { PracticeProgress } from '@/features/vocabulary/card-practice/shared/ui/PracticeProgress';
 import switchAnim from '@/features/vocabulary/card-practice/shared/ui/SwitchAnimation.module.scss';
-import { normalButtonWide, wideButtonStyles } from '@/shared/lib/styles/button.styles.ts';
+import {
+  mediumButtonStyles,
+  wideButtonStyles,
+} from '@/shared/lib/styles/button.styles';
 import { Button, Input } from '@/shared/ui';
 
 import { useListeningStore } from '../model/listening.store';
+import styles from './../../shared/ui/CommonHint.module.scss';
 import style from './ListeningPractice.module.scss';
 
 export function ListeningPractice({
@@ -92,9 +96,9 @@ export function ListeningPractice({
               style={wideButtonStyles}
             />
           </div>
-          <div className={style.hint}>
-            <div className={style.hintLabel}>Hint</div>
-            <div className={style.hintValue}>{unit?.translation}</div>
+          <div className={styles.hint}>
+            <div className={styles.hintLabel}>Hint</div>
+            <div className={styles.hintValue}>{unit?.translation}</div>
           </div>
         </div>
 
@@ -108,12 +112,12 @@ export function ListeningPractice({
             onKeyDown={handleInputKeyDown}
           />
           <div className={style.buttonsContainer}>
-            <Button title={'Check'} onClick={submit} disabled={locked} style={normalButtonWide} />
-            <Button title={'Skip'} onClick={skip} style={normalButtonWide} />
+            <Button title={'Check'} onClick={submit} disabled={locked} style={mediumButtonStyles} />
+            <Button title={'Skip'} onClick={skip} style={mediumButtonStyles} />
           </div>
         </div>
 
-        <PracticeProgress index={index} total={cards.length} attempts={attempts} style={style} />
+        <PracticeProgress index={index} total={cards.length} attempts={attempts}/>
       </div>
     </PracticeGuard>
   );

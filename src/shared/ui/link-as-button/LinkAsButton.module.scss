@@ -50,7 +50,7 @@
 }
 
 .linkAsButton:hover {
-  transform: translateY(var(--translate-hover-y-secondary));
+  transform: translateY(var(--translate-hover-y));
   border-color: var(--border-color-hover);
 
   background:
@@ -59,7 +59,7 @@
 }
 
 .linkAsButton:focus-visible {
-  transform: translateY(var(--translate-hover-y-secondary));
+  transform: translateY(var(--translate-hover-y));
   border-color: var(--border-color-focus);
 
   background:

@@ -9,6 +9,68 @@
           linear-gradient(180deg, rgb(255 255 255 / 0.05),
           rgb(255 255 255 / 0.02));
 
+  --glass-bg-primary: linear-gradient(
+                  180deg,
+                  rgba(52, 52, 52, 0.96),
+                  rgba(39, 39, 39, 0.94)
+  );
+
+  --glass-bg-secondary: linear-gradient(
+                  180deg,
+                  rgba(58, 58, 58, 0.94),
+                  rgba(45, 45, 45, 0.92)
+  );
+
+  --glass-bg-tertiary: linear-gradient(
+                  180deg,
+                  rgba(64, 64, 64, 0.92),
+                  rgba(49, 49, 49, 0.9)
+  );
+
+  --glass-bg-hover: linear-gradient(
+                  180deg,
+                  rgba(70, 70, 70, 0.94),
+                  rgba(54, 54, 54, 0.92)
+  );
+
+  --glass-highlight-primary: linear-gradient(
+                  135deg,
+                  rgb(255 255 255 / 0.06),
+                  transparent 38%
+  );
+
+  --glass-highlight-secondary: linear-gradient(
+                  315deg,
+                  rgb(255 255 255 / 0.03),
+                  transparent 30%
+  );
+
+  --glass-highlight: var(--glass-highlight-primary),
+  var(--glass-highlight-secondary);
+
+  --glass-overlay-primary: linear-gradient(
+                  180deg,
+                  rgb(255 255 255 / 0.05),
+                  transparent 55%
+  );
+
+  --glass-overlay-secondary: linear-gradient(
+                  135deg,
+                  rgb(255 255 255 / 0.04),
+                  transparent 38%
+  );
+
+  --glass-overlay: var(--glass-overlay-primary),
+  var(--glass-overlay-secondary);
+
+  --glass-divider: linear-gradient(
+                  90deg,
+                  transparent 0%,
+                  rgb(255 255 255 / 0.18) 20%,
+                  rgb(255 255 255 / 0.18) 80%,
+                  transparent 100%
+  );
+
   --text-color-primary: #1a1a1a;
   --text-color-secondary: #f4f1ec;
   --text-color-muted: rgb(255 255 255 / 0.8);
@@ -47,6 +109,7 @@
 
   --section-padding-x: 24px;
   --section-padding-y: 48px;
+  --section-padding-z: 14vh;
 
   --panel-padding-primary: 56px;
   --panel-padding-secondary: 40px;
@@ -80,6 +143,7 @@
 
   --header-height: 11vh;
   --max-width-primary: 50%;
+  --max-width-secondary: 100%;
   --padding-primary: 12px;
 
   --section-padding-y-mobile: 24px;
@@ -115,8 +179,8 @@
 
   --transition-duration-fast: 0.2s;
   --transition-timing-default: ease-in-out;
-  --translate-hover-y: -4px;
-  --translate-hover-y-secondary: -2px;
+  --translate-hover-y: -2px;
+  --translate-hover-y-secondary: 2px;
   --dashboard-nav-offset: calc((var(--dashboard-nav-width) + var(--dashboard-shell-padding)) * -1);
 
   // fonts

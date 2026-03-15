@@ -1,7 +1,10 @@
 .wrap {
   position: fixed;
-  inset: 0;
-  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 2147483647;
   pointer-events: none;
   overflow: hidden;
 }
@@ -10,10 +13,13 @@
   position: absolute;
   left: 50%;
   top: 42%;
+  width: 0;
+  height: 0;
   transform: translate(-50%, -50%);
 }
 
 .piece {
+  display: block;
   position: absolute;
   left: 0;
   top: 0;
@@ -46,6 +52,6 @@
   100% {
     opacity: 0;
     transform: translate(calc(var(--dx) * 1.05), calc(var(--dy) + 85vh)) rotate(var(--rot2))
-      scale(0.95);
+    scale(0.95);
   }
 }

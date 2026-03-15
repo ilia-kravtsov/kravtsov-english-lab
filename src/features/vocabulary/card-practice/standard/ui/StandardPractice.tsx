@@ -1,7 +1,7 @@
 import { type KeyboardEvent } from 'react';
 
-import type { Params } from '@/features/vocabulary/card-practice/standard/model/standard-practice.types.ts';
-import { useStandardPractice } from '@/features/vocabulary/card-practice/standard/model/use-standard-practice.ts';
+import type { Params } from '@/features/vocabulary/card-practice/standard/model/standard-practice.types';
+import { useStandardPractice } from '@/features/vocabulary/card-practice/standard/model/use-standard-practice';
 import { StandardPracticeBack } from '@/features/vocabulary/card-practice/standard/ui/StandardPracticeBack';
 import { StandardPracticeControls } from '@/features/vocabulary/card-practice/standard/ui/StandardPracticeControls';
 import { StandardPracticeFront } from '@/features/vocabulary/card-practice/standard/ui/StandardPracticeFront';

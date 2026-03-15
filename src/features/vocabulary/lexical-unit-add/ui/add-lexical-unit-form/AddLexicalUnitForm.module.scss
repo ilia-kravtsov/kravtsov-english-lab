@@ -1,46 +1,94 @@
+@use '@/shared/global-styles/scss/mixins' as mixins;
+
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: var(--gap-primary);
   width: 100%;
 }
 
 .audioContainer {
+  position: relative;
+
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: var(--gap-title);
   width: 100%;
-  flex-wrap: wrap;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-  padding: 8px 10px;
-  border-radius: 6px;
-  background-color: var(--bg-color-primary);
+  @include mixins.glassBlock;
 }
 
 .button {
-  padding: 6px 10px;
-  border-radius: 6px;
-  border: none;
-  background-color: var(--bg-color-secondary);
-  color: var(--bg-color-primary);
+  position: relative;
+  z-index: 1;
 
-  font-size: var(--font-size-small);
+  padding: 8px 12px;
+
+  border: 1px solid var(--border-color-tertiary);
+  border-radius: var(--border-radius-primary);
+
+  background: linear-gradient(
+                  180deg,
+                  var(--surface-color-tertiary),
+                  var(--surface-color-secondary)
+  );
+
+  box-shadow: var(--shadow-card-inset);
+
+  color: var(--text-color-soft);
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: none;
+
   cursor: pointer;
-  transition: opacity 0.2s ease;
-}
 
-.button:hover {
-  opacity: 0.85;
+  transition:
+          transform var(--transition-duration-fast) var(--transition-timing-default),
+          border-color var(--transition-duration-fast) var(--transition-timing-default),
+          background var(--transition-duration-fast) var(--transition-timing-default),
+          color var(--transition-duration-fast) var(--transition-timing-default);
+
+  &:hover {
+    transform: translateY(var(--translate-hover-y));
+    border-color: var(--border-color-hover);
+    background: linear-gradient(
+                    180deg,
+                    var(--surface-color-hover),
+                    var(--surface-color-primary)
+    );
+    color: var(--text-color-secondary);
+  }
+
+  &:focus-visible {
+    outline: none;
+    transform: translateY(var(--translate-hover-y));
+    border-color: var(--border-color-focus);
+    background: linear-gradient(
+                    180deg,
+                    var(--surface-color-hover),
+                    var(--surface-color-primary)
+    );
+    color: var(--text-color-secondary);
+  }
 }
 
 .audio {
-  height: 28px;
+  position: relative;
+  z-index: 1;
+
+  height: 32px;
   width: 180px;
   flex: 0 0 auto;
+
+  border-radius: var(--border-radius-primary);
+  opacity: 0.92;
 }
 
 .remoteAudioContainer {
+  position: relative;
+  z-index: 1;
+
   flex: 0 0 100%;
   display: flex;
   align-items: center;
@@ -51,26 +99,31 @@
   width: 100%;
   max-width: 420px;
   height: 32px;
+
+  border-radius: var(--border-radius-primary);
+  opacity: 0.92;
 }
 
 .imageContainer {
+  position: relative;
+
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
-  gap: 10px;
-  flex-wrap: wrap;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-  padding: var(--padding-primary);
-  border-radius: var(--border-radius-primary);
-  background-color: var(--bg-color-primary);
+  gap: var(--gap-title);
+  @include mixins.glassBlock;
 }
 
 .imagePreview {
+  position: relative;
+  z-index: 1;
+
   max-width: 220px;
   max-height: 220px;
   flex: 0 0 100%;
   width: 100%;
+
   display: flex;
   justify-content: center;
 }
@@ -78,25 +131,52 @@
 .imagePreviewImage {
   max-width: 320px;
   max-height: 220px;
+
+  border: 1px solid var(--border-color-secondary);
   border-radius: var(--border-radius-primary);
+
   object-fit: cover;
+
+  box-shadow: var(--shadow-panel-secondary);
 }
 
 .examplesList {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: var(--gap-title);
 }
 
 .examplesRow {
   display: grid;
   grid-template-columns: 1fr auto;
-  gap: 10px;
+  gap: var(--gap-title);
   align-items: start;
 }
 
 .examplesActions {
   display: flex;
   gap: 8px;
+}
+
+@media (width <= 640px) {
+  .audioContainer,
+  .imageContainer {
+    padding: 10px;
+  }
+
+  .examplesRow {
+    grid-template-columns: 1fr;
+  }
+
+  .examplesActions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .audio,
+  .remoteAudio {
+    width: 100%;
+    max-width: 100%;
+  }
 }
