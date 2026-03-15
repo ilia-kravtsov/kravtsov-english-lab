@@ -4,7 +4,7 @@
   flex-direction: column;
   gap: 24px;
   width: 100%;
-  min-height: calc(100vh - var(--dashboard-header-height) - var(--dashboard-footer-height));
+  min-height: 100vh;
   padding: var(--section-padding-y) var(--section-padding-x);
 
   background:
@@ -51,7 +51,6 @@
   background: var(--bg-color-gradient-primary);
   box-shadow: var(--shadow-panel-primary);
   backdrop-filter: blur(var(--blur-primary));
-  overflow: hidden;
 }
 
 .left::before,
