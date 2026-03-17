@@ -1,5 +1,6 @@
-import type { PracticeModeStats } from './practice.types';
 import { round } from '@/features/vocabulary/card-practice/shared/model/text-input-practice.utils.ts';
+
+import type { PracticeModeStats } from './practice.types';
 
 type CardStatLike = {
   attempts: number;
