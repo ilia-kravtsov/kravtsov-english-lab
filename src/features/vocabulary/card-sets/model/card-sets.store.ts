@@ -1,45 +1,58 @@
-import { createGStore } from 'create-gstore';
-import { useState } from 'react';
+import { create } from 'zustand/react';
 
-import type { CardSet } from '@/entities/card-set/model/card-set.types';
 import type { CardSetsState } from '@/features/vocabulary/card-sets/model/card-sets.types';
 
-export const useCardSetsStore = createGStore<CardSetsState>(() => {
-  const [sets, setSetsState] = useState<CardSet[]>([]);
-  const [selectedId, setSelectedId] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
+export const useCardSetsStore = create<CardSetsState>((set, get) => ({
+  sets: [],
+  selectedId: null,
+  isLoading: false,
 
-  return {
-    sets,
-    selectedId,
-    isLoading,
+  setSets: (next) => {
+    const prevSelectedId = get().selectedId;
+    const nextSelectedId =
+      prevSelectedId && next.some((s) => s.id === prevSelectedId)
+        ? prevSelectedId
+        : (next[0]?.id ?? null);
 
-    setSets: (next) => {
-      setSetsState(next);
-      setSelectedId((prev) => {
-        if (prev && next.some((s) => s.id === prev)) return prev;
-        return next[0]?.id ?? null;
-      });
-    },
+    set({
+      sets: next,
+      selectedId: nextSelectedId,
+    });
+  },
 
-    setLoading: setIsLoading,
+  setLoading: (value) =>
+    set({
+      isLoading: value,
+    }),
 
-    select: setSelectedId,
+  select: (id) =>
+    set({
+      selectedId: id,
+    }),
 
-    removeFromState: (id) => {
-      setSetsState((prev) => prev.filter((s) => s.id !== id));
-      setSelectedId((prev) => (prev === id ? null : prev));
-    },
+  removeFromState: (id) => {
+    const prev = get();
+    const nextSets = prev.sets.filter((s) => s.id !== id);
+    const nextSelectedId = prev.selectedId === id ? null : prev.selectedId;
 
-    upsertInState: (set) => {
-      setSetsState((prev) => {
-        const idx = prev.findIndex((x) => x.id === set.id);
-        if (idx === -1) return [set, ...prev];
-        const copy = prev.slice();
-        copy[idx] = set;
-        return copy;
-      });
-      setSelectedId(set.id);
-    },
-  };
-});
+    set({
+      sets: nextSets,
+      selectedId: nextSelectedId,
+    });
+  },
+
+  upsertInState: (cardSet) => {
+    const prevSets = get().sets;
+    const idx = prevSets.findIndex((x) => x.id === cardSet.id);
+
+    const nextSets =
+      idx === -1
+        ? [cardSet, ...prevSets]
+        : prevSets.map((item, index) => (index === idx ? cardSet : item));
+
+    set({
+      sets: nextSets,
+      selectedId: cardSet.id,
+    });
+  },
+}));
