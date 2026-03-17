@@ -1,7 +1,6 @@
-import { createGStore } from 'create-gstore';
-import { useState } from 'react';
+import { create } from 'zustand/react';
 
-import type { User } from './user.types.ts';
+import type { User } from './user.types';
 
 export interface UserState {
   user: User | null;
@@ -15,45 +14,45 @@ export interface UserState {
   clearAuth: () => void;
 }
 
-export const useUserStore = createGStore<UserState>(() => {
-  const [user, setUser] = useState<User | null>(null);
-  const [accessToken, setAccessToken] = useState<string | null>(null);
-  const [isInitialized, setIsInitialized] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+export const useUserStore = create<UserState>((set) => ({
+  user: null,
+  accessToken: null,
+  isAuthenticated: false,
+  isInitialized: false,
 
-  return {
-    user,
-    accessToken,
-    isAuthenticated,
-    isInitialized,
+  setAuthData: (user, token) => {
+    persistAccessToken(token);
 
-    setAuthData: (user, token) => {
-      setUser(user);
-      setAccessToken(token);
-      setIsAuthenticated(true);
-      persistAccessToken(token);
-      setIsInitialized(true);
-    },
+    set({
+      user,
+      accessToken: token,
+      isAuthenticated: true,
+      isInitialized: true,
+    });
+  },
 
-    setAccessToken: (token) => {
-      setAccessToken(token);
-      setIsAuthenticated(true);
-      persistAccessToken(token);
-      setIsInitialized(true);
-    },
+  setAccessToken: (token) => {
+    persistAccessToken(token);
 
-    clearAuth: () => {
-      setUser(null);
-      setAccessToken(null);
-      setIsAuthenticated(false);
+    set({
+      accessToken: token,
+      isAuthenticated: true,
+      isInitialized: true,
+    });
+  },
 
-      localStorage.removeItem('accessToken');
-      localStorage.removeItem('rememberMe');
+  clearAuth: () => {
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('rememberMe');
 
-      setIsInitialized(true);
-    },
-  };
-});
+    set({
+      user: null,
+      accessToken: null,
+      isAuthenticated: false,
+      isInitialized: true,
+    });
+  },
+}));
 
 function persistAccessToken(token: string) {
   const rememberMe = localStorage.getItem('rememberMe') === 'true';
