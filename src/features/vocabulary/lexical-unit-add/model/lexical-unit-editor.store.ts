@@ -1,5 +1,4 @@
-import { createGStore } from 'create-gstore';
-import { useState } from 'react';
+import { create } from 'zustand/react';
 
 import type { LexicalUnit } from '@/entities/lexical-unit/model/lexical-unit.types';
 
@@ -19,49 +18,47 @@ interface LexicalUnitEditorState {
   resetEditor: () => void;
 }
 
-export const useLexicalUnitEditorStore = createGStore<LexicalUnitEditorState>(() => {
-  const [activeTab, setActiveTab] = useState<WordsBankTab>('add');
-  const [mode, setMode] = useState<EditorMode>('add');
-  const [prefillValue, setPrefillValue] = useState('');
-  const [editingUnit, setEditingUnit] = useState<LexicalUnit | null>(null);
+export const useLexicalUnitEditorStore = create<LexicalUnitEditorState>((set) => ({
+  activeTab: 'add',
+  mode: 'add',
+  prefillValue: '',
+  editingUnit: null,
 
-  return {
-    activeTab,
-    mode,
-    prefillValue,
-    editingUnit,
+  openSearch: () =>
+    set({
+      mode: 'add',
+      editingUnit: null,
+      prefillValue: '',
+      activeTab: 'search',
+    }),
 
-    openSearch: () => {
-      setMode('add');
-      setEditingUnit(null);
-      setPrefillValue('');
-      setActiveTab('search');
-    },
+  openAdd: () =>
+    set({
+      mode: 'add',
+      editingUnit: null,
+      activeTab: 'add',
+    }),
 
-    openAdd: () => {
-      setMode('add');
-      setEditingUnit(null);
-      setActiveTab('add');
-    },
+  openAddWithValue: (value) =>
+    set({
+      mode: 'add',
+      editingUnit: null,
+      prefillValue: value,
+      activeTab: 'add',
+    }),
 
-    openAddWithValue: (value) => {
-      setMode('add');
-      setEditingUnit(null);
-      setPrefillValue(value);
-      setActiveTab('add');
-    },
+  openUpdate: (unit) =>
+    set({
+      mode: 'update',
+      editingUnit: unit,
+      prefillValue: '',
+      activeTab: 'add',
+    }),
 
-    openUpdate: (unit) => {
-      setMode('update');
-      setEditingUnit(unit);
-      setPrefillValue('');
-      setActiveTab('add');
-    },
-
-    resetEditor: () => {
-      setMode('add');
-      setEditingUnit(null);
-      setPrefillValue('');
-    },
-  };
-});
+  resetEditor: () =>
+    set({
+      mode: 'add',
+      editingUnit: null,
+      prefillValue: '',
+    }),
+}));

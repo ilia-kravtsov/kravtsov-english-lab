@@ -3,7 +3,7 @@ import { usePracticeView } from '@/features/vocabulary/card-practice/shared/mode
 import { useTextInputPracticeHandlers } from '@/features/vocabulary/card-practice/shared/model/use-text-input-practice-handlers';
 import { PracticeGuard } from '@/features/vocabulary/card-practice/shared/ui/PracticeGuard';
 import { PracticeProgress } from '@/features/vocabulary/card-practice/shared/ui/PracticeProgress';
-import { mediumButtonStyles, normalButtonWide } from '@/shared/lib/styles/button.styles';
+import { mediumButtonStyles } from '@/shared/lib/styles/button.styles';
 import { Button, Input } from '@/shared/ui';
 
 import { useContextStore } from '../model/context.store';
