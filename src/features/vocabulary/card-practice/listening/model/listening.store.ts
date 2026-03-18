@@ -286,8 +286,8 @@ export const useListeningStore = create<ListeningState>((set, get) => {
 
     statsByCard: {},
 
-    start,
     initPractice,
+    start,
     stop,
     setInput,
     submit,
