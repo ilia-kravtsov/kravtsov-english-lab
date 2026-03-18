@@ -16,7 +16,6 @@ const navLinks: NavLink[] = [
 ];
 
 export function Footer() {
-
   return (
     <div className={style.container}>
       {navLinks.map((navLink: NavLink) => (

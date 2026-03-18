@@ -23,12 +23,7 @@ export function StandardPracticeFront({ value, audioRef, audioSrc, onPlay }: Pro
         {audioSrc ? (
           <>
             <audio ref={audioRef} src={audioSrc} preload={'metadata'} />
-            <Button
-              type={'button'}
-              onClick={onPlay}
-              title={'Play'}
-              style={practiceButtonStyles}
-            />
+            <Button type={'button'} onClick={onPlay} title={'Play'} style={practiceButtonStyles} />
           </>
         ) : (
           <div className={style.muted}> </div>

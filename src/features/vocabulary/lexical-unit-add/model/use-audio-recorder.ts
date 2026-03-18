@@ -139,7 +139,6 @@ export function useAudioRecorder() {
     }
   };
 
-
   const stopRecording = () => {
     stopRecordingInternal(true);
   };

@@ -23,9 +23,9 @@
   border-radius: var(--border-radius-primary);
 
   background: linear-gradient(
-                  180deg,
-                  var(--surface-color-tertiary),
-                  var(--surface-color-secondary)
+    180deg,
+    var(--surface-color-tertiary),
+    var(--surface-color-secondary)
   );
 
   box-shadow: var(--shadow-card-inset);
@@ -36,31 +36,23 @@
   cursor: pointer;
 
   transition:
-          transform var(--transition-duration-fast) var(--transition-timing-default),
-          border-color var(--transition-duration-fast) var(--transition-timing-default),
-          background var(--transition-duration-fast) var(--transition-timing-default),
-          box-shadow var(--transition-duration-fast) var(--transition-timing-default);
+    transform var(--transition-duration-fast) var(--transition-timing-default),
+    border-color var(--transition-duration-fast) var(--transition-timing-default),
+    background var(--transition-duration-fast) var(--transition-timing-default),
+    box-shadow var(--transition-duration-fast) var(--transition-timing-default);
 
   &:hover {
     border-color: var(--border-color-hover);
-    background: linear-gradient(
-                    180deg,
-                    var(--surface-color-hover),
-                    var(--surface-color-primary)
-    );
+    background: linear-gradient(180deg, var(--surface-color-hover), var(--surface-color-primary));
   }
 }
 
 .root:focus-within .control {
   border-color: var(--border-color-focus);
-  background: linear-gradient(
-                  180deg,
-                  var(--surface-color-hover),
-                  var(--surface-color-primary)
-  );
+  background: linear-gradient(180deg, var(--surface-color-hover), var(--surface-color-primary));
   box-shadow:
-          var(--shadow-card-inset),
-          0 0 0 1px var(--border-color-focus);
+    var(--shadow-card-inset),
+    0 0 0 1px var(--border-color-focus);
 }
 
 .valueArea {
@@ -91,11 +83,7 @@
   border: 1px solid var(--border-color-tertiary);
   border-radius: var(--border-radius-primary);
 
-  background: linear-gradient(
-                  180deg,
-                  var(--surface-color-hover),
-                  var(--surface-color-primary)
-  );
+  background: linear-gradient(180deg, var(--surface-color-hover), var(--surface-color-primary));
 
   box-shadow: var(--shadow-card-inset);
 
@@ -114,8 +102,8 @@
   font-size: var(--font-size-primary);
 
   transition:
-          color var(--transition-duration-fast) var(--transition-timing-default),
-          opacity var(--transition-duration-fast) var(--transition-timing-default);
+    color var(--transition-duration-fast) var(--transition-timing-default),
+    opacity var(--transition-duration-fast) var(--transition-timing-default);
 
   &:hover {
     color: var(--text-color-secondary);
@@ -138,11 +126,7 @@
   border: 1px solid var(--border-color-primary);
   border-radius: var(--border-radius-primary);
 
-  background: linear-gradient(
-                  180deg,
-                  var(--surface-color-primary),
-                  var(--surface-color-secondary)
-  );
+  background: linear-gradient(180deg, var(--surface-color-primary), var(--surface-color-secondary));
 
   backdrop-filter: blur(12px);
 
@@ -169,28 +153,20 @@
   text-align: left;
 
   transition:
-          border-color var(--transition-duration-fast) var(--transition-timing-default),
-          background var(--transition-duration-fast) var(--transition-timing-default),
-          color var(--transition-duration-fast) var(--transition-timing-default);
+    border-color var(--transition-duration-fast) var(--transition-timing-default),
+    background var(--transition-duration-fast) var(--transition-timing-default),
+    color var(--transition-duration-fast) var(--transition-timing-default);
 
   &:hover {
     border-color: var(--border-color-hover);
-    background: linear-gradient(
-                    180deg,
-                    var(--surface-color-hover),
-                    var(--surface-color-primary)
-    );
+    background: linear-gradient(180deg, var(--surface-color-hover), var(--surface-color-primary));
     color: var(--text-color-secondary);
   }
 }
 
 .optionActive {
   border-color: var(--border-color-focus);
-  background: linear-gradient(
-                  180deg,
-                  var(--surface-color-hover),
-                  var(--surface-color-primary)
-  );
+  background: linear-gradient(180deg, var(--surface-color-hover), var(--surface-color-primary));
   color: var(--text-color-secondary);
 }
 

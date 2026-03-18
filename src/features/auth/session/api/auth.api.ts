@@ -1,14 +1,14 @@
-import type {ForgotPasswordDto} from "@/features/auth/forgot-password/model/forgot-password.dto";
-import type {ForgotPasswordResponse} from "@/features/auth/forgot-password/model/forgot-password.types";
-import type {LoginDto} from "@/features/auth/login/model/login.dto";
-import type {MeResponse} from "@/features/auth/me/model/me.types";
-import type {RefreshResponse} from "@/features/auth/refresh/model/refresh.types";
-import type {RegisterDto} from "@/features/auth/register/model/register.dto";
-import type {ResetPasswordDto} from "@/features/auth/reset-password/model/reset-password.dto";
-import type {ResetPasswordResponse} from "@/features/auth/reset-password/model/reset-password.types";
-import type {AuthResponse} from "@/features/auth/session/api/auth.types";
-import {api} from '@/shared/api';
-import {apiRefresh} from "@/shared/api/api-refresh";
+import type { ForgotPasswordDto } from '@/features/auth/forgot-password/model/forgot-password.dto';
+import type { ForgotPasswordResponse } from '@/features/auth/forgot-password/model/forgot-password.types';
+import type { LoginDto } from '@/features/auth/login/model/login.dto';
+import type { MeResponse } from '@/features/auth/me/model/me.types';
+import type { RefreshResponse } from '@/features/auth/refresh/model/refresh.types';
+import type { RegisterDto } from '@/features/auth/register/model/register.dto';
+import type { ResetPasswordDto } from '@/features/auth/reset-password/model/reset-password.dto';
+import type { ResetPasswordResponse } from '@/features/auth/reset-password/model/reset-password.types';
+import type { AuthResponse } from '@/features/auth/session/api/auth.types';
+import { api } from '@/shared/api';
+import { apiRefresh } from '@/shared/api/api-refresh';
 
 export const authApi = {
   async login(dto: LoginDto): Promise<AuthResponse> {

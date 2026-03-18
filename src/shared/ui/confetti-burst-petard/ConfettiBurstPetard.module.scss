@@ -52,6 +52,6 @@
   100% {
     opacity: 0;
     transform: translate(calc(var(--dx) * 1.05), calc(var(--dy) + 85vh)) rotate(var(--rot2))
-    scale(0.95);
+      scale(0.95);
   }
 }

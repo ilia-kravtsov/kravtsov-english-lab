@@ -15,14 +15,7 @@ type Props = {
   onDelete: (set: CardSetItem) => void;
 };
 
-export function CardSetsList({
-                               sets,
-                               selectedId,
-                               isLoading,
-                               onOpen,
-                               onEdit,
-                               onDelete,
-                             }: Props) {
+export function CardSetsList({ sets, selectedId, isLoading, onOpen, onEdit, onDelete }: Props) {
   return (
     <div className={style.sectionYourCardSets}>
       <div className={style.headerRow}>

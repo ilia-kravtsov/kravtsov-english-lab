@@ -15,7 +15,6 @@ export function ContextPractice({
   onAutoNext,
   autoNextCommitDelayMs,
 }: PracticeViewProps) {
-
   const cards = useContextStore((s) => s.cards);
   const index = useContextStore((s) => s.index);
   const feedback = useContextStore((s) => s.feedback);

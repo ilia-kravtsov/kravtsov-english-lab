@@ -1,11 +1,4 @@
-import {
-  type ChangeEvent,
-  type KeyboardEvent,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import { type ChangeEvent, type KeyboardEvent, useEffect, useMemo, useRef, useState } from 'react';
 
 import type { LexicalUnitSearchResultState } from './use-lexical-unit-search-query.ts';
 import { useLexicalUnitSuggestions } from './use-lexical-unit-suggestions.ts';
@@ -19,12 +12,12 @@ type Params = {
 };
 
 export function useLexicalUnitSearchInput({
-                                            query,
-                                            setQuery,
-                                            normalizedQuery,
-                                            result,
-                                            runSearch,
-                                          }: Params) {
+  query,
+  setQuery,
+  normalizedQuery,
+  result,
+  runSearch,
+}: Params) {
   const [isSuggestOpen, setIsSuggestOpen] = useState(false);
   const suggestWrapRef = useRef<HTMLDivElement | null>(null);
 

@@ -12,23 +12,17 @@ type Props = {
 };
 
 export function PracticeGuard({
-                                      cardSetId,
-                                      isFinished,
-                                      restart,
-                                      restartTitle,
-                                      isReady,
-                                      children,
-                                    }: Props): JSX.Element | null {
+  cardSetId,
+  isFinished,
+  restart,
+  restartTitle,
+  isReady,
+  children,
+}: Props): JSX.Element | null {
   if (!cardSetId) return null;
 
   if (isFinished) {
-    return (
-      <PracticeResults
-        cardSetId={cardSetId}
-        restart={restart}
-        restartTitle={restartTitle}
-      />
-    );
+    return <PracticeResults cardSetId={cardSetId} restart={restart} restartTitle={restartTitle} />;
   }
 
   if (!isReady) return null;

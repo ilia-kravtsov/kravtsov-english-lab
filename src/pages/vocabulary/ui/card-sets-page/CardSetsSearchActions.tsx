@@ -1,5 +1,5 @@
+import { wideButtonStyles } from '@/shared/lib/styles/button.styles';
 import { Button } from '@/shared/ui';
-import { wideButtonStyles } from '@/shared/lib/styles/button.styles.ts';
 
 type Props = {
   inSet: boolean;
@@ -11,13 +11,13 @@ type Props = {
 };
 
 export function CardSetsSearchActions({
-                                        inSet,
-                                        adding,
-                                        removing,
-                                        hasFoundCardInSet,
-                                        onAdd,
-                                        onRemove,
-                                      }: Props) {
+  inSet,
+  adding,
+  removing,
+  hasFoundCardInSet,
+  onAdd,
+  onRemove,
+}: Props) {
   return (
     <div style={{ display: 'flex', gap: '12px' }}>
       <Button

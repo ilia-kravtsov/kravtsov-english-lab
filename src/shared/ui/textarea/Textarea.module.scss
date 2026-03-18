@@ -12,9 +12,9 @@
   border-radius: var(--border-radius-primary);
 
   background: linear-gradient(
-                  180deg,
-                  var(--surface-color-tertiary),
-                  var(--surface-color-secondary)
+    180deg,
+    var(--surface-color-tertiary),
+    var(--surface-color-secondary)
   );
 
   box-shadow: var(--shadow-card-inset);
@@ -23,9 +23,9 @@
   min-height: 80px;
 
   transition:
-          border-color var(--transition-duration-fast) var(--transition-timing-default),
-          background var(--transition-duration-fast) var(--transition-timing-default),
-          box-shadow var(--transition-duration-fast) var(--transition-timing-default);
+    border-color var(--transition-duration-fast) var(--transition-timing-default),
+    background var(--transition-duration-fast) var(--transition-timing-default),
+    box-shadow var(--transition-duration-fast) var(--transition-timing-default);
 }
 
 .container::placeholder {
@@ -41,15 +41,11 @@
 
   border-color: var(--border-color-focus);
 
-  background: linear-gradient(
-                  180deg,
-                  var(--surface-color-hover),
-                  var(--surface-color-primary)
-  );
+  background: linear-gradient(180deg, var(--surface-color-hover), var(--surface-color-primary));
 
   box-shadow:
-          var(--shadow-card-inset),
-          0 0 0 1px var(--border-color-focus);
+    var(--shadow-card-inset),
+    0 0 0 1px var(--border-color-focus);
 }
 
 .container:disabled {

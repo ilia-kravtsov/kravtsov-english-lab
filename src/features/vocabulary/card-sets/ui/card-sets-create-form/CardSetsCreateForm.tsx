@@ -11,12 +11,12 @@ type Props = Pick<
 >;
 
 export function CardSetsCreateForm({
-                                     registerCreate,
-                                     handleSubmitCreate,
-                                     submitCreate,
-                                     createErrors,
-                                     isCreating,
-                                   }: Props) {
+  registerCreate,
+  handleSubmitCreate,
+  submitCreate,
+  createErrors,
+  isCreating,
+}: Props) {
   return (
     <div className={style.sectionCreateCardSet}>
       <h2 className={style.title}>Create Card Set</h2>
@@ -25,10 +25,7 @@ export function CardSetsCreateForm({
         <div className={style.formRow}>
           <div className={style.formField}>
             <span className={style.label}>Title</span>
-            <Input
-              placeholder={'Travel France'}
-              {...registerCreate('title', { required: true })}
-            />
+            <Input placeholder={'Travel France'} {...registerCreate('title', { required: true })} />
             {createErrors.title && <span className={style.error}>Title is required</span>}
           </div>
 

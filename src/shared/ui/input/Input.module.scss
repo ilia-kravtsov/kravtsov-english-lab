@@ -13,21 +13,17 @@
   color: var(--text-color-secondary);
 
   background:
-          linear-gradient(
-                          180deg,
-                          rgb(255 255 255 / 0.08),
-                          rgb(255 255 255 / 0.04)
-          ),
-          var(--surface-color-primary);
+    linear-gradient(180deg, rgb(255 255 255 / 0.08), rgb(255 255 255 / 0.04)),
+    var(--surface-color-primary);
 
   box-shadow: var(--shadow-card-inset);
 
   backdrop-filter: blur(calc(var(--blur-primary) * 0.6));
 
   transition:
-          border-color var(--transition-duration-fast) var(--transition-timing-default),
-          box-shadow var(--transition-duration-fast) var(--transition-timing-default),
-          background var(--transition-duration-fast) var(--transition-timing-default);
+    border-color var(--transition-duration-fast) var(--transition-timing-default),
+    box-shadow var(--transition-duration-fast) var(--transition-timing-default),
+    background var(--transition-duration-fast) var(--transition-timing-default);
 }
 
 .input::placeholder {
@@ -42,8 +38,8 @@
   outline: none;
   border-color: var(--border-color-focus);
   box-shadow:
-          var(--shadow-card-inset),
-          0 0 0 1px var(--border-color-focus);
+    var(--shadow-card-inset),
+    0 0 0 1px var(--border-color-focus);
 }
 
 .input:disabled {
@@ -75,6 +71,6 @@
 
 .input[data-error='true']:focus {
   box-shadow:
-          var(--shadow-card-inset),
-          0 0 0 1px var(--error-color-primary);
+    var(--shadow-card-inset),
+    0 0 0 1px var(--error-color-primary);
 }

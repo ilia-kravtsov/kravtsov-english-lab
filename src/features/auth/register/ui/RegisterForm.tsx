@@ -114,7 +114,6 @@ export function RegisterForm() {
         disabled={isSubmitting}
         title={isSubmitting ? 'Registering...' : 'Register'}
       />
-
     </form>
   );
 }

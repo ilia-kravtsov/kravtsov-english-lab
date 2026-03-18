@@ -17,17 +17,17 @@ export function VocabularyIntro() {
           To get started, choose one of the options from the menu above
         </p>
         <p className={style.paragraph}>
-          <NavLink to={"cards"}>Cards — </NavLink>
+          <NavLink to={'cards'}>Cards — </NavLink>
           ready-made sets of cards organized by difficulty level. Create your own cards for
           personalized practice
         </p>
         <p className={style.paragraph}>
-          <NavLink to={"words-bank"}>Words bank — </NavLink>
+          <NavLink to={'words-bank'}>Words bank — </NavLink>
           save unfamiliar words and new expressions for later review and future practice
         </p>
       </div>
 
-      <LinkAsButton to={"cards"}>Let's dive in!</LinkAsButton>
+      <LinkAsButton to={'cards'}>Let's dive in!</LinkAsButton>
     </div>
   );
 }

@@ -60,19 +60,15 @@
   opacity: 0.55;
 
   transition:
-          transform var(--transition-duration-fast) var(--transition-timing-default),
-          border-color var(--transition-duration-fast) var(--transition-timing-default),
-          background var(--transition-duration-fast) var(--transition-timing-default),
-          opacity var(--transition-duration-fast) var(--transition-timing-default);
+    transform var(--transition-duration-fast) var(--transition-timing-default),
+    border-color var(--transition-duration-fast) var(--transition-timing-default),
+    background var(--transition-duration-fast) var(--transition-timing-default),
+    opacity var(--transition-duration-fast) var(--transition-timing-default);
 
   &:hover {
     transform: translateY(var(--translate-hover-y));
     border-color: var(--border-color-hover);
-    background: linear-gradient(
-                    180deg,
-                    var(--surface-color-hover),
-                    var(--surface-color-primary)
-    );
+    background: linear-gradient(180deg, var(--surface-color-hover), var(--surface-color-primary));
     opacity: 0.9;
   }
 
@@ -81,11 +77,7 @@
 
     border-color: var(--border-color-focus);
 
-    background: linear-gradient(
-                    180deg,
-                    var(--surface-color-hover),
-                    var(--surface-color-primary)
-    );
+    background: linear-gradient(180deg, var(--surface-color-hover), var(--surface-color-primary));
   }
 }
 

@@ -84,9 +84,9 @@
   border-radius: var(--border-radius-primary);
 
   background: linear-gradient(
-                  180deg,
-                  var(--surface-color-tertiary),
-                  var(--surface-color-secondary)
+    180deg,
+    var(--surface-color-tertiary),
+    var(--surface-color-secondary)
   );
 
   box-shadow: var(--shadow-card-inset);
@@ -98,20 +98,16 @@
   letter-spacing: var(--letter-spacing-wide);
 
   transition:
-          transform var(--transition-duration-fast) var(--transition-timing-default),
-          border-color var(--transition-duration-fast) var(--transition-timing-default),
-          background var(--transition-duration-fast) var(--transition-timing-default),
-          color var(--transition-duration-fast) var(--transition-timing-default);
+    transform var(--transition-duration-fast) var(--transition-timing-default),
+    border-color var(--transition-duration-fast) var(--transition-timing-default),
+    background var(--transition-duration-fast) var(--transition-timing-default),
+    color var(--transition-duration-fast) var(--transition-timing-default);
 
   &:hover {
     transform: translateY(var(--translate-hover-y));
     border-color: var(--border-color-hover);
 
-    background: linear-gradient(
-                    180deg,
-                    var(--surface-color-hover),
-                    var(--surface-color-primary)
-    );
+    background: linear-gradient(180deg, var(--surface-color-hover), var(--surface-color-primary));
 
     color: var(--text-color-secondary);
   }

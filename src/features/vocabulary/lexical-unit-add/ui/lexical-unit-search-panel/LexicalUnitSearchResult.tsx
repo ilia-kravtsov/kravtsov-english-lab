@@ -26,24 +26,24 @@ type Props = {
 };
 
 export function LexicalUnitSearchResult({
-                                          unit,
-                                          variant = 'full',
+  unit,
+  variant = 'full',
 
-                                          audioRef,
-                                          audioSrc,
-                                          playAudio,
+  audioRef,
+  audioSrc,
+  playAudio,
 
-                                          meaningAudioRef,
-                                          meaningAudioSrc,
-                                          playMeaningAudio,
+  meaningAudioRef,
+  meaningAudioSrc,
+  playMeaningAudio,
 
-                                          exampleAudioRef,
-                                          exampleAudioSrc,
-                                          playExampleAudio,
+  exampleAudioRef,
+  exampleAudioSrc,
+  playExampleAudio,
 
-                                          imageSrc,
-                                          renderFoundActions,
-                                        }: Props) {
+  imageSrc,
+  renderFoundActions,
+}: Props) {
   return (
     <div className={style.resultBox}>
       <div className={style.fields}>

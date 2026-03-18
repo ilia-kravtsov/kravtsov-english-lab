@@ -15,7 +15,6 @@ export function TypingPractice({
   onAutoNext,
   autoNextCommitDelayMs,
 }: PracticeViewProps) {
-
   const cards = useTypingStore((s) => s.cards);
   const index = useTypingStore((s) => s.index);
   const feedback = useTypingStore((s) => s.feedback);

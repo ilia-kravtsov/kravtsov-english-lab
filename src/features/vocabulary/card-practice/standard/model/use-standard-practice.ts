@@ -1,7 +1,8 @@
 import { type MouseEvent, useEffect, useMemo, useRef } from 'react';
-import type { PracticeSwitchDir } from '@/features/vocabulary/card-practice/shared/model/practice-mode.types.ts';
-import { toAbsoluteMediaUrl } from '@/shared/lib/url/to-absolute-media-url.ts';
-import type { Params } from '@/features/vocabulary/card-practice/standard/model/standard-practice.types.ts';
+
+import type { PracticeSwitchDir } from '@/features/vocabulary/card-practice/shared/model/practice-mode.types';
+import type { Params } from '@/features/vocabulary/card-practice/standard/model/standard-practice.types';
+import { toAbsoluteMediaUrl } from '@/shared/lib/url/to-absolute-media-url';
 
 export function useStandardPractice({
   items,

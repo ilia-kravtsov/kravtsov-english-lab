@@ -27,18 +27,18 @@ type Props = {
 const searchButtonStyle = { width: '120px' };
 
 export function LexicalUnitSearchInput({
-                                         query,
-                                         isLoading,
-                                         normalizedQuery,
-                                         suggestWrapRef,
-                                         suggestions,
-                                         showSuggest,
-                                         onChange,
-                                         onKeyDown,
-                                         onFocus,
-                                         onSearch,
-                                         onPickSuggestion,
-                                       }: Props) {
+  query,
+  isLoading,
+  normalizedQuery,
+  suggestWrapRef,
+  suggestions,
+  showSuggest,
+  onChange,
+  onKeyDown,
+  onFocus,
+  onSearch,
+  onPickSuggestion,
+}: Props) {
   return (
     <div className={style.searchRow}>
       <div className={style.inputWrap} ref={suggestWrapRef}>

@@ -31,11 +31,11 @@ export function createTextInputPracticeMethods<
   TFeedback extends TextInputFeedback,
   TStat extends TextInputCardStat,
 >({
-    set,
-    get,
-    initialFeedback,
-    writeStats,
-  }: CreateTextInputPracticeMethodsParams<TCard, TFeedback, TStat>) {
+  set,
+  get,
+  initialFeedback,
+  writeStats,
+}: CreateTextInputPracticeMethodsParams<TCard, TFeedback, TStat>) {
   let shownAt = 0;
   let feedbackResetTimer: number | null = null;
 
@@ -178,8 +178,7 @@ export function createTextInputPracticeMethods<
   };
 
   const skip = () => {
-    const { isActive, isFinished, cards, index, locked, attempts, wrongCount, statsByCard } =
-      get();
+    const { isActive, isFinished, cards, index, locked, attempts, wrongCount, statsByCard } = get();
 
     if (!isActive || isFinished) return;
 

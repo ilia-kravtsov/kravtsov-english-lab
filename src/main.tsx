@@ -14,7 +14,7 @@ initAuthApp();
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <Profiler id={"AppRoot"} onRender={appProfilerOnRender}>
+    <Profiler id={'AppRoot'} onRender={appProfilerOnRender}>
       <RouterProvider router={router} />
 
       <ToastContainer

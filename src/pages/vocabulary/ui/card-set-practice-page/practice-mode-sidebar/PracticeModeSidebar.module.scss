@@ -71,11 +71,11 @@
   overflow: hidden;
 
   transition:
-          transform var(--transition-duration-fast) var(--transition-timing-default),
-          border-color var(--transition-duration-fast) var(--transition-timing-default),
-          box-shadow var(--transition-duration-fast) var(--transition-timing-default),
-          opacity var(--transition-duration-fast) var(--transition-timing-default),
-          background var(--transition-duration-fast) var(--transition-timing-default);
+    transform var(--transition-duration-fast) var(--transition-timing-default),
+    border-color var(--transition-duration-fast) var(--transition-timing-default),
+    box-shadow var(--transition-duration-fast) var(--transition-timing-default),
+    opacity var(--transition-duration-fast) var(--transition-timing-default),
+    background var(--transition-duration-fast) var(--transition-timing-default);
 }
 
 .modeBtn::before,
@@ -108,20 +108,20 @@
   outline: none;
   border-color: var(--border-color-focus);
   box-shadow:
-          0 0 0 1px rgba(255, 255, 255, 0.08),
-          var(--shadow-card-inset);
+    0 0 0 1px rgba(255, 255, 255, 0.08),
+    var(--shadow-card-inset);
 }
 
 .modeBtnActive {
   cursor: default;
   border-color: var(--border-color-focus);
   background:
-          linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02)),
-          var(--glass-bg-tertiary);
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02)),
+    var(--glass-bg-tertiary);
   box-shadow:
-          0 0 0 1px rgba(255, 255, 255, 0.08),
-          0 0 20px rgba(255, 255, 255, 0.04),
-          var(--shadow-card-inset);
+    0 0 0 1px rgba(255, 255, 255, 0.08),
+    0 0 20px rgba(255, 255, 255, 0.04),
+    var(--shadow-card-inset);
   color: var(--text-color-secondary);
 }
 

@@ -9,15 +9,13 @@
   justify-content: flex-end;
   padding: 0 40px;
 
-  background:
-          var(--bg-color-gradient-primary),
-          linear-gradient(180deg, #0f0f10 0%, #090909 100%);
+  background: var(--bg-color-gradient-primary), linear-gradient(180deg, #0f0f10 0%, #090909 100%);
 
   border-bottom: 1px solid var(--border-color-primary);
 
   box-shadow:
-          0 24px 80px rgb(0 0 0 / 0.45),
-          inset 0 1px 0 rgb(255 255 255 / 0.08);
+    0 24px 80px rgb(0 0 0 / 0.45),
+    inset 0 1px 0 rgb(255 255 255 / 0.08);
 
   overflow: hidden;
 }
@@ -27,8 +25,8 @@
   position: absolute;
   inset: 0;
   background:
-          linear-gradient(135deg, rgb(255 255 255 / 0.06), transparent 38%),
-          linear-gradient(315deg, rgb(255 255 255 / 0.03), transparent 30%);
+    linear-gradient(135deg, rgb(255 255 255 / 0.06), transparent 38%),
+    linear-gradient(315deg, rgb(255 255 255 / 0.03), transparent 30%);
   pointer-events: none;
 }
 

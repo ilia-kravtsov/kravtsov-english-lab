@@ -14,13 +14,13 @@ type Props = {
 };
 
 export function StandardPracticeControls({
-                                           index,
-                                           total,
-                                           isLastCard,
-                                           onPrev,
-                                           onNext,
-                                           onRestart,
-                                         }: Props) {
+  index,
+  total,
+  isLastCard,
+  onPrev,
+  onNext,
+  onRestart,
+}: Props) {
   return (
     <div className={style.controlsRow}>
       <Button
