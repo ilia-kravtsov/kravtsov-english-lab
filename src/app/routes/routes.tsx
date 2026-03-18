@@ -1,3 +1,5 @@
+import { Profiler } from 'react';
+
 import { ProtectedRoute } from '@/app/routes/ProtectedRoute';
 import { AppInitWrapper } from '@/app/ui/AppInitWrapper';
 import { CardSets } from '@/features/vocabulary/card-sets';
@@ -20,17 +22,20 @@ import { CardSetPracticePage, CardSetsPage, VocabularyLayout, WordsBank } from '
 import { vocabularyHeaderLinks } from '@/pages/vocabulary/model/vocabulary-header-links';
 import { VocabularyIntro } from '@/pages/vocabulary/ui/vocabulary-layout/vocabulary-intro/VocabularyIntro';
 import { Writing } from '@/pages/writing';
+import { appProfilerOnRender } from '@/shared/lib/react-profiler';
 import { Dashboard } from '@/widgets/dashboard';
 
 export const routes = [
   {
     path: '/',
     element: (
-      <ProtectedRoute>
-        <AppInitWrapper>
-          <Dashboard />
-        </AppInitWrapper>
-      </ProtectedRoute>
+      <Profiler id="DashboardRoute" onRender={appProfilerOnRender}>
+        <ProtectedRoute>
+          <AppInitWrapper>
+            <Dashboard />
+          </AppInitWrapper>
+        </ProtectedRoute>
+      </Profiler>
     ),
     children: [
       { index: true, element: <Home /> },
@@ -45,16 +50,48 @@ export const routes = [
       { path: 'settings', element: <Settings /> },
       {
         path: 'vocabulary',
-        element: <VocabularyLayout />,
+        element: (
+          <Profiler id={"VocabularyLayoutRoute"} onRender={appProfilerOnRender}>
+            <VocabularyLayout />
+          </Profiler>
+        ),
         handle: {
           headerLinks: vocabularyHeaderLinks,
         },
         children: [
           { index: true, element: <VocabularyIntro /> },
-          { path: 'cards', element: <CardSets /> },
-          { path: 'cards/:cardSetId', element: <CardSetsPage /> },
-          { path: 'cards/:cardSetId/practice', element: <CardSetPracticePage /> },
-          { path: 'words-bank', element: <WordsBank /> },
+          {
+            path: 'cards',
+            element: (
+              <Profiler id={"CardSetsRoute"} onRender={appProfilerOnRender}>
+                <CardSets />
+              </Profiler>
+            ),
+          },
+          {
+            path: 'cards/:cardSetId',
+            element: (
+              <Profiler id={"CardSetsPageRoute"} onRender={appProfilerOnRender}>
+                <CardSetsPage />
+              </Profiler>
+            ),
+          },
+          {
+            path: 'cards/:cardSetId/practice',
+            element: (
+              <Profiler id={"CardSetPracticePageRoute"} onRender={appProfilerOnRender}>
+                <CardSetPracticePage />
+              </Profiler>
+            ),
+          },
+          {
+            path: 'words-bank',
+            element: (
+              <Profiler id={"WordsBankRoute"} onRender={appProfilerOnRender}>
+                <WordsBank />
+              </Profiler>
+            ),
+          },
           { path: '*', element: <NotFound /> },
         ],
       },

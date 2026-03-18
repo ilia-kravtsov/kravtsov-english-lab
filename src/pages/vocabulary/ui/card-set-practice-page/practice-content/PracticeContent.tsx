@@ -1,16 +1,17 @@
-import type { Dispatch, ReactNode, SetStateAction } from 'react';
+import { type Dispatch, Profiler, type ReactNode, type SetStateAction } from 'react';
 
-import type { CardWithLexicalUnit } from '@/entities/card/model/card.types.ts';
-import { ContextPractice } from '@/features/vocabulary/card-practice/context/ui/ContextPractice.tsx';
-import { ListeningPractice } from '@/features/vocabulary/card-practice/listening/ui/ListeningPractice.tsx';
-import { RecognitionPractice } from '@/features/vocabulary/card-practice/recognition/ui/RecognitionPractice.tsx';
+import type { CardWithLexicalUnit } from '@/entities/card/model/card.types';
+import { ContextPractice } from '@/features/vocabulary/card-practice/context/ui/ContextPractice';
+import { ListeningPractice } from '@/features/vocabulary/card-practice/listening/ui/ListeningPractice';
+import { RecognitionPractice } from '@/features/vocabulary/card-practice/recognition/ui/RecognitionPractice';
 import type {
   PracticeMode,
   PracticeSwitchDir,
   PracticeSwitchState,
-} from '@/features/vocabulary/card-practice/shared/model/practice-mode.types.ts';
-import { StandardPractice } from '@/features/vocabulary/card-practice/standard/ui/StandardPractice.tsx';
-import { TypingPractice } from '@/features/vocabulary/card-practice/typing/ui/TypingPractice.tsx';
+} from '@/features/vocabulary/card-practice/shared/model/practice-mode.types';
+import { StandardPractice } from '@/features/vocabulary/card-practice/standard/ui/StandardPractice';
+import { TypingPractice } from '@/features/vocabulary/card-practice/typing/ui/TypingPractice';
+import { appProfilerOnRender } from '@/shared/lib/react-profiler';
 
 import style from './PracticeContent.module.scss';
 
@@ -64,15 +65,17 @@ export function PracticeContent({
   switch (mode) {
     case 'standard':
       content = (
-        <StandardPractice
-          items={items}
-          index={index}
-          isFlipped={isFlipped}
-          setIsFlipped={setIsFlipped}
-          setIndex={setIndex}
-          switchDir={switchDir}
-          triggerSwitch={triggerSwitch}
-        />
+        <Profiler id={'StandardPractice'} onRender={appProfilerOnRender}>
+          <StandardPractice
+            items={items}
+            index={index}
+            isFlipped={isFlipped}
+            setIsFlipped={setIsFlipped}
+            setIndex={setIndex}
+            switchDir={switchDir}
+            triggerSwitch={triggerSwitch}
+          />
+        </Profiler>
       );
       break;
 
@@ -80,11 +83,13 @@ export function PracticeContent({
       content = !recognitionAvailable ? (
         <div className={style.muted}>Recognition needs at least 2 cards with translation.</div>
       ) : (
-        <RecognitionPractice
-          switchDir={switchDir}
-          onAutoNext={() => triggerSwitch('next')}
-          autoNextCommitDelayMs={130}
-        />
+        <Profiler id={'RecognitionPractice'} onRender={appProfilerOnRender}>
+          <RecognitionPractice
+            switchDir={switchDir}
+            onAutoNext={() => triggerSwitch('next')}
+            autoNextCommitDelayMs={130}
+          />
+        </Profiler>
       );
       break;
 
@@ -92,21 +97,25 @@ export function PracticeContent({
       content = !typingAvailable ? (
         <div className={style.muted}>Typing needs at least 1 card with translation.</div>
       ) : (
-        <TypingPractice
-          switchDir={switchDir}
-          onAutoNext={() => triggerSwitch('next')}
-          autoNextCommitDelayMs={130}
-        />
+        <Profiler id={'TypingPractice'} onRender={appProfilerOnRender}>
+          <TypingPractice
+            switchDir={switchDir}
+            onAutoNext={() => triggerSwitch('next')}
+            autoNextCommitDelayMs={130}
+          />
+        </Profiler>
       );
       break;
 
     case 'context':
       content = (
-        <ContextPractice
-          switchDir={switchDir}
-          onAutoNext={() => triggerSwitch('next')}
-          autoNextCommitDelayMs={130}
-        />
+        <Profiler id={'ContextPractice'} onRender={appProfilerOnRender}>
+          <ContextPractice
+            switchDir={switchDir}
+            onAutoNext={() => triggerSwitch('next')}
+            autoNextCommitDelayMs={130}
+          />
+        </Profiler>
       );
       break;
 
@@ -114,11 +123,13 @@ export function PracticeContent({
       content = !listeningAvailable ? (
         <div className={style.muted}>Listening needs at least 1 card with audio.</div>
       ) : (
-        <ListeningPractice
-          switchDir={switchDir}
-          onAutoNext={() => triggerSwitch('next')}
-          autoNextCommitDelayMs={130}
-        />
+        <Profiler id={'ListeningPractice'} onRender={appProfilerOnRender}>
+          <ListeningPractice
+            switchDir={switchDir}
+            onAutoNext={() => triggerSwitch('next')}
+            autoNextCommitDelayMs={130}
+          />
+        </Profiler>
       );
       break;
 
