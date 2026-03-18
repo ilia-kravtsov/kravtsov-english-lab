@@ -23,7 +23,6 @@ export { usePracticeModeAvailability } from './model/use-practice-mode-availabil
 export { usePracticeView } from './model/use-practice-view';
 export { useSwitchAnimation } from './model/use-switch-animation';
 export { useTextInputPracticeHandlers } from './model/use-text-input-practice-handlers';
-export { useTextInputPracticeState } from './model/use-text-input-practice-state';
 export { PracticeResults } from './ui/practice-results/PracticeResults';
 export { PracticeGuard } from './ui/PracticeGuard';
 export { PracticeProgress } from './ui/PracticeProgress';
