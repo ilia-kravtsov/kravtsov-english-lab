@@ -3,72 +3,40 @@
   --bg-color-primary: #fff;
   --bg-color-secondary: #1a1a1a;
   --bg-color-tertiary:
-          radial-gradient(circle at top, rgb(255 255 255 / 0.06), transparent 30%),
-          linear-gradient(180deg, #0f0f10 0%, #090909 100%);
-  --bg-color-gradient-primary:
-          linear-gradient(180deg, rgb(255 255 255 / 0.05),
-          rgb(255 255 255 / 0.02));
-
-  --glass-bg-primary: linear-gradient(
-                  180deg,
-                  rgba(52, 52, 52, 0.96),
-                  rgba(39, 39, 39, 0.94)
+    radial-gradient(circle at top, rgb(255 255 255 / 0.06), transparent 30%),
+    linear-gradient(180deg, #0f0f10 0%, #090909 100%);
+  --bg-color-gradient-primary: linear-gradient(
+    180deg,
+    rgb(255 255 255 / 0.05),
+    rgb(255 255 255 / 0.02)
   );
 
-  --glass-bg-secondary: linear-gradient(
-                  180deg,
-                  rgba(58, 58, 58, 0.94),
-                  rgba(45, 45, 45, 0.92)
-  );
+  --glass-bg-primary: linear-gradient(180deg, rgba(52, 52, 52, 0.96), rgba(39, 39, 39, 0.94));
 
-  --glass-bg-tertiary: linear-gradient(
-                  180deg,
-                  rgba(64, 64, 64, 0.92),
-                  rgba(49, 49, 49, 0.9)
-  );
+  --glass-bg-secondary: linear-gradient(180deg, rgba(58, 58, 58, 0.94), rgba(45, 45, 45, 0.92));
 
-  --glass-bg-hover: linear-gradient(
-                  180deg,
-                  rgba(70, 70, 70, 0.94),
-                  rgba(54, 54, 54, 0.92)
-  );
+  --glass-bg-tertiary: linear-gradient(180deg, rgba(64, 64, 64, 0.92), rgba(49, 49, 49, 0.9));
 
-  --glass-highlight-primary: linear-gradient(
-                  135deg,
-                  rgb(255 255 255 / 0.06),
-                  transparent 38%
-  );
+  --glass-bg-hover: linear-gradient(180deg, rgba(70, 70, 70, 0.94), rgba(54, 54, 54, 0.92));
 
-  --glass-highlight-secondary: linear-gradient(
-                  315deg,
-                  rgb(255 255 255 / 0.03),
-                  transparent 30%
-  );
+  --glass-highlight-primary: linear-gradient(135deg, rgb(255 255 255 / 0.06), transparent 38%);
 
-  --glass-highlight: var(--glass-highlight-primary),
-  var(--glass-highlight-secondary);
+  --glass-highlight-secondary: linear-gradient(315deg, rgb(255 255 255 / 0.03), transparent 30%);
 
-  --glass-overlay-primary: linear-gradient(
-                  180deg,
-                  rgb(255 255 255 / 0.05),
-                  transparent 55%
-  );
+  --glass-highlight: var(--glass-highlight-primary), var(--glass-highlight-secondary);
 
-  --glass-overlay-secondary: linear-gradient(
-                  135deg,
-                  rgb(255 255 255 / 0.04),
-                  transparent 38%
-  );
+  --glass-overlay-primary: linear-gradient(180deg, rgb(255 255 255 / 0.05), transparent 55%);
 
-  --glass-overlay: var(--glass-overlay-primary),
-  var(--glass-overlay-secondary);
+  --glass-overlay-secondary: linear-gradient(135deg, rgb(255 255 255 / 0.04), transparent 38%);
+
+  --glass-overlay: var(--glass-overlay-primary), var(--glass-overlay-secondary);
 
   --glass-divider: linear-gradient(
-                  90deg,
-                  transparent 0%,
-                  rgb(255 255 255 / 0.18) 20%,
-                  rgb(255 255 255 / 0.18) 80%,
-                  transparent 100%
+    90deg,
+    transparent 0%,
+    rgb(255 255 255 / 0.18) 20%,
+    rgb(255 255 255 / 0.18) 80%,
+    transparent 100%
   );
 
   --text-color-primary: #1a1a1a;
@@ -169,13 +137,9 @@
   --shadow-secondary: 0 0 2px rgba(0, 0, 0, 0.4);
   --shadow-tertiary: 0 0 1px rgba(0, 0, 0, 0.2);
   --shadow-active: 0 0 8px rgba(77, 163, 255, 0.6);
-  --shadow-panel-primary:
-          0 24px 80px rgb(0 0 0 / 0.45),
-          inset 0 1px 0 var(--overlay-color-primary);
+  --shadow-panel-primary: 0 24px 80px rgb(0 0 0 / 0.45), inset 0 1px 0 var(--overlay-color-primary);
   --shadow-card-inset: inset 0 1px 0 var(--overlay-color-secondary);
-  --shadow-panel-secondary:
-          0 18px 48px rgb(0 0 0 / 0.32),
-          inset 0 1px 0 rgb(255 255 255 / 0.05);
+  --shadow-panel-secondary: 0 18px 48px rgb(0 0 0 / 0.32), inset 0 1px 0 rgb(255 255 255 / 0.05);
 
   --transition-duration-fast: 0.2s;
   --transition-timing-default: ease-in-out;

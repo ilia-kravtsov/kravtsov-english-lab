@@ -39,8 +39,8 @@
   position: absolute;
   inset: 0;
   background:
-          linear-gradient(135deg, rgb(255 255 255 / 0.06), transparent 38%),
-          linear-gradient(315deg, rgb(255 255 255 / 0.03), transparent 30%);
+    linear-gradient(135deg, rgb(255 255 255 / 0.06), transparent 38%),
+    linear-gradient(315deg, rgb(255 255 255 / 0.03), transparent 30%);
   pointer-events: none;
 }
 
@@ -122,39 +122,31 @@
   border: 1px solid var(--border-color-secondary);
   border-radius: var(--border-radius-primary);
   background: linear-gradient(
-                  180deg,
-                  var(--surface-color-tertiary),
-                  var(--surface-color-secondary)
+    180deg,
+    var(--surface-color-tertiary),
+    var(--surface-color-secondary)
   );
   box-shadow: var(--shadow-card-inset);
   transition:
-          transform var(--transition-duration-fast) var(--transition-timing-default),
-          border-color var(--transition-duration-fast) var(--transition-timing-default),
-          background var(--transition-duration-fast) var(--transition-timing-default),
-          box-shadow var(--transition-duration-fast) var(--transition-timing-default);
+    transform var(--transition-duration-fast) var(--transition-timing-default),
+    border-color var(--transition-duration-fast) var(--transition-timing-default),
+    background var(--transition-duration-fast) var(--transition-timing-default),
+    box-shadow var(--transition-duration-fast) var(--transition-timing-default);
 }
 
 .item:hover {
   transform: translateY(var(--translate-hover-y));
   border-color: var(--border-color-hover);
-  background: linear-gradient(
-                  180deg,
-                  var(--surface-color-hover),
-                  var(--surface-color-primary)
-  );
+  background: linear-gradient(180deg, var(--surface-color-hover), var(--surface-color-primary));
   box-shadow: var(--shadow-panel-primary);
 }
 
 .itemActive {
   border-color: var(--border-color-focus);
-  background: linear-gradient(
-                  180deg,
-                  var(--surface-color-hover),
-                  var(--surface-color-primary)
-  );
+  background: linear-gradient(180deg, var(--surface-color-hover), var(--surface-color-primary));
   box-shadow:
-          var(--shadow-panel-primary),
-          0 0 0 1px var(--border-color-focus);
+    var(--shadow-panel-primary),
+    0 0 0 1px var(--border-color-focus);
 }
 
 .itemTitle {
@@ -213,9 +205,9 @@
   box-shadow: var(--shadow-card-inset);
 
   transition:
-          transform var(--transition-duration-fast) var(--transition-timing-default),
-          border-color var(--transition-duration-fast) var(--transition-timing-default),
-          background var(--transition-duration-fast) var(--transition-timing-default);
+    transform var(--transition-duration-fast) var(--transition-timing-default),
+    border-color var(--transition-duration-fast) var(--transition-timing-default),
+    background var(--transition-duration-fast) var(--transition-timing-default);
 }
 
 .iconButton:hover {

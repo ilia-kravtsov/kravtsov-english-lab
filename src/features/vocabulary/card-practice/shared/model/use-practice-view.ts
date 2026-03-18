@@ -21,16 +21,16 @@ type Result<TCard> = {
 };
 
 export function usePracticeView<TCard>({
-                                         cards,
-                                         index,
-                                         locked,
-                                         isFinished,
-                                         feedback,
-                                         next,
-                                         onAutoNext,
-                                         autoNextCommitDelayMs,
-                                         withInputFocus = false,
-                                       }: Params<TCard>): Result<TCard> {
+  cards,
+  index,
+  locked,
+  isFinished,
+  feedback,
+  next,
+  onAutoNext,
+  autoNextCommitDelayMs,
+  withInputFocus = false,
+}: Params<TCard>): Result<TCard> {
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {

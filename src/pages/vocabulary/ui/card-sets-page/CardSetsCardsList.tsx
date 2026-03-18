@@ -9,12 +9,7 @@ type Props = {
   onRequestRemove: (card: CardWithLexicalUnit) => void;
 };
 
-export function CardSetsCardsList({
-                                    cards,
-                                    cardsLoading,
-                                    removing,
-                                    onRequestRemove,
-                                  }: Props) {
+export function CardSetsCardsList({ cards, cardsLoading, removing, onRequestRemove }: Props) {
   const hasCards = cards.length > 0;
   const isEmptyCards = !cardsLoading && !hasCards;
 

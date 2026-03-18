@@ -2,9 +2,7 @@ import { createGStore } from 'create-gstore';
 import { useRef, useState } from 'react';
 
 import type { CardWithLexicalUnit } from '@/entities/card/model/card.types';
-import {
-  buildRecognitionPracticeStats
-} from '@/features/vocabulary/card-practice/shared/model/build-recognition-practice-stats';
+import { buildRecognitionPracticeStats } from '@/features/vocabulary/card-practice/shared/model/build-recognition-practice-stats';
 import { readPracticeStats } from '@/features/vocabulary/card-practice/shared/model/practice.storage';
 import type { PracticeModeStats } from '@/features/vocabulary/card-practice/shared/model/practice.types';
 import { shuffle } from '@/features/vocabulary/card-practice/shared/model/shuffle.ts';
@@ -19,12 +17,11 @@ import { round } from '@/features/vocabulary/card-practice/shared/model/text-inp
 import { writeRecognitionStats } from './recognition.storage';
 import { norm, uniqNonEmpty } from './recognition.utils';
 
-interface RecognitionState
-  extends BasePracticeState<
-    TextInputSessionCard,
-    TextInputFeedback,
-    TextInputCardStat
-  > {
+interface RecognitionState extends BasePracticeState<
+  TextInputSessionCard,
+  TextInputFeedback,
+  TextInputCardStat
+> {
   options: string[];
   disabled: Record<string, true>;
   selected: string | null;

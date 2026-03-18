@@ -14,19 +14,19 @@ type Params = {
 };
 
 export function useTextInputPracticeHandlers({
-                                               style,
-                                               switchDir,
-                                               feedback,
-                                               setInput,
-                                               submit,
-                                             }: Params) {
+  style,
+  switchDir,
+  feedback,
+  setInput,
+  submit,
+}: Params) {
   const cardStyles = clsx(
     style.card,
     switchDir === 'next' && switchAnim.switchNext,
     switchDir === 'prev' && switchAnim.switchPrev,
     feedback === 'correct' && style.cardCorrect,
     feedback === 'wrong' && style.cardWrong,
-  )
+  );
 
   function handleInputChange(e: ChangeEvent<HTMLInputElement>) {
     setInput(e.target.value);

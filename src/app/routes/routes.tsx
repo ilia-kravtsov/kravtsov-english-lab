@@ -29,7 +29,7 @@ export const routes = [
   {
     path: '/',
     element: (
-      <Profiler id={"DashboardRoute"} onRender={appProfilerOnRender}>
+      <Profiler id={'DashboardRoute'} onRender={appProfilerOnRender}>
         <ProtectedRoute>
           <AppInitWrapper>
             <Dashboard />
@@ -63,7 +63,7 @@ export const routes = [
           {
             path: 'cards',
             element: (
-              <Profiler id={"CardSetsRoute"} onRender={appProfilerOnRender}>
+              <Profiler id={'CardSetsRoute'} onRender={appProfilerOnRender}>
                 <CardSets />
               </Profiler>
             ),
@@ -71,7 +71,7 @@ export const routes = [
           {
             path: 'cards/:cardSetId',
             element: (
-              <Profiler id={"CardSetsPageRoute"} onRender={appProfilerOnRender}>
+              <Profiler id={'CardSetsPageRoute'} onRender={appProfilerOnRender}>
                 <CardSetsPage />
               </Profiler>
             ),
@@ -79,7 +79,7 @@ export const routes = [
           {
             path: 'cards/:cardSetId/practice',
             element: (
-              <Profiler id={"CardSetPracticePageRoute"} onRender={appProfilerOnRender}>
+              <Profiler id={'CardSetPracticePageRoute'} onRender={appProfilerOnRender}>
                 <CardSetPracticePage />
               </Profiler>
             ),
@@ -87,7 +87,7 @@ export const routes = [
           {
             path: 'words-bank',
             element: (
-              <Profiler id={"WordsBankRoute"} onRender={appProfilerOnRender}>
+              <Profiler id={'WordsBankRoute'} onRender={appProfilerOnRender}>
                 <WordsBank />
               </Profiler>
             ),

@@ -1,15 +1,15 @@
 .cardCorrect {
-  animation: flashCorrect 520ms cubic-bezier(.2,.7,.3,1);
+  animation: flashCorrect 520ms cubic-bezier(0.2, 0.7, 0.3, 1);
 }
 
 .cardCorrect::after {
-  animation: correctRipple 520ms cubic-bezier(.2,.7,.3,1);
+  animation: correctRipple 520ms cubic-bezier(0.2, 0.7, 0.3, 1);
   background: radial-gradient(
-                  circle,
-                  rgba(46, 204, 113, 0.26) 0%,
-                  rgba(46, 204, 113, 0.12) 34%,
-                  rgba(46, 204, 113, 0.06) 52%,
-                  transparent 74%
+    circle,
+    rgba(46, 204, 113, 0.26) 0%,
+    rgba(46, 204, 113, 0.12) 34%,
+    rgba(46, 204, 113, 0.06) 52%,
+    transparent 74%
   );
 }
 
@@ -32,13 +32,13 @@
   transform: scale(0.72);
   border-radius: inherit;
   background: radial-gradient(
-                  circle,
-                  rgba(46, 204, 113, 0.26) 0%,
-                  rgba(46, 204, 113, 0.12) 34%,
-                  rgba(46, 204, 113, 0.06) 52%,
-                  transparent 74%
+    circle,
+    rgba(46, 204, 113, 0.26) 0%,
+    rgba(46, 204, 113, 0.12) 34%,
+    rgba(46, 204, 113, 0.06) 52%,
+    transparent 74%
   );
-  animation: correctRipple 520ms cubic-bezier(.2,.7,.3,1);
+  animation: correctRipple 520ms cubic-bezier(0.2, 0.7, 0.3, 1);
 }
 
 @keyframes flashCorrect {
@@ -48,9 +48,9 @@
   }
   35% {
     box-shadow:
-            0 0 0 2px rgba(46, 204, 113, 0.35),
-            0 0 22px rgba(46, 204, 113, 0.35),
-            var(--shadow-panel-primary);
+      0 0 0 2px rgba(46, 204, 113, 0.35),
+      0 0 22px rgba(46, 204, 113, 0.35),
+      var(--shadow-panel-primary);
     transform: scale(1.01);
   }
   100% {
@@ -60,7 +60,6 @@
 }
 
 @keyframes flashWrong {
-
   0% {
     box-shadow: var(--shadow-panel-primary);
     transform: translateX(0);
@@ -68,9 +67,9 @@
 
   25% {
     box-shadow:
-            0 0 0 2px rgba(231, 76, 60, 0.35),
-            0 0 18px rgba(231, 76, 60, 0.3),
-            var(--shadow-panel-primary);
+      0 0 0 2px rgba(231, 76, 60, 0.35),
+      0 0 18px rgba(231, 76, 60, 0.3),
+      var(--shadow-panel-primary);
 
     transform: translateX(-4px);
   }
@@ -87,7 +86,6 @@
     box-shadow: var(--shadow-panel-primary);
     transform: translateX(0);
   }
-
 }
 
 @keyframes correctRipple {

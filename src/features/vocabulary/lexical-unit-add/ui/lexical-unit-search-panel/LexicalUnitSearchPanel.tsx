@@ -61,7 +61,6 @@ export function LexicalUnitSearchPanel({
   renderNotFound,
   renderFoundActions,
 }: Props) {
-
   const {
     suggestWrapRef,
     suggestions,

@@ -11,5 +11,5 @@ api.interceptors.request.use((config) => {
 
 api.interceptors.response.use(
   (res) => res,
-  (err) => Promise.reject(err)
+  (err) => Promise.reject(err),
 );

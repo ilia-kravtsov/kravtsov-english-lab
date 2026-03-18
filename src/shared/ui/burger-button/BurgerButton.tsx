@@ -21,7 +21,7 @@ export const BurgerButton = forwardRef<HTMLButtonElement, Props>(
         onClick={toggle}
         aria-label={'Toggle menu'}
         ref={ref}
-        type={"button"}
+        type={'button'}
       >
         <span className={style.burgerLine} />
         <span className={style.burgerLine} />

@@ -12,7 +12,7 @@ export const buttonStyles: CSSProperties = {
 
 export const mediumButtonStyles: CSSProperties = {
   width: '100px',
-  fontSize: '16px'
+  fontSize: '16px',
 };
 
 export const smallButtonStyles: CSSProperties = {
@@ -29,8 +29,8 @@ export const wideButtonStyles: CSSProperties = {
 };
 
 export const normalButtonWide: CSSProperties = {
-  width: '120px'
-}
+  width: '120px',
+};
 
 export const practiceButtonStyles: CSSProperties = {
   padding: '10px 20px',

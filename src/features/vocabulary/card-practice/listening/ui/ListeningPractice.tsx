@@ -6,10 +6,7 @@ import { useTextInputPracticeHandlers } from '@/features/vocabulary/card-practic
 import { PracticeGuard } from '@/features/vocabulary/card-practice/shared/ui/PracticeGuard';
 import { PracticeProgress } from '@/features/vocabulary/card-practice/shared/ui/PracticeProgress';
 import switchAnim from '@/features/vocabulary/card-practice/shared/ui/SwitchAnimation.module.scss';
-import {
-  mediumButtonStyles,
-  wideButtonStyles,
-} from '@/shared/lib/styles/button.styles';
+import { mediumButtonStyles, wideButtonStyles } from '@/shared/lib/styles/button.styles';
 import { Button, Input } from '@/shared/ui';
 
 import { useListeningStore } from '../model/listening.store';
@@ -117,7 +114,7 @@ export function ListeningPractice({
           </div>
         </div>
 
-        <PracticeProgress index={index} total={cards.length} attempts={attempts}/>
+        <PracticeProgress index={index} total={cards.length} attempts={attempts} />
       </div>
     </PracticeGuard>
   );

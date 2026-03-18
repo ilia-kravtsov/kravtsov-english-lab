@@ -19,8 +19,11 @@ export type TextInputSessionCard = CardWithLexicalUnit & {
   lexicalUnit: NonNullable<CardWithLexicalUnit['lexicalUnit']>;
 };
 
-export interface TextInputPracticeState<TCard, TFeedback, TStat>
-  extends BasePracticeState<TCard, TFeedback, TStat> {
+export interface TextInputPracticeState<TCard, TFeedback, TStat> extends BasePracticeState<
+  TCard,
+  TFeedback,
+  TStat
+> {
   input: string;
 
   setInput: (value: string) => void;
@@ -34,7 +37,6 @@ export type WriteStatsFn<TStat extends TextInputCardStat> = (
   id: string,
   payload: ReturnType<typeof buildPracticeModeStats<TStat>>,
 ) => void;
-
 
 export interface BasePracticeState<TCard, TFeedback, TStat> {
   cardSetId: string | null;

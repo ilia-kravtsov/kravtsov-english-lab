@@ -19,7 +19,6 @@ export function AudioField({
   recordButtonStyle,
   actionButtonStyle,
 }: Props) {
-
   const {
     recording,
     audioBlob,

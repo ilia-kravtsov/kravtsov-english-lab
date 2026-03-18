@@ -79,10 +79,7 @@ export function AddLexicalUnitForm() {
       <Input {...register('transcription')} placeholder={'transcription'} />
       <Textarea {...register('meaning')} placeholder={'meaning in English'} />
 
-      <ImageField
-        imagePreviewSrc={imagePreviewSrc}
-        imageUrlInputProps={register('imageUrl')}
-      />
+      <ImageField imagePreviewSrc={imagePreviewSrc} imageUrlInputProps={register('imageUrl')} />
 
       <Controller
         control={control}

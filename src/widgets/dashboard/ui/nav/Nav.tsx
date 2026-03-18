@@ -13,7 +13,6 @@ interface Props {
 
 export const Nav = forwardRef<HTMLDivElement, Props>(
   ({ isOpen, onLinkClick }, ref: Ref<HTMLDivElement>) => {
-
     const containerStyles = `${style.container} ${!isOpen ? style.collapsed : ''}`;
 
     const handleClick = () => {
@@ -24,12 +23,7 @@ export const Nav = forwardRef<HTMLDivElement, Props>(
       <aside className={containerStyles} ref={ref}>
         <nav className={style.menu}>
           {dashboardSections.map((navLink) => (
-            <LinkAsButton
-              key={navLink.id}
-              to={navLink.to}
-              style={linkStyles}
-              onClick={handleClick}
-            >
+            <LinkAsButton key={navLink.id} to={navLink.to} style={linkStyles} onClick={handleClick}>
               {navLink.title}
             </LinkAsButton>
           ))}

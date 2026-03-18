@@ -7,18 +7,24 @@ type CardSetsModel = ReturnType<typeof useCardSets>;
 
 type Props = Pick<
   CardSetsModel,
-  'selectedId' | 'selected' | 'registerEdit' | 'handleSubmitEdit' | 'submitEdit' | 'editErrors' | 'isEditing'
+  | 'selectedId'
+  | 'selected'
+  | 'registerEdit'
+  | 'handleSubmitEdit'
+  | 'submitEdit'
+  | 'editErrors'
+  | 'isEditing'
 >;
 
 export function CardSetsEditForm({
-                                   selectedId,
-                                   selected,
-                                   registerEdit,
-                                   handleSubmitEdit,
-                                   submitEdit,
-                                   editErrors,
-                                   isEditing,
-                                 }: Props) {
+  selectedId,
+  selected,
+  registerEdit,
+  handleSubmitEdit,
+  submitEdit,
+  editErrors,
+  isEditing,
+}: Props) {
   if (!selectedId) return null;
 
   return (
@@ -44,11 +50,7 @@ export function CardSetsEditForm({
               <Input {...registerEdit('description')} />
             </div>
 
-            <Button
-              title={isEditing ? 'Saving...' : 'Save'}
-              type={'submit'}
-              disabled={isEditing}
-            />
+            <Button title={isEditing ? 'Saving...' : 'Save'} type={'submit'} disabled={isEditing} />
           </div>
         </form>
       )}

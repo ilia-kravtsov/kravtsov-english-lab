@@ -15,14 +15,14 @@ type Props = {
 };
 
 export function DynamicListField({
-                                   items,
-                                   count,
-                                   onAdd,
-                                   onRemove,
-                                   addButtonStyle,
-                                   getKey,
-                                   renderField,
-                                 }: Props) {
+  items,
+  count,
+  onAdd,
+  onRemove,
+  addButtonStyle,
+  getKey,
+  renderField,
+}: Props) {
   return (
     <div className={style.examplesList}>
       {items.map((_, index) => (
@@ -31,12 +31,7 @@ export function DynamicListField({
 
           <div className={style.examplesActions}>
             {count < 5 && index === count - 1 && (
-              <Button
-                type={'button'}
-                title={'+'}
-                onClick={onAdd}
-                style={addButtonStyle}
-              />
+              <Button type={'button'} title={'+'} onClick={onAdd} style={addButtonStyle} />
             )}
 
             {count > 1 && (

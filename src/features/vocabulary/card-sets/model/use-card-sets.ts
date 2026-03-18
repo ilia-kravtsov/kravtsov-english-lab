@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { type SubmitHandler,useForm } from 'react-hook-form';
+import { type SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
 import {

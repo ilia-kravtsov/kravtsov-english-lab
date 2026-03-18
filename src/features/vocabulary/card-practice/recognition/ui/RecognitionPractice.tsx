@@ -14,7 +14,6 @@ export function RecognitionPractice({
   onAutoNext,
   autoNextCommitDelayMs,
 }: PracticeViewProps) {
-
   const cards = useRecognitionStore((s) => s.cards);
   const index = useRecognitionStore((s) => s.index);
   const feedback = useRecognitionStore((s) => s.feedback);
@@ -88,11 +87,7 @@ export function RecognitionPractice({
           })}
         </div>
 
-        <PracticeProgress
-          index={index}
-          total={cards.length}
-          attempts={attempts}
-        />
+        <PracticeProgress index={index} total={cards.length} attempts={attempts} />
       </div>
     </PracticeGuard>
   );

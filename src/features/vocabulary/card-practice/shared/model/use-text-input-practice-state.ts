@@ -13,7 +13,7 @@ import { norm, round } from './text-input-practice.utils.ts';
 export function useTextInputPracticeState<
   TCard extends TextInputSessionCard,
   TFeedback extends TextInputFeedback,
-  TStat extends TextInputCardStat
+  TStat extends TextInputCardStat,
 >(initialFeedback: TFeedback, writeStats: WriteStatsFn<TStat>) {
   const [cardSetId, setCardSetId] = useState<string | null>(null);
 

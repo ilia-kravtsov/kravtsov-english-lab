@@ -16,7 +16,7 @@ export function WordsBank() {
         <button
           className={`${style.tab} ${activeTab === 'add' ? style.active : ''}`}
           onClick={openAdd}
-          type={"button"}
+          type={'button'}
         >
           {mode === 'update' ? 'Update' : 'Add'}
         </button>
@@ -24,7 +24,7 @@ export function WordsBank() {
         <button
           className={`${style.tab} ${activeTab === 'search' ? style.active : ''}`}
           onClick={openSearch}
-          type={"button"}
+          type={'button'}
         >
           Search
         </button>

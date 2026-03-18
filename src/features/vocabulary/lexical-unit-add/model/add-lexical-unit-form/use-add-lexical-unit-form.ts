@@ -132,7 +132,6 @@ export function useAddLexicalUnitForm() {
       );
 
       if (mode === 'update') {
-
         if (!editingUnit?.id) {
           throw new Error('No editing unit id');
         }
