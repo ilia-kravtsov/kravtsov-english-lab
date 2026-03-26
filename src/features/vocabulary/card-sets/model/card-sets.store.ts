@@ -33,7 +33,6 @@ export const useCardSetsStore = createGStore<CardSetsState>(() => {
     setSelectedId(set.id);
   };
 
-
   return {
     sets,
     selectedId,
