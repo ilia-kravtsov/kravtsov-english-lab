@@ -29,7 +29,7 @@ export const routes = [
   {
     path: '/',
     element: (
-      <Profiler id="DashboardRoute" onRender={appProfilerOnRender}>
+      <Profiler id={'DashboardRoute'} onRender={appProfilerOnRender}>
         <ProtectedRoute>
           <AppInitWrapper>
             <Dashboard />
