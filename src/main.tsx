@@ -1,7 +1,7 @@
 import '@/shared/global-styles/index.scss';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { Profiler, StrictMode } from 'react';
+import { Profiler } from 'react';
 import { createRoot } from 'react-dom/client';
 import { RouterProvider } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
@@ -13,8 +13,7 @@ import { appProfilerOnRender } from '@/shared/lib/react-profiler';
 initAuthApp();
 
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <Profiler id="AppRoot" onRender={appProfilerOnRender}>
+    <Profiler id={"AppRoot"} onRender={appProfilerOnRender}>
       <RouterProvider router={router} />
 
       <ToastContainer
@@ -28,5 +27,4 @@ createRoot(document.getElementById('root')!).render(
         theme={'dark'}
       />
     </Profiler>
-  </StrictMode>,
 );
