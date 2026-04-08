@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { buildPracticeModeStats } from '../build-practice-mode-stats';
+import { buildPracticeModeStats } from './build-practice-mode-stats.ts';
 
 describe('buildPracticeModeStats', () => {
   it('returns zeroed derived stats for empty statsByCard', () => {
