@@ -120,7 +120,6 @@
 
 @media (width <= 640px) {
   .container {
-    min-height: auto;
     padding: var(--section-padding-y-mobile) var(--section-padding-x-mobile);
     gap: var(--gap-secondary);
   }
