@@ -56,13 +56,13 @@ export function SearchLexicalUnit() {
         imageSrc={imageSrc}
         variant={'full'}
         renderNotFound={() => (
-          <div className={style.actionsBox}>
+          <div className={style.badResultBox}>
             <div className={style.hint}>Not found in your bank — you can add it.</div>
             <Button type={'button'} title={'Add'} onClick={handleAdd} style={{ width: '200px' }} />
           </div>
         )}
         renderFoundActions={() => (
-          <div className={style.actionsBox}>
+          <div className={style.buttonsBox}>
             <Button
               type={'button'}
               title={'Update'}

@@ -10,8 +10,13 @@
   opacity: 0.8;
 }
 
-.actionsBox {
-  @media(max-width: 640px) {
-    flex-direction: column;
-  }
+.badResultBox {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.buttonsBox {
+  display: flex;
+  gap: 16px;
 }

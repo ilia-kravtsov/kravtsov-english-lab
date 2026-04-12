@@ -32,7 +32,7 @@ export function LoginForm() {
           id={'email'}
           type={'email'}
           data-error={!!errors.email}
-          placeholder={'bondjames007@gmail.com'}
+          placeholder={'demo@example.com'}
           {...register('email', { required: 'Email is required' })}
         />
         <div className={style.errorSlot}>{errors.email?.message}</div>
@@ -46,7 +46,7 @@ export function LoginForm() {
           id={'password'}
           type={'password'}
           data-error={!!errors.password}
-          placeholder={'qwerty12345'}
+          placeholder={'demo12345'}
           {...register('password', { required: 'Password is required' })}
         />
         <div className={style.errorSlot}>{errors.password?.message}</div>
