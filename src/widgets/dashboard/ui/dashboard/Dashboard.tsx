@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 
 import { BurgerButton } from '@/shared/ui/burger-button/BurgerButton';
 import { Footer } from '@/widgets/dashboard/ui/footer/Footer';
@@ -12,6 +12,7 @@ export function Dashboard() {
   const [isOpen, setIsOpen] = useState(false);
   const navRef = useRef<HTMLDivElement>(null);
   const toggleMenuRef = useRef<HTMLButtonElement>(null);
+  const { pathname } = useLocation();
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -30,6 +31,10 @@ export function Dashboard() {
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   const handleToggleNav = () => {
     setIsOpen((prev) => !prev);
