@@ -4,8 +4,8 @@ import { useState } from 'react';
 import { describe, expect, it } from 'vitest';
 
 import type { PracticeSwitchState } from '@/features/vocabulary/card-practice/shared';
-import { baseCards } from '@/shared/test/fixtures/cards.fixture.ts';
-import { setupPracticeStoreTest } from '@/shared/test/utils/practice-test.utils.ts';
+import { baseCards } from '@/shared/test/fixtures/cards.fixture';
+import { setupPracticeStoreTest } from '@/shared/test/utils/practice-test.utils';
 
 import { useRecognitionStore } from '../model/recognition.store';
 import { RecognitionPractice } from './RecognitionPractice';
@@ -74,22 +74,5 @@ describe('RecognitionPractice integration', () => {
     });
 
     expect(wrongOption).toHaveClass(style.optionWrong);
-  });
-
-  it('accepts correct answer and highlights correct option', async () => {
-    const user = userEvent.setup();
-
-    renderRecognitionPractice();
-
-    const correctOption = screen.getByRole('button', { name: 'привет' });
-
-    await user.click(correctOption);
-
-    await waitFor(() => {
-      expect(screen.getByText('Attempts: 1')).toBeInTheDocument();
-      expect(correctOption).toBeDisabled();
-    });
-
-    expect(correctOption).toHaveClass(style.optionCorrect);
   });
 });

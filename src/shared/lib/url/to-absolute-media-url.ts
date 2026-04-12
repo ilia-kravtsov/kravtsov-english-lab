@@ -1,6 +1,5 @@
 import { API_BASE_URL } from '@/shared/config/api-base-url.ts';
-
-import { isAbsoluteUrl } from './is-absolute-url.ts';
+import { isAbsoluteUrl } from '@/shared/lib';
 
 export function toAbsoluteMediaUrl(url?: string | null): string | null {
   if (!url) return null;
