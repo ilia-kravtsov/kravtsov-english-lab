@@ -4,6 +4,10 @@
 }
 
 .main {
-  min-height: calc(100vh - var(--header-height));
   padding-top: 6vh;
+  height: 100%;
+
+  @media (max-width: 960px) {
+    padding-top: 0;
+  }
 }

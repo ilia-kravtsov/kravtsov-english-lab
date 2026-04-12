@@ -225,7 +225,7 @@
 @media (width <= 960px) {
   .container {
     grid-template-columns: 1fr;
-    padding: var(--section-padding-y) var(--section-padding-x-tablet);
+    padding-top: 12vh;
   }
 
   .sectionCreateCardSet,
@@ -237,7 +237,7 @@
 
 @media (width <= 640px) {
   .container {
-    padding: var(--section-padding-y-mobile) var(--section-padding-x-mobile);
+    padding-top: 18vh;
   }
 
   .sectionContainer {
@@ -267,5 +267,22 @@
 
   .item {
     min-height: 200px;
+    align-items: center;
+  }
+
+  .itemCount {
+    width: 100%;
+    align-self: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .itemActions {
+    width: 100%;
+  }
+
+  .iconButton {
+    width: 100%;
+    text-align: center;
   }
 }

@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 
-import { BurgerButton } from '@/shared/ui/burger-button/BurgerButton';
 import { Footer } from '@/widgets/dashboard/ui/footer/Footer';
 import { Header } from '@/widgets/dashboard/ui/header/Header';
 import { Nav } from '@/widgets/dashboard/ui/nav/Nav';
@@ -36,8 +35,8 @@ export function Dashboard() {
     window.scrollTo(0, 0);
   }, [pathname]);
 
-  const handleToggleNav = () => {
-    setIsOpen((prev) => !prev);
+  const handleToggleNav = (isOpenStatus: boolean) => {
+    setIsOpen(isOpenStatus);
   };
 
   const handleClick = () => {
@@ -46,9 +45,7 @@ export function Dashboard() {
 
   return (
     <div className={style.container}>
-      <Header />
-
-      <BurgerButton toggleBurger={handleToggleNav} isOpen={isOpen} ref={toggleMenuRef} />
+      <Header onToggleMenu={handleToggleNav} isMenuOpen={isOpen} burgerRef={toggleMenuRef} />
 
       <Nav onLinkClick={handleClick} isOpen={isOpen} ref={navRef} />
 
