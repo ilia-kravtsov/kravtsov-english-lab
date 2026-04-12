@@ -9,3 +9,15 @@
 .header {
   font-size: var(--font-size-secondary);
 }
+
+@media (width <= 2500px) {
+  .container {
+    max-width: 80%;
+  }
+}
+
+@media (width <= 1500px) {
+  .container {
+    max-width: 100%;
+  }
+}

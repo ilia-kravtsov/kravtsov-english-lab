@@ -5,17 +5,22 @@
   display: flex;
   flex-direction: column;
   gap: 15px;
-  min-width: 350px;
   width: 100%;
 }
 
 .inputsContainer {
   display: flex;
   gap: 10px;
+  width: 100%;
+
+  @media (max-width: 640px) {
+    flex-direction: column;
+  }
 }
 
 .inputContainer {
   @include form.inputContainer(15px);
+  width: 100%;
 }
 
 .errorSlot {
@@ -31,6 +36,7 @@
 .checkBoxLinkContainer {
   display: flex;
   justify-content: space-between;
+  text-align: center;
 }
 
 .link {
