@@ -56,7 +56,7 @@
 
 @media (max-width: 768px) {
   .container {
-    padding: var(--section-padding-y-mobile) var(--section-padding-x-mobile)
+    padding: 60px var(--section-padding-x-mobile)
       calc(var(--section-padding-y-mobile) + 72px);
   }
 

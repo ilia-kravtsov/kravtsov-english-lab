@@ -4,10 +4,18 @@
   align-items: center;
   align-self: flex-start;
   gap: 30px;
+
+  @media(max-width: 640px) {
+    align-self: center;
+  }
 }
 
 .headerLeft {
   display: flex;
   align-items: center;
   gap: 30px;
+
+  @media(max-width: 640px) {
+    flex-direction: column;
+  }
 }

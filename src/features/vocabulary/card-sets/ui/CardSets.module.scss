@@ -225,7 +225,6 @@
 @media (width <= 960px) {
   .container {
     grid-template-columns: 1fr;
-    padding-top: 12vh;
   }
 
   .sectionCreateCardSet,
@@ -236,10 +235,6 @@
 }
 
 @media (width <= 640px) {
-  .container {
-    padding-top: 18vh;
-  }
-
   .sectionContainer {
     gap: 16px;
   }

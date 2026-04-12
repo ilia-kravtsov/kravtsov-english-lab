@@ -1,6 +1,8 @@
 import { wideButtonStyles } from '@/shared/lib/styles/button.styles';
 import { Button } from '@/shared/ui';
 
+import style from './CardSetsPage.module.scss';
+
 type Props = {
   inSet: boolean;
   adding: boolean;
@@ -19,7 +21,7 @@ export function CardSetsSearchActions({
   onRemove,
 }: Props) {
   return (
-    <div style={{ display: 'flex', gap: '12px' }}>
+    <div className={style.buttonBox}>
       <Button
         type={'button'}
         title={inSet ? 'Already added' : adding ? 'Adding...' : 'Add'}

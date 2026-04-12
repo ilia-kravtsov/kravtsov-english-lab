@@ -103,8 +103,7 @@ export function useCardSets() {
       toast.success('Card set created');
       resetCreate({ title: '', description: '' });
 
-      await load();
-      select(created.id);
+      upsertInState(created);
     } catch (e) {
       toast.error(extractErrorMessage(e));
     }
