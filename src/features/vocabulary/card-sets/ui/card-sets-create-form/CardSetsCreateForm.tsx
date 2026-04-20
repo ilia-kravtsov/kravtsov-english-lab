@@ -25,13 +25,19 @@ export function CardSetsCreateForm({
         <div className={style.formRow}>
           <div className={style.formField}>
             <span className={style.label}>Title</span>
-            <Input placeholder={'Travel France'} {...registerCreate('title', { required: true })} />
+            <Input
+              placeholder={'Travel France'}
+              {...registerCreate('title', { required: true })}
+            />
             {createErrors.title && <span className={style.error}>Title is required</span>}
           </div>
 
           <div className={style.formField}>
             <span className={style.label}>Description</span>
-            <Input placeholder={'Short note'} {...registerCreate('description')} />
+            <Input
+              placeholder={'Short note'}
+              {...registerCreate('description')}
+            />
           </div>
 
           <div className={style.buttonContainer}>

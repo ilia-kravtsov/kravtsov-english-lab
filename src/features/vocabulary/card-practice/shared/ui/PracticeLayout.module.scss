@@ -11,8 +11,8 @@
 .card {
   position: relative;
 
-  width: min(720px, 100%);
-  min-height: 320px;
+  width: 100%;
+  min-height: 45vh;
 
   padding: var(--panel-padding-tertiary);
 
@@ -21,7 +21,7 @@
   justify-content: center;
   align-items: center;
 
-  gap: var(--gap-primary);
+  gap: var(--gap-biggest);
 
   border: 1px solid var(--border-color-primary);
   border-radius: var(--border-radius-primary);
@@ -32,6 +32,19 @@
   backdrop-filter: blur(var(--blur-primary));
 
   overflow: hidden;
+
+  @media (max-width: 768px) {
+    min-height: 280px;
+    padding: var(--panel-padding-x-tablet);
+  }
+
+  @media (max-width: 480px) {
+    min-height: 240px;
+    padding: var(--panel-padding-x-mobile);
+  }
+  @media (max-width: 500px) {
+    gap: var(--gap-secondary);
+  }
 }
 
 .card::before {
@@ -47,18 +60,4 @@
 .card > * {
   position: relative;
   z-index: 1;
-}
-
-@media (max-width: 768px) {
-  .card {
-    min-height: 280px;
-    padding: var(--panel-padding-x-tablet);
-  }
-}
-
-@media (max-width: 480px) {
-  .card {
-    min-height: 240px;
-    padding: var(--panel-padding-x-mobile);
-  }
 }

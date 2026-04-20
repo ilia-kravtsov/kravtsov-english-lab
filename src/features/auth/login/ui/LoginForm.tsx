@@ -2,7 +2,8 @@ import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 
 import type { LoginFormData } from '@/features/auth/login/model/login.types';
-import { useLoginForm } from '@/features/auth/login/model/use-login-form.ts';
+import { useLoginForm } from '@/features/auth/login/model/use-login-form';
+import { authButtonStyles } from '@/shared/lib/styles/button.styles';
 import { Button } from '@/shared/ui';
 import { Checkbox } from '@/shared/ui/checkbox/Checkbox';
 import { Input } from '@/shared/ui/input/Input';
@@ -32,7 +33,8 @@ export function LoginForm() {
           id={'email'}
           type={'email'}
           data-error={!!errors.email}
-          placeholder={'demo@example.com'}
+          placeholder={'test@mail.com'}
+          style={{ fontSize: '24px' }}
           {...register('email', { required: 'Email is required' })}
         />
         <div className={style.errorSlot}>{errors.email?.message}</div>
@@ -47,6 +49,7 @@ export function LoginForm() {
           type={'password'}
           data-error={!!errors.password}
           placeholder={'demo12345'}
+          style={{ fontSize: '24px' }}
           {...register('password', { required: 'Password is required' })}
         />
         <div className={style.errorSlot}>{errors.password?.message}</div>
@@ -62,7 +65,7 @@ export function LoginForm() {
               label={'Remember me'}
               checked={field.value}
               onChange={field.onChange}
-              size={14}
+              size={20}
             />
           )}
         />
@@ -74,6 +77,7 @@ export function LoginForm() {
       <Button
         type={'submit'}
         disabled={isSubmitting}
+        style={authButtonStyles}
         title={isSubmitting ? 'Logging in...' : 'Login'}
       />
     </form>

@@ -9,6 +9,8 @@
 
 .inputContainer {
   @include form.inputContainer;
+  font-size: var(--font-size-secondary);
+  gap: 20px;
 }
 
 .errorSlot {
@@ -18,4 +20,9 @@
 .checkBoxLinkContainer {
   display: flex;
   justify-content: space-between;
+  font-size: var(--font-size-secondary);
+}
+
+.link {
+  font-size: var(--font-size-secondary);
 }

@@ -1,5 +1,6 @@
 import { Outlet, useLocation } from 'react-router-dom';
 
+import { infoButtonStyles } from '@/shared/lib/styles/button.styles';
 import { LinkAsButton } from '@/shared/ui/link-as-button/LinkAsButton';
 
 import style from './AuthLayout.module.scss';
@@ -34,7 +35,9 @@ export function AuthLayout() {
               <p className={style.paragraph}>
                 Let’s get you all set up so you can start creating your first onboarding experience
               </p>
-              <LinkAsButton to={'/register'}>Register</LinkAsButton>
+              <LinkAsButton to={'/register'} style={infoButtonStyles}>
+                Register
+              </LinkAsButton>
             </div>
           </div>
           <div className={style.formWrapper}>
@@ -54,7 +57,7 @@ export function AuthLayout() {
                 Log in to your account so you can continue building and editing your onboarding
                 flows
               </p>
-              <LinkAsButton to={'/login'}>Log in</LinkAsButton>
+              <LinkAsButton to={'/login'} style={infoButtonStyles}>Log in</LinkAsButton>
             </div>
           </div>
         </>

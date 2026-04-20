@@ -3,15 +3,19 @@
 
 .promptLabel {
   color: var(--text-color-soft);
-  font-size: var(--font-size-body-sm);
+  font-size: var(--font-size-medium);
   line-height: var(--line-height-body);
-  opacity: 0.82;
+  opacity: var(--opacity-primary);
   text-align: center;
+
+  @media (max-width: 1200px) {
+    font-size: var(--font-size-secondary);
+  }
 }
 
 .promptValue {
   color: var(--text-color-secondary);
-  font-size: var(--font-size-large);
+  font-size: var(--font-size-medium);
   line-height: 1.08;
   letter-spacing: var(--letter-spacing-tight);
   text-align: center;
@@ -19,17 +23,27 @@
 }
 
 .formRow {
-  width: min(720px, 100%);
+  width: 100%;
 
   display: flex;
   align-items: stretch;
-  gap: 12px;
+  gap: var(--gap-small);
+
+  @media (max-width: 1000px) {
+    flex-direction: column;
+    align-items: stretch;
+  }
 }
 
 .buttonsContainer {
   display: flex;
-  gap: 12px;
+  gap: var(--gap-small);
   align-items: stretch;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 @media (max-width: 768px) {
@@ -49,19 +63,5 @@
 
   .buttonsContainer > * {
     flex: 1 1 0;
-  }
-}
-
-@media (max-width: 480px) {
-  .promptValue {
-    font-size: var(--font-size-secondary);
-  }
-
-  .hint {
-    padding: 12px 14px;
-  }
-
-  .buttonsContainer {
-    flex-direction: column;
   }
 }

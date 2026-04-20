@@ -1,12 +1,12 @@
 .hint {
   position: relative;
 
-  width: 100%;
-  padding: 14px 16px;
+  width: 60%;
+  padding: 20px;
 
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: var(--gap-small);
   align-items: center;
 
   border: 1px solid var(--border-color-secondary);
@@ -17,6 +17,14 @@
   backdrop-filter: blur(calc(var(--blur-primary) * 0.75));
 
   overflow: hidden;
+
+  @media (max-width: 1200px) {
+    width: 80%;
+  }
+
+  @media (max-width: 700px) {
+    width: 100%;
+  }
 }
 
 .hint::before {
@@ -35,16 +43,25 @@
 .hintLabel {
   color: var(--text-color-soft);
   text-align: center;
-  font-size: var(--font-size-body-sm);
+  font-size: var(--font-size-tertiary);
   line-height: var(--line-height-body);
-  opacity: 0.8;
+  opacity: var(--opacity-primary);
+
+  @media (max-width: 1200px) {
+    width: 80%;
+    font-size: var(--font-size-secondary);
+  }
 }
 
 .hintValue {
   color: var(--text-color-secondary);
-  font-size: var(--font-size-primary);
+  font-size: var(--font-size-secondary);
   line-height: var(--line-height-body);
   text-align: center;
-  opacity: 0.95;
+  opacity: var(--opacity-primary);
   word-break: break-word;
+
+  @media (max-width: 1200px) {
+    font-size: var(--font-size-standard);
+  }
 }

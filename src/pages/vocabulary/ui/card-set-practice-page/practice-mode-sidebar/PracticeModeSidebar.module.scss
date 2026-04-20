@@ -17,6 +17,11 @@
   backdrop-filter: blur(var(--blur-primary));
 
   overflow: hidden;
+
+  @media (width <= 800px) {
+    padding: 10px;
+    gap: 10px;
+  }
 }
 
 .left::before {
@@ -35,7 +40,7 @@
 .sectionTitle {
   color: var(--text-color-secondary);
   font-weight: 600;
-  opacity: 0.95;
+  font-size: var(--font-size-medium);
 }
 
 .modeList {
@@ -50,13 +55,15 @@
   position: relative;
 
   width: 100%;
-  min-height: 44px;
+  min-height: 50px;
 
   display: flex;
   align-items: center;
   justify-content: flex-start;
 
-  padding: 10px 12px;
+  padding: 10px;
+
+  font-size: var(--font-size-secondary);
 
   border: 1px solid var(--border-color-secondary);
   border-radius: var(--border-radius-primary);
@@ -76,6 +83,10 @@
     box-shadow var(--transition-duration-fast) var(--transition-timing-default),
     opacity var(--transition-duration-fast) var(--transition-timing-default),
     background var(--transition-duration-fast) var(--transition-timing-default);
+
+  @media (max-width: 500px) {
+    font-size: var(--font-size-standard);
+  }
 }
 
 .modeBtn::before,
@@ -144,25 +155,6 @@
   box-shadow: var(--shadow-card-inset);
 
   color: var(--text-color-soft);
-  font-size: var(--font-size-body-sm);
+  font-size: var(--font-size-small);
   line-height: var(--line-height-body);
-}
-
-@media (max-width: 768px) {
-  .left {
-    padding: 18px;
-    gap: 16px;
-  }
-}
-
-@media (max-width: 480px) {
-  .left {
-    padding: 14px;
-  }
-
-  .modeBtn,
-  .modeBtnActive,
-  .modeBtnDisabled {
-    min-height: 42px;
-  }
 }

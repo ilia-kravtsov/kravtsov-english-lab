@@ -1,5 +1,4 @@
 import { LogoutButton } from '@/features/auth/logout';
-import { linkStyles } from '@/shared/lib/styles/link.styles';
 import { LinkAsButton } from '@/shared/ui/link-as-button/LinkAsButton';
 
 import style from './Footer.module.scss';
@@ -11,7 +10,7 @@ type NavLink = {
 };
 
 const navLinks: NavLink[] = [
-  { id: 'about', to: 'about', title: 'Author' },
+  { id: 'about', to: 'about', title: 'About' },
   { id: 'contacts', to: 'contacts', title: 'Contacts' },
 ];
 
@@ -19,7 +18,10 @@ export function Footer() {
   return (
     <div className={style.container}>
       {navLinks.map((navLink: NavLink) => (
-        <LinkAsButton key={navLink.id} to={navLink.to} style={linkStyles}>
+        <LinkAsButton
+          key={navLink.id}
+          to={navLink.to}
+        >
           {navLink.title}
         </LinkAsButton>
       ))}

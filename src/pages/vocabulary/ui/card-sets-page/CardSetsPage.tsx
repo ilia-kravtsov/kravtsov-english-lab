@@ -5,7 +5,6 @@ import { LexicalUnitSearchPanel } from '@/features/vocabulary/lexical-unit-add/u
 import { CardSetsPageHeader } from '@/pages/vocabulary/ui/card-sets-page/card-sets-page-header/CardSetsPageHeader';
 import { CardSetsCardsList } from '@/pages/vocabulary/ui/card-sets-page/CardSetsCardsList';
 import { CardSetsSearchActions } from '@/pages/vocabulary/ui/card-sets-page/CardSetsSearchActions';
-import { smallButtonStyles } from '@/shared/lib/styles/button.styles';
 import { ConfirmModal, LinkAsButton } from '@/shared/ui';
 
 import style from './CardSetsPage.module.scss';
@@ -80,10 +79,9 @@ export function CardSetsPage() {
       <CardSetsPageHeader
         title={pageTitle}
         onBackClick={onBackClick}
-        backButtonStyle={smallButtonStyles}
       >
         {cardSetId && (
-          <LinkAsButton to={`/vocabulary/cards/${cardSetId}/practice`} style={smallButtonStyles}>
+          <LinkAsButton to={`/vocabulary/cards/${cardSetId}/practice`}>
             Practice
           </LinkAsButton>
         )}

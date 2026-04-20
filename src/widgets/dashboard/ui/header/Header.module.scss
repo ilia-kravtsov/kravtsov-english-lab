@@ -1,12 +1,13 @@
 .container {
-  position: fixed;
-  inset: 0 0 auto 0;
+  position: sticky;
+  top: 0;
   z-index: 1000;
 
   height: var(--header-height);
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: var(--gap-medium);
   padding: 0 40px;
 
   background: var(--bg-color-gradient-primary), linear-gradient(180deg, #0f0f10 0%, #090909 100%);
@@ -45,7 +46,7 @@
   }
 
   .navContainer {
-    gap: 16px;
+    gap: var(--gap-small);
   }
 }
 
@@ -59,6 +60,6 @@
   .navContainer {
     flex-direction: column;
     align-items: flex-end;
-    gap: 12px;
+    gap: var(--gap-small);
   }
 }

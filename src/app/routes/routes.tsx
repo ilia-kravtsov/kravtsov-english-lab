@@ -16,6 +16,8 @@ import { Reading } from '@/pages/reading';
 import { Settings } from '@/pages/settings';
 import { Speaking } from '@/pages/speaking';
 import { Theory } from '@/pages/theory';
+import { About } from '@/pages/about';
+import { Contacts } from '@/pages/contacts';
 import { CardSetPracticePage, CardSetsPage, VocabularyLayout, WordsBank } from '@/pages/vocabulary';
 import { vocabularyHeaderLinks } from '@/pages/vocabulary/model/vocabulary-header-links';
 import { VocabularyIntro } from '@/pages/vocabulary/ui/vocabulary-layout/vocabulary-intro/VocabularyIntro';
@@ -43,6 +45,8 @@ export const routes = [
       { path: 'profile', element: <Profile /> },
       { path: 'rating', element: <Rating /> },
       { path: 'settings', element: <Settings /> },
+      { path: 'about', element: <About /> },
+      { path: 'contacts', element: <Contacts /> },
       {
         path: 'vocabulary',
         element: <VocabularyLayout />,

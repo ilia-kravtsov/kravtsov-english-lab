@@ -1,5 +1,5 @@
 .container {
-  min-height: calc(100vh - 140px);
+  min-height: 90vh;
   padding: var(--section-padding-y) var(--section-padding-x);
   display: flex;
   align-items: center;
@@ -19,7 +19,7 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  gap: var(--gap-lead);
+  gap: var(--gap-biggest);
 
   &::before {
     content: '';
@@ -45,7 +45,7 @@
   border-radius: var(--border-radius-primary);
   background: var(--surface-color-primary);
   color: var(--text-color-soft);
-  font-size: var(--font-size-badge);
+  font-size: var(--font-size-small);
   font-weight: var(--font-weight-medium);
   letter-spacing: var(--letter-spacing-wide);
   text-transform: uppercase;
@@ -96,13 +96,12 @@
 
 .paragraph {
   color: var(--text-color-soft);
-  font-size: var(--font-size-body-md);
+  font-size: var(--font-size-standard);
   line-height: var(--line-height-body-widest);
 }
 
 .cards {
   position: relative;
-  z-index: 1;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--gap-primary);
@@ -112,8 +111,7 @@
 .card {
   display: flex;
   flex-direction: column;
-  gap: var(--gap-title);
-  min-width: 0;
+  gap: var(--gap-medium);
   color: inherit;
   text-decoration: none;
   min-height: var(--card-min-height-primary);
@@ -148,13 +146,13 @@
 .cardIndex {
   display: inline-block;
   color: var(--text-color-meta);
-  font-size: var(--font-size-meta);
+  font-size: var(--font-size-small);
   font-weight: var(--font-weight-bold);
   letter-spacing: var(--letter-spacing-wider);
 }
 
 .cardTitle {
-  font-size: var(--font-size-card-title);
+  font-size: var(--font-size-tertiary);
   line-height: var(--line-height-heading);
   font-weight: var(--font-weight-bold);
   letter-spacing: var(--letter-spacing-tight);
@@ -162,14 +160,14 @@
 
 .cardText {
   color: var(--text-color-faint);
-  font-size: var(--font-size-body-sm);
+  font-size: var(--font-size-primary);
   line-height: var(--line-height-body-wide);
 }
 
 .cardItem {
   display: flex;
   flex-direction: column;
-  gap: var(--gap-title);
+  gap: var(--gap-small);
 }
 
 @media (width <= 960px) {
@@ -189,7 +187,7 @@
 
 @media (width <= 640px) {
   .container {
-    padding: var(--section-padding-y-mobile) var(--section-padding-x-mobile);
+    padding: var(--section-padding-x-mobile);
   }
 
   .hero {
@@ -198,7 +196,7 @@
   }
 
   .lead {
-    font-size: var(--font-size-lead-mobile);
+    font-size: var(--font-size-primary);
   }
 
   .card {

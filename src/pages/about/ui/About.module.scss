@@ -1,0 +1,13 @@
+@use '@/shared/common-styles/common-pages.module' as common;
+
+.container {
+  @include common.container;
+}
+
+.header {
+  @include common.header;
+}
+
+.paragraph {
+  @include common.paragraph;
+}

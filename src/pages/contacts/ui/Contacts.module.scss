@@ -1,0 +1,41 @@
+@use '@/shared/common-styles/common-pages.module' as common;
+
+.container {
+  @include common.container;
+}
+
+.header {
+  @include common.header;
+}
+
+.paragraph {
+  @include common.paragraph;
+}
+
+.contactList {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.contactItem {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: var(--font-size-primary);
+}
+
+.label {
+  font-weight: 600;
+}
+
+.link {
+  color: white;
+  text-decoration: none;
+  transition: 0.2s;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

@@ -4,14 +4,15 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 20px;
   width: 100%;
 }
 
 .inputsContainer {
   display: flex;
-  gap: 10px;
   width: 100%;
+  font-size: var(--font-size-secondary);
+  gap: 20px;
 
   @media (max-width: 640px) {
     flex-direction: column;
@@ -21,22 +22,24 @@
 .inputContainer {
   @include form.inputContainer(15px);
   width: 100%;
+  font-size: var(--font-size-secondary);
 }
 
 .errorSlot {
   @include form.errorSlot;
-  bottom: 55px;
+  bottom: 70px;
 }
 
 .errorSlotTerms {
   @include form.errorSlot;
-  bottom: 47px;
+  bottom: 60px;
 }
 
 .checkBoxLinkContainer {
   display: flex;
   justify-content: space-between;
   text-align: center;
+  font-size: var(--font-size-secondary);
 }
 
 .link {

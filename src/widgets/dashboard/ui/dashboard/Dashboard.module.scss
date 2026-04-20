@@ -4,11 +4,6 @@
 }
 
 .main {
-  padding-top: 8vh;
-  height: 100%;
-  background: var(--bg-color-gradient-primary), linear-gradient(180deg, #0f0f10 0%, #090909 100%);
-
-  @media (max-width: 960px) {
-    padding-top: 16vh;
-  }
+  min-height: 80vh;
+  background: var(--bg-color-gradient-primary), linear-gradient(180deg, #0f0f10, #090909);
 }

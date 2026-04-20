@@ -1,5 +1,4 @@
 import type { ReactNode } from 'react';
-import { useId } from 'react';
 
 import style from './Checkbox.module.scss';
 
@@ -11,8 +10,6 @@ interface Props {
 }
 
 export const Checkbox = ({ size = 24, label, checked = false, onChange }: Props) => {
-  const checkBoxId = `checkbox_${useId()}`;
-
   const checkBoxSize = {
     width: size,
     height: size,
@@ -26,10 +23,10 @@ export const Checkbox = ({ size = 24, label, checked = false, onChange }: Props)
 
   return (
     <div className={style.container}>
-      <div className={style.checkbox} id={checkBoxId} onClick={changeStatus} style={checkBoxSize}>
+      <div className={style.checkbox} onClick={changeStatus} style={checkBoxSize} role={'checkbox'}>
         <div className={checkBoxClassNames} />
       </div>
-      <label className={style.label} htmlFor={checkBoxId} onClick={changeStatus}>
+      <label className={style.label} onClick={changeStatus}>
         {label}
       </label>
     </div>

@@ -3,10 +3,14 @@
 
 .promptLabel {
   color: var(--text-color-soft);
-  font-size: var(--font-size-body-sm);
+  font-size: var(--font-size-medium);
   line-height: var(--line-height-body);
   text-align: center;
-  opacity: 0.82;
+  opacity: var(--opacity-primary);
+
+  @media (max-width: 1200px) {
+    font-size: var(--font-size-tertiary);
+  }
 }
 
 .promptValue {
@@ -15,34 +19,32 @@
   line-height: var(--line-height-body-wide);
   text-align: center;
   word-break: break-word;
+
+  @media (max-width: 768px) {
+    font-size: var(--font-size-primary);
+    line-height: var(--line-height-body);
+  }
 }
 
 .formRow {
-  width: min(720px, 100%);
+  width: 100%;
 
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto auto;
   align-items: stretch;
-  gap: 12px;
-}
+  gap: var(--gap-small);
 
-@media (max-width: 768px) {
-  .promptValue {
-    font-size: var(--font-size-primary);
-    line-height: var(--line-height-body);
-  }
-
-  .formRow {
+  @media (max-width: 1000px) {
     grid-template-columns: 1fr;
   }
 
-  .formRow > * {
+  & > * {
     width: 100%;
   }
 }
 
 @media (max-width: 480px) {
   .hint {
-    padding: 12px 14px;
+    padding: 14px;
   }
 }

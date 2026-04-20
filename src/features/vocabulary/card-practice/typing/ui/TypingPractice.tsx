@@ -81,6 +81,7 @@ export function TypingPractice({
             placeholder={'Type lexical unit'}
             disabled={locked}
             onKeyDown={handleInputKeyDown}
+            style={{fontSize: '24px'}}
           />
 
           <div className={style.buttonsContainer}>

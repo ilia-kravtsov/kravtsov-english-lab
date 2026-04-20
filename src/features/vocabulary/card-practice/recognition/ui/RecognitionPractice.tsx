@@ -87,7 +87,11 @@ export function RecognitionPractice({
           })}
         </div>
 
-        <PracticeProgress index={index} total={cards.length} attempts={attempts} />
+        <PracticeProgress
+          index={index}
+          total={cards.length}
+          attempts={attempts}
+        />
       </div>
     </PracticeGuard>
   );

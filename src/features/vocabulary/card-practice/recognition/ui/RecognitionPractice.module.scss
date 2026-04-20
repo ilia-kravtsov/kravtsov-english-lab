@@ -11,8 +11,8 @@
 
 .card {
   position: relative;
-  width: min(720px, 100%);
-  min-height: 320px;
+  width: 100%;
+  min-height: 45vh;
 
   display: flex;
   flex-direction: column;
@@ -51,13 +51,26 @@
   line-height: 1.1;
   text-align: center;
   word-break: break-word;
+
+  @media (max-width: 768px) {
+    font-size: var(--font-size-medium);
+  }
 }
 
 .options {
-  width: min(720px, 100%);
+  width: 100%;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
+  gap: var(--gap-primary);
+  font-size: var(--font-size-secondary);
+
+  @media (max-width: 1000px) {
+    grid-template-columns: 1fr;
+  }
+
+  @media (max-width: 600px) {
+    font-size: var(--font-size-standard);
+  }
 }
 
 .optionBtn {
@@ -68,7 +81,7 @@
   align-items: center;
   justify-content: flex-start;
 
-  padding: 12px 14px;
+  padding: 14px;
 
   border: 1px solid var(--border-color-secondary);
   border-radius: var(--border-radius-primary);
@@ -130,10 +143,6 @@
   .card {
     min-height: 280px;
     padding: var(--panel-padding-tertiary);
-  }
-
-  .options {
-    grid-template-columns: 1fr;
   }
 }
 

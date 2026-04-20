@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import type { ReactNode } from 'react';
+import type { ReactNode, RefObject } from 'react';
 import { beforeEach,describe, expect, it, vi } from 'vitest';
 
 import { Header } from './Header';
@@ -7,6 +7,11 @@ import { Header } from './Header';
 const useMatchesMock = vi.fn();
 const useLocationMock = vi.fn();
 const linkMock = vi.fn();
+const mockProps = {
+  onToggleMenu: vi.fn(),
+  isMenuOpen: false,
+  burgerRef: { current: null } as RefObject<HTMLButtonElement | null>,
+};
 
 vi.mock('react-router-dom', () => ({
   useMatches: () => useMatchesMock(),
@@ -38,7 +43,7 @@ describe('Header', () => {
     useLocationMock.mockReturnValue({ pathname: '/' });
     useMatchesMock.mockReturnValue([]);
 
-    render(<Header />);
+    render(<Header {...mockProps} />);
 
     expect(screen.queryByTestId('home-link')).not.toBeInTheDocument();
   });
@@ -47,7 +52,7 @@ describe('Header', () => {
     useLocationMock.mockReturnValue({ pathname: '/profile' });
     useMatchesMock.mockReturnValue([]);
 
-    render(<Header />);
+    render(<Header {...mockProps} />);
 
     expect(screen.getByTestId('home-link')).toBeInTheDocument();
   });
@@ -65,7 +70,7 @@ describe('Header', () => {
       },
     ]);
 
-    render(<Header />);
+    render(<Header {...mockProps} />);
 
     expect(screen.getByTestId('link-/profile/info')).toBeInTheDocument();
     expect(screen.getByTestId('link-/profile/settings')).toBeInTheDocument();
@@ -88,7 +93,7 @@ describe('Header', () => {
       },
     ]);
 
-    render(<Header />);
+    render(<Header {...mockProps} />);
 
     expect(screen.queryByTestId('link-/old')).not.toBeInTheDocument();
     expect(screen.getByTestId('link-/new')).toBeInTheDocument();
@@ -103,7 +108,7 @@ describe('Header', () => {
       { handle: { somethingElse: true } },
     ]);
 
-    render(<Header />);
+    render(<Header {...mockProps} />);
 
     expect(screen.queryByRole('link', { name: 'Info' })).not.toBeInTheDocument();
     expect(screen.queryByRole('link', { name: 'Settings' })).not.toBeInTheDocument();
@@ -122,7 +127,7 @@ describe('Header', () => {
       },
     ]);
 
-    render(<Header />);
+    render(<Header {...mockProps} />);
 
     expect(linkMock).toHaveBeenCalledWith(
       expect.objectContaining({ to: '/profile/info', children: 'Info' }),

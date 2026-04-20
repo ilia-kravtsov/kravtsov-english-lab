@@ -100,9 +100,11 @@ export function PracticeContent({
       );
       break;
 
-    case 'context':
-      content = (
-        <ContextPractice
+    case 'listening':
+      content = !listeningAvailable ? (
+        <div className={style.muted}>Listening needs at least 1 card with audio.</div>
+      ) : (
+        <ListeningPractice
           switchDir={switchDir}
           onAutoNext={() => triggerSwitch('next')}
           autoNextCommitDelayMs={130}
@@ -110,11 +112,9 @@ export function PracticeContent({
       );
       break;
 
-    case 'listening':
-      content = !listeningAvailable ? (
-        <div className={style.muted}>Listening needs at least 1 card with audio.</div>
-      ) : (
-        <ListeningPractice
+    case 'context':
+      content = (
+        <ContextPractice
           switchDir={switchDir}
           onAutoNext={() => triggerSwitch('next')}
           autoNextCommitDelayMs={130}

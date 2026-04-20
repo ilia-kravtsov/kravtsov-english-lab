@@ -67,14 +67,12 @@ export function SearchLexicalUnit() {
               type={'button'}
               title={'Update'}
               onClick={handleUpdate}
-              style={{ width: '120px' }}
             />
             <Button
               type={'button'}
               title={'Delete'}
               disabled={deleting}
               onClick={handleDeleteClick}
-              style={{ width: '120px' }}
             />
           </div>
         )}

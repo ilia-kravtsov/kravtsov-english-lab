@@ -112,13 +112,13 @@
 
 .hint {
   color: var(--text-color-soft);
-  font-size: var(--font-size-body-sm);
+  font-size: var(--font-size-small);
   line-height: var(--line-height-body);
 }
 
 .error {
   color: var(--error-color-secondary);
-  font-size: var(--font-size-body-sm);
+  font-size: var(--font-size-small);
   line-height: var(--line-height-body);
 }
 
@@ -196,19 +196,18 @@
 .fieldBlock {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  min-width: 0;
+  gap: var(--gap-small);
 }
 
 .label {
   color: var(--text-color-soft);
-  font-size: var(--font-size-body-sm);
+  font-size: var(--font-size-standard);
   line-height: var(--line-height-body);
 }
 
 .value {
   color: var(--text-color-secondary);
-  font-size: var(--font-size-body-md);
+  font-size: var(--font-size-standard);
   line-height: var(--line-height-body);
   word-break: break-word;
 }
@@ -240,7 +239,7 @@
 
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: var(--gap-small);
 
   width: 100%;
 }

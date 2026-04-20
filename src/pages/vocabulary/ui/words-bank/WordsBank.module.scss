@@ -1,5 +1,5 @@
 .container {
-  min-height: 100vh;
+  min-height: 90vh;
   padding: var(--section-padding-y) var(--section-padding-x);
 
   display: flex;
@@ -15,7 +15,7 @@
   position: relative;
 
   display: flex;
-  gap: var(--gap-title);
+  gap: var(--gap-small);
 
   width: min(var(--container-width-primary), 100%);
 
@@ -50,7 +50,7 @@
   background: var(--surface-color-primary);
 
   color: var(--text-color-soft);
-  font-size: var(--font-size-body-sm);
+  font-size: var(--font-size-small);
   font-weight: var(--font-weight-medium);
   letter-spacing: var(--letter-spacing-wide);
   text-transform: uppercase;

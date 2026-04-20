@@ -10,6 +10,7 @@
     rgb(255 255 255 / 0.05),
     rgb(255 255 255 / 0.02)
   );
+  --bg-nav-primary: #111111;
 
   --glass-bg-primary: linear-gradient(180deg, rgba(52, 52, 52, 0.96), rgba(39, 39, 39, 0.94));
 
@@ -71,7 +72,7 @@
   --surface-color-quinary: rgb(255 255 255 / 0.08);
 
   // sizes
-  --container-width-primary: 1120px;
+  --container-width-primary: 1400px;
   --content-width-primary: 760px;
   --content-width-secondary: 720px;
 
@@ -90,26 +91,20 @@
   --badge-padding-x: 14px;
 
   --card-padding-primary: 24px;
-  --card-min-height-primary: 220px;
+  --card-min-height-primary: 280px;
 
+  --gap-small: 12px;
   --gap-primary: 18px;
+  --gap-standard: 20px;
+  --gap-medium: 24px;
   --gap-secondary: 28px;
+  --gap-huge: 32px;
   --gap-large: 36px;
-  --gap-xl: 32px;
-  --gap-card-meta: 20px;
-  --gap-title: 12px;
-  --gap-lead: 24px;
+  --gap-biggest: 50px;
 
   --divider-height: 1px;
 
-  --font-size-primary: 18px;
-  --font-size-secondary: 24px;
-  --font-size-tertiary: 28px;
-  --font-size-small: 14px;
-  --font-size-large: 48px;
-  --font-error-primary: 14px;
-
-  --header-height: 11vh;
+  --header-height: 10vh;
   --nav-menu-height: 13vh;
   --max-width-primary: 50%;
   --max-width-secondary: 100%;
@@ -142,7 +137,7 @@
   --shadow-card-inset: inset 0 1px 0 var(--overlay-color-secondary);
   --shadow-panel-secondary: 0 18px 48px rgb(0 0 0 / 0.32), inset 0 1px 0 rgb(255 255 255 / 0.05);
 
-  --transition-duration-fast: 0.2s;
+  --transition-duration-fast: 0.15s;
   --transition-timing-default: ease-in-out;
   --translate-hover-y: -2px;
   --translate-hover-y-secondary: 2px;
@@ -151,12 +146,15 @@
   // fonts
   --font-family-primary: 'Baskervville';
   --font-family-secondary: 'Baskervville'; // 'Roboto' 'PT Sans Narrow' 'PT Sans'
-  --font-size-badge: 12px;
-  --font-size-meta: 13px;
-  --font-size-body-sm: 15px;
-  --font-size-body-md: 16px;
-  --font-size-lead-mobile: 18px;
-  --font-size-card-title: 22px;
+  --font-size-small: 14px;
+  --font-size-primary: 18px;
+  --font-size-standard: 20px;
+  --font-size-secondary: 24px;
+  --font-size-tertiary: 28px;
+  --font-size-medium: 32px;
+  --font-size-large: 48px;
+  --font-size-page-title: clamp(56px, 5vw, 70px);
+  --font-error-primary: 14px;
 
   --font-weight-medium: 600;
   --font-weight-bold: 700;
@@ -172,6 +170,8 @@
   --line-height-body: 1.6;
   --line-height-body-wide: 1.75;
   --line-height-body-widest: 1.8;
+
+  --opacity-primary: 0.82;
 }
 
 [data-theme='dark'] {

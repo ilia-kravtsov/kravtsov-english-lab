@@ -11,7 +11,7 @@ type Props = {
 export function PracticeProgress({ index, total, attempts }: Props): JSX.Element {
   return (
     <div className={style.controlsRow}>
-      <div className={style.meta}>Attempts: {attempts}</div>
+      <div className={style.attempts}>Attempts: {attempts}</div>
       <div className={style.counter}>
         {index + 1} / {total}
       </div>

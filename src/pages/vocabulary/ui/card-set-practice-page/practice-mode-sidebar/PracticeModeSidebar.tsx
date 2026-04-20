@@ -31,54 +31,55 @@ export function PracticeModeSidebar({
   onListeningClick,
   onContextClick,
 }: Props) {
+
+  const modes = [
+    {
+      key: 'standard',
+      label: 'Standard',
+      onClick: onStandardClick,
+    },
+    {
+      key: 'recognition',
+      label: 'Recognition',
+      onClick: onRecognitionClick,
+      disabled: !recognitionAvailable || loading || !hasItems,
+    },
+    {
+      key: 'typing',
+      label: 'Typing',
+      onClick: onTypingClick,
+      disabled: !typingAvailable || loading || !hasItems,
+    },
+    {
+      key: 'listening',
+      label: 'Listening',
+      onClick: onListeningClick,
+      disabled: !listeningAvailable || loading || !hasItems,
+    },
+    {
+      key: 'context',
+      label: 'Context',
+      onClick: onContextClick,
+      disabled: !contextAvailable || loading || !hasItems,
+    },
+  ];
+
   return (
     <div className={style.left}>
       <h3 className={style.sectionTitle}>Mode</h3>
 
       <div className={style.modeList}>
-        <button
-          type={'button'}
-          className={mode === 'standard' ? style.modeBtnActive : style.modeBtn}
-          onClick={onStandardClick}
-        >
-          Standard
-        </button>
-
-        <button
-          type={'button'}
-          className={mode === 'recognition' ? style.modeBtnActive : style.modeBtn}
-          onClick={onRecognitionClick}
-          disabled={!recognitionAvailable || loading || !hasItems}
-        >
-          Recognition
-        </button>
-
-        <button
-          type={'button'}
-          className={mode === 'typing' ? style.modeBtnActive : style.modeBtn}
-          onClick={onTypingClick}
-          disabled={!typingAvailable || loading || !hasItems}
-        >
-          Typing
-        </button>
-
-        <button
-          type={'button'}
-          className={mode === 'listening' ? style.modeBtnActive : style.modeBtn}
-          onClick={onListeningClick}
-          disabled={!listeningAvailable || loading || !hasItems}
-        >
-          Listening
-        </button>
-
-        <button
-          type={'button'}
-          className={mode === 'context' ? style.modeBtnActive : style.modeBtn}
-          onClick={onContextClick}
-          disabled={!contextAvailable || loading || !hasItems}
-        >
-          Context
-        </button>
+        {modes.map(({ key, label, onClick, disabled }) => (
+          <button
+            key={key}
+            type="button"
+            className={mode === key ? style.modeBtnActive : style.modeBtn}
+            onClick={onClick}
+            disabled={disabled}
+          >
+            {label}
+          </button>
+        ))}
       </div>
 
       {!loading && hasItems && !recognitionAvailable && (

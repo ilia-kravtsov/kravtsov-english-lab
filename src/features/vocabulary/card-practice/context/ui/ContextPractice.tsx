@@ -3,7 +3,6 @@ import { usePracticeView } from '@/features/vocabulary/card-practice/shared/mode
 import { useTextInputPracticeHandlers } from '@/features/vocabulary/card-practice/shared/model/use-text-input-practice-handlers';
 import { PracticeGuard } from '@/features/vocabulary/card-practice/shared/ui/PracticeGuard';
 import { PracticeProgress } from '@/features/vocabulary/card-practice/shared/ui/PracticeProgress';
-import { mediumButtonStyles } from '@/shared/lib/styles/button.styles';
 import { Button, Input } from '@/shared/ui';
 
 import { useContextStore } from '../model/context.store';
@@ -81,9 +80,10 @@ export function ContextPractice({
             placeholder={'Type lexical unit'}
             disabled={locked}
             onKeyDown={handleInputKeyDown}
+            style={{ fontSize: '24px' }}
           />
-          <Button title={'Check'} onClick={submit} disabled={locked} style={mediumButtonStyles} />
-          <Button title={'Skip'} onClick={skip} style={mediumButtonStyles} />
+          <Button title={'Check'} onClick={submit} disabled={locked} />
+          <Button title={'Skip'} onClick={skip} />
         </div>
 
         <PracticeProgress index={index} total={cards.length} attempts={attempts} />

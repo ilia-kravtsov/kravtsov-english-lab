@@ -1,13 +1,12 @@
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { useCardSetPracticePage } from '@/features/vocabulary/card-practice/shared/model/use-card-set-practice-page.ts';
-import { usePracticeModeActions } from '@/features/vocabulary/card-practice/shared/model/use-practice-mode-actions.ts';
-import { usePracticeModeAvailability } from '@/features/vocabulary/card-practice/shared/model/use-practice-mode-availability.ts';
-import { useSwitchAnimation } from '@/features/vocabulary/card-practice/shared/model/use-switch-animation.ts';
-import { PracticeContent } from '@/pages/vocabulary/ui/card-set-practice-page/practice-content/PracticeContent.tsx';
-import { PracticeModeSidebar } from '@/pages/vocabulary/ui/card-set-practice-page/practice-mode-sidebar/PracticeModeSidebar.tsx';
-import { CardSetsPageHeader } from '@/pages/vocabulary/ui/card-sets-page/card-sets-page-header/CardSetsPageHeader.tsx';
-import { smallButtonStyles } from '@/shared/lib/styles/button.styles.ts';
+import { useCardSetPracticePage } from '@/features/vocabulary/card-practice/shared/model/use-card-set-practice-page';
+import { usePracticeModeActions } from '@/features/vocabulary/card-practice/shared/model/use-practice-mode-actions';
+import { usePracticeModeAvailability } from '@/features/vocabulary/card-practice/shared/model/use-practice-mode-availability';
+import { useSwitchAnimation } from '@/features/vocabulary/card-practice/shared/model/use-switch-animation';
+import { PracticeContent } from '@/pages/vocabulary/ui/card-set-practice-page/practice-content/PracticeContent';
+import { PracticeModeSidebar } from '@/pages/vocabulary/ui/card-set-practice-page/practice-mode-sidebar/PracticeModeSidebar';
+import { CardSetsPageHeader } from '@/pages/vocabulary/ui/card-sets-page/card-sets-page-header/CardSetsPageHeader';
 
 import style from './CardSetPracticePage.module.scss';
 
@@ -52,7 +51,6 @@ export function CardSetPracticePage() {
       <CardSetsPageHeader
         title={cardSet?.title ?? 'Practice'}
         onBackClick={onBackClick}
-        backButtonStyle={smallButtonStyles}
       />
 
       <div className={style.body}>

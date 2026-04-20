@@ -13,7 +13,7 @@
 
   display: flex;
   align-items: center;
-  gap: var(--gap-title);
+  gap: var(--gap-small);
   width: 100%;
   @include mixins.glassBlock;
 }
@@ -36,7 +36,7 @@
   box-shadow: var(--shadow-card-inset);
 
   color: var(--text-color-soft);
-  font-size: var(--font-size-body-sm);
+  font-size: var(--font-size-small);
   font-weight: var(--font-weight-medium);
   letter-spacing: var(--letter-spacing-wide);
   text-transform: none;
@@ -103,7 +103,7 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  gap: var(--gap-title);
+  gap: var(--gap-small);
   @include mixins.glassBlock;
 }
 
@@ -136,13 +136,13 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: var(--gap-title);
+  gap: var(--gap-small);
 }
 
 .examplesRow {
   display: grid;
   grid-template-columns: 1fr auto;
-  gap: var(--gap-title);
+  gap: var(--gap-small);
   align-items: start;
 }
 

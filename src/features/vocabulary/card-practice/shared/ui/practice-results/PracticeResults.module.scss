@@ -1,12 +1,12 @@
 .result {
   position: relative;
 
-  width: min(720px, 100%);
+  width: 100%;
   padding: 24px;
 
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: var(--gap-standard);
 
   border: 1px solid var(--border-color-primary);
   border-radius: var(--border-radius-primary);
@@ -34,13 +34,14 @@
 .sectionTitle {
   color: var(--text-color-secondary);
   font-weight: 600;
-  opacity: 0.95;
+  font-size: var(--font-size-tertiary);
 }
 
 .resultBlock {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: var(--gap-small);
+  font-size: var(--font-size-secondary);
 }
 
 .resultRow {
@@ -49,9 +50,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: var(--gap-small);
 
-  padding: 10px 12px;
+  padding: 12px;
 
   border: 1px solid var(--border-color-secondary);
   border-radius: var(--border-radius-primary);

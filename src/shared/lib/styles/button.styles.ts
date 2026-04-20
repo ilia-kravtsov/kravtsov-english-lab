@@ -10,26 +10,17 @@ export const buttonStyles: CSSProperties = {
   fontSize: '14px',
 };
 
-export const mediumButtonStyles: CSSProperties = {
-  width: '100px',
-  fontSize: '16px',
-};
-
-export const smallButtonStyles: CSSProperties = {
-  width: '90px',
-  height: '40px',
-  fontSize: '16px',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-};
-
-export const wideButtonStyles: CSSProperties = {
-  width: '140px',
-};
-
 export const normalButtonWide: CSSProperties = {
   width: '120px',
+};
+
+export const mediumButtonStyles: CSSProperties = {
+  width: '100px',
+  fontSize: '20px',
+};
+
+export const hugeButtonStyles: CSSProperties = {
+  width: '140px',
 };
 
 export const practiceButtonStyles: CSSProperties = {
@@ -40,3 +31,16 @@ export const practiceButtonStyles: CSSProperties = {
   justifyContent: 'center',
   alignItems: 'center',
 };
+
+export const infoButtonStyles: CSSProperties = {
+  width: '200px',
+  height: '60px',
+  fontSize: '20px',
+}
+
+export const authButtonStyles: CSSProperties = {
+  width: '100%',
+  height: '60px',
+  fontSize: '20px',
+}
+

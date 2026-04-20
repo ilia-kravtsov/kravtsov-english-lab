@@ -1,7 +1,6 @@
 import { forwardRef, type Ref } from 'react';
 
 import { dashboardSections } from '@/shared/config/dashboard-sections';
-import { linkStyles } from '@/shared/lib/styles/link.styles';
 import { LinkAsButton } from '@/shared/ui/link-as-button/LinkAsButton';
 
 import style from './Nav.module.scss';
@@ -23,7 +22,7 @@ export const Nav = forwardRef<HTMLDivElement, Props>(
       <aside className={containerStyles} ref={ref}>
         <nav className={style.menu}>
           {dashboardSections.map((navLink) => (
-            <LinkAsButton key={navLink.id} to={navLink.to} style={linkStyles} onClick={handleClick}>
+            <LinkAsButton key={navLink.id} to={navLink.to} onClick={handleClick}>
               {navLink.title}
             </LinkAsButton>
           ))}

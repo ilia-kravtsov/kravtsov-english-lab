@@ -15,7 +15,9 @@ export function StandardPracticeBack({ unit, hasBackContent }: Props) {
       <div className={style.backContent}>
         {unit?.translation && (
           <div className={style.backRow}>
-            <div className={style.backValue}>{unit.translation}</div>
+            <div className={style.backValue}>
+              Translation: {unit.translation}
+            </div>
           </div>
         )}
 
@@ -27,15 +29,18 @@ export function StandardPracticeBack({ unit, hasBackContent }: Props) {
 
         {unit?.meaning && (
           <div className={style.backRow}>
-            <div className={style.backValue}>{unit.meaning}</div>
+            <div className={style.backValue}>
+              Meaning: {unit.meaning}
+            </div>
           </div>
         )}
 
         {Array.isArray(unit?.examples) && unit.examples.length > 0 && (
           <div className={style.backRow}>
             <div className={style.backValue}>
+              Value:
               {unit.examples.map((example, index) => (
-                <div key={index}>{example}</div>
+                <span key={index}> {example}</span>
               ))}
             </div>
           </div>

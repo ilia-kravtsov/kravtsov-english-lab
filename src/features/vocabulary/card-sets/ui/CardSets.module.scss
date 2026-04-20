@@ -1,12 +1,17 @@
 .container {
   display: grid;
-  grid-template-columns: minmax(300px, 360px) minmax(0, 1fr);
+  grid-template-columns: minmax(300px, 460px) minmax(0, 1fr);
   align-items: start;
   gap: 24px;
   width: 100%;
-  padding: var(--section-padding-y) var(--section-padding-x);
-  background: var(--bg-color-tertiary);
+  min-height: 90vh;
+  padding: 40px;
   color: var(--text-color-secondary);
+
+  @media (width <= 960px) {
+    grid-template-columns: 1fr;
+    padding: 10px;
+  }
 }
 
 .sectionContainer {
@@ -22,7 +27,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 40px;
   min-width: 0;
   padding: var(--panel-padding-secondary);
   border: 1px solid var(--border-color-primary);
@@ -30,6 +35,10 @@
   background: var(--bg-color-gradient-primary);
   box-shadow: var(--shadow-panel-primary);
   overflow: hidden;
+
+  @media (width <= 960px) {
+    padding: 20px 10px 10px 10px;
+  }
 }
 
 .sectionCreateCardSet::before,
@@ -54,11 +63,11 @@
 .headerRow {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: var(--gap-secondary);
 }
 
 .title {
-  font-size: clamp(22px, 2vw, 28px);
+  font-size: clamp(var(--font-size-medium), 4vw, var(--font-size-large));
   line-height: var(--line-height-tight);
   font-weight: var(--font-weight-bold);
   letter-spacing: var(--letter-spacing-tight);
@@ -67,7 +76,7 @@
 
 .headerRow p,
 .muted {
-  font-size: var(--font-size-body-sm);
+  font-size: var(--font-size-standard);
   line-height: var(--line-height-body);
   color: var(--text-color-soft);
 }
@@ -75,7 +84,7 @@
 .formRow {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: var(--gap-huge);
   width: 100%;
 }
 
@@ -88,7 +97,7 @@
 }
 
 .label {
-  font-size: var(--font-size-body-sm);
+  font-size: clamp(var(--font-size-standard), 4vw, var(--font-size-secondary));
   line-height: var(--line-height-body);
   color: var(--text-color-soft);
 }
@@ -107,17 +116,22 @@
 
 .list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
   width: 100%;
+
+  @media (width <= 1000px) {
+    gap: var(--gap-small);
+  }
 }
 
 .item {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 16px;
-  min-height: 220px;
+  align-items: center;
+  gap: var(--gap-medium);
+  min-height: 260px;
   padding: 16px;
   border: 1px solid var(--border-color-secondary);
   border-radius: var(--border-radius-primary);
@@ -150,14 +164,14 @@
 }
 
 .itemTitle {
-  font-size: var(--font-size-secondary);
+  font-size: var(--font-size-tertiary);
   line-height: var(--line-height-tight);
   font-weight: var(--font-weight-bold);
   color: var(--text-color-secondary);
 }
 
 .itemDesc {
-  font-size: var(--font-size-primary);
+  font-size: var(--font-size-secondary);
   line-height: var(--line-height-body);
   color: var(--text-color-soft);
 }
@@ -165,13 +179,12 @@
 .itemCount {
   display: inline-flex;
   align-items: center;
-  align-self: flex-start;
   padding: var(--badge-padding-y) var(--badge-padding-x);
   border: 1px solid var(--border-color-tertiary);
   border-radius: var(--border-radius-primary);
   background: var(--surface-color-primary);
   color: var(--text-color-soft);
-  font-size: var(--font-size-badge);
+  font-size: var(--font-size-standard);
   font-weight: var(--font-weight-medium);
   letter-spacing: var(--letter-spacing-wide);
   box-shadow: var(--shadow-card-inset);
@@ -181,24 +194,23 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 8px;
+  width: 100%;
+  gap: var(--gap-medium);
 }
 
 .iconButton {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-
-  width: 80px;
-  height: 32px;
-
+  padding: var(--badge-padding-y) var(--badge-padding-x);
+  width: 120px;
   border: 1px solid var(--border-color-tertiary);
   border-radius: var(--border-radius-primary);
 
   background: var(--surface-color-primary);
 
   color: var(--text-color-soft);
-  font-size: 16px;
+  font-size: var(--font-size-standard);
 
   cursor: pointer;
 
@@ -222,32 +234,13 @@
   background: var(--surface-color-hover);
 }
 
-@media (width <= 960px) {
-  .container {
-    grid-template-columns: 1fr;
-  }
-
-  .sectionCreateCardSet,
-  .sectionEdit,
-  .sectionYourCardSets {
-    padding: var(--panel-padding-secondary) var(--panel-padding-x-tablet);
-  }
-}
-
 @media (width <= 640px) {
-  .sectionContainer {
-    gap: 16px;
+  .title {
+    text-align: center;
   }
 
-  .sectionCreateCardSet,
-  .sectionEdit,
-  .sectionYourCardSets {
-    gap: 16px;
-    padding: var(--panel-padding-tertiary) var(--panel-padding-x-mobile);
-  }
-
-  .formRow {
-    gap: 12px;
+  .itemDesc {
+    text-align: center;
   }
 
   .buttonContainer,

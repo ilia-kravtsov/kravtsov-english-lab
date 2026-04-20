@@ -6,7 +6,7 @@ import { useTextInputPracticeHandlers } from '@/features/vocabulary/card-practic
 import { PracticeGuard } from '@/features/vocabulary/card-practice/shared/ui/PracticeGuard';
 import { PracticeProgress } from '@/features/vocabulary/card-practice/shared/ui/PracticeProgress';
 import switchAnim from '@/features/vocabulary/card-practice/shared/ui/SwitchAnimation.module.scss';
-import { mediumButtonStyles, wideButtonStyles } from '@/shared/lib/styles/button.styles';
+import { hugeButtonStyles } from '@/shared/lib/styles/button.styles';
 import { Button, Input } from '@/shared/ui';
 
 import { useListeningStore } from '../model/listening.store';
@@ -90,7 +90,7 @@ export function ListeningPractice({
               title={'Play'}
               onClick={playAudio}
               disabled={!audioSrc}
-              style={wideButtonStyles}
+              style={hugeButtonStyles}
             />
           </div>
           <div className={styles.hint}>
@@ -107,10 +107,11 @@ export function ListeningPractice({
             placeholder={'Type lexical unit'}
             disabled={locked}
             onKeyDown={handleInputKeyDown}
+            style={{fontSize: '24px'}}
           />
           <div className={style.buttonsContainer}>
-            <Button title={'Check'} onClick={submit} disabled={locked} style={mediumButtonStyles} />
-            <Button title={'Skip'} onClick={skip} style={mediumButtonStyles} />
+            <Button title={'Check'} onClick={submit} disabled={locked} />
+            <Button title={'Skip'} onClick={skip} />
           </div>
         </div>
 

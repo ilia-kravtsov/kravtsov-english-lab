@@ -2,7 +2,8 @@ import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 
 import type { RegisterFormData } from '@/features/auth/register/model/register.types';
-import { useRegisterForm } from '@/features/auth/register/model/use-register-form.ts';
+import { useRegisterForm } from '@/features/auth/register/model/use-register-form';
+import { authButtonStyles } from '@/shared/lib/styles/button.styles';
 import { Button } from '@/shared/ui';
 import { Checkbox } from '@/shared/ui/checkbox/Checkbox';
 import { Input } from '@/shared/ui/input/Input';
@@ -34,6 +35,7 @@ export function RegisterForm() {
             id={'firstName'}
             data-error={!!errors.firstName}
             placeholder={'James'}
+            style={{ fontSize: '24px' }}
             {...register('firstName', { required: 'First Name is required' })}
           />
           <div className={style.errorSlot}>{errors.firstName?.message}</div>
@@ -48,6 +50,7 @@ export function RegisterForm() {
             id={'lastName'}
             data-error={!!errors.lastName}
             placeholder={'Brown'}
+            style={{ fontSize: '24px' }}
             {...register('lastName', { required: 'Last Name is required' })}
           />
           <div className={style.errorSlot}>{errors.lastName?.message}</div>
@@ -63,6 +66,7 @@ export function RegisterForm() {
           id={'email'}
           data-error={!!errors.email}
           placeholder={'brown@test.com'}
+          style={{ fontSize: '24px' }}
           {...register('email', { required: 'Email is required' })}
         />
         <div className={style.errorSlot}>{errors.email?.message}</div>
@@ -77,6 +81,7 @@ export function RegisterForm() {
           id={'password'}
           data-error={!!errors.password}
           placeholder={'qwerty12345'}
+          style={{ fontSize: '24px' }}
           {...register('password', { required: 'Password is required' })}
         />
         <div className={style.errorSlot}>{errors.password?.message}</div>
@@ -102,7 +107,7 @@ export function RegisterForm() {
               }
               checked={field.value}
               onChange={field.onChange}
-              size={16}
+              size={20}
             />
           )}
         />
@@ -112,6 +117,7 @@ export function RegisterForm() {
       <Button
         type={'submit'}
         disabled={isSubmitting}
+        style={authButtonStyles}
         title={isSubmitting ? 'Registering...' : 'Register'}
       />
     </form>

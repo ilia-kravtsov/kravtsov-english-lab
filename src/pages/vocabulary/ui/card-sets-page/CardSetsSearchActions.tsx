@@ -1,4 +1,4 @@
-import { wideButtonStyles } from '@/shared/lib/styles/button.styles';
+import { hugeButtonStyles } from '@/shared/lib/styles/button.styles';
 import { Button } from '@/shared/ui';
 
 import style from './CardSetsPage.module.scss';
@@ -27,7 +27,7 @@ export function CardSetsSearchActions({
         title={inSet ? 'Already added' : adding ? 'Adding...' : 'Add'}
         disabled={adding || inSet}
         onClick={onAdd}
-        style={wideButtonStyles}
+        style={hugeButtonStyles}
       />
 
       <Button
@@ -35,7 +35,7 @@ export function CardSetsSearchActions({
         title={removing ? 'Removing...' : 'Remove'}
         disabled={removing || !hasFoundCardInSet}
         onClick={onRemove}
-        style={wideButtonStyles}
+        style={hugeButtonStyles}
       />
     </div>
   );
