@@ -18,7 +18,7 @@ vi.mock('@/shared/ui/link-as-button/LinkAsButton', () => ({
   },
 }));
 
-vi.mock('@/features/auth/logout-button', () => ({
+vi.mock('@/features/auth/logout', () => ({
   LogoutButton: () => <button data-testid="logout">Logout</button>,
 }));
 
@@ -33,7 +33,7 @@ describe('Footer', () => {
   it('renders correct link titles', () => {
     render(<Footer />);
 
-    expect(screen.getByText('Author')).toBeInTheDocument();
+    expect(screen.getByText('About')).toBeInTheDocument();
     expect(screen.getByText('Contacts')).toBeInTheDocument();
   });
 
@@ -41,7 +41,7 @@ describe('Footer', () => {
     render(<Footer />);
 
     expect(linkMock).toHaveBeenCalledWith(
-      expect.objectContaining({ to: 'about', children: 'Author' }),
+      expect.objectContaining({ to: 'about', children: 'About' })
     );
 
     expect(linkMock).toHaveBeenCalledWith(

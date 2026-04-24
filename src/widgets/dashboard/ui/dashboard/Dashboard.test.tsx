@@ -1,19 +1,20 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { forwardRef } from 'react';
+import { forwardRef, type RefObject } from 'react';
 import type * as RouterDom from 'react-router-dom';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { Dashboard } from './Dashboard';
 
-type BurgerButtonProps = {
-  isOpen: boolean;
-  toggleBurger: (toggleStatus: boolean) => void;
-};
-
 type NavProps = {
   isOpen: boolean;
   onLinkClick: () => void;
+};
+
+type HeaderProps = {
+  onToggleMenu: (isOpenStatus: boolean) => void;
+  isMenuOpen: boolean;
+  burgerRef: RefObject<HTMLButtonElement | null>;
 };
 
 const navMock = vi.fn();
@@ -33,7 +34,26 @@ vi.mock('react-router-dom', async (importOriginal) => {
 });
 
 vi.mock('../header/Header', () => ({
-  Header: () => <div data-testid="header">Header</div>,
+  Header: ({ onToggleMenu, isMenuOpen, burgerRef }: HeaderProps) => {
+    burgerButtonMock({
+      isOpen: isMenuOpen,
+      toggleBurger: onToggleMenu,
+    });
+
+    return (
+      <div data-testid="header">
+        Header
+        <button
+          ref={burgerRef}
+          type="button"
+          data-testid="burger-button"
+          onClick={() => onToggleMenu(!isMenuOpen)}
+        >
+          {isMenuOpen ? 'close' : 'open'}
+        </button>
+      </div>
+    );
+  },
 }));
 
 vi.mock('../footer/Footer', () => ({
@@ -53,25 +73,6 @@ vi.mock('../nav/Nav', () => ({
       </div>
     );
   }),
-}));
-
-vi.mock('@/shared/ui/burger-button/BurgerButton', () => ({
-  BurgerButton: forwardRef<HTMLButtonElement, BurgerButtonProps>(
-    ({ isOpen, toggleBurger }, ref) => {
-      burgerButtonMock({ isOpen, toggleBurger });
-
-      return (
-        <button
-          ref={ref}
-          type="button"
-          data-testid="burger-button"
-          onClick={() => toggleBurger(!isOpen)}
-        >
-          {isOpen ? 'close' : 'open'}
-        </button>
-      );
-    },
-  ),
 }));
 
 describe('Dashboard', () => {
